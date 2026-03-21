@@ -1,0 +1,252 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Experiment Evaluation API
+  description: >-
+    The Amplitude Experiment Evaluation API retrieves variant assignment data
+    for users through remote evaluation. When called, it evaluates targeting
+    rules and returns the assigned variant for each active experiment or
+    feature flag. The API also tracks assignment events automatically in
+    Amplitude Analytics. It is used by server-side applications that need
+    to determine which experiment variant or feature flag value to serve
+    to a given user in real time.
+  version: '1'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+externalDocs:
+  description: Amplitude Experiment Evaluation API Documentation
+  url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+servers:
+  - url: https://api.lab.amplitude.com
+    description: Amplitude Experiment Evaluation Server
+tags:
+  - name: Evaluation
+    description: Remote flag and experiment evaluation operations
+  - name: Flags
+    description: Flag configuration retrieval for local evaluation
+security:
+  - apiKeyAuth: []
+paths:
+  /v1/vardata:
+    post:
+      operationId: evaluateVariants
+      summary: Evaluate variants for a user
+      description: >-
+        Remotely evaluate all active experiments and feature flags for a
+        specific user. Returns the variant assignments based on the user's
+        properties and targeting rules. Amplitude automatically tracks an
+        Experiment Assignment event for each evaluation.
+      tags:
+        - Evaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvaluationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationResponse'
+        '400':
+          description: Bad request - missing user context
+        '401':
+          description: Unauthorized - invalid deployment key
+    get:
+      operationId: evaluateVariantsGet
+      summary: Evaluate variants for a user via GET
+      description: >-
+        Remotely evaluate all active experiments and feature flags for a
+        user identified by query parameters. Returns variant assignments
+        based on targeting rules.
+      tags:
+        - Evaluation
+      parameters:
+        - name: user_id
+          in: query
+          description: >-
+            The user ID to evaluate variants for.
+          schema:
+            type: string
+        - name: device_id
+          in: query
+          description: >-
+            The device ID to evaluate variants for.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationResponse'
+        '401':
+          description: Unauthorized
+  /v1/flags:
+    get:
+      operationId: getFlags
+      summary: Get flag configurations
+      description: >-
+        Download all flag configurations for local evaluation. This endpoint
+        returns the full flag configuration including targeting rules,
+        variants, and segment definitions. Useful for bootstrapping
+        client-side local evaluation SDKs with initialFlags or running
+        evaluation in edge environments.
+      tags:
+        - Flags
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                description: >-
+                  Array of flag configuration objects.
+                items:
+                  $ref: '#/components/schemas/FlagConfiguration'
+        '401':
+          description: Unauthorized - invalid deployment key
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Pass your deployment key in the Authorization header with the prefix
+        Api-Key, for example Api-Key YOUR_DEPLOYMENT_KEY.
+  schemas:
+    EvaluationRequest:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: >-
+            The user ID to evaluate experiments and flags for.
+        device_id:
+          type: string
+          description: >-
+            The device ID to evaluate experiments and flags for.
+        user_properties:
+          type: object
+          description: >-
+            User properties to use for targeting rule evaluation.
+          additionalProperties: true
+        groups:
+          type: object
+          description: >-
+            Group type to group name mappings for group-level targeting.
+          additionalProperties: true
+        group_properties:
+          type: object
+          description: >-
+            Group properties to use for targeting rule evaluation.
+          additionalProperties: true
+    EvaluationResponse:
+      type: object
+      description: >-
+        A map of flag keys to variant objects representing the evaluated
+        variant assignments for the user.
+      additionalProperties:
+        $ref: '#/components/schemas/Variant'
+    Variant:
+      type: object
+      properties:
+        key:
+          type: string
+          description: >-
+            The variant key identifying this variant.
+        value:
+          type: string
+          description: >-
+            The variant value or payload.
+        payload:
+          description: >-
+            An optional JSON payload associated with the variant.
+        metadata:
+          type: object
+          description: >-
+            Metadata about the variant assignment.
+          properties:
+            experimentKey:
+              type: string
+              description: >-
+                The key of the experiment that assigned this variant.
+            flagType:
+              type: string
+              description: >-
+                The type of flag, such as experiment or release.
+            flagVersion:
+              type: integer
+              description: >-
+                The version of the flag configuration.
+            default:
+              type: boolean
+              description: >-
+                Whether this is the default variant.
+    FlagConfiguration:
+      type: object
+      properties:
+        key:
+          type: string
+          description: >-
+            The unique key identifying the flag.
+        metadata:
+          type: object
+          description: >-
+            Metadata about the flag configuration.
+          properties:
+            deployed:
+              type: boolean
+              description: >-
+                Whether the flag is currently deployed.
+            evaluationMode:
+              type: string
+              description: >-
+                The evaluation mode, either local or remote.
+            flagType:
+              type: string
+              description: >-
+                The type of flag, such as experiment or release.
+            flagVersion:
+              type: integer
+              description: >-
+                The version of the flag configuration.
+        segments:
+          type: array
+          description: >-
+            Array of targeting segments for this flag.
+          items:
+            type: object
+            properties:
+              conditions:
+                type: array
+                description: >-
+                  Array of targeting conditions.
+                items:
+                  type: object
+                  additionalProperties: true
+              variant:
+                type: string
+                description: >-
+                  The variant key to assign when conditions are met.
+        variants:
+          type: object
+          description: >-
+            Map of variant keys to variant configuration objects.
+          additionalProperties:
+            type: object
+            properties:
+              key:
+                type: string
+                description: >-
+                  The variant key.
+              payload:
+                description: >-
+                  Optional payload for the variant.

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://amplitude.com/schemas/amplitude/cohort.json",
+  "title": "Amplitude Cohort",
+  "description": "Schema for an Amplitude behavioral cohort representing a group of users defined by shared behavioral patterns or properties.",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the cohort."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the cohort.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the cohort and the behavioral pattern it captures."
+    },
+    "size": {
+      "type": "integer",
+      "description": "The number of users currently in the cohort.",
+      "minimum": 0
+    },
+    "lastComputed": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the cohort membership was last computed."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the cohort has been archived."
+    },
+    "owner": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address of the cohort owner."
+    },
+    "appId": {
+      "type": "integer",
+      "description": "The Amplitude project ID the cohort belongs to."
+    },
+    "definition": {
+      "$ref": "#/$defs/CohortDefinition"
+    }
+  },
+  "$defs": {
+    "CohortDefinition": {
+      "type": "object",
+      "description": "The behavioral definition that determines cohort membership.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of cohort definition.",
+          "enum": ["behavioral", "property", "uploaded"]
+        },
+        "events": {
+          "type": "array",
+          "description": "Array of event conditions that define behavioral cohort membership.",
+          "items": {
+            "$ref": "#/$defs/EventCondition"
+          }
+        },
+        "properties": {
+          "type": "array",
+          "description": "Array of user property conditions for property-based cohorts.",
+          "items": {
+            "$ref": "#/$defs/PropertyCondition"
+          }
+        }
+      }
+    },
+    "EventCondition": {
+      "type": "object",
+      "description": "A condition based on user event behavior.",
+      "properties": {
+        "event_type": {
+          "type": "string",
+          "description": "The event type the condition evaluates."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The comparison operator.",
+          "enum": ["is", "is_not", "contains", "does_not_contain", "greater_than", "less_than"]
+        },
+        "value": {
+          "description": "The value to compare against."
+        }
+      }
+    },
+    "PropertyCondition": {
+      "type": "object",
+      "description": "A condition based on user properties.",
+      "properties": {
+        "property": {
+          "type": "string",
+          "description": "The user property name."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The comparison operator.",
+          "enum": ["is", "is_not", "contains", "does_not_contain", "set", "not_set", "greater_than", "less_than"]
+        },
+        "value": {
+          "description": "The value to compare against."
+        }
+      }
+    }
+  }
+}

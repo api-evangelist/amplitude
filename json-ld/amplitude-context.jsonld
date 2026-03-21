@@ -1,0 +1,150 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amp": "https://amplitude.com/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Event": {
+      "@id": "amp:Event",
+      "@context": {
+        "eventType": "amp:eventType",
+        "userId": "schema:identifier",
+        "deviceId": "amp:deviceId",
+        "time": {
+          "@id": "dcterms:date",
+          "@type": "xsd:dateTime"
+        },
+        "eventProperties": "amp:eventProperties",
+        "userProperties": "amp:userProperties",
+        "platform": "amp:platform",
+        "osName": "amp:osName",
+        "osVersion": "amp:osVersion",
+        "deviceBrand": "amp:deviceBrand",
+        "deviceModel": "amp:deviceModel",
+        "country": "schema:addressCountry",
+        "region": "schema:addressRegion",
+        "city": "schema:addressLocality",
+        "language": "schema:inLanguage",
+        "revenue": "amp:revenue",
+        "price": "schema:price",
+        "quantity": "amp:quantity",
+        "productId": "schema:productID",
+        "sessionId": "amp:sessionId",
+        "ipAddress": "amp:ipAddress",
+        "appVersion": "schema:softwareVersion"
+      }
+    },
+
+    "UserProfile": {
+      "@id": "amp:UserProfile",
+      "@context": {
+        "userId": "schema:identifier",
+        "amplitudeId": "amp:amplitudeId",
+        "userProperties": "amp:userProperties",
+        "computedProperties": "amp:computedProperties",
+        "cohortIds": {
+          "@id": "amp:cohortIds",
+          "@container": "@set"
+        },
+        "recommendations": {
+          "@id": "amp:recommendations",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Cohort": {
+      "@id": "amp:Cohort",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "size": "amp:cohortSize",
+        "owner": {
+          "@id": "schema:author",
+          "@type": "@id"
+        },
+        "lastComputed": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "archived": "amp:archived",
+        "appId": "amp:projectId"
+      }
+    },
+
+    "Experiment": {
+      "@id": "amp:Experiment",
+      "@context": {
+        "key": "schema:identifier",
+        "name": "schema:name",
+        "description": "schema:description",
+        "enabled": "amp:enabled",
+        "state": "amp:state",
+        "evaluationMode": "amp:evaluationMode",
+        "variants": {
+          "@id": "amp:variants",
+          "@container": "@set"
+        },
+        "segments": {
+          "@id": "amp:segments",
+          "@container": "@set"
+        },
+        "deployments": {
+          "@id": "amp:deployments",
+          "@container": "@set"
+        },
+        "startDate": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "endDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Variant": {
+      "@id": "amp:Variant",
+      "@context": {
+        "key": "schema:identifier",
+        "name": "schema:name",
+        "description": "schema:description",
+        "payload": "amp:payload",
+        "rolloutWeight": "amp:rolloutWeight"
+      }
+    },
+
+    "Annotation": {
+      "@id": "amp:Annotation",
+      "@context": {
+        "label": "schema:name",
+        "date": {
+          "@id": "dcterms:date",
+          "@type": "xsd:date"
+        },
+        "endDate": {
+          "@id": "schema:endDate",
+          "@type": "xsd:date"
+        },
+        "details": "schema:description",
+        "category": "schema:category",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Deployment": {
+      "@id": "amp:Deployment",
+      "@context": {
+        "label": "schema:name",
+        "key": "schema:identifier",
+        "projectId": "amp:projectId"
+      }
+    }
+  }
+}

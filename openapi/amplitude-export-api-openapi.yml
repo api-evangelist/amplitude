@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Export API
+  description: >-
+    The Amplitude Export API enables bulk export of raw event data for a
+    given project within a specified date range. Results are returned as
+    zipped archives of JSON files containing complete event records with
+    timestamps, user properties, device information, and attribution data.
+    This API is commonly used for data warehousing, offline analysis, and
+    feeding event data into external processing pipelines.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+externalDocs:
+  description: Amplitude Export API Documentation
+  url: https://amplitude.com/docs/apis/analytics/export
+servers:
+  - url: https://amplitude.com
+    description: Amplitude Production Server
+tags:
+  - name: Export
+    description: Raw event data export operations
+security:
+  - basicAuth: []
+paths:
+  /api/2/export:
+    get:
+      operationId: exportEvents
+      summary: Export raw event data
+      description: >-
+        Export raw event data for the specified date range as a zipped archive
+        of JSON files. The maximum queryable period is 365 days and the
+        maximum response size is 4 GB. Data is available for export at a
+        minimum within 2 hours of server ingestion. Dates older than 30 days
+        before the current date may not be available.
+      tags:
+        - Export
+      parameters:
+        - name: start
+          in: query
+          required: true
+          description: >-
+            The start date and hour in YYYYMMDDTHH format, for example
+            20220101T00. For multi-day exports, the format YYYYMMDD is also
+            accepted.
+          schema:
+            type: string
+            pattern: '^\d{8}(T\d{2})?$'
+        - name: end
+          in: query
+          required: true
+          description: >-
+            The end date and hour in YYYYMMDDTHH format, for example
+            20220101T23. For multi-day exports, the format YYYYMMDD is also
+            accepted.
+          schema:
+            type: string
+            pattern: '^\d{8}(T\d{2})?$'
+      responses:
+        '200':
+          description: Success - returns a zipped archive of JSON event files
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: >-
+            Bad request - the exported data exceeds the 4 GB size limit
+        '401':
+          description: Unauthorized - invalid or missing credentials
+        '404':
+          description: >-
+            No data found for the requested date range
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Use your Amplitude API key as the username and your secret key as the
+        password. Encode them as base64 in the format api_key:secret_key.

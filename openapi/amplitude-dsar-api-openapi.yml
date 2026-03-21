@@ -1,0 +1,277 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Data Subject Access Request API
+  description: >-
+    The Amplitude Data Subject Access Request (DSAR) API enables organizations
+    to programmatically handle privacy requests in compliance with GDPR, CCPA,
+    and other data protection regulations. It supports submitting deletion
+    requests for user data based on user IDs or device IDs, and retrieving
+    all data associated with a user. This API allows companies to automate
+    their privacy compliance workflows and ensure timely processing of data
+    subject requests at scale.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+externalDocs:
+  description: Amplitude DSAR API Documentation
+  url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+servers:
+  - url: https://amplitude.com
+    description: Amplitude Production Server
+tags:
+  - name: Data Access
+    description: Data subject access request operations
+  - name: Data Deletion
+    description: User data deletion request operations
+security:
+  - basicAuth: []
+paths:
+  /api/2/dsar/requests:
+    post:
+      operationId: createDsarRequest
+      summary: Create a data subject access request
+      description: >-
+        Submit a data subject access request (DSAR) to retrieve all data
+        Amplitude has collected for a specific user. The request is processed
+        asynchronously and results are made available for download when
+        complete. This endpoint supports CCPA and GDPR compliance workflows.
+      tags:
+        - Data Access
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DsarRequest'
+      responses:
+        '200':
+          description: Success - DSAR request submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DsarResponse'
+        '400':
+          description: Bad request - invalid user identifier
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too many requests
+  /api/2/dsar/requests/{request_id}:
+    get:
+      operationId: getDsarRequestStatus
+      summary: Get DSAR request status
+      description: >-
+        Check the status of a previously submitted data subject access
+        request. Returns the processing status and download URL when
+        complete.
+      tags:
+        - Data Access
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          description: >-
+            The ID of the DSAR request to check.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DsarStatusResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: DSAR request not found
+  /api/2/deletions/users:
+    post:
+      operationId: createDeletionRequest
+      summary: Request user data deletion
+      description: >-
+        Submit a request to delete all event data and user properties for
+        one or more users identified by Amplitude IDs or user IDs. Each
+        HTTP request can contain up to 100 amplitude_ids or user_ids.
+        Rate limited to 1 request per second. Amplitude emails all account
+        admins with deletion details when a request is submitted.
+      tags:
+        - Data Deletion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletionRequest'
+      responses:
+        '200':
+          description: Success - deletion request accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletionResponse'
+        '400':
+          description: Bad request - invalid identifiers or exceeds 100 IDs
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too many requests - rate limit of 1 per second exceeded
+    get:
+      operationId: listDeletionRequests
+      summary: List deletion requests
+      description: >-
+        Retrieve a list of previously submitted deletion requests and their
+        processing status.
+      tags:
+        - Data Deletion
+      parameters:
+        - name: start_day
+          in: query
+          description: >-
+            The start date to filter deletion requests in YYYY-MM-DD format.
+          schema:
+            type: string
+            format: date
+        - name: end_day
+          in: query
+          description: >-
+            The end date to filter deletion requests in YYYY-MM-DD format.
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletionListResponse'
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Use your Amplitude API key as the username and your secret key as the
+        password. Encode them as base64 in the format api_key:secret_key.
+  schemas:
+    DsarRequest:
+      type: object
+      required:
+        - user_ids
+      properties:
+        user_ids:
+          type: array
+          description: >-
+            Array of user IDs to retrieve data for.
+          items:
+            type: string
+    DsarResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: >-
+            The unique identifier for the DSAR request.
+        status:
+          type: string
+          description: >-
+            The status of the request.
+    DsarStatusResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: >-
+            The unique identifier for the DSAR request.
+        status:
+          type: string
+          description: >-
+            The processing status of the request.
+          enum:
+            - pending
+            - processing
+            - complete
+            - failed
+        download_url:
+          type: string
+          format: uri
+          description: >-
+            The URL to download the requested data. Only present when status
+            is complete.
+    DeletionRequest:
+      type: object
+      properties:
+        amplitude_ids:
+          type: array
+          description: >-
+            Array of Amplitude internal user IDs to delete data for. Maximum
+            100 per request.
+          maxItems: 100
+          items:
+            type: integer
+            format: int64
+        user_ids:
+          type: array
+          description: >-
+            Array of user IDs to delete data for. Maximum 100 per request.
+          maxItems: 100
+          items:
+            type: string
+        requester:
+          type: string
+          description: >-
+            The email address of the person requesting the deletion for
+            audit purposes.
+    DeletionResponse:
+      type: object
+      properties:
+        day:
+          type: string
+          format: date
+          description: >-
+            The day the deletion job is scheduled for processing.
+        status:
+          type: string
+          description: >-
+            The status of the deletion request.
+    DeletionListResponse:
+      type: object
+      properties:
+        deletions:
+          type: array
+          description: >-
+            Array of deletion request records.
+          items:
+            type: object
+            properties:
+              day:
+                type: string
+                format: date
+                description: >-
+                  The day the deletion job was scheduled.
+              status:
+                type: string
+                description: >-
+                  The processing status of the deletion.
+                enum:
+                  - staging
+                  - submitted
+                  - done
+              amplitude_ids:
+                type: array
+                description: >-
+                  Array of Amplitude IDs included in the deletion.
+                items:
+                  type: integer
+                  format: int64
+              user_ids:
+                type: array
+                description: >-
+                  Array of user IDs included in the deletion.
+                items:
+                  type: string

@@ -1,0 +1,634 @@
+openapi: 3.1.0
+info:
+  title: Amplitude SCIM API
+  description: >-
+    The Amplitude SCIM API implements the System for Cross-domain Identity
+    Management (SCIM) 2.0 standard for automated user provisioning and
+    deprovisioning. It allows identity providers such as Okta, Azure AD,
+    and OneLogin to automatically create, update, and deactivate user
+    accounts in Amplitude. This API is essential for enterprise organizations
+    that need centralized user lifecycle management and compliance with
+    security policies.
+  version: '1'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+externalDocs:
+  description: Amplitude SCIM API Documentation
+  url: https://amplitude.com/docs/apis/analytics/scim
+servers:
+  - url: https://core.amplitude.com
+    description: Amplitude SCIM Server
+tags:
+  - name: Users
+    description: SCIM user provisioning operations
+  - name: Groups
+    description: SCIM group management operations
+security:
+  - bearerAuth: []
+paths:
+  /scim/1/Users:
+    get:
+      operationId: listScimUsers
+      summary: List SCIM users
+      description: >-
+        Retrieve a paginated list of users provisioned in Amplitude.
+        Supports SCIM filtering to search for specific users by attributes
+        such as email or display name.
+      tags:
+        - Users
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            A SCIM filter expression to narrow the results. For example,
+            userName eq "user@example.com".
+          schema:
+            type: string
+        - name: startIndex
+          in: query
+          description: >-
+            The 1-based index of the first result in the current set of
+            results. Default is 1.
+          schema:
+            type: integer
+            default: 1
+        - name: count
+          in: query
+          description: >-
+            The number of results per page. Default varies by implementation.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimUserListResponse'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createScimUser
+      summary: Create a SCIM user
+      description: >-
+        Provision a new user in Amplitude via SCIM. The user is created with
+        the specified attributes and can be assigned to groups. Typically
+        called by identity providers during automated provisioning.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/scim+json:
+            schema:
+              $ref: '#/components/schemas/ScimUserRequest'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request - invalid user data
+        '401':
+          description: Unauthorized
+        '409':
+          description: User already exists
+  /scim/1/Users/{user_id}:
+    get:
+      operationId: getScimUser
+      summary: Get a SCIM user
+      description: >-
+        Retrieve a single user by their SCIM user ID.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/scimUserId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+    put:
+      operationId: replaceScimUser
+      summary: Replace a SCIM user
+      description: >-
+        Replace all attributes of an existing user with the provided values.
+        Any attributes not included in the request body are reset to their
+        default values.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/scimUserId'
+      requestBody:
+        required: true
+        content:
+          application/scim+json:
+            schema:
+              $ref: '#/components/schemas/ScimUserRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+    patch:
+      operationId: updateScimUser
+      summary: Update a SCIM user
+      description: >-
+        Partially update a user's attributes. Only the specified attributes
+        are modified. Commonly used for activating or deactivating users.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/scimUserId'
+      requestBody:
+        required: true
+        content:
+          application/scim+json:
+            schema:
+              $ref: '#/components/schemas/ScimPatchRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+    delete:
+      operationId: deleteScimUser
+      summary: Delete a SCIM user
+      description: >-
+        Deactivate and remove a user from Amplitude. This is typically
+        called by identity providers when a user is offboarded.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/scimUserId'
+      responses:
+        '204':
+          description: User deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+  /scim/1/Groups:
+    get:
+      operationId: listScimGroups
+      summary: List SCIM groups
+      description: >-
+        Retrieve a list of groups provisioned in Amplitude.
+      tags:
+        - Groups
+      parameters:
+        - name: filter
+          in: query
+          description: >-
+            A SCIM filter expression to narrow results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimGroupListResponse'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createScimGroup
+      summary: Create a SCIM group
+      description: >-
+        Create a new group in Amplitude via SCIM.
+      tags:
+        - Groups
+      requestBody:
+        required: true
+        content:
+          application/scim+json:
+            schema:
+              $ref: '#/components/schemas/ScimGroupRequest'
+      responses:
+        '201':
+          description: Group created
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /scim/1/Groups/{group_id}:
+    get:
+      operationId: getScimGroup
+      summary: Get a SCIM group
+      description: >-
+        Retrieve a single group by its SCIM group ID.
+      tags:
+        - Groups
+      parameters:
+        - $ref: '#/components/parameters/scimGroupId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+    patch:
+      operationId: updateScimGroup
+      summary: Update a SCIM group
+      description: >-
+        Partially update a group's attributes or membership.
+      tags:
+        - Groups
+      parameters:
+        - $ref: '#/components/parameters/scimGroupId'
+      requestBody:
+        required: true
+        content:
+          application/scim+json:
+            schema:
+              $ref: '#/components/schemas/ScimPatchRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+    delete:
+      operationId: deleteScimGroup
+      summary: Delete a SCIM group
+      description: >-
+        Delete a group from Amplitude.
+      tags:
+        - Groups
+      parameters:
+        - $ref: '#/components/parameters/scimGroupId'
+      responses:
+        '204':
+          description: Group deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Use a SCIM API token generated in the Amplitude organization settings.
+        Pass it in the Authorization header as Bearer YOUR_TOKEN.
+  parameters:
+    scimUserId:
+      name: user_id
+      in: path
+      required: true
+      description: >-
+        The SCIM user ID.
+      schema:
+        type: string
+    scimGroupId:
+      name: group_id
+      in: path
+      required: true
+      description: >-
+        The SCIM group ID.
+      schema:
+        type: string
+  schemas:
+    ScimUserListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: >-
+            The SCIM schema URIs for this response.
+        totalResults:
+          type: integer
+          description: >-
+            The total number of matching users.
+        startIndex:
+          type: integer
+          description: >-
+            The 1-based index of the first result.
+        itemsPerPage:
+          type: integer
+          description: >-
+            The number of results returned in this page.
+        Resources:
+          type: array
+          description: >-
+            Array of SCIM user resources.
+          items:
+            $ref: '#/components/schemas/ScimUser'
+    ScimUser:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: >-
+            The SCIM schema URIs for this resource.
+        id:
+          type: string
+          description: >-
+            The SCIM unique identifier for the user.
+        userName:
+          type: string
+          format: email
+          description: >-
+            The user's email address, used as the primary identifier.
+        name:
+          type: object
+          description: >-
+            The user's name components.
+          properties:
+            givenName:
+              type: string
+              description: >-
+                The user's first name.
+            familyName:
+              type: string
+              description: >-
+                The user's last name.
+        emails:
+          type: array
+          description: >-
+            Array of email addresses for the user.
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: email
+                description: >-
+                  The email address.
+              primary:
+                type: boolean
+                description: >-
+                  Whether this is the primary email address.
+              type:
+                type: string
+                description: >-
+                  The type of email address such as work or personal.
+        active:
+          type: boolean
+          description: >-
+            Whether the user account is active.
+        groups:
+          type: array
+          description: >-
+            Array of groups the user belongs to.
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: >-
+                  The group ID.
+              display:
+                type: string
+                description: >-
+                  The group display name.
+        meta:
+          type: object
+          description: >-
+            SCIM metadata for the resource.
+          properties:
+            resourceType:
+              type: string
+              description: >-
+                The type of SCIM resource.
+            created:
+              type: string
+              format: date-time
+              description: >-
+                The date and time the resource was created.
+            lastModified:
+              type: string
+              format: date-time
+              description: >-
+                The date and time the resource was last modified.
+    ScimUserRequest:
+      type: object
+      required:
+        - schemas
+        - userName
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: >-
+            The SCIM schema URIs, typically
+            urn:ietf:params:scim:schemas:core:2.0:User.
+        userName:
+          type: string
+          format: email
+          description: >-
+            The user's email address.
+        name:
+          type: object
+          properties:
+            givenName:
+              type: string
+              description: >-
+                The user's first name.
+            familyName:
+              type: string
+              description: >-
+                The user's last name.
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: email
+                description: >-
+                  The email address.
+              primary:
+                type: boolean
+                description: >-
+                  Whether this is the primary email.
+              type:
+                type: string
+                description: >-
+                  The type of email.
+        active:
+          type: boolean
+          description: >-
+            Whether the user account should be active.
+    ScimPatchRequest:
+      type: object
+      required:
+        - schemas
+        - Operations
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: >-
+            The SCIM patch operation schema URI, typically
+            urn:ietf:params:scim:api:messages:2.0:PatchOp.
+        Operations:
+          type: array
+          description: >-
+            Array of patch operations to apply.
+          items:
+            type: object
+            properties:
+              op:
+                type: string
+                description: >-
+                  The operation to perform.
+                enum:
+                  - add
+                  - remove
+                  - replace
+              path:
+                type: string
+                description: >-
+                  The attribute path to apply the operation to.
+              value:
+                description: >-
+                  The value to use for the operation.
+    ScimGroupListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: >-
+            The SCIM schema URIs for this response.
+        totalResults:
+          type: integer
+          description: >-
+            The total number of matching groups.
+        Resources:
+          type: array
+          description: >-
+            Array of SCIM group resources.
+          items:
+            $ref: '#/components/schemas/ScimGroup'
+    ScimGroup:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: >-
+            The SCIM schema URIs for this resource.
+        id:
+          type: string
+          description: >-
+            The SCIM unique identifier for the group.
+        displayName:
+          type: string
+          description: >-
+            The display name of the group.
+        members:
+          type: array
+          description: >-
+            Array of group members.
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: >-
+                  The member user ID.
+              display:
+                type: string
+                description: >-
+                  The member display name.
+        meta:
+          type: object
+          description: >-
+            SCIM metadata for the resource.
+          properties:
+            resourceType:
+              type: string
+              description: >-
+                The type of SCIM resource.
+            created:
+              type: string
+              format: date-time
+              description: >-
+                The date and time the resource was created.
+            lastModified:
+              type: string
+              format: date-time
+              description: >-
+                The date and time the resource was last modified.
+    ScimGroupRequest:
+      type: object
+      required:
+        - schemas
+        - displayName
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: >-
+            The SCIM schema URIs.
+        displayName:
+          type: string
+          description: >-
+            The display name of the group.
+        members:
+          type: array
+          description: >-
+            Array of initial group members.
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: >-
+                  The member user ID.

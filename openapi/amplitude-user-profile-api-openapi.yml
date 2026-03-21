@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Amplitude User Profile API
+  description: >-
+    The Amplitude User Profile API serves user profiles that include user
+    properties, computed user properties, a list of cohort IDs the user
+    belongs to, and personalized recommendations. It enables real-time
+    access to enriched user data for powering personalization engines,
+    in-app experiences, and targeted content delivery. This API is
+    particularly useful for retrieving recommendation results generated
+    by Amplitude's machine learning models.
+  version: '1'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+externalDocs:
+  description: Amplitude User Profile API Documentation
+  url: https://amplitude.com/docs/apis/analytics/user-profile
+servers:
+  - url: https://profile-api.amplitude.com
+    description: Amplitude Profile API Server
+tags:
+  - name: Profiles
+    description: User profile retrieval operations
+security:
+  - apiKeyAuth: []
+paths:
+  /v1/userprofile:
+    get:
+      operationId: getUserProfile
+      summary: Get a user profile
+      description: >-
+        Retrieve the profile for a specific user including user properties,
+        computed properties, cohort memberships, and personalized
+        recommendations. The response includes all enriched data Amplitude
+        has computed for the user.
+      tags:
+        - Profiles
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          description: >-
+            The user_id of the user whose profile to retrieve.
+          schema:
+            type: string
+        - name: comp_id
+          in: query
+          description: >-
+            The computed property ID or recommendation ID to retrieve
+            specific computed results for the user.
+          schema:
+            type: integer
+        - name: get_recs
+          in: query
+          description: >-
+            When true, include personalized recommendations in the response.
+          schema:
+            type: boolean
+            default: false
+        - name: rec_id
+          in: query
+          description: >-
+            The recommendation model ID to retrieve specific recommendation
+            results.
+          schema:
+            type: string
+        - name: rec_type
+          in: query
+          description: >-
+            The type of recommendation to retrieve.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: >-
+            The maximum number of recommendation results to return.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileResponse'
+        '400':
+          description: Bad request - missing user_id
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: User not found
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Pass your deployment key in the Authorization header with the prefix
+        Api-Key, for example Api-Key YOUR_API_KEY.
+  schemas:
+    UserProfileResponse:
+      type: object
+      properties:
+        userData:
+          $ref: '#/components/schemas/UserData'
+    UserData:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: >-
+            The user's user_id.
+        user_properties:
+          type: object
+          description: >-
+            A dictionary of the user's properties as set via the Identify
+            API or SDK.
+          additionalProperties: true
+        computed_properties:
+          type: object
+          description: >-
+            A dictionary of computed properties calculated by Amplitude for
+            the user.
+          additionalProperties: true
+        cohort_ids:
+          type: array
+          description: >-
+            Array of cohort IDs the user is a member of.
+          items:
+            type: string
+        recommendations:
+          type: array
+          description: >-
+            Array of personalized recommendation results for the user. Only
+            included when get_recs is true.
+          items:
+            $ref: '#/components/schemas/Recommendation'
+        amplitude_id:
+          type: integer
+          format: int64
+          description: >-
+            The Amplitude internal ID for the user.
+    Recommendation:
+      type: object
+      properties:
+        rec_id:
+          type: string
+          description: >-
+            The recommendation model ID.
+        child_ids:
+          type: array
+          description: >-
+            Array of recommended item IDs.
+          items:
+            type: string
+        is_control:
+          type: boolean
+          description: >-
+            Whether the user is in the control group for this recommendation
+            model.
+        recommendation_type:
+          type: string
+          description: >-
+            The type of recommendation model.
+        title:
+          type: string
+          description: >-
+            The title of the recommendation.

@@ -1,0 +1,314 @@
+openapi: 3.1.0
+info:
+  title: Amplitude HTTP V2 API
+  description: >-
+    The Amplitude HTTP V2 API enables developers to send event data directly
+    from servers or clients to Amplitude's analytics platform. It supports
+    uploading individual or batched events along with user properties, event
+    properties, and group properties. This API is the primary method for
+    server-side event ingestion and is designed for high-throughput data
+    collection with built-in validation and error reporting.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+externalDocs:
+  description: Amplitude HTTP V2 API Documentation
+  url: https://amplitude.com/docs/apis/analytics/http-v2
+servers:
+  - url: https://api2.amplitude.com
+    description: Amplitude US Production Server
+  - url: https://api.eu.amplitude.com
+    description: Amplitude EU Production Server
+tags:
+  - name: Events
+    description: Event ingestion operations
+security: []
+paths:
+  /2/httpapi:
+    post:
+      operationId: uploadEvents
+      summary: Upload events
+      description: >-
+        Send up to 10 events per request to Amplitude for ingestion. Each event
+        must include either a user_id or device_id, and an event_type. The API
+        validates the request and returns detailed error reporting for any
+        invalid events in the batch.
+      tags:
+        - Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '400':
+          description: Bad request - invalid events or missing required fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '413':
+          description: Payload too large
+        '429':
+          description: Too many requests - rate limit exceeded
+components:
+  schemas:
+    UploadRequestBody:
+      type: object
+      required:
+        - api_key
+        - events
+      properties:
+        api_key:
+          type: string
+          description: >-
+            The API key for the Amplitude project to which events will be sent.
+        events:
+          type: array
+          description: >-
+            An array of event objects to upload. Maximum of 10 events per batch
+            is recommended.
+          maxItems: 2000
+          items:
+            $ref: '#/components/schemas/Event'
+        options:
+          $ref: '#/components/schemas/UploadOptions'
+    UploadOptions:
+      type: object
+      properties:
+        min_id_length:
+          type: integer
+          description: >-
+            Minimum length for user_id and device_id fields. Default is 5.
+          minimum: 1
+    Event:
+      type: object
+      required:
+        - event_type
+      properties:
+        user_id:
+          type: string
+          description: >-
+            A readable ID specified by you. Must have a minimum length of 5
+            characters unless overridden. Required unless device_id is present.
+        device_id:
+          type: string
+          description: >-
+            A device-specific identifier. Required unless user_id is present.
+        event_type:
+          type: string
+          description: >-
+            The name of the event being tracked.
+        time:
+          type: integer
+          format: int64
+          description: >-
+            The timestamp of the event in milliseconds since epoch. If not
+            provided, Amplitude uses the upload time.
+        event_properties:
+          type: object
+          description: >-
+            A dictionary of key-value pairs representing properties of the
+            event.
+          additionalProperties: true
+        user_properties:
+          type: object
+          description: >-
+            A dictionary of key-value pairs representing properties of the
+            user. Supports set, setOnce, add, append, prepend, unset, and
+            remove operations.
+          additionalProperties: true
+        groups:
+          type: object
+          description: >-
+            A dictionary of group type to group name mappings for this event.
+          additionalProperties: true
+        group_properties:
+          type: object
+          description: >-
+            A dictionary of key-value pairs representing properties of the
+            group.
+          additionalProperties: true
+        app_version:
+          type: string
+          description: >-
+            The version of the application sending the event.
+        platform:
+          type: string
+          description: >-
+            The platform of the device sending the event.
+        os_name:
+          type: string
+          description: >-
+            The name of the operating system of the device.
+        os_version:
+          type: string
+          description: >-
+            The version of the operating system of the device.
+        device_brand:
+          type: string
+          description: >-
+            The brand of the device.
+        device_manufacturer:
+          type: string
+          description: >-
+            The manufacturer of the device.
+        device_model:
+          type: string
+          description: >-
+            The model of the device.
+        carrier:
+          type: string
+          description: >-
+            The carrier of the device.
+        country:
+          type: string
+          description: >-
+            The country of the user.
+        region:
+          type: string
+          description: >-
+            The region or state of the user.
+        city:
+          type: string
+          description: >-
+            The city of the user.
+        dma:
+          type: string
+          description: >-
+            The designated market area of the user.
+        language:
+          type: string
+          description: >-
+            The language setting of the user.
+        price:
+          type: number
+          description: >-
+            The price of the item purchased in a revenue event.
+        quantity:
+          type: integer
+          description: >-
+            The quantity of the item purchased in a revenue event.
+        revenue:
+          type: number
+          description: >-
+            The revenue generated by the event. Use negative values for refunds.
+        productId:
+          type: string
+          description: >-
+            The identifier for the product in a revenue event.
+        revenueType:
+          type: string
+          description: >-
+            The type of revenue for the event, such as purchase or refund.
+        location_lat:
+          type: number
+          format: double
+          description: >-
+            The latitude of the user's location.
+        location_lng:
+          type: number
+          format: double
+          description: >-
+            The longitude of the user's location.
+        ip:
+          type: string
+          description: >-
+            The IP address of the user. Use $remote to use the IP address
+            from the upload request.
+        idfa:
+          type: string
+          description: >-
+            The Identifier for Advertiser (iOS).
+        idfv:
+          type: string
+          description: >-
+            The Identifier for Vendor (iOS).
+        adid:
+          type: string
+          description: >-
+            The Google Play Services advertising ID (Android).
+        android_id:
+          type: string
+          description: >-
+            The Android ID (Android).
+        event_id:
+          type: integer
+          description: >-
+            An incrementing counter to distinguish events with identical
+            user_id and timestamps.
+        session_id:
+          type: integer
+          format: int64
+          description: >-
+            The start time of the session in milliseconds since epoch. Use -1
+            for events outside a session.
+        insert_id:
+          type: string
+          description: >-
+            A unique identifier for the event used for deduplication. Amplitude
+            deduplicates subsequent events sent with the same insert_id and
+            device_id or user_id within the past 7 days.
+    UploadResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: >-
+            The HTTP status code of the response.
+          example: 200
+        events_ingested:
+          type: integer
+          description: >-
+            The number of events successfully ingested.
+        payload_size_bytes:
+          type: integer
+          description: >-
+            The size of the request payload in bytes.
+        server_upload_time:
+          type: integer
+          format: int64
+          description: >-
+            The time the server received the upload in milliseconds since epoch.
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: >-
+            The HTTP status code of the error.
+        error:
+          type: string
+          description: >-
+            A human-readable error message describing the issue.
+        missing_field:
+          type: string
+          description: >-
+            The name of the required field that is missing, if applicable.
+        events_with_invalid_fields:
+          type: object
+          description: >-
+            A map of field names to arrays of event indices that had invalid
+            values for those fields.
+          additionalProperties:
+            type: array
+            items:
+              type: integer
+        events_with_missing_fields:
+          type: object
+          description: >-
+            A map of field names to arrays of event indices that were missing
+            required fields.
+          additionalProperties:
+            type: array
+            items:
+              type: integer

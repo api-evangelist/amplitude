@@ -1,0 +1,167 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Identify API
+  description: >-
+    The Amplitude Identify API allows developers to update user properties
+    for a specific user without needing to send an accompanying event. This
+    is useful for setting or modifying user attributes such as demographics,
+    subscription status, or preferences outside of the normal event tracking
+    flow. The API supports operations like set, unset, append, and prepend
+    on user properties.
+  version: '1'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+externalDocs:
+  description: Amplitude Identify API Documentation
+  url: https://amplitude.com/docs/apis/analytics/identify
+servers:
+  - url: https://api2.amplitude.com
+    description: Amplitude US Production Server
+  - url: https://api.eu.amplitude.com
+    description: Amplitude EU Production Server
+tags:
+  - name: Identify
+    description: User identification and property update operations
+security: []
+paths:
+  /identify:
+    post:
+      operationId: identifyUser
+      summary: Identify a user
+      description: >-
+        Set or update user properties for a specific user without sending an
+        event. Supports operations including set, setOnce, add, append, prepend,
+        unset, and remove on user properties. The request can be sent as form
+        data or JSON.
+      tags:
+        - Identify
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/IdentifyRequestForm'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdentifyRequestBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentifyResponse'
+        '400':
+          description: Bad request - missing required fields or invalid data
+        '429':
+          description: Too many requests - rate limit exceeded
+components:
+  schemas:
+    IdentifyRequestForm:
+      type: object
+      required:
+        - api_key
+        - identification
+      properties:
+        api_key:
+          type: string
+          description: >-
+            The API key for the Amplitude project.
+        identification:
+          type: string
+          description: >-
+            A JSON-encoded string or array of JSON-encoded identification
+            objects containing user_id or device_id and user_properties.
+    IdentifyRequestBody:
+      type: object
+      required:
+        - api_key
+        - identification
+      properties:
+        api_key:
+          type: string
+          description: >-
+            The API key for the Amplitude project.
+        identification:
+          type: array
+          description: >-
+            An array of identification objects containing user_id or device_id
+            and user_properties.
+          items:
+            $ref: '#/components/schemas/Identification'
+    Identification:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: >-
+            A readable ID specified by you. Required unless device_id is present.
+        device_id:
+          type: string
+          description: >-
+            A device-specific identifier. Required unless user_id is present.
+        user_properties:
+          $ref: '#/components/schemas/UserPropertyOperations'
+    UserPropertyOperations:
+      type: object
+      description: >-
+        An object containing user property operations. Each key is an operation
+        type and the value is an object of property names to values.
+      properties:
+        $set:
+          type: object
+          description: >-
+            Set the value of a user property. If the property already exists,
+            the value is overwritten.
+          additionalProperties: true
+        $setOnce:
+          type: object
+          description: >-
+            Set the value of a user property only if it has not already been
+            set. Useful for properties like initial_referrer.
+          additionalProperties: true
+        $add:
+          type: object
+          description: >-
+            Increment a numeric user property by the specified value.
+          additionalProperties:
+            type: number
+        $append:
+          type: object
+          description: >-
+            Append a value or values to a list user property.
+          additionalProperties: true
+        $prepend:
+          type: object
+          description: >-
+            Prepend a value or values to a list user property.
+          additionalProperties: true
+        $unset:
+          type: object
+          description: >-
+            Remove a user property by setting its value to the string $unset.
+          additionalProperties: true
+        $remove:
+          type: object
+          description: >-
+            Remove a value from a list user property.
+          additionalProperties: true
+    IdentifyResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: >-
+            The HTTP status code of the response.
+          example: 200
+        server_upload_time:
+          type: integer
+          format: int64
+          description: >-
+            The time the server received the request in milliseconds since epoch.
+        events_ingested:
+          type: integer
+          description: >-
+            The number of identify operations successfully processed.

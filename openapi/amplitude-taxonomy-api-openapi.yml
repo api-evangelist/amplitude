@@ -1,0 +1,830 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Taxonomy API
+  description: >-
+    The Amplitude Taxonomy API provides programmatic management of your
+    analytics tracking plan. It supports creating, reading, updating, and
+    deleting event categories, event types, event properties, and user
+    properties. This API is essential for data governance workflows, enabling
+    teams to maintain a consistent and well-organized event taxonomy across
+    their instrumentation without needing to use the Amplitude UI directly.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+externalDocs:
+  description: Amplitude Taxonomy API Documentation
+  url: https://amplitude.com/docs/apis/analytics/taxonomy
+servers:
+  - url: https://amplitude.com
+    description: Amplitude Production Server
+tags:
+  - name: Event Categories
+    description: Operations for managing event categories
+  - name: Event Types
+    description: Operations for managing event types
+  - name: Event Properties
+    description: Operations for managing event properties
+  - name: User Properties
+    description: Operations for managing user properties
+security:
+  - basicAuth: []
+paths:
+  /api/2/taxonomy/category:
+    get:
+      operationId: listEventCategories
+      summary: List all event categories
+      description: >-
+        Retrieve all event categories in the project. Categories help organize
+        event types into logical groups for easier data governance.
+      tags:
+        - Event Categories
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryListResponse'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createEventCategory
+      summary: Create an event category
+      description: >-
+        Create a new event category to organize event types into logical groups.
+      tags:
+        - Event Categories
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - category_name
+              properties:
+                category_name:
+                  type: string
+                  description: >-
+                    The name of the event category.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '409':
+          description: Category already exists
+  /api/2/taxonomy/category/{category_id}:
+    get:
+      operationId: getEventCategory
+      summary: Get an event category
+      description: >-
+        Retrieve a single event category by its ID.
+      tags:
+        - Event Categories
+      parameters:
+        - $ref: '#/components/parameters/categoryId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Category not found
+    put:
+      operationId: updateEventCategory
+      summary: Update an event category
+      description: >-
+        Update the name of an existing event category.
+      tags:
+        - Event Categories
+      parameters:
+        - $ref: '#/components/parameters/categoryId'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - category_name
+              properties:
+                category_name:
+                  type: string
+                  description: >-
+                    The new name for the event category.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Category not found
+    delete:
+      operationId: deleteEventCategory
+      summary: Delete an event category
+      description: >-
+        Delete an event category. Event types previously assigned to this
+        category will become uncategorized.
+      tags:
+        - Event Categories
+      parameters:
+        - $ref: '#/components/parameters/categoryId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Category not found
+  /api/2/taxonomy/event:
+    get:
+      operationId: listEventTypes
+      summary: List all event types
+      description: >-
+        Retrieve all event types in the project. Optionally include deleted
+        event types using the showDeleted parameter.
+      tags:
+        - Event Types
+      parameters:
+        - name: showDeleted
+          in: query
+          description: >-
+            When true, include deleted event types in the response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventTypeListResponse'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createEventType
+      summary: Create an event type
+      description: >-
+        Create a new event type in the tracking plan. This is for planning
+        purposes and does not affect event ingestion.
+      tags:
+        - Event Types
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - event_type
+              properties:
+                event_type:
+                  type: string
+                  description: >-
+                    The name of the event type.
+                category:
+                  type: string
+                  description: >-
+                    The category to assign the event type to.
+                description:
+                  type: string
+                  description: >-
+                    A description of the event type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '409':
+          description: Event type already exists
+  /api/2/taxonomy/event/{event_type}:
+    get:
+      operationId: getEventType
+      summary: Get an event type
+      description: >-
+        Retrieve a single event type by its name.
+      tags:
+        - Event Types
+      parameters:
+        - $ref: '#/components/parameters/eventType'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventType'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event type not found
+    put:
+      operationId: updateEventType
+      summary: Update an event type
+      description: >-
+        Update an existing event type's metadata such as description or
+        category assignment.
+      tags:
+        - Event Types
+      parameters:
+        - $ref: '#/components/parameters/eventType'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                new_event_type:
+                  type: string
+                  description: >-
+                    The new name for the event type.
+                category:
+                  type: string
+                  description: >-
+                    The category to assign the event type to.
+                description:
+                  type: string
+                  description: >-
+                    An updated description of the event type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event type not found
+    delete:
+      operationId: deleteEventType
+      summary: Delete an event type
+      description: >-
+        Delete a planned event type. This is intended for removing event
+        types that have not yet received data. Deleting an event type that
+        has received data does not remove the data.
+      tags:
+        - Event Types
+      parameters:
+        - $ref: '#/components/parameters/eventType'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event type not found
+  /api/2/taxonomy/event-property:
+    get:
+      operationId: listEventProperties
+      summary: List all event properties
+      description: >-
+        Retrieve all event properties for a given event type in the project.
+      tags:
+        - Event Properties
+      parameters:
+        - name: event_type
+          in: query
+          required: true
+          description: >-
+            The event type to list properties for.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPropertyListResponse'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createEventProperty
+      summary: Create an event property
+      description: >-
+        Create a new event property in the tracking plan for a specific
+        event type.
+      tags:
+        - Event Properties
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - event_type
+                - event_property
+              properties:
+                event_type:
+                  type: string
+                  description: >-
+                    The event type this property belongs to.
+                event_property:
+                  type: string
+                  description: >-
+                    The name of the event property.
+                description:
+                  type: string
+                  description: >-
+                    A description of the event property.
+                type:
+                  type: string
+                  description: >-
+                    The data type of the property.
+                  enum:
+                    - string
+                    - number
+                    - boolean
+                    - enum
+                    - any
+                is_required:
+                  type: boolean
+                  description: >-
+                    Whether the property is required.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '409':
+          description: Event property already exists
+  /api/2/taxonomy/event-property/{event_property}:
+    get:
+      operationId: getEventProperty
+      summary: Get an event property
+      description: >-
+        Retrieve a single event property by its name for a given event type.
+      tags:
+        - Event Properties
+      parameters:
+        - name: event_property
+          in: path
+          required: true
+          description: >-
+            The name of the event property.
+          schema:
+            type: string
+        - name: event_type
+          in: query
+          required: true
+          description: >-
+            The event type the property belongs to.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventProperty'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event property not found
+    put:
+      operationId: updateEventProperty
+      summary: Update an event property
+      description: >-
+        Update an existing event property's metadata.
+      tags:
+        - Event Properties
+      parameters:
+        - name: event_property
+          in: path
+          required: true
+          description: >-
+            The name of the event property to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - event_type
+              properties:
+                event_type:
+                  type: string
+                  description: >-
+                    The event type this property belongs to.
+                description:
+                  type: string
+                  description: >-
+                    An updated description of the event property.
+                new_event_property:
+                  type: string
+                  description: >-
+                    A new name for the event property.
+                type:
+                  type: string
+                  description: >-
+                    The data type of the property.
+                  enum:
+                    - string
+                    - number
+                    - boolean
+                    - enum
+                    - any
+                is_required:
+                  type: boolean
+                  description: >-
+                    Whether the property is required.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event property not found
+    delete:
+      operationId: deleteEventProperty
+      summary: Delete an event property
+      description: >-
+        Delete a planned event property. This is intended for properties
+        that have not yet received data.
+      tags:
+        - Event Properties
+      parameters:
+        - name: event_property
+          in: path
+          required: true
+          description: >-
+            The name of the event property to delete.
+          schema:
+            type: string
+        - name: event_type
+          in: query
+          required: true
+          description: >-
+            The event type the property belongs to.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event property not found
+  /api/2/taxonomy/user-property:
+    get:
+      operationId: listUserProperties
+      summary: List all user properties
+      description: >-
+        Retrieve all user properties in the project. Optionally include
+        deleted user properties.
+      tags:
+        - User Properties
+      parameters:
+        - name: showDeleted
+          in: query
+          description: >-
+            When true, include deleted user properties in the response.
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPropertyListResponse'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createUserProperty
+      summary: Create a user property
+      description: >-
+        Create a new user property in the tracking plan.
+      tags:
+        - User Properties
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - user_property
+              properties:
+                user_property:
+                  type: string
+                  description: >-
+                    The name of the user property.
+                description:
+                  type: string
+                  description: >-
+                    A description of the user property.
+                type:
+                  type: string
+                  description: >-
+                    The data type of the property.
+                  enum:
+                    - string
+                    - number
+                    - boolean
+                    - enum
+                    - any
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '409':
+          description: User property already exists
+  /api/2/taxonomy/user-property/{user_property}:
+    get:
+      operationId: getUserProperty
+      summary: Get a user property
+      description: >-
+        Retrieve a single user property by its name.
+      tags:
+        - User Properties
+      parameters:
+        - name: user_property
+          in: path
+          required: true
+          description: >-
+            The name of the user property.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProperty'
+        '401':
+          description: Unauthorized
+        '404':
+          description: User property not found
+    put:
+      operationId: updateUserProperty
+      summary: Update a user property
+      description: >-
+        Update an existing user property's metadata.
+      tags:
+        - User Properties
+      parameters:
+        - name: user_property
+          in: path
+          required: true
+          description: >-
+            The name of the user property to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  description: >-
+                    An updated description of the user property.
+                new_user_property:
+                  type: string
+                  description: >-
+                    A new name for the user property.
+                type:
+                  type: string
+                  description: >-
+                    The data type of the property.
+                  enum:
+                    - string
+                    - number
+                    - boolean
+                    - enum
+                    - any
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: User property not found
+    delete:
+      operationId: deleteUserProperty
+      summary: Delete a user property
+      description: >-
+        Delete a planned user property. This is intended for properties that
+        have not yet received data.
+      tags:
+        - User Properties
+      parameters:
+        - name: user_property
+          in: path
+          required: true
+          description: >-
+            The name of the user property to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: User property not found
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        Use your Amplitude API key as the username and your secret key as the
+        password. Encode them as base64 in the format api_key:secret_key.
+  parameters:
+    categoryId:
+      name: category_id
+      in: path
+      required: true
+      description: >-
+        The ID of the event category.
+      schema:
+        type: integer
+    eventType:
+      name: event_type
+      in: path
+      required: true
+      description: >-
+        The name of the event type.
+      schema:
+        type: string
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: >-
+            Whether the operation was successful.
+    CategoryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: >-
+            Array of event categories.
+          items:
+            $ref: '#/components/schemas/Category'
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: >-
+            The unique identifier of the category.
+        name:
+          type: string
+          description: >-
+            The name of the category.
+    EventTypeListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: >-
+            Array of event types.
+          items:
+            $ref: '#/components/schemas/EventType'
+    EventType:
+      type: object
+      properties:
+        event_type:
+          type: string
+          description: >-
+            The name of the event type.
+        category:
+          $ref: '#/components/schemas/Category'
+        description:
+          type: string
+          description: >-
+            A description of the event type.
+    EventPropertyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: >-
+            Array of event properties.
+          items:
+            $ref: '#/components/schemas/EventProperty'
+    EventProperty:
+      type: object
+      properties:
+        event_property:
+          type: string
+          description: >-
+            The name of the event property.
+        event_type:
+          type: string
+          description: >-
+            The event type this property belongs to.
+        description:
+          type: string
+          description: >-
+            A description of the event property.
+        type:
+          type: string
+          description: >-
+            The data type of the property.
+        is_required:
+          type: boolean
+          description: >-
+            Whether the property is required.
+    UserPropertyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: >-
+            Array of user properties.
+          items:
+            $ref: '#/components/schemas/UserProperty'
+    UserProperty:
+      type: object
+      properties:
+        user_property:
+          type: string
+          description: >-
+            The name of the user property.
+        description:
+          type: string
+          description: >-
+            A description of the user property.
+        type:
+          type: string
+          description: >-
+            The data type of the property.
