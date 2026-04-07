@@ -1,5 +1,6 @@
 aid: amplitude
-url: https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/apis.yml
 modified: '2026-03-20'
 apis:
   - aid: amplitude:http-v2-api
@@ -9,7 +10,8 @@ apis:
       - Events
       - Tracking
       - Ingestion
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api2.amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/http-v2
     properties:
@@ -31,7 +33,8 @@ apis:
       - Users
       - Properties
       - Identity
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api2.amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/identify
     properties:
@@ -53,7 +56,8 @@ apis:
       - Dashboards
       - Reporting
       - Metrics
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/dashboard-rest
     properties:
@@ -76,7 +80,8 @@ apis:
       - Export
       - Events
       - Data
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/export
     properties:
@@ -98,7 +103,8 @@ apis:
       - Cohorts
       - Segmentation
       - Users
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
     properties:
@@ -120,7 +126,8 @@ apis:
       - Taxonomy
       - Events
       - Data Governance
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/taxonomy
     properties:
@@ -142,7 +149,8 @@ apis:
       - Attribution
       - Campaigns
       - Marketing
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api2.amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/attribution
     properties:
@@ -164,7 +172,8 @@ apis:
       - Annotations
       - Charts
       - Reporting
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/chart-annotations
     properties:
@@ -187,7 +196,8 @@ apis:
       - Users
       - Profiles
       - Recommendations
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://profile-api.amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/user-profile
     properties:
@@ -210,7 +220,8 @@ apis:
       - Users
       - Identity
       - Aliasing
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api2.amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/user-mapping
     properties:
@@ -232,7 +243,8 @@ apis:
       - Provisioning
       - Users
       - Access Management
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://analytics.amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/scim
     properties:
@@ -255,7 +267,8 @@ apis:
       - Compliance
       - GDPR
       - CCPA
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://amplitude.com
     humanURL: https://amplitude.com/docs/apis/analytics/ccpa-dsar
     properties:
@@ -277,11 +290,14 @@ apis:
       - Feature Flags
       - A/B Testing
       - Variants
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://api.lab.amplitude.com
-    humanURL: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+    humanURL: 
+      https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
     properties:
-      - url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+      - url: 
+          https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
         type: Documentation
       - url: openapi/amplitude-experiment-evaluation-api-openapi.yml
         type: OpenAPI
@@ -300,11 +316,14 @@ apis:
       - Feature Flags
       - A/B Testing
       - Management
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://experiment.amplitude.com
-    humanURL: https://amplitude.com/docs/apis/experiment/experiment-management-api
+    humanURL: 
+      https://amplitude.com/docs/apis/experiment/experiment-management-api
     properties:
-      - url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+      - url: 
+          https://amplitude.com/docs/apis/experiment/experiment-management-api
         type: Documentation
       - url: openapi/amplitude-experiment-management-api-openapi.yml
         type: OpenAPI
@@ -325,3 +344,6 @@ common:
     url: json-schema/amplitude-cohort-schema.json
   - type: JSONSchema
     url: json-schema/amplitude-experiment-schema.json
+description: >-
+  Considerations Keep the following in mind as you use the HTTP V2 API. Rate limiting
+  Amplitude rate.
