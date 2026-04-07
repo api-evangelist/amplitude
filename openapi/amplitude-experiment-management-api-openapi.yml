@@ -21,12 +21,12 @@ servers:
   - url: https://experiment.amplitude.com
     description: Amplitude Experiment Management Server
 tags:
-  - name: Flags
-    description: Feature flag management operations
-  - name: Experiments
-    description: Experiment management operations
   - name: Deployments
     description: Deployment management operations
+  - name: Experiments
+    description: Experiment management operations
+  - name: Flags
+    description: Feature flag management operations
   - name: Versions
     description: Flag and experiment version history operations
 security:

@@ -21,18 +21,18 @@ servers:
   - url: https://amplitude.com
     description: Amplitude Production Server
 tags:
+  - name: Event List
+    description: Event listing operations
   - name: Event Segmentation
     description: Event segmentation analysis operations
   - name: Funnel Analysis
     description: Funnel analysis operations
   - name: Retention Analysis
     description: Retention analysis operations
-  - name: User Activity
-    description: User activity lookup operations
   - name: Revenue Analysis
     description: Revenue analysis operations
-  - name: Event List
-    description: Event listing operations
+  - name: User Activity
+    description: User activity lookup operations
 security:
   - basicAuth: []
 paths:

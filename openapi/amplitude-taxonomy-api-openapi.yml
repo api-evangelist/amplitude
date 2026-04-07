@@ -22,10 +22,10 @@ servers:
 tags:
   - name: Event Categories
     description: Operations for managing event categories
-  - name: Event Types
-    description: Operations for managing event types
   - name: Event Properties
     description: Operations for managing event properties
+  - name: Event Types
+    description: Operations for managing event types
   - name: User Properties
     description: Operations for managing user properties
 security:

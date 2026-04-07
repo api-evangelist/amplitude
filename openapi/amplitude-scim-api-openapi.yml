@@ -21,10 +21,10 @@ servers:
   - url: https://core.amplitude.com
     description: Amplitude SCIM Server
 tags:
-  - name: Users
-    description: SCIM user provisioning operations
   - name: Groups
     description: SCIM group management operations
+  - name: Users
+    description: SCIM user provisioning operations
 security:
   - bearerAuth: []
 paths:
