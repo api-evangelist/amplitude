@@ -1,0 +1,8 @@
+{
+  "event_type": "standard",
+  "category": {
+    "id": 816,
+    "name": "Example Name"
+  },
+  "description": "Example description"
+}

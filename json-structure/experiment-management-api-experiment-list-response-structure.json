@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/experiment-management-api-experiment-list-response-structure.json",
+  "name": "ExperimentListResponse",
+  "description": "ExperimentListResponse schema from Amplitude Experiment Management API",
+  "type": "object",
+  "properties": {
+    "experiments": {
+      "type": "array",
+      "description": "Array of experiment objects.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the experiment."
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The project ID the experiment belongs to."
+          },
+          "key": {
+            "type": "string",
+            "description": "The unique key used to reference the experiment in code."
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the experiment."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the experiment's purpose."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the experiment is enabled."
+          },
+          "evaluationMode": {
+            "type": "string",
+            "description": "The evaluation mode, either local or remote.",
+            "enum": [
+              "local",
+              "remote"
+            ]
+          },
+          "bucketingKey": {
+            "type": "string",
+            "description": "The property used for bucketing."
+          },
+          "bucketingSalt": {
+            "type": "string",
+            "description": "The salt used for hashing."
+          },
+          "variants": {
+            "type": "array",
+            "description": "Array of variant configurations including control and treatment groups.",
+            "items": {
+              "$ref": "#/components/schemas/VariantConfig"
+            }
+          },
+          "deployments": {
+            "type": "array",
+            "description": "Array of deployment IDs.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "segments": {
+            "type": "array",
+            "description": "Array of targeting segments.",
+            "items": {
+              "$ref": "#/components/schemas/Segment"
+            }
+          },
+          "state": {
+            "type": "string",
+            "description": "The current state of the experiment.",
+            "enum": [
+              "draft",
+              "running",
+              "stopped",
+              "archived"
+            ]
+          },
+          "rolledOutVariant": {
+            "type": "string",
+            "description": "The variant key that was rolled out, if the experiment has concluded."
+          },
+          "startDate": {
+            "type": "datetime",
+            "description": "The date and time the experiment started running."
+          },
+          "endDate": {
+            "type": "datetime",
+            "description": "The date and time the experiment stopped running."
+          }
+        }
+      }
+    },
+    "nextCursor": {
+      "type": "string",
+      "description": "A cursor for fetching the next page."
+    }
+  }
+}

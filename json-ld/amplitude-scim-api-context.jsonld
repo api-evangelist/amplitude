@@ -1,0 +1,123 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ScimGroup": "amplitude:ScimGroup",
+    "ScimUser": "amplitude:ScimUser",
+    "ScimGroupRequest": "amplitude:ScimGroupRequest",
+    "ScimUserRequest": "amplitude:ScimUserRequest",
+    "ScimGroupListResponse": "amplitude:ScimGroupListResponse",
+    "ScimPatchRequest": "amplitude:ScimPatchRequest",
+    "ScimUserListResponse": "amplitude:ScimUserListResponse",
+    "schemas": {
+      "@id": "amplitude:schemas",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "amplitude:id",
+      "@type": "xsd:string"
+    },
+    "displayName": {
+      "@id": "amplitude:displayName",
+      "@type": "xsd:string"
+    },
+    "members": {
+      "@id": "amplitude:members",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "amplitude:value",
+      "@type": "xsd:string"
+    },
+    "display": {
+      "@id": "amplitude:display",
+      "@type": "xsd:string"
+    },
+    "meta": {
+      "@id": "amplitude:meta",
+      "@type": "@id"
+    },
+    "resourceType": {
+      "@id": "amplitude:resourceType",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "amplitude:created",
+      "@type": "xsd:dateTime"
+    },
+    "lastModified": {
+      "@id": "amplitude:lastModified",
+      "@type": "xsd:dateTime"
+    },
+    "userName": {
+      "@id": "amplitude:userName",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "givenName": {
+      "@id": "amplitude:givenName",
+      "@type": "xsd:string"
+    },
+    "familyName": {
+      "@id": "amplitude:familyName",
+      "@type": "xsd:string"
+    },
+    "emails": {
+      "@id": "amplitude:emails",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "primary": {
+      "@id": "amplitude:primary",
+      "@type": "xsd:boolean"
+    },
+    "type": {
+      "@id": "amplitude:type",
+      "@type": "xsd:string"
+    },
+    "active": {
+      "@id": "amplitude:active",
+      "@type": "xsd:boolean"
+    },
+    "groups": {
+      "@id": "amplitude:groups",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "totalResults": {
+      "@id": "amplitude:totalResults",
+      "@type": "xsd:integer"
+    },
+    "Resources": {
+      "@id": "amplitude:Resources",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "Operations": {
+      "@id": "amplitude:Operations",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "op": {
+      "@id": "amplitude:op",
+      "@type": "xsd:string"
+    },
+    "path": {
+      "@id": "amplitude:path",
+      "@type": "xsd:string"
+    },
+    "startIndex": {
+      "@id": "amplitude:startIndex",
+      "@type": "xsd:integer"
+    },
+    "itemsPerPage": {
+      "@id": "amplitude:itemsPerPage",
+      "@type": "xsd:integer"
+    }
+  }
+}

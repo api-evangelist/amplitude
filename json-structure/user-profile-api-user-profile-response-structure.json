@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/user-profile-api-user-profile-response-structure.json",
+  "name": "UserProfileResponse",
+  "description": "UserProfileResponse schema from Amplitude User Profile API",
+  "type": "object",
+  "properties": {
+    "userData": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "The user's user_id."
+        },
+        "user_properties": {
+          "type": "object",
+          "description": "A dictionary of the user's properties as set via the Identify API or SDK.",
+          "additionalProperties": true
+        },
+        "computed_properties": {
+          "type": "object",
+          "description": "A dictionary of computed properties calculated by Amplitude for the user.",
+          "additionalProperties": true
+        },
+        "cohort_ids": {
+          "type": "array",
+          "description": "Array of cohort IDs the user is a member of.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "Array of personalized recommendation results for the user. Only included when get_recs is true.",
+          "items": {
+            "$ref": "#/components/schemas/Recommendation"
+          }
+        },
+        "amplitude_id": {
+          "type": "int64",
+          "description": "The Amplitude internal ID for the user."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "DsarStatusResponse": "amplitude:DsarStatusResponse",
+    "DeletionRequest": "amplitude:DeletionRequest",
+    "DeletionListResponse": "amplitude:DeletionListResponse",
+    "DsarResponse": "amplitude:DsarResponse",
+    "DeletionResponse": "amplitude:DeletionResponse",
+    "DsarRequest": "amplitude:DsarRequest",
+    "requestId": {
+      "@id": "amplitude:request_id",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "amplitude:status",
+      "@type": "xsd:string"
+    },
+    "downloadUrl": {
+      "@id": "amplitude:download_url",
+      "@type": "@id"
+    },
+    "amplitudeIds": {
+      "@id": "amplitude:amplitude_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "userIds": {
+      "@id": "amplitude:user_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "requester": {
+      "@id": "amplitude:requester",
+      "@type": "xsd:string"
+    },
+    "deletions": {
+      "@id": "amplitude:deletions",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "day": {
+      "@id": "amplitude:day",
+      "@type": "xsd:date"
+    }
+  }
+}

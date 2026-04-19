@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/identify-api-identify-request-form-schema.json",
+  "title": "IdentifyRequestForm",
+  "description": "IdentifyRequestForm schema from Amplitude Identify API",
+  "type": "object",
+  "properties": {
+    "api_key": {
+      "type": "string",
+      "description": "The API key for the Amplitude project."
+    },
+    "identification": {
+      "type": "string",
+      "description": "A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties."
+    }
+  },
+  "required": [
+    "api_key",
+    "identification"
+  ]
+}

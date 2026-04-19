@@ -1,0 +1,9 @@
+{
+  "$set": {},
+  "$setOnce": {},
+  "$add": {},
+  "$append": {},
+  "$prepend": {},
+  "$unset": {},
+  "$remove": {}
+}

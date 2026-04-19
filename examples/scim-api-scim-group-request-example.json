@@ -1,0 +1,11 @@
+{
+  "schemas": [
+    "example_value"
+  ],
+  "displayName": "Example Name",
+  "members": [
+    {
+      "value": "example_value"
+    }
+  ]
+}

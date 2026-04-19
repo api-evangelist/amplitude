@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/dashboard-rest-api-user-search-result-structure.json",
+  "name": "UserSearchResult",
+  "description": "UserSearchResult schema from Amplitude Dashboard REST API",
+  "type": "object",
+  "properties": {
+    "matches": {
+      "type": "array",
+      "description": "Array of matching users with their identifiers.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "description": "The user's user_id."
+          },
+          "amplitude_id": {
+            "type": "int64",
+            "description": "The user's Amplitude internal ID."
+          }
+        }
+      }
+    }
+  }
+}

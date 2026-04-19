@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/attribution-api-attribution-response-structure.json",
+  "name": "AttributionResponse",
+  "description": "AttributionResponse schema from Amplitude Attribution API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "int32",
+      "description": "The HTTP status code of the response.",
+      "example": 200
+    },
+    "events_ingested": {
+      "type": "int32",
+      "description": "The number of events successfully ingested."
+    },
+    "server_upload_time": {
+      "type": "int64",
+      "description": "The time the server received the upload in milliseconds since epoch."
+    }
+  }
+}

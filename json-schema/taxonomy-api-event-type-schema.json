@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/taxonomy-api-event-type-schema.json",
+  "title": "EventType",
+  "description": "EventType schema from Amplitude Taxonomy API",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "description": "The name of the event type."
+    },
+    "category": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The unique identifier of the category."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the category."
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the event type."
+    }
+  }
+}

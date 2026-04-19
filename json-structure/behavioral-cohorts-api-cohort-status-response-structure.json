@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/behavioral-cohorts-api-cohort-status-response-structure.json",
+  "name": "CohortStatusResponse",
+  "description": "CohortStatusResponse schema from Amplitude Behavioral Cohorts API",
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "description": "The ID of the export request."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the export job.",
+      "enum": [
+        "queued",
+        "computing",
+        "complete",
+        "failed"
+      ]
+    }
+  }
+}

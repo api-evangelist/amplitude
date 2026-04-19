@@ -1,0 +1,15 @@
+{
+  "name": "Example Name",
+  "conditions": [
+    {
+      "type": "standard",
+      "prop": "example_value",
+      "op": "example_value",
+      "values": [
+        {}
+      ]
+    }
+  ],
+  "variant": "example_value",
+  "percentage": 274
+}

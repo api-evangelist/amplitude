@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/taxonomy-api-success-response-structure.json",
+  "name": "SuccessResponse",
+  "description": "SuccessResponse schema from Amplitude Taxonomy API",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Whether the operation was successful."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/behavioral-cohorts-api-cohort-upload-response-schema.json",
+  "title": "CohortUploadResponse",
+  "description": "CohortUploadResponse schema from Amplitude Behavioral Cohorts API",
+  "type": "object",
+  "properties": {
+    "cohort_id": {
+      "type": "string",
+      "description": "The ID of the created or updated cohort."
+    }
+  }
+}

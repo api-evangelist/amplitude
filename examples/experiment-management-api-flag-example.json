@@ -1,0 +1,34 @@
+{
+  "id": "500123",
+  "projectId": "example_value",
+  "key": "example_value",
+  "name": "Example Name",
+  "description": "Example description",
+  "enabled": true,
+  "evaluationMode": "local",
+  "bucketingKey": "example_value",
+  "bucketingSalt": "example_value",
+  "variants": [
+    {
+      "key": "example_value",
+      "name": "Example Name",
+      "payload": "example_value",
+      "description": "Example description",
+      "rolloutWeight": 211
+    }
+  ],
+  "deployments": [
+    "example_value"
+  ],
+  "segments": [
+    {
+      "name": "Example Name",
+      "conditions": [
+        {}
+      ],
+      "variant": "example_value",
+      "percentage": 18
+    }
+  ],
+  "state": "draft"
+}

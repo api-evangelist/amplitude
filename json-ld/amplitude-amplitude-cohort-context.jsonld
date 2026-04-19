@@ -1,0 +1,40 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Amplitude Cohort": "amplitude:Amplitude Cohort",
+    "id": {
+      "@id": "amplitude:id",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "size": {
+      "@id": "amplitude:size",
+      "@type": "xsd:integer"
+    },
+    "lastComputed": {
+      "@id": "amplitude:lastComputed",
+      "@type": "xsd:dateTime"
+    },
+    "archived": {
+      "@id": "amplitude:archived",
+      "@type": "xsd:boolean"
+    },
+    "owner": {
+      "@id": "amplitude:owner",
+      "@type": "xsd:string"
+    },
+    "appId": {
+      "@id": "amplitude:appId",
+      "@type": "xsd:integer"
+    },
+    "definition": {
+      "@id": "amplitude:definition",
+      "@type": "xsd:string"
+    }
+  }
+}

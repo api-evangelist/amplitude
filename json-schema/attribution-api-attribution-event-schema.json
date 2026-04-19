@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/attribution-api-attribution-event-schema.json",
+  "title": "AttributionEvent",
+  "description": "AttributionEvent schema from Amplitude Attribution API",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "The user ID to attribute the campaign event to. Required unless device_id is present."
+    },
+    "device_id": {
+      "type": "string",
+      "description": "The device ID. Required unless user_id is present."
+    },
+    "event_type": {
+      "type": "string",
+      "description": "The type of attribution event, typically a campaign-related event such as install or re-engage."
+    },
+    "platform": {
+      "type": "string",
+      "description": "The platform of the device, such as iOS or Android."
+    },
+    "os_name": {
+      "type": "string",
+      "description": "The operating system name."
+    },
+    "os_version": {
+      "type": "string",
+      "description": "The operating system version."
+    },
+    "device_brand": {
+      "type": "string",
+      "description": "The brand of the device."
+    },
+    "device_manufacturer": {
+      "type": "string",
+      "description": "The manufacturer of the device."
+    },
+    "device_model": {
+      "type": "string",
+      "description": "The model of the device."
+    },
+    "carrier": {
+      "type": "string",
+      "description": "The carrier of the device."
+    },
+    "country": {
+      "type": "string",
+      "description": "The country of the user."
+    },
+    "region": {
+      "type": "string",
+      "description": "The region or state of the user."
+    },
+    "city": {
+      "type": "string",
+      "description": "The city of the user."
+    },
+    "language": {
+      "type": "string",
+      "description": "The language setting of the user."
+    },
+    "adid": {
+      "type": "string",
+      "description": "The Google Play Services advertising ID (Android)."
+    },
+    "idfa": {
+      "type": "string",
+      "description": "The Identifier for Advertiser (iOS)."
+    },
+    "idfv": {
+      "type": "string",
+      "description": "The Identifier for Vendor (iOS)."
+    },
+    "user_properties": {
+      "type": "object",
+      "description": "User property operations to set alongside the attribution event. Typically used to set campaign-related properties like utm_source, utm_medium, utm_campaign, utm_term, and utm_content.",
+      "additionalProperties": true
+    },
+    "event_properties": {
+      "type": "object",
+      "description": "Additional properties associated with the attribution event such as campaign name, ad group, ad creative, and network.",
+      "additionalProperties": true
+    },
+    "time": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The timestamp of the event in milliseconds since epoch."
+    }
+  },
+  "required": [
+    "event_type"
+  ]
+}

@@ -1,0 +1,66 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Identify API
+  description: The Amplitude Identify API allows developers to update user properties for a specific user without needing to send an accompanying event. This is useful for setting or modifying user 
+    attributes such as demographics, subscription status, or preferences outside of the normal event tracking flow. The API supports operations like set, unset, append, and prepend on user properties.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: identify-api
+    baseUri: https://api2.amplitude.com
+    description: The Amplitude Identify API allows developers to update user properties for a specific user without needing to send an accompanying event. This is useful for setting or modifying user 
+      attributes such as demographics, subscription status, or preferences outside of the normal event tracking flow. The API supports operations like set, unset, append, and prepend on user 
+      properties.
+    resources:
+    - name: identify
+      path: /identify
+      description: Identify operations
+      operations:
+      - name: identifyUser
+        method: POST
+        description: Amplitude Identify a User
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8109
+    namespace: identify-api-rest
+    resources:
+    - path: /v1/identify
+      name: identify
+      description: Identify operations
+      operations:
+      - method: POST
+        name: identifyUser
+        description: Amplitude Identify a User
+        call: identify-api.identifyUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9109
+    namespace: identify-api-mcp
+    transport: http
+    tools:
+    - name: identifyUser
+      description: Amplitude Identify a User
+      hints:
+        readOnly: false
+      call: identify-api.identifyUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

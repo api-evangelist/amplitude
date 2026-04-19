@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/user-mapping-api-user-mapping-schema.json",
+  "title": "UserMapping",
+  "description": "UserMapping schema from Amplitude User Mapping API",
+  "type": "object",
+  "properties": {
+    "global_user_id": {
+      "type": "string",
+      "description": "The primary user ID that other identities will be mapped to."
+    },
+    "user_id": {
+      "type": "string",
+      "description": "The user ID to map to the global_user_id."
+    },
+    "unmap": {
+      "type": "boolean",
+      "description": "When true, removes the mapping instead of creating it."
+    }
+  },
+  "required": [
+    "global_user_id",
+    "user_id"
+  ]
+}

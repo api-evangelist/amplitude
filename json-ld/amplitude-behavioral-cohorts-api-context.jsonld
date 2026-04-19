@@ -1,0 +1,67 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CohortListResponse": "amplitude:CohortListResponse",
+    "CohortUploadResponse": "amplitude:CohortUploadResponse",
+    "CohortUploadRequest": "amplitude:CohortUploadRequest",
+    "CohortRequestResponse": "amplitude:CohortRequestResponse",
+    "Cohort": "amplitude:Cohort",
+    "CohortStatusResponse": "amplitude:CohortStatusResponse",
+    "cohorts": {
+      "@id": "amplitude:cohorts",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "amplitude:id",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "size": {
+      "@id": "amplitude:size",
+      "@type": "xsd:integer"
+    },
+    "lastComputed": {
+      "@id": "amplitude:lastComputed",
+      "@type": "xsd:dateTime"
+    },
+    "archived": {
+      "@id": "amplitude:archived",
+      "@type": "xsd:boolean"
+    },
+    "owner": {
+      "@id": "amplitude:owner",
+      "@type": "xsd:string"
+    },
+    "appId": {
+      "@id": "amplitude:appId",
+      "@type": "xsd:integer"
+    },
+    "cohortId": {
+      "@id": "amplitude:cohort_id",
+      "@type": "xsd:string"
+    },
+    "ids": {
+      "@id": "amplitude:ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "existingCohortId": {
+      "@id": "amplitude:existing_cohort_id",
+      "@type": "xsd:string"
+    },
+    "requestId": {
+      "@id": "amplitude:request_id",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "amplitude:status",
+      "@type": "xsd:string"
+    }
+  }
+}

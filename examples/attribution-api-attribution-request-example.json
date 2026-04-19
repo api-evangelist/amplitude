@@ -1,0 +1,25 @@
+{
+  "api_key": "example_value",
+  "event": {
+    "user_id": "500123",
+    "device_id": "500123",
+    "event_type": "standard",
+    "platform": "example_value",
+    "os_name": "Example Name",
+    "os_version": "example_value",
+    "device_brand": "example_value",
+    "device_manufacturer": "example_value",
+    "device_model": "example_value",
+    "carrier": "example_value",
+    "country": "example_value",
+    "region": "example_value",
+    "city": "example_value",
+    "language": "example_value",
+    "adid": "example_value",
+    "idfa": "example_value",
+    "idfv": "example_value",
+    "user_properties": {},
+    "event_properties": {},
+    "time": 1718153645993
+  }
+}

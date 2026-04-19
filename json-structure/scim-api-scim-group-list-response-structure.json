@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/scim-api-scim-group-list-response-structure.json",
+  "name": "ScimGroupListResponse",
+  "description": "ScimGroupListResponse schema from Amplitude SCIM API",
+  "type": "object",
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The SCIM schema URIs for this response."
+    },
+    "totalResults": {
+      "type": "int32",
+      "description": "The total number of matching groups."
+    },
+    "Resources": {
+      "type": "array",
+      "description": "Array of SCIM group resources.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "schemas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The SCIM schema URIs for this resource."
+          },
+          "id": {
+            "type": "string",
+            "description": "The SCIM unique identifier for the group."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The display name of the group."
+          },
+          "members": {
+            "type": "array",
+            "description": "Array of group members.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "description": "The member user ID."
+                },
+                "display": {
+                  "type": "string",
+                  "description": "The member display name."
+                }
+              }
+            }
+          },
+          "meta": {
+            "type": "object",
+            "description": "SCIM metadata for the resource.",
+            "properties": {
+              "resourceType": {
+                "type": "string",
+                "description": "The type of SCIM resource."
+              },
+              "created": {
+                "type": "datetime",
+                "description": "The date and time the resource was created."
+              },
+              "lastModified": {
+                "type": "datetime",
+                "description": "The date and time the resource was last modified."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

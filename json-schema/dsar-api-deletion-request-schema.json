@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/dsar-api-deletion-request-schema.json",
+  "title": "DeletionRequest",
+  "description": "DeletionRequest schema from Amplitude Data Subject Access Request API",
+  "type": "object",
+  "properties": {
+    "amplitude_ids": {
+      "type": "array",
+      "description": "Array of Amplitude internal user IDs to delete data for. Maximum 100 per request.",
+      "maxItems": 100,
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "user_ids": {
+      "type": "array",
+      "description": "Array of user IDs to delete data for. Maximum 100 per request.",
+      "maxItems": 100,
+      "items": {
+        "type": "string"
+      }
+    },
+    "requester": {
+      "type": "string",
+      "description": "The email address of the person requesting the deletion for audit purposes."
+    }
+  }
+}

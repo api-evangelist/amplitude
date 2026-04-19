@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude HTTP V2 API
+  description: The Amplitude HTTP V2 API enables developers to send event data directly from servers or clients to Amplitude's analytics platform. It supports uploading individual or batched events 
+    along with user properties, event properties, and group properties. This API is the primary method for server-side event ingestion and is designed for high-throughput data collection with built-in
+    validation and error reporting.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: http-v2-api
+    baseUri: https://api2.amplitude.com
+    description: The Amplitude HTTP V2 API enables developers to send event data directly from servers or clients to Amplitude's analytics platform. It supports uploading individual or batched events 
+      along with user properties, event properties, and group properties. This API is the primary method for server-side event ingestion and is designed for high-throughput data collection with 
+      built-in validation and error reporting.
+    resources:
+    - name: events
+      path: /events
+      description: Events operations
+      operations:
+      - name: uploadEvents
+        method: POST
+        description: Amplitude Upload Events
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8108
+    namespace: http-v2-api-rest
+    resources:
+    - path: /v1/events
+      name: events
+      description: Events operations
+      operations:
+      - method: POST
+        name: uploadEvents
+        description: Amplitude Upload Events
+        call: http-v2-api.uploadEvents
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9108
+    namespace: http-v2-api-mcp
+    transport: http
+    tools:
+    - name: uploadEvents
+      description: Amplitude Upload Events
+      hints:
+        readOnly: false
+      call: http-v2-api.uploadEvents
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/behavioral-cohorts-api-cohort-schema.json",
+  "title": "Cohort",
+  "description": "Cohort schema from Amplitude Behavioral Cohorts API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the cohort."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the cohort."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the cohort."
+    },
+    "size": {
+      "type": "integer",
+      "description": "The number of users in the cohort."
+    },
+    "lastComputed": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the cohort was last computed."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the cohort is archived."
+    },
+    "owner": {
+      "type": "string",
+      "description": "The email of the cohort owner."
+    },
+    "appId": {
+      "type": "integer",
+      "description": "The Amplitude project ID the cohort belongs to."
+    }
+  }
+}

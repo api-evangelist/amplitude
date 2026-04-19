@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/dashboard-rest-api-retention-result-schema.json",
+  "title": "RetentionResult",
+  "description": "RetentionResult schema from Amplitude Dashboard REST API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Retention data organized by cohort date with day-by-day return percentages."
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/user-profile-api-recommendation-structure.json",
+  "name": "Recommendation",
+  "description": "Recommendation schema from Amplitude User Profile API",
+  "type": "object",
+  "properties": {
+    "rec_id": {
+      "type": "string",
+      "description": "The recommendation model ID."
+    },
+    "child_ids": {
+      "type": "array",
+      "description": "Array of recommended item IDs.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "is_control": {
+      "type": "boolean",
+      "description": "Whether the user is in the control group for this recommendation model."
+    },
+    "recommendation_type": {
+      "type": "string",
+      "description": "The type of recommendation model."
+    },
+    "name": {
+      "type": "string",
+      "description": "The title of the recommendation."
+    }
+  }
+}

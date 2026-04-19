@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/taxonomy-api-category-schema.json",
+  "title": "Category",
+  "description": "Category schema from Amplitude Taxonomy API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The unique identifier of the category."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the category."
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "UserPropertyOperations": "amplitude:UserPropertyOperations",
+    "Identification": "amplitude:Identification",
+    "IdentifyResponse": "amplitude:IdentifyResponse",
+    "IdentifyRequestForm": "amplitude:IdentifyRequestForm",
+    "IdentifyRequestBody": "amplitude:IdentifyRequestBody",
+    "$set": {
+      "@id": "amplitude:$set",
+      "@type": "@id"
+    },
+    "$setOnce": {
+      "@id": "amplitude:$setOnce",
+      "@type": "@id"
+    },
+    "$add": {
+      "@id": "amplitude:$add",
+      "@type": "@id"
+    },
+    "$append": {
+      "@id": "amplitude:$append",
+      "@type": "@id"
+    },
+    "$prepend": {
+      "@id": "amplitude:$prepend",
+      "@type": "@id"
+    },
+    "$unset": {
+      "@id": "amplitude:$unset",
+      "@type": "@id"
+    },
+    "$remove": {
+      "@id": "amplitude:$remove",
+      "@type": "@id"
+    },
+    "userId": {
+      "@id": "amplitude:user_id",
+      "@type": "xsd:string"
+    },
+    "deviceId": {
+      "@id": "amplitude:device_id",
+      "@type": "xsd:string"
+    },
+    "userProperties": {
+      "@id": "amplitude:user_properties",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "amplitude:code",
+      "@type": "xsd:integer"
+    },
+    "serverUploadTime": {
+      "@id": "amplitude:server_upload_time",
+      "@type": "xsd:integer"
+    },
+    "eventsIngested": {
+      "@id": "amplitude:events_ingested",
+      "@type": "xsd:integer"
+    },
+    "apiKey": {
+      "@id": "amplitude:api_key",
+      "@type": "xsd:string"
+    },
+    "identification": {
+      "@id": "amplitude:identification",
+      "@container": "@set",
+      "@type": "@id"
+    }
+  }
+}

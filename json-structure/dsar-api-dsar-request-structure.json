@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/dsar-api-dsar-request-structure.json",
+  "name": "DsarRequest",
+  "description": "DsarRequest schema from Amplitude Data Subject Access Request API",
+  "type": "object",
+  "properties": {
+    "user_ids": {
+      "type": "array",
+      "description": "Array of user IDs to retrieve data for.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "user_ids"
+  ]
+}

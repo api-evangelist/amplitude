@@ -1,0 +1,211 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Behavioral Cohorts API
+  description: The Amplitude Behavioral Cohorts API allows developers to list, export, and upload cohorts in Amplitude. Cohorts are groups of users defined by shared behavioral patterns or properties.
+    This API supports downloading cohort membership lists, creating new cohorts from external data, and retrieving cohort metadata. It is commonly used for syncing audience segments with marketing 
+    platforms, CRMs, and other downstream tools.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: behavioral-cohorts-api
+    baseUri: https://amplitude.com
+    description: The Amplitude Behavioral Cohorts API allows developers to list, export, and upload cohorts in Amplitude. Cohorts are groups of users defined by shared behavioral patterns or 
+      properties. This API supports downloading cohort membership lists, creating new cohorts from external data, and retrieving cohort metadata. It is commonly used for syncing audience segments with
+      marketing platforms, CRMs, and other downstream tools.
+    resources:
+    - name: cohorts
+      path: /cohorts
+      description: Cohorts operations
+      operations:
+      - name: listCohorts
+        method: GET
+        description: Amplitude List All Cohorts
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: requestCohortExport
+        method: GET
+        description: Amplitude Request a Cohort Export
+        inputParameters:
+        - name: cohort_id
+          in: path
+          type: string
+          required: true
+          description: The ID of the cohort to export.
+        - name: props
+          in: query
+          type: integer
+          required: false
+          description: Set to 1 to include user properties in the export.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getCohortExportStatus
+        method: GET
+        description: Amplitude Get Cohort Export Status
+        inputParameters:
+        - name: cohort_id
+          in: path
+          type: string
+          required: true
+          description: The ID of the cohort whose export status to check.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: downloadCohortExport
+        method: GET
+        description: Amplitude Download Cohort Export File
+        inputParameters:
+        - name: cohort_id
+          in: path
+          type: string
+          required: true
+          description: The ID of the cohort to download.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: uploadCohort
+        method: POST
+        description: Amplitude Upload a Cohort
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{AMPLITUDE_API_KEY}}'
+      password: '{{AMPLITUDE_SECRET_KEY}}'
+  exposes:
+  - type: rest
+    port: 8101
+    namespace: behavioral-cohorts-api-rest
+    resources:
+    - path: /v1/cohorts
+      name: cohorts
+      description: Cohorts operations
+      operations:
+      - method: GET
+        name: listCohorts
+        description: Amplitude List All Cohorts
+        call: behavioral-cohorts-api.listCohorts
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cohorts
+      name: cohorts
+      description: Cohorts operations
+      operations:
+      - method: GET
+        name: requestCohortExport
+        description: Amplitude Request a Cohort Export
+        call: behavioral-cohorts-api.requestCohortExport
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cohorts
+      name: cohorts
+      description: Cohorts operations
+      operations:
+      - method: GET
+        name: getCohortExportStatus
+        description: Amplitude Get Cohort Export Status
+        call: behavioral-cohorts-api.getCohortExportStatus
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cohorts
+      name: cohorts
+      description: Cohorts operations
+      operations:
+      - method: GET
+        name: downloadCohortExport
+        description: Amplitude Download Cohort Export File
+        call: behavioral-cohorts-api.downloadCohortExport
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cohorts
+      name: cohorts
+      description: Cohorts operations
+      operations:
+      - method: POST
+        name: uploadCohort
+        description: Amplitude Upload a Cohort
+        call: behavioral-cohorts-api.uploadCohort
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9101
+    namespace: behavioral-cohorts-api-mcp
+    transport: http
+    tools:
+    - name: listCohorts
+      description: Amplitude List All Cohorts
+      hints:
+        readOnly: true
+      call: behavioral-cohorts-api.listCohorts
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: requestCohortExport
+      description: Amplitude Request a Cohort Export
+      hints:
+        readOnly: true
+      call: behavioral-cohorts-api.requestCohortExport
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getCohortExportStatus
+      description: Amplitude Get Cohort Export Status
+      hints:
+        readOnly: true
+      call: behavioral-cohorts-api.getCohortExportStatus
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: downloadCohortExport
+      description: Amplitude Download Cohort Export File
+      hints:
+        readOnly: true
+      call: behavioral-cohorts-api.downloadCohortExport
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uploadCohort
+      description: Amplitude Upload a Cohort
+      hints:
+        readOnly: false
+      call: behavioral-cohorts-api.uploadCohort
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

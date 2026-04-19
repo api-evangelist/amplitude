@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/identify-api-identify-request-form-structure.json",
+  "name": "IdentifyRequestForm",
+  "description": "IdentifyRequestForm schema from Amplitude Identify API",
+  "type": "object",
+  "properties": {
+    "api_key": {
+      "type": "string",
+      "description": "The API key for the Amplitude project."
+    },
+    "identification": {
+      "type": "string",
+      "description": "A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties."
+    }
+  },
+  "required": [
+    "api_key",
+    "identification"
+  ]
+}

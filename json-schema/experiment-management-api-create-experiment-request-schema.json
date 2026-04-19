@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/experiment-management-api-create-experiment-request-schema.json",
+  "title": "CreateExperimentRequest",
+  "description": "CreateExperimentRequest schema from Amplitude Experiment Management API",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The unique key for the experiment."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the experiment."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the experiment."
+    },
+    "variants": {
+      "type": "array",
+      "description": "Array of variant configurations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The unique key for the variant."
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the variant."
+          },
+          "payload": {
+            "description": "An optional JSON payload associated with the variant."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what this variant does."
+          },
+          "rolloutWeight": {
+            "type": "integer",
+            "description": "The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "bucketingKey": {
+      "type": "string",
+      "description": "The property used for bucketing."
+    }
+  },
+  "required": [
+    "key"
+  ]
+}

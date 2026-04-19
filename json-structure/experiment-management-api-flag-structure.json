@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/experiment-management-api-flag-structure.json",
+  "name": "Flag",
+  "description": "Flag schema from Amplitude Experiment Management API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the flag."
+    },
+    "projectId": {
+      "type": "string",
+      "description": "The project ID the flag belongs to."
+    },
+    "key": {
+      "type": "string",
+      "description": "The unique key used to reference the flag in code."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the flag."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the flag's purpose."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the flag is enabled."
+    },
+    "evaluationMode": {
+      "type": "string",
+      "description": "The evaluation mode, either local or remote.",
+      "enum": [
+        "local",
+        "remote"
+      ]
+    },
+    "bucketingKey": {
+      "type": "string",
+      "description": "The property used for bucketing users into variants."
+    },
+    "bucketingSalt": {
+      "type": "string",
+      "description": "The salt used for hashing during bucketing."
+    },
+    "variants": {
+      "type": "array",
+      "description": "Array of variant configurations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The unique key for the variant."
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the variant."
+          },
+          "payload": {
+            "description": "An optional JSON payload associated with the variant."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what this variant does."
+          },
+          "rolloutWeight": {
+            "type": "int32",
+            "description": "The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "deployments": {
+      "type": "array",
+      "description": "Array of deployment IDs the flag is deployed to.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "segments": {
+      "type": "array",
+      "description": "Array of targeting segment configurations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The display name of the segment."
+          },
+          "conditions": {
+            "type": "array",
+            "description": "Array of targeting conditions that define this segment.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The condition type."
+                },
+                "prop": {
+                  "type": "string",
+                  "description": "The property to evaluate."
+                },
+                "op": {
+                  "type": "string",
+                  "description": "The comparison operator."
+                },
+                "values": {
+                  "type": "array",
+                  "description": "The values to compare against.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "variant": {
+            "type": "string",
+            "description": "The variant key to assign when this segment matches."
+          },
+          "percentage": {
+            "type": "int32",
+            "description": "The percentage of matching users to include (0-100).",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "state": {
+      "type": "string",
+      "description": "The current state of the flag.",
+      "enum": [
+        "draft",
+        "active",
+        "archived"
+      ]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Example Name",
+  "ids": [
+    "example_value"
+  ],
+  "owner": "example_value",
+  "existing_cohort_id": "500123"
+}

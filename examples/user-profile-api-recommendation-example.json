@@ -1,0 +1,9 @@
+{
+  "rec_id": "500123",
+  "child_ids": [
+    "example_value"
+  ],
+  "is_control": true,
+  "recommendation_type": "standard",
+  "title": "example_value"
+}

@@ -18,23 +18,23 @@ externalDocs:
   description: Amplitude Chart Annotations API Documentation
   url: https://amplitude.com/docs/apis/analytics/chart-annotations
 servers:
-  - url: https://amplitude.com
-    description: Amplitude Production Server
+- url: https://amplitude.com
+  description: Amplitude Production Server
 tags:
-  - name: Annotations
-    description: Chart annotation management operations
+- name: Annotations
+  description: Chart annotation management operations
 security:
-  - basicAuth: []
+- basicAuth: []
 paths:
   /api/3/annotations:
     get:
       operationId: listAnnotations
-      summary: List all annotations
+      summary: Amplitude List All Annotations
       description: >-
         Retrieve all chart annotations in the project. Supports filtering by
         category, chart, and date range.
       tags:
-        - Annotations
+      - Annotations
       responses:
         '200':
           description: Success
@@ -42,17 +42,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnnotationListResponse'
+              examples:
+                listAnnotations200Example:
+                  summary: Default listAnnotations 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - example_value
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createAnnotation
-      summary: Create an annotation
+      summary: Amplitude Create an Annotation
       description: >-
         Create a new chart annotation with a label, date or date range,
         optional category, and optional chart association. Annotations appear
         on timeline-based charts to provide context for significant events.
       tags:
-        - Annotations
+      - Annotations
       requestBody:
         required: true
         content:
@@ -66,20 +76,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Annotation'
+              examples:
+                createAnnotation200Example:
+                  summary: Default createAnnotation 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 100
+                    label: example_value
+                    date: '2025-03-15'
+                    end_date: '2025-03-15'
+                    details: example_value
+                    category: example_value
+                    chart_id: 100
+                    created_at: '2025-03-15T14:30:00Z'
+                    updated_at: '2025-03-15T14:30:00Z'
         '400':
           description: Bad request - invalid annotation data
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/3/annotations/{annotation_id}:
     get:
       operationId: getAnnotation
-      summary: Get an annotation
+      summary: Amplitude Get an Annotation
       description: >-
         Retrieve a single chart annotation by its ID.
       tags:
-        - Annotations
+      - Annotations
       parameters:
-        - $ref: '#/components/parameters/annotationId'
+      - $ref: '#/components/parameters/annotationId'
       responses:
         '200':
           description: Success
@@ -87,20 +114,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Annotation'
+              examples:
+                getAnnotation200Example:
+                  summary: Default getAnnotation 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 100
+                    label: example_value
+                    date: '2025-03-15'
+                    end_date: '2025-03-15'
+                    details: example_value
+                    category: example_value
+                    chart_id: 100
+                    created_at: '2025-03-15T14:30:00Z'
+                    updated_at: '2025-03-15T14:30:00Z'
         '401':
           description: Unauthorized
         '404':
           description: Annotation not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateAnnotation
-      summary: Update an annotation
+      summary: Amplitude Update an Annotation
       description: >-
         Update an existing annotation. Only the fields included in the
         request body are updated; other fields remain unchanged.
       tags:
-        - Annotations
+      - Annotations
       parameters:
-        - $ref: '#/components/parameters/annotationId'
+      - $ref: '#/components/parameters/annotationId'
       requestBody:
         required: true
         content:
@@ -114,21 +158,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Annotation'
+              examples:
+                updateAnnotation200Example:
+                  summary: Default updateAnnotation 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 100
+                    label: example_value
+                    date: '2025-03-15'
+                    end_date: '2025-03-15'
+                    details: example_value
+                    category: example_value
+                    chart_id: 100
+                    created_at: '2025-03-15T14:30:00Z'
+                    updated_at: '2025-03-15T14:30:00Z'
         '400':
           description: Bad request
         '401':
           description: Unauthorized
         '404':
           description: Annotation not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteAnnotation
-      summary: Delete an annotation
+      summary: Amplitude Delete an Annotation
       description: >-
         Delete a chart annotation by its ID.
       tags:
-        - Annotations
+      - Annotations
       parameters:
-        - $ref: '#/components/parameters/annotationId'
+      - $ref: '#/components/parameters/annotationId'
       responses:
         '200':
           description: Success
@@ -136,6 +197,9 @@ paths:
           description: Unauthorized
         '404':
           description: Annotation not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -211,8 +275,8 @@ components:
     CreateAnnotationRequest:
       type: object
       required:
-        - label
-        - date
+      - label
+      - date
       properties:
         label:
           type: string

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/dashboard-rest-api-segmentation-result-structure.json",
+  "name": "SegmentationResult",
+  "description": "SegmentationResult schema from Amplitude Dashboard REST API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "An array of data series, one per segment or group-by value.",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "seriesLabels": {
+          "type": "array",
+          "description": "Labels corresponding to each series.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "xValues": {
+          "type": "array",
+          "description": "The x-axis values representing time periods.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

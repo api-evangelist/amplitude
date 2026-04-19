@@ -1,0 +1,46 @@
+{
+  "api_key": "example_value",
+  "events": [
+    {
+      "user_id": "500123",
+      "device_id": "500123",
+      "event_type": "standard",
+      "time": 1718153645993,
+      "event_properties": {},
+      "user_properties": {},
+      "groups": {},
+      "group_properties": {},
+      "app_version": "example_value",
+      "platform": "example_value",
+      "os_name": "Example Name",
+      "os_version": "example_value",
+      "device_brand": "example_value",
+      "device_manufacturer": "example_value",
+      "device_model": "example_value",
+      "carrier": "example_value",
+      "country": "example_value",
+      "region": "example_value",
+      "city": "example_value",
+      "dma": "example_value",
+      "language": "example_value",
+      "price": 10.92,
+      "quantity": 823,
+      "revenue": 96.22,
+      "productId": "example_value",
+      "revenueType": "standard",
+      "location_lat": 36.46,
+      "location_lng": 4.67,
+      "ip": "example_value",
+      "idfa": "example_value",
+      "idfv": "example_value",
+      "adid": "example_value",
+      "android_id": "500123",
+      "event_id": 888,
+      "session_id": 816,
+      "insert_id": "500123"
+    }
+  ],
+  "options": {
+    "min_id_length": 81
+  }
+}

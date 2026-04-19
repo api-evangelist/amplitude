@@ -1,0 +1,38 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "UserMapRequest": "amplitude:UserMapRequest",
+    "UserMapResponse": "amplitude:UserMapResponse",
+    "UserUnmapRequest": "amplitude:UserUnmapRequest",
+    "UserMapping": "amplitude:UserMapping",
+    "mapping": {
+      "@id": "amplitude:mapping",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "globalUserId": {
+      "@id": "amplitude:global_user_id",
+      "@type": "xsd:string"
+    },
+    "userId": {
+      "@id": "amplitude:user_id",
+      "@type": "xsd:string"
+    },
+    "unmap": {
+      "@id": "amplitude:unmap",
+      "@type": "xsd:boolean"
+    },
+    "code": {
+      "@id": "amplitude:code",
+      "@type": "xsd:integer"
+    },
+    "success": {
+      "@id": "amplitude:success",
+      "@type": "xsd:boolean"
+    }
+  }
+}

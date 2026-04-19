@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/taxonomy-api-category-structure.json",
+  "name": "Category",
+  "description": "Category schema from Amplitude Taxonomy API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "int32",
+      "description": "The unique identifier of the category."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the category."
+    }
+  }
+}

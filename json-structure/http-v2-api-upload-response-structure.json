@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/http-v2-api-upload-response-structure.json",
+  "name": "UploadResponse",
+  "description": "UploadResponse schema from Amplitude HTTP V2 API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "int32",
+      "description": "The HTTP status code of the response.",
+      "example": 200
+    },
+    "events_ingested": {
+      "type": "int32",
+      "description": "The number of events successfully ingested."
+    },
+    "payload_size_bytes": {
+      "type": "int32",
+      "description": "The size of the request payload in bytes."
+    },
+    "server_upload_time": {
+      "type": "int64",
+      "description": "The time the server received the upload in milliseconds since epoch."
+    }
+  }
+}

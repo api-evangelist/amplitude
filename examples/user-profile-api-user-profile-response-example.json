@@ -1,0 +1,14 @@
+{
+  "userData": {
+    "user_id": "500123",
+    "user_properties": {},
+    "computed_properties": {},
+    "cohort_ids": [
+      "example_value"
+    ],
+    "recommendations": [
+      "example_value"
+    ],
+    "amplitude_id": 970
+  }
+}

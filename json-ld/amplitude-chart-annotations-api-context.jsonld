@@ -1,0 +1,48 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "UpdateAnnotationRequest": "amplitude:UpdateAnnotationRequest",
+    "CreateAnnotationRequest": "amplitude:CreateAnnotationRequest",
+    "AnnotationListResponse": "amplitude:AnnotationListResponse",
+    "Annotation": "amplitude:Annotation",
+    "label": {
+      "@id": "amplitude:label",
+      "@type": "xsd:string"
+    },
+    "date": {
+      "@id": "amplitude:date",
+      "@type": "xsd:date"
+    },
+    "endDate": {
+      "@id": "amplitude:end_date",
+      "@type": "xsd:date"
+    },
+    "details": {
+      "@id": "amplitude:details",
+      "@type": "xsd:string"
+    },
+    "category": {
+      "@id": "amplitude:category",
+      "@type": "xsd:string"
+    },
+    "chartId": {
+      "@id": "amplitude:chart_id",
+      "@type": "xsd:integer"
+    },
+    "data": {
+      "@id": "amplitude:data",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "amplitude:id",
+      "@type": "xsd:integer"
+    },
+    "createdAt": "schema:dateCreated",
+    "updatedAt": "schema:dateModified"
+  }
+}

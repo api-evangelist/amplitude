@@ -1,0 +1,101 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude User Mapping API
+  description: The Amplitude User Mapping (Aliasing) API allows developers to merge users with different user IDs together in Amplitude. This is useful when a user initially interacts with a product 
+    anonymously and later creates an account, or when users have multiple identifiers across different systems. The API maps these distinct identities into a single unified user profile to ensure 
+    accurate analytics and attribution.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: user-mapping-api
+    baseUri: https://amplitude.com
+    description: The Amplitude User Mapping (Aliasing) API allows developers to merge users with different user IDs together in Amplitude. This is useful when a user initially interacts with a product
+      anonymously and later creates an account, or when users have multiple identifiers across different systems. The API maps these distinct identities into a single unified user profile to ensure 
+      accurate analytics and attribution.
+    resources:
+    - name: user-mapping
+      path: /user-mapping
+      description: User Mapping operations
+      operations:
+      - name: mapUser
+        method: POST
+        description: Amplitude Map User Identities
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: unmapUser
+        method: POST
+        description: Amplitude Unmap User Identities
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{AMPLITUDE_API_KEY}}'
+      password: '{{AMPLITUDE_SECRET_KEY}}'
+  exposes:
+  - type: rest
+    port: 8112
+    namespace: user-mapping-api-rest
+    resources:
+    - path: /v1/user-mapping
+      name: user-mapping
+      description: User Mapping operations
+      operations:
+      - method: POST
+        name: mapUser
+        description: Amplitude Map User Identities
+        call: user-mapping-api.mapUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-mapping
+      name: user-mapping
+      description: User Mapping operations
+      operations:
+      - method: POST
+        name: unmapUser
+        description: Amplitude Unmap User Identities
+        call: user-mapping-api.unmapUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9112
+    namespace: user-mapping-api-mcp
+    transport: http
+    tools:
+    - name: mapUser
+      description: Amplitude Map User Identities
+      hints:
+        readOnly: false
+      call: user-mapping-api.mapUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unmapUser
+      description: Amplitude Unmap User Identities
+      hints:
+        readOnly: false
+      call: user-mapping-api.unmapUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

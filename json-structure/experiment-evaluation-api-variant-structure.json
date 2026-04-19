@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/experiment-evaluation-api-variant-structure.json",
+  "name": "Variant",
+  "description": "Variant schema from Amplitude Experiment Evaluation API",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The variant key identifying this variant."
+    },
+    "value": {
+      "type": "string",
+      "description": "The variant value or payload."
+    },
+    "payload": {
+      "description": "An optional JSON payload associated with the variant."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Metadata about the variant assignment.",
+      "properties": {
+        "experimentKey": {
+          "type": "string",
+          "description": "The key of the experiment that assigned this variant."
+        },
+        "flagType": {
+          "type": "string",
+          "description": "The type of flag, such as experiment or release."
+        },
+        "flagVersion": {
+          "type": "int32",
+          "description": "The version of the flag configuration."
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Whether this is the default variant."
+        }
+      }
+    }
+  }
+}

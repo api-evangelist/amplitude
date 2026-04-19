@@ -1,0 +1,180 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Data Subject Access Request API
+  description: The Amplitude Data Subject Access Request (DSAR) API enables organizations to programmatically handle privacy requests in compliance with GDPR, CCPA, and other data protection 
+    regulations. It supports submitting deletion requests for user data based on user IDs or device IDs, and retrieving all data associated with a user. This API allows companies to automate their 
+    privacy compliance workflows and ensure timely processing of data subject requests at scale.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dsar-api
+    baseUri: https://amplitude.com
+    description: The Amplitude Data Subject Access Request (DSAR) API enables organizations to programmatically handle privacy requests in compliance with GDPR, CCPA, and other data protection 
+      regulations. It supports submitting deletion requests for user data based on user IDs or device IDs, and retrieving all data associated with a user. This API allows companies to automate their 
+      privacy compliance workflows and ensure timely processing of data subject requests at scale.
+    resources:
+    - name: data-access
+      path: /data-access
+      description: Data Access operations
+      operations:
+      - name: createDsarRequest
+        method: POST
+        description: Amplitude Create a Data Subject Access Request
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getDsarRequestStatus
+        method: GET
+        description: Amplitude Get DSAR Request Status
+        inputParameters:
+        - name: request_id
+          in: path
+          type: string
+          required: true
+          description: The ID of the DSAR request to check.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: data-deletion
+      path: /data-deletion
+      description: Data Deletion operations
+      operations:
+      - name: listDeletionRequests
+        method: GET
+        description: Amplitude List Deletion Requests
+        inputParameters:
+        - name: start_day
+          in: query
+          type: string
+          required: false
+          description: The start date to filter deletion requests in YYYY-MM-DD format.
+        - name: end_day
+          in: query
+          type: string
+          required: false
+          description: The end date to filter deletion requests in YYYY-MM-DD format.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createDeletionRequest
+        method: POST
+        description: Amplitude Request User Data Deletion
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{AMPLITUDE_API_KEY}}'
+      password: '{{AMPLITUDE_SECRET_KEY}}'
+  exposes:
+  - type: rest
+    port: 8104
+    namespace: dsar-api-rest
+    resources:
+    - path: /v1/data-access
+      name: data-access
+      description: Data Access operations
+      operations:
+      - method: POST
+        name: createDsarRequest
+        description: Amplitude Create a Data Subject Access Request
+        call: dsar-api.createDsarRequest
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data-access
+      name: data-access
+      description: Data Access operations
+      operations:
+      - method: GET
+        name: getDsarRequestStatus
+        description: Amplitude Get DSAR Request Status
+        call: dsar-api.getDsarRequestStatus
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data-deletion
+      name: data-deletion
+      description: Data Deletion operations
+      operations:
+      - method: GET
+        name: listDeletionRequests
+        description: Amplitude List Deletion Requests
+        call: dsar-api.listDeletionRequests
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data-deletion
+      name: data-deletion
+      description: Data Deletion operations
+      operations:
+      - method: POST
+        name: createDeletionRequest
+        description: Amplitude Request User Data Deletion
+        call: dsar-api.createDeletionRequest
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9104
+    namespace: dsar-api-mcp
+    transport: http
+    tools:
+    - name: createDsarRequest
+      description: Amplitude Create a Data Subject Access Request
+      hints:
+        readOnly: false
+      call: dsar-api.createDsarRequest
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getDsarRequestStatus
+      description: Amplitude Get DSAR Request Status
+      hints:
+        readOnly: true
+      call: dsar-api.getDsarRequestStatus
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listDeletionRequests
+      description: Amplitude List Deletion Requests
+      hints:
+        readOnly: true
+      call: dsar-api.listDeletionRequests
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createDeletionRequest
+      description: Amplitude Request User Data Deletion
+      hints:
+        readOnly: false
+      call: dsar-api.createDeletionRequest
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

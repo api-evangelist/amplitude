@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/dashboard-rest-api-funnel-result-structure.json",
+  "name": "FunnelResult",
+  "description": "FunnelResult schema from Amplitude Dashboard REST API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Funnel conversion data including step-by-step drop-off rates."
+    }
+  }
+}

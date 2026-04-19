@@ -1,0 +1,14 @@
+{
+  "cohorts": [
+    {
+      "id": "500123",
+      "name": "Example Name",
+      "description": "Example description",
+      "size": 178,
+      "lastComputed": "2025-03-15T14:30:00Z",
+      "archived": false,
+      "owner": "example_value",
+      "appId": 414
+    }
+  ]
+}

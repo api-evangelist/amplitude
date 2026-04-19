@@ -1,0 +1,312 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Experimentation
+  description: Manage and evaluate A/B experiments and feature flags. For product managers.
+  tags:
+  - Amplitude
+  - Experimentation
+  - Feature Flags
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - import: experiment-evaluation-api
+    location: ./shared/experiment-evaluation-api.yaml
+  - import: experiment-management-api
+    location: ./shared/experiment-management-api.yaml
+  exposes:
+  - type: rest
+    port: 8082
+    namespace: amplitude-experimentation-api
+    description: REST API for Amplitude Experimentation
+    resources:
+    - path: /v1/evaluation
+      name: evaluation
+      operations:
+      - method: GET
+        name: evaluateVariantsGet
+        description: Amplitude Evaluate Variants for a User via GET
+        call: experiment-evaluation-api.evaluateVariantsGet
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/evaluation
+      name: evaluation
+      operations:
+      - method: POST
+        name: evaluateVariants
+        description: Amplitude Evaluate Variants for a User
+        call: experiment-evaluation-api.evaluateVariants
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flags
+      name: flags
+      operations:
+      - method: GET
+        name: getFlags
+        description: Amplitude Get Flag Configurations
+        call: experiment-evaluation-api.getFlags
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flags
+      name: flags
+      operations:
+      - method: GET
+        name: listFlags
+        description: Amplitude List All Flags
+        call: experiment-management-api.listFlags
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flags
+      name: flags
+      operations:
+      - method: POST
+        name: createFlag
+        description: Amplitude Create a Flag
+        call: experiment-management-api.createFlag
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flags
+      name: flags
+      operations:
+      - method: GET
+        name: getFlag
+        description: Amplitude Get a Flag
+        call: experiment-management-api.getFlag
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flags
+      name: flags
+      operations:
+      - method: PATCH
+        name: updateFlag
+        description: Amplitude Update a Flag
+        call: experiment-management-api.updateFlag
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/experiments
+      name: experiments
+      operations:
+      - method: GET
+        name: listExperiments
+        description: Amplitude List All Experiments
+        call: experiment-management-api.listExperiments
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/experiments
+      name: experiments
+      operations:
+      - method: POST
+        name: createExperiment
+        description: Amplitude Create an Experiment
+        call: experiment-management-api.createExperiment
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/experiments
+      name: experiments
+      operations:
+      - method: GET
+        name: getExperiment
+        description: Amplitude Get an Experiment
+        call: experiment-management-api.getExperiment
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/experiments
+      name: experiments
+      operations:
+      - method: PATCH
+        name: updateExperiment
+        description: Amplitude Update an Experiment
+        call: experiment-management-api.updateExperiment
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deployments
+      name: deployments
+      operations:
+      - method: GET
+        name: listDeployments
+        description: Amplitude List All Deployments
+        call: experiment-management-api.listDeployments
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deployments
+      name: deployments
+      operations:
+      - method: GET
+        name: getDeployment
+        description: Amplitude Get a Deployment
+        call: experiment-management-api.getDeployment
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/versions
+      name: versions
+      operations:
+      - method: GET
+        name: listVersions
+        description: Amplitude List Flag and Experiment Versions
+        call: experiment-management-api.listVersions
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9092
+    namespace: amplitude-experimentation-mcp
+    transport: http
+    description: MCP for Amplitude Experimentation
+    tools:
+    - name: experiment-evaluation-api-evaluateVariantsGet
+      description: Amplitude Evaluate Variants for a User via GET
+      hints:
+        readOnly: true
+      call: experiment-evaluation-api.evaluateVariantsGet
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-evaluation-api-evaluateVariants
+      description: Amplitude Evaluate Variants for a User
+      hints:
+        readOnly: false
+      call: experiment-evaluation-api.evaluateVariants
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-evaluation-api-getFlags
+      description: Amplitude Get Flag Configurations
+      hints:
+        readOnly: true
+      call: experiment-evaluation-api.getFlags
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-listFlags
+      description: Amplitude List All Flags
+      hints:
+        readOnly: true
+      call: experiment-management-api.listFlags
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-createFlag
+      description: Amplitude Create a Flag
+      hints:
+        readOnly: false
+      call: experiment-management-api.createFlag
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-getFlag
+      description: Amplitude Get a Flag
+      hints:
+        readOnly: true
+      call: experiment-management-api.getFlag
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-updateFlag
+      description: Amplitude Update a Flag
+      hints:
+        readOnly: false
+      call: experiment-management-api.updateFlag
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-listExperiments
+      description: Amplitude List All Experiments
+      hints:
+        readOnly: true
+      call: experiment-management-api.listExperiments
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-createExperiment
+      description: Amplitude Create an Experiment
+      hints:
+        readOnly: false
+      call: experiment-management-api.createExperiment
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-getExperiment
+      description: Amplitude Get an Experiment
+      hints:
+        readOnly: true
+      call: experiment-management-api.getExperiment
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-updateExperiment
+      description: Amplitude Update an Experiment
+      hints:
+        readOnly: false
+      call: experiment-management-api.updateExperiment
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-listDeployments
+      description: Amplitude List All Deployments
+      hints:
+        readOnly: true
+      call: experiment-management-api.listDeployments
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-getDeployment
+      description: Amplitude Get a Deployment
+      hints:
+        readOnly: true
+      call: experiment-management-api.getDeployment
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: experiment-management-api-listVersions
+      description: Amplitude List Flag and Experiment Versions
+      hints:
+        readOnly: true
+      call: experiment-management-api.listVersions
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

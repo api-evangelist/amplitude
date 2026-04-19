@@ -1,0 +1,154 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Amplitude Event": "amplitude:Amplitude Event",
+    "userId": {
+      "@id": "amplitude:user_id",
+      "@type": "xsd:string"
+    },
+    "deviceId": {
+      "@id": "amplitude:device_id",
+      "@type": "xsd:string"
+    },
+    "eventType": {
+      "@id": "amplitude:event_type",
+      "@type": "xsd:string"
+    },
+    "time": {
+      "@id": "amplitude:time",
+      "@type": "xsd:integer"
+    },
+    "eventProperties": {
+      "@id": "amplitude:event_properties",
+      "@type": "@id"
+    },
+    "userProperties": {
+      "@id": "amplitude:user_properties",
+      "@type": "@id"
+    },
+    "groups": {
+      "@id": "amplitude:groups",
+      "@type": "@id"
+    },
+    "groupProperties": {
+      "@id": "amplitude:group_properties",
+      "@type": "@id"
+    },
+    "appVersion": {
+      "@id": "amplitude:app_version",
+      "@type": "xsd:string"
+    },
+    "platform": {
+      "@id": "amplitude:platform",
+      "@type": "xsd:string"
+    },
+    "osName": {
+      "@id": "amplitude:os_name",
+      "@type": "xsd:string"
+    },
+    "osVersion": {
+      "@id": "amplitude:os_version",
+      "@type": "xsd:string"
+    },
+    "deviceBrand": {
+      "@id": "amplitude:device_brand",
+      "@type": "xsd:string"
+    },
+    "deviceManufacturer": {
+      "@id": "amplitude:device_manufacturer",
+      "@type": "xsd:string"
+    },
+    "deviceModel": {
+      "@id": "amplitude:device_model",
+      "@type": "xsd:string"
+    },
+    "carrier": {
+      "@id": "amplitude:carrier",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "amplitude:country",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "amplitude:region",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "amplitude:city",
+      "@type": "xsd:string"
+    },
+    "dma": {
+      "@id": "amplitude:dma",
+      "@type": "xsd:string"
+    },
+    "language": {
+      "@id": "amplitude:language",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "amplitude:price",
+      "@type": "xsd:decimal"
+    },
+    "quantity": {
+      "@id": "amplitude:quantity",
+      "@type": "xsd:integer"
+    },
+    "revenue": {
+      "@id": "amplitude:revenue",
+      "@type": "xsd:decimal"
+    },
+    "productId": {
+      "@id": "amplitude:productId",
+      "@type": "xsd:string"
+    },
+    "revenueType": {
+      "@id": "amplitude:revenueType",
+      "@type": "xsd:string"
+    },
+    "locationLat": {
+      "@id": "amplitude:location_lat",
+      "@type": "xsd:decimal"
+    },
+    "locationLng": {
+      "@id": "amplitude:location_lng",
+      "@type": "xsd:decimal"
+    },
+    "ip": {
+      "@id": "amplitude:ip",
+      "@type": "xsd:string"
+    },
+    "idfa": {
+      "@id": "amplitude:idfa",
+      "@type": "xsd:string"
+    },
+    "idfv": {
+      "@id": "amplitude:idfv",
+      "@type": "xsd:string"
+    },
+    "adid": {
+      "@id": "amplitude:adid",
+      "@type": "xsd:string"
+    },
+    "androidId": {
+      "@id": "amplitude:android_id",
+      "@type": "xsd:string"
+    },
+    "eventId": {
+      "@id": "amplitude:event_id",
+      "@type": "xsd:integer"
+    },
+    "sessionId": {
+      "@id": "amplitude:session_id",
+      "@type": "xsd:integer"
+    },
+    "insertId": {
+      "@id": "amplitude:insert_id",
+      "@type": "xsd:string"
+    }
+  }
+}

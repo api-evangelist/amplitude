@@ -1,0 +1,7 @@
+{
+  "key": "example_value",
+  "name": "Example Name",
+  "payload": "example_value",
+  "description": "Example description",
+  "rolloutWeight": 444
+}

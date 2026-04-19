@@ -1,0 +1,24 @@
+{
+  "name": "Example Name",
+  "description": "Example description",
+  "enabled": false,
+  "variants": [
+    {
+      "key": "example_value",
+      "name": "Example Name",
+      "payload": "example_value",
+      "description": "Example description",
+      "rolloutWeight": 86
+    }
+  ],
+  "segments": [
+    {
+      "name": "Example Name",
+      "conditions": [
+        {}
+      ],
+      "variant": "example_value",
+      "percentage": 990
+    }
+  ]
+}

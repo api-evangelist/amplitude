@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/behavioral-cohorts-api-cohort-upload-request-structure.json",
+  "name": "CohortUploadRequest",
+  "description": "CohortUploadRequest schema from Amplitude Behavioral Cohorts API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the cohort to create or update."
+    },
+    "ids": {
+      "type": "array",
+      "description": "Array of user_id or amplitude_id values to include in the cohort.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "owner": {
+      "type": "string",
+      "description": "The email address of the cohort owner."
+    },
+    "existing_cohort_id": {
+      "type": "string",
+      "description": "If provided, updates the existing cohort with this ID instead of creating a new one."
+    }
+  },
+  "required": [
+    "name",
+    "ids"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "500123",
+  "name": "Example Name",
+  "description": "Example description",
+  "size": 72,
+  "lastComputed": "2025-03-15T14:30:00Z",
+  "archived": false,
+  "owner": "analyst@example.com",
+  "appId": 64,
+  "definition": "example_value"
+}

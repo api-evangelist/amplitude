@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/chart-annotations-api-update-annotation-request-schema.json",
+  "title": "UpdateAnnotationRequest",
+  "description": "UpdateAnnotationRequest schema from Amplitude Chart Annotations API",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "description": "The updated display label for the annotation.",
+      "maxLength": 255
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The updated date in YYYY-MM-DD format."
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "The updated end date in YYYY-MM-DD format."
+    },
+    "details": {
+      "type": "string",
+      "description": "Updated additional details or notes."
+    },
+    "category": {
+      "type": "string",
+      "description": "The updated category."
+    },
+    "chart_id": {
+      "type": "integer",
+      "description": "The updated chart ID."
+    }
+  }
+}

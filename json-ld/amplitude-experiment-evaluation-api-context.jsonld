@@ -1,0 +1,91 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "EvaluationResponse": "amplitude:EvaluationResponse",
+    "EvaluationRequest": "amplitude:EvaluationRequest",
+    "Variant": "amplitude:Variant",
+    "FlagConfiguration": "amplitude:FlagConfiguration",
+    "userId": {
+      "@id": "amplitude:user_id",
+      "@type": "xsd:string"
+    },
+    "deviceId": {
+      "@id": "amplitude:device_id",
+      "@type": "xsd:string"
+    },
+    "userProperties": {
+      "@id": "amplitude:user_properties",
+      "@type": "@id"
+    },
+    "groups": {
+      "@id": "amplitude:groups",
+      "@type": "@id"
+    },
+    "groupProperties": {
+      "@id": "amplitude:group_properties",
+      "@type": "@id"
+    },
+    "key": {
+      "@id": "amplitude:key",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "amplitude:value",
+      "@type": "xsd:string"
+    },
+    "payload": {
+      "@id": "amplitude:payload",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "amplitude:metadata",
+      "@type": "@id"
+    },
+    "experimentKey": {
+      "@id": "amplitude:experimentKey",
+      "@type": "xsd:string"
+    },
+    "flagType": {
+      "@id": "amplitude:flagType",
+      "@type": "xsd:string"
+    },
+    "flagVersion": {
+      "@id": "amplitude:flagVersion",
+      "@type": "xsd:integer"
+    },
+    "default": {
+      "@id": "amplitude:default",
+      "@type": "xsd:boolean"
+    },
+    "deployed": {
+      "@id": "amplitude:deployed",
+      "@type": "xsd:boolean"
+    },
+    "evaluationMode": {
+      "@id": "amplitude:evaluationMode",
+      "@type": "xsd:string"
+    },
+    "segments": {
+      "@id": "amplitude:segments",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "conditions": {
+      "@id": "amplitude:conditions",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "variant": {
+      "@id": "amplitude:variant",
+      "@type": "xsd:string"
+    },
+    "variants": {
+      "@id": "amplitude:variants",
+      "@type": "@id"
+    }
+  }
+}

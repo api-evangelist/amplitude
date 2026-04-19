@@ -17,26 +17,26 @@ externalDocs:
   description: Amplitude HTTP V2 API Documentation
   url: https://amplitude.com/docs/apis/analytics/http-v2
 servers:
-  - url: https://api2.amplitude.com
-    description: Amplitude US Production Server
-  - url: https://api.eu.amplitude.com
-    description: Amplitude EU Production Server
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
 tags:
-  - name: Events
-    description: Event ingestion operations
+- name: Events
+  description: Event ingestion operations
 security: []
 paths:
   /2/httpapi:
     post:
       operationId: uploadEvents
-      summary: Upload events
+      summary: Amplitude Upload Events
       description: >-
         Send up to 10 events per request to Amplitude for ingestion. Each event
         must include either a user_id or device_id, and an event_type. The API
         validates the request and returns detailed error reporting for any
         invalid events in the batch.
       tags:
-        - Events
+      - Events
       requestBody:
         required: true
         content:
@@ -50,23 +50,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UploadResponse'
+              examples:
+                uploadEvents200Example:
+                  summary: Default uploadEvents 200 response
+                  x-microcks-default: true
+                  value:
+                    code: 100
+                    events_ingested: 100
+                    payload_size_bytes: 100
+                    server_upload_time: 1718153645993
         '400':
           description: Bad request - invalid events or missing required fields
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                uploadEvents400Example:
+                  summary: Default uploadEvents 400 response
+                  x-microcks-default: true
+                  value:
+                    code: 100
+                    error: example_value
+                    missing_field: example_value
+                    events_with_invalid_fields: {}
+                    events_with_missing_fields: {}
         '413':
           description: Payload too large
         '429':
           description: Too many requests - rate limit exceeded
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   schemas:
     UploadRequestBody:
       type: object
       required:
-        - api_key
-        - events
+      - api_key
+      - events
       properties:
         api_key:
           type: string
@@ -93,7 +115,7 @@ components:
     Event:
       type: object
       required:
-        - event_type
+      - event_type
       properties:
         user_id:
           type: string

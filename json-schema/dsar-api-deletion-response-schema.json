@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/dsar-api-deletion-response-schema.json",
+  "title": "DeletionResponse",
+  "description": "DeletionResponse schema from Amplitude Data Subject Access Request API",
+  "type": "object",
+  "properties": {
+    "day": {
+      "type": "string",
+      "format": "date",
+      "description": "The day the deletion job is scheduled for processing."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the deletion request."
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/experiment-management-api-version-list-response-structure.json",
+  "name": "VersionListResponse",
+  "description": "VersionListResponse schema from Amplitude Experiment Management API",
+  "type": "object",
+  "properties": {
+    "versions": {
+      "type": "array",
+      "description": "Array of version records.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The version record ID."
+          },
+          "flagId": {
+            "type": "string",
+            "description": "The flag or experiment ID."
+          },
+          "version": {
+            "type": "int32",
+            "description": "The version number."
+          },
+          "createdAt": {
+            "type": "datetime",
+            "description": "The date and time the version was created."
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "The user who created this version."
+          }
+        }
+      }
+    },
+    "nextCursor": {
+      "type": "string",
+      "description": "A cursor for fetching the next page."
+    }
+  }
+}

@@ -17,25 +17,25 @@ externalDocs:
   description: Amplitude User Mapping API Documentation
   url: https://amplitude.com/docs/apis/analytics/user-mapping
 servers:
-  - url: https://amplitude.com
-    description: Amplitude Production Server
+- url: https://amplitude.com
+  description: Amplitude Production Server
 tags:
-  - name: User Mapping
-    description: User identity mapping and aliasing operations
+- name: User Mapping
+  description: User identity mapping and aliasing operations
 security:
-  - basicAuth: []
+- basicAuth: []
 paths:
   /api/2/usermap:
     post:
       operationId: mapUser
-      summary: Map user identities
+      summary: Amplitude Map User Identities
       description: >-
         Merge two user identities together by mapping one user_id to another.
         After mapping, all events and user properties from both identities
         are consolidated into a single user profile. This is typically used
         when an anonymous user creates an account.
       tags:
-        - User Mapping
+      - User Mapping
       requestBody:
         required: true
         content:
@@ -49,20 +49,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserMapResponse'
+              examples:
+                mapUser200Example:
+                  summary: Default mapUser 200 response
+                  x-microcks-default: true
+                  value:
+                    code: 100
+                    success: true
         '400':
           description: Bad request - invalid mapping data
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/userunmap:
     post:
       operationId: unmapUser
-      summary: Unmap user identities
+      summary: Amplitude Unmap User Identities
       description: >-
         Reverse a previously created user identity mapping. After unmapping,
         the two identities are treated as separate users again. This does
         not retroactively separate events that were already merged.
       tags:
-        - User Mapping
+      - User Mapping
       requestBody:
         required: true
         content:
@@ -76,10 +86,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserMapResponse'
+              examples:
+                unmapUser200Example:
+                  summary: Default unmapUser 200 response
+                  x-microcks-default: true
+                  value:
+                    code: 100
+                    success: true
         '400':
           description: Bad request - invalid unmap data
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -92,7 +112,7 @@ components:
     UserMapRequest:
       type: object
       required:
-        - mapping
+      - mapping
       properties:
         mapping:
           type: array
@@ -104,8 +124,8 @@ components:
     UserMapping:
       type: object
       required:
-        - global_user_id
-        - user_id
+      - global_user_id
+      - user_id
       properties:
         global_user_id:
           type: string
@@ -122,7 +142,7 @@ components:
     UserUnmapRequest:
       type: object
       required:
-        - mapping
+      - mapping
       properties:
         mapping:
           type: array

@@ -1,0 +1,13 @@
+{
+  "user_id": "500123",
+  "device_id": "500123",
+  "user_properties": {
+    "$set": {},
+    "$setOnce": {},
+    "$add": {},
+    "$append": {},
+    "$prepend": {},
+    "$unset": {},
+    "$remove": {}
+  }
+}

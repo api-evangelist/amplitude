@@ -1,0 +1,26 @@
+{
+  "flags": [
+    {
+      "id": "500123",
+      "projectId": "example_value",
+      "key": "example_value",
+      "name": "Example Name",
+      "description": "Example description",
+      "enabled": true,
+      "evaluationMode": "local",
+      "bucketingKey": "example_value",
+      "bucketingSalt": "example_value",
+      "variants": [
+        {}
+      ],
+      "deployments": [
+        {}
+      ],
+      "segments": [
+        {}
+      ],
+      "state": "draft"
+    }
+  ],
+  "nextCursor": "example_value"
+}

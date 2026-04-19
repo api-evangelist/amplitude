@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "EventProperty": "amplitude:EventProperty",
+    "EventPropertyListResponse": "amplitude:EventPropertyListResponse",
+    "CategoryListResponse": "amplitude:CategoryListResponse",
+    "SuccessResponse": "amplitude:SuccessResponse",
+    "EventType": "amplitude:EventType",
+    "EventTypeListResponse": "amplitude:EventTypeListResponse",
+    "Category": "amplitude:Category",
+    "UserPropertyListResponse": "amplitude:UserPropertyListResponse",
+    "UserProperty": "amplitude:UserProperty",
+    "eventProperty": {
+      "@id": "amplitude:event_property",
+      "@type": "xsd:string"
+    },
+    "eventType": {
+      "@id": "amplitude:event_type",
+      "@type": "xsd:string"
+    },
+    "description": "schema:description",
+    "type": {
+      "@id": "amplitude:type",
+      "@type": "xsd:string"
+    },
+    "isRequired": {
+      "@id": "amplitude:is_required",
+      "@type": "xsd:boolean"
+    },
+    "data": {
+      "@id": "amplitude:data",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "amplitude:id",
+      "@type": "xsd:integer"
+    },
+    "name": "schema:name",
+    "success": {
+      "@id": "amplitude:success",
+      "@type": "xsd:boolean"
+    },
+    "category": {
+      "@id": "amplitude:category",
+      "@type": "xsd:string"
+    },
+    "userProperty": {
+      "@id": "amplitude:user_property",
+      "@type": "xsd:string"
+    }
+  }
+}

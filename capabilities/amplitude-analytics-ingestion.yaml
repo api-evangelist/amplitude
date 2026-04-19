@@ -1,0 +1,94 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Analytics Ingestion
+  description: Unified workflow for sending events and identifying users. For data engineers.
+  tags:
+  - Amplitude
+  - Analytics
+  - Event Ingestion
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - import: attribution-api
+    location: ./shared/attribution-api.yaml
+  - import: http-v2-api
+    location: ./shared/http-v2-api.yaml
+  - import: identify-api
+    location: ./shared/identify-api.yaml
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: amplitude-analytics-ingestion-api
+    description: REST API for Amplitude Analytics Ingestion
+    resources:
+    - path: /v1/attribution
+      name: attribution
+      operations:
+      - method: POST
+        name: sendAttribution
+        description: Amplitude Send Attribution Data
+        call: attribution-api.sendAttribution
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/events
+      name: events
+      operations:
+      - method: POST
+        name: uploadEvents
+        description: Amplitude Upload Events
+        call: http-v2-api.uploadEvents
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/identify
+      name: identify
+      operations:
+      - method: POST
+        name: identifyUser
+        description: Amplitude Identify a User
+        call: identify-api.identifyUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: amplitude-analytics-ingestion-mcp
+    transport: http
+    description: MCP for Amplitude Analytics Ingestion
+    tools:
+    - name: attribution-api-sendAttribution
+      description: Amplitude Send Attribution Data
+      hints:
+        readOnly: false
+      call: attribution-api.sendAttribution
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: http-v2-api-uploadEvents
+      description: Amplitude Upload Events
+      hints:
+        readOnly: false
+      call: http-v2-api.uploadEvents
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: identify-api-identifyUser
+      description: Amplitude Identify a User
+      hints:
+        readOnly: false
+      call: identify-api.identifyUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

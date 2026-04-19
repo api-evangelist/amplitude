@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/taxonomy-api-user-property-list-response-schema.json",
+  "title": "UserPropertyListResponse",
+  "description": "UserPropertyListResponse schema from Amplitude Taxonomy API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "Array of user properties.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user_property": {
+            "type": "string",
+            "description": "The name of the user property."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the user property."
+          },
+          "type": {
+            "type": "string",
+            "description": "The data type of the property."
+          }
+        }
+      }
+    }
+  }
+}

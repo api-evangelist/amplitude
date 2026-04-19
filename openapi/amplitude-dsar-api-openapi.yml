@@ -18,27 +18,27 @@ externalDocs:
   description: Amplitude DSAR API Documentation
   url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
 servers:
-  - url: https://amplitude.com
-    description: Amplitude Production Server
+- url: https://amplitude.com
+  description: Amplitude Production Server
 tags:
-  - name: Data Access
-    description: Data subject access request operations
-  - name: Data Deletion
-    description: User data deletion request operations
+- name: Data Access
+  description: Data subject access request operations
+- name: Data Deletion
+  description: User data deletion request operations
 security:
-  - basicAuth: []
+- basicAuth: []
 paths:
   /api/2/dsar/requests:
     post:
       operationId: createDsarRequest
-      summary: Create a data subject access request
+      summary: Amplitude Create a Data Subject Access Request
       description: >-
         Submit a data subject access request (DSAR) to retrieve all data
         Amplitude has collected for a specific user. The request is processed
         asynchronously and results are made available for download when
         complete. This endpoint supports CCPA and GDPR compliance workflows.
       tags:
-        - Data Access
+      - Data Access
       requestBody:
         required: true
         content:
@@ -52,30 +52,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DsarResponse'
+              examples:
+                createDsarRequest200Example:
+                  summary: Default createDsarRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    request_id: '500123'
+                    status: active
         '400':
           description: Bad request - invalid user identifier
         '401':
           description: Unauthorized
         '429':
           description: Too many requests
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/dsar/requests/{request_id}:
     get:
       operationId: getDsarRequestStatus
-      summary: Get DSAR request status
+      summary: Amplitude Get DSAR Request Status
       description: >-
         Check the status of a previously submitted data subject access
         request. Returns the processing status and download URL when
         complete.
       tags:
-        - Data Access
+      - Data Access
       parameters:
-        - name: request_id
-          in: path
-          required: true
-          description: >-
-            The ID of the DSAR request to check.
-          schema:
-            type: string
+      - name: request_id
+        in: path
+        required: true
+        description: >-
+          The ID of the DSAR request to check.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -83,14 +93,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DsarStatusResponse'
+              examples:
+                getDsarRequestStatus200Example:
+                  summary: Default getDsarRequestStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    request_id: '500123'
+                    status: pending
+                    download_url: https://example.com/path
         '401':
           description: Unauthorized
         '404':
           description: DSAR request not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/deletions/users:
     post:
       operationId: createDeletionRequest
-      summary: Request user data deletion
+      summary: Amplitude Request User Data Deletion
       description: >-
         Submit a request to delete all event data and user properties for
         one or more users identified by Amplitude IDs or user IDs. Each
@@ -98,7 +119,7 @@ paths:
         Rate limited to 1 request per second. Amplitude emails all account
         admins with deletion details when a request is submitted.
       tags:
-        - Data Deletion
+      - Data Deletion
       requestBody:
         required: true
         content:
@@ -112,35 +133,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeletionResponse'
+              examples:
+                createDeletionRequest200Example:
+                  summary: Default createDeletionRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    day: '2025-03-15'
+                    status: active
         '400':
           description: Bad request - invalid identifiers or exceeds 100 IDs
         '401':
           description: Unauthorized
         '429':
           description: Too many requests - rate limit of 1 per second exceeded
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     get:
       operationId: listDeletionRequests
-      summary: List deletion requests
+      summary: Amplitude List Deletion Requests
       description: >-
         Retrieve a list of previously submitted deletion requests and their
         processing status.
       tags:
-        - Data Deletion
+      - Data Deletion
       parameters:
-        - name: start_day
-          in: query
-          description: >-
-            The start date to filter deletion requests in YYYY-MM-DD format.
-          schema:
-            type: string
-            format: date
-        - name: end_day
-          in: query
-          description: >-
-            The end date to filter deletion requests in YYYY-MM-DD format.
-          schema:
-            type: string
-            format: date
+      - name: start_day
+        in: query
+        description: >-
+          The start date to filter deletion requests in YYYY-MM-DD format.
+        schema:
+          type: string
+          format: date
+      - name: end_day
+        in: query
+        description: >-
+          The end date to filter deletion requests in YYYY-MM-DD format.
+        schema:
+          type: string
+          format: date
       responses:
         '200':
           description: Success
@@ -148,8 +179,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeletionListResponse'
+              examples:
+                listDeletionRequests200Example:
+                  summary: Default listDeletionRequests 200 response
+                  x-microcks-default: true
+                  value:
+                    deletions:
+                    - day: {}
+                      status: {}
+                      amplitude_ids: {}
+                      user_ids: {}
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:
@@ -162,7 +206,7 @@ components:
     DsarRequest:
       type: object
       required:
-        - user_ids
+      - user_ids
       properties:
         user_ids:
           type: array
@@ -193,10 +237,10 @@ components:
           description: >-
             The processing status of the request.
           enum:
-            - pending
-            - processing
-            - complete
-            - failed
+          - pending
+          - processing
+          - complete
+          - failed
         download_url:
           type: string
           format: uri
@@ -259,9 +303,9 @@ components:
                 description: >-
                   The processing status of the deletion.
                 enum:
-                  - staging
-                  - submitted
-                  - done
+                - staging
+                - submitted
+                - done
               amplitude_ids:
                 type: array
                 description: >-

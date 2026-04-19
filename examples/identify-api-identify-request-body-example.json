@@ -1,0 +1,10 @@
+{
+  "api_key": "example_value",
+  "identification": [
+    {
+      "user_id": "500123",
+      "device_id": "500123",
+      "user_properties": "example_value"
+    }
+  ]
+}

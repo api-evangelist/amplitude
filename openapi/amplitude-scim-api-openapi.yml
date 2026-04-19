@@ -18,48 +18,48 @@ externalDocs:
   description: Amplitude SCIM API Documentation
   url: https://amplitude.com/docs/apis/analytics/scim
 servers:
-  - url: https://core.amplitude.com
-    description: Amplitude SCIM Server
+- url: https://core.amplitude.com
+  description: Amplitude SCIM Server
 tags:
-  - name: Groups
-    description: SCIM group management operations
-  - name: Users
-    description: SCIM user provisioning operations
+- name: Groups
+  description: SCIM group management operations
+- name: Users
+  description: SCIM user provisioning operations
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /scim/1/Users:
     get:
       operationId: listScimUsers
-      summary: List SCIM users
+      summary: Amplitude List SCIM Users
       description: >-
         Retrieve a paginated list of users provisioned in Amplitude.
         Supports SCIM filtering to search for specific users by attributes
         such as email or display name.
       tags:
-        - Users
+      - Users
       parameters:
-        - name: filter
-          in: query
-          description: >-
-            A SCIM filter expression to narrow the results. For example,
-            userName eq "user@example.com".
-          schema:
-            type: string
-        - name: startIndex
-          in: query
-          description: >-
-            The 1-based index of the first result in the current set of
-            results. Default is 1.
-          schema:
-            type: integer
-            default: 1
-        - name: count
-          in: query
-          description: >-
-            The number of results per page. Default varies by implementation.
-          schema:
-            type: integer
+      - name: filter
+        in: query
+        description: >-
+          A SCIM filter expression to narrow the results. For example,
+          userName eq "user@example.com".
+        schema:
+          type: string
+      - name: startIndex
+        in: query
+        description: >-
+          The 1-based index of the first result in the current set of
+          results. Default is 1.
+        schema:
+          type: integer
+          default: 1
+      - name: count
+        in: query
+        description: >-
+          The number of results per page. Default varies by implementation.
+        schema:
+          type: integer
       responses:
         '200':
           description: Success
@@ -69,15 +69,18 @@ paths:
                 $ref: '#/components/schemas/ScimUserListResponse'
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createScimUser
-      summary: Create a SCIM user
+      summary: Amplitude Create a SCIM User
       description: >-
         Provision a new user in Amplitude via SCIM. The user is created with
         the specified attributes and can be assigned to groups. Typically
         called by identity providers during automated provisioning.
       tags:
-        - Users
+      - Users
       requestBody:
         required: true
         content:
@@ -97,16 +100,19 @@ paths:
           description: Unauthorized
         '409':
           description: User already exists
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /scim/1/Users/{user_id}:
     get:
       operationId: getScimUser
-      summary: Get a SCIM user
+      summary: Amplitude Get a SCIM User
       description: >-
         Retrieve a single user by their SCIM user ID.
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/scimUserId'
+      - $ref: '#/components/parameters/scimUserId'
       responses:
         '200':
           description: Success
@@ -118,17 +124,20 @@ paths:
           description: Unauthorized
         '404':
           description: User not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: replaceScimUser
-      summary: Replace a SCIM user
+      summary: Amplitude Replace a SCIM User
       description: >-
         Replace all attributes of an existing user with the provided values.
         Any attributes not included in the request body are reset to their
         default values.
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/scimUserId'
+      - $ref: '#/components/parameters/scimUserId'
       requestBody:
         required: true
         content:
@@ -148,16 +157,19 @@ paths:
           description: Unauthorized
         '404':
           description: User not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateScimUser
-      summary: Update a SCIM user
+      summary: Amplitude Update a SCIM User
       description: >-
         Partially update a user's attributes. Only the specified attributes
         are modified. Commonly used for activating or deactivating users.
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/scimUserId'
+      - $ref: '#/components/parameters/scimUserId'
       requestBody:
         required: true
         content:
@@ -177,16 +189,19 @@ paths:
           description: Unauthorized
         '404':
           description: User not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteScimUser
-      summary: Delete a SCIM user
+      summary: Amplitude Delete a SCIM User
       description: >-
         Deactivate and remove a user from Amplitude. This is typically
         called by identity providers when a user is offboarded.
       tags:
-        - Users
+      - Users
       parameters:
-        - $ref: '#/components/parameters/scimUserId'
+      - $ref: '#/components/parameters/scimUserId'
       responses:
         '204':
           description: User deleted
@@ -194,21 +209,24 @@ paths:
           description: Unauthorized
         '404':
           description: User not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /scim/1/Groups:
     get:
       operationId: listScimGroups
-      summary: List SCIM groups
+      summary: Amplitude List SCIM Groups
       description: >-
         Retrieve a list of groups provisioned in Amplitude.
       tags:
-        - Groups
+      - Groups
       parameters:
-        - name: filter
-          in: query
-          description: >-
-            A SCIM filter expression to narrow results.
-          schema:
-            type: string
+      - name: filter
+        in: query
+        description: >-
+          A SCIM filter expression to narrow results.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -218,13 +236,16 @@ paths:
                 $ref: '#/components/schemas/ScimGroupListResponse'
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createScimGroup
-      summary: Create a SCIM group
+      summary: Amplitude Create a SCIM Group
       description: >-
         Create a new group in Amplitude via SCIM.
       tags:
-        - Groups
+      - Groups
       requestBody:
         required: true
         content:
@@ -242,16 +263,19 @@ paths:
           description: Bad request
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /scim/1/Groups/{group_id}:
     get:
       operationId: getScimGroup
-      summary: Get a SCIM group
+      summary: Amplitude Get a SCIM Group
       description: >-
         Retrieve a single group by its SCIM group ID.
       tags:
-        - Groups
+      - Groups
       parameters:
-        - $ref: '#/components/parameters/scimGroupId'
+      - $ref: '#/components/parameters/scimGroupId'
       responses:
         '200':
           description: Success
@@ -263,15 +287,18 @@ paths:
           description: Unauthorized
         '404':
           description: Group not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateScimGroup
-      summary: Update a SCIM group
+      summary: Amplitude Update a SCIM Group
       description: >-
         Partially update a group's attributes or membership.
       tags:
-        - Groups
+      - Groups
       parameters:
-        - $ref: '#/components/parameters/scimGroupId'
+      - $ref: '#/components/parameters/scimGroupId'
       requestBody:
         required: true
         content:
@@ -291,15 +318,18 @@ paths:
           description: Unauthorized
         '404':
           description: Group not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteScimGroup
-      summary: Delete a SCIM group
+      summary: Amplitude Delete a SCIM Group
       description: >-
         Delete a group from Amplitude.
       tags:
-        - Groups
+      - Groups
       parameters:
-        - $ref: '#/components/parameters/scimGroupId'
+      - $ref: '#/components/parameters/scimGroupId'
       responses:
         '204':
           description: Group deleted
@@ -307,6 +337,9 @@ paths:
           description: Unauthorized
         '404':
           description: Group not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -452,8 +485,8 @@ components:
     ScimUserRequest:
       type: object
       required:
-        - schemas
-        - userName
+      - schemas
+      - userName
       properties:
         schemas:
           type: array
@@ -503,8 +536,8 @@ components:
     ScimPatchRequest:
       type: object
       required:
-        - schemas
-        - Operations
+      - schemas
+      - Operations
       properties:
         schemas:
           type: array
@@ -525,9 +558,9 @@ components:
                 description: >-
                   The operation to perform.
                 enum:
-                  - add
-                  - remove
-                  - replace
+                - add
+                - remove
+                - replace
               path:
                 type: string
                 description: >-
@@ -608,8 +641,8 @@ components:
     ScimGroupRequest:
       type: object
       required:
-        - schemas
-        - displayName
+      - schemas
+      - displayName
       properties:
         schemas:
           type: array

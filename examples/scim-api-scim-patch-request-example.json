@@ -1,0 +1,12 @@
+{
+  "schemas": [
+    "example_value"
+  ],
+  "Operations": [
+    {
+      "op": "add",
+      "path": "example_value",
+      "value": "example_value"
+    }
+  ]
+}

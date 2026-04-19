@@ -17,19 +17,19 @@ externalDocs:
   description: Amplitude Attribution API Documentation
   url: https://amplitude.com/docs/apis/analytics/attribution
 servers:
-  - url: https://api2.amplitude.com
-    description: Amplitude US Production Server
-  - url: https://api.eu.amplitude.com
-    description: Amplitude EU Production Server
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
 tags:
-  - name: Attribution
-    description: Campaign attribution event operations
+- name: Attribution
+  description: Campaign attribution event operations
 security: []
 paths:
   /attribution:
     post:
       operationId: sendAttribution
-      summary: Send attribution data
+      summary: Amplitude Send Attribution Data
       description: >-
         Send a campaign attribution event to Amplitude to associate a user
         with the marketing campaign, channel, or creative that drove their
@@ -37,7 +37,7 @@ paths:
         attribution-specific fields such as campaign name, source, medium,
         and ad creative.
       tags:
-        - Attribution
+      - Attribution
       requestBody:
         required: true
         content:
@@ -51,17 +51,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AttributionResponse'
+              examples:
+                sendAttribution200Example:
+                  summary: Default sendAttribution 200 response
+                  x-microcks-default: true
+                  value:
+                    code: 100
+                    events_ingested: 100
+                    server_upload_time: 1718153645993
         '400':
           description: Bad request - missing required fields
         '429':
           description: Too many requests - rate limit exceeded
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   schemas:
     AttributionRequest:
       type: object
       required:
-        - api_key
-        - event
+      - api_key
+      - event
       properties:
         api_key:
           type: string
@@ -72,7 +83,7 @@ components:
     AttributionEvent:
       type: object
       required:
-        - event_type
+      - event_type
       properties:
         user_id:
           type: string

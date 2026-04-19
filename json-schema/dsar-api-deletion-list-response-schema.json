@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/dsar-api-deletion-list-response-schema.json",
+  "title": "DeletionListResponse",
+  "description": "DeletionListResponse schema from Amplitude Data Subject Access Request API",
+  "type": "object",
+  "properties": {
+    "deletions": {
+      "type": "array",
+      "description": "Array of deletion request records.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string",
+            "format": "date",
+            "description": "The day the deletion job was scheduled."
+          },
+          "status": {
+            "type": "string",
+            "description": "The processing status of the deletion.",
+            "enum": [
+              "staging",
+              "submitted",
+              "done"
+            ]
+          },
+          "amplitude_ids": {
+            "type": "array",
+            "description": "Array of Amplitude IDs included in the deletion.",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "user_ids": {
+            "type": "array",
+            "description": "Array of user IDs included in the deletion.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

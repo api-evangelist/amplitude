@@ -1,0 +1,9 @@
+{
+  "data": [
+    {
+      "event_type": "standard",
+      "category": "example_value",
+      "description": "Example description"
+    }
+  ]
+}

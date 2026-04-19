@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Amplitude Experiment": "amplitude:Amplitude Experiment",
+    "id": {
+      "@id": "amplitude:id",
+      "@type": "xsd:string"
+    },
+    "projectId": {
+      "@id": "amplitude:projectId",
+      "@type": "xsd:string"
+    },
+    "key": {
+      "@id": "amplitude:key",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "type": {
+      "@id": "amplitude:type",
+      "@type": "xsd:string"
+    },
+    "enabled": {
+      "@id": "amplitude:enabled",
+      "@type": "xsd:boolean"
+    },
+    "evaluationMode": {
+      "@id": "amplitude:evaluationMode",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "amplitude:state",
+      "@type": "xsd:string"
+    },
+    "bucketingKey": {
+      "@id": "amplitude:bucketingKey",
+      "@type": "xsd:string"
+    },
+    "bucketingSalt": {
+      "@id": "amplitude:bucketingSalt",
+      "@type": "xsd:string"
+    },
+    "variants": {
+      "@id": "amplitude:variants",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "segments": {
+      "@id": "amplitude:segments",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "deployments": {
+      "@id": "amplitude:deployments",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "rolledOutVariant": {
+      "@id": "amplitude:rolledOutVariant",
+      "@type": "xsd:string"
+    },
+    "startDate": {
+      "@id": "amplitude:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "endDate": {
+      "@id": "amplitude:endDate",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

@@ -1,0 +1,294 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Data Export and Cohorts
+  description: Export raw event data and manage behavioral cohorts. For data analysts.
+  tags:
+  - Amplitude
+  - Analytics
+  - Data Export
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - import: behavioral-cohorts-api
+    location: ./shared/behavioral-cohorts-api.yaml
+  - import: dashboard-rest-api
+    location: ./shared/dashboard-rest-api.yaml
+  - import: export-api
+    location: ./shared/export-api.yaml
+  exposes:
+  - type: rest
+    port: 8081
+    namespace: amplitude-data-export-and-cohorts-api
+    description: REST API for Amplitude Data Export and Cohorts
+    resources:
+    - path: /v1/cohorts
+      name: cohorts
+      operations:
+      - method: GET
+        name: listCohorts
+        description: Amplitude List All Cohorts
+        call: behavioral-cohorts-api.listCohorts
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cohorts
+      name: cohorts
+      operations:
+      - method: GET
+        name: requestCohortExport
+        description: Amplitude Request a Cohort Export
+        call: behavioral-cohorts-api.requestCohortExport
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cohorts
+      name: cohorts
+      operations:
+      - method: GET
+        name: getCohortExportStatus
+        description: Amplitude Get Cohort Export Status
+        call: behavioral-cohorts-api.getCohortExportStatus
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cohorts
+      name: cohorts
+      operations:
+      - method: GET
+        name: downloadCohortExport
+        description: Amplitude Download Cohort Export File
+        call: behavioral-cohorts-api.downloadCohortExport
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cohorts
+      name: cohorts
+      operations:
+      - method: POST
+        name: uploadCohort
+        description: Amplitude Upload a Cohort
+        call: behavioral-cohorts-api.uploadCohort
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/event-segmentation
+      name: event-segmentation
+      operations:
+      - method: GET
+        name: getEventSegmentation
+        description: Amplitude Get Event Segmentation
+        call: dashboard-rest-api.getEventSegmentation
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/funnel-analysis
+      name: funnel-analysis
+      operations:
+      - method: GET
+        name: getFunnelAnalysis
+        description: Amplitude Get Funnel Analysis
+        call: dashboard-rest-api.getFunnelAnalysis
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/retention-analysis
+      name: retention-analysis
+      operations:
+      - method: GET
+        name: getRetentionAnalysis
+        description: Amplitude Get Retention Analysis
+        call: dashboard-rest-api.getRetentionAnalysis
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-activity
+      name: user-activity
+      operations:
+      - method: GET
+        name: getUserActivity
+        description: Amplitude Get User Activity
+        call: dashboard-rest-api.getUserActivity
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-activity
+      name: user-activity
+      operations:
+      - method: GET
+        name: searchUsers
+        description: Amplitude Search Users
+        call: dashboard-rest-api.searchUsers
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/revenue-analysis
+      name: revenue-analysis
+      operations:
+      - method: GET
+        name: getRevenueLTV
+        description: Amplitude Get Revenue LTV Data
+        call: dashboard-rest-api.getRevenueLTV
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/event-list
+      name: event-list
+      operations:
+      - method: GET
+        name: listEventTypes
+        description: Amplitude List Event Types
+        call: dashboard-rest-api.listEventTypes
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/export
+      name: export
+      operations:
+      - method: GET
+        name: exportEvents
+        description: Amplitude Export Raw Event Data
+        call: export-api.exportEvents
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9091
+    namespace: amplitude-data-export-and-cohorts-mcp
+    transport: http
+    description: MCP for Amplitude Data Export and Cohorts
+    tools:
+    - name: behavioral-cohorts-api-listCohorts
+      description: Amplitude List All Cohorts
+      hints:
+        readOnly: true
+      call: behavioral-cohorts-api.listCohorts
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: behavioral-cohorts-api-requestCohortExport
+      description: Amplitude Request a Cohort Export
+      hints:
+        readOnly: true
+      call: behavioral-cohorts-api.requestCohortExport
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: behavioral-cohorts-api-getCohortExportStatus
+      description: Amplitude Get Cohort Export Status
+      hints:
+        readOnly: true
+      call: behavioral-cohorts-api.getCohortExportStatus
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: behavioral-cohorts-api-downloadCohortExport
+      description: Amplitude Download Cohort Export File
+      hints:
+        readOnly: true
+      call: behavioral-cohorts-api.downloadCohortExport
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: behavioral-cohorts-api-uploadCohort
+      description: Amplitude Upload a Cohort
+      hints:
+        readOnly: false
+      call: behavioral-cohorts-api.uploadCohort
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: dashboard-rest-api-getEventSegmentation
+      description: Amplitude Get Event Segmentation
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getEventSegmentation
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: dashboard-rest-api-getFunnelAnalysis
+      description: Amplitude Get Funnel Analysis
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getFunnelAnalysis
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: dashboard-rest-api-getRetentionAnalysis
+      description: Amplitude Get Retention Analysis
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getRetentionAnalysis
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: dashboard-rest-api-getUserActivity
+      description: Amplitude Get User Activity
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getUserActivity
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: dashboard-rest-api-searchUsers
+      description: Amplitude Search Users
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.searchUsers
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: dashboard-rest-api-getRevenueLTV
+      description: Amplitude Get Revenue LTV Data
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getRevenueLTV
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: dashboard-rest-api-listEventTypes
+      description: Amplitude List Event Types
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.listEventTypes
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: export-api-exportEvents
+      description: Amplitude Export Raw Event Data
+      hints:
+        readOnly: true
+      call: export-api.exportEvents
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

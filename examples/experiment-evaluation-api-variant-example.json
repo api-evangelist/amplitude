@@ -1,0 +1,11 @@
+{
+  "key": "example_value",
+  "value": "example_value",
+  "payload": "example_value",
+  "metadata": {
+    "experimentKey": "example_value",
+    "flagType": "standard",
+    "flagVersion": 689,
+    "default": true
+  }
+}

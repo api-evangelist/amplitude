@@ -17,18 +17,18 @@ externalDocs:
   description: Amplitude Export API Documentation
   url: https://amplitude.com/docs/apis/analytics/export
 servers:
-  - url: https://amplitude.com
-    description: Amplitude Production Server
+- url: https://amplitude.com
+  description: Amplitude Production Server
 tags:
-  - name: Export
-    description: Raw event data export operations
+- name: Export
+  description: Raw event data export operations
 security:
-  - basicAuth: []
+- basicAuth: []
 paths:
   /api/2/export:
     get:
       operationId: exportEvents
-      summary: Export raw event data
+      summary: Amplitude Export Raw Event Data
       description: >-
         Export raw event data for the specified date range as a zipped archive
         of JSON files. The maximum queryable period is 365 days and the
@@ -36,28 +36,28 @@ paths:
         minimum within 2 hours of server ingestion. Dates older than 30 days
         before the current date may not be available.
       tags:
-        - Export
+      - Export
       parameters:
-        - name: start
-          in: query
-          required: true
-          description: >-
-            The start date and hour in YYYYMMDDTHH format, for example
-            20220101T00. For multi-day exports, the format YYYYMMDD is also
-            accepted.
-          schema:
-            type: string
-            pattern: '^\d{8}(T\d{2})?$'
-        - name: end
-          in: query
-          required: true
-          description: >-
-            The end date and hour in YYYYMMDDTHH format, for example
-            20220101T23. For multi-day exports, the format YYYYMMDD is also
-            accepted.
-          schema:
-            type: string
-            pattern: '^\d{8}(T\d{2})?$'
+      - name: start
+        in: query
+        required: true
+        description: >-
+          The start date and hour in YYYYMMDDTHH format, for example
+          20220101T00. For multi-day exports, the format YYYYMMDD is also
+          accepted.
+        schema:
+          type: string
+          pattern: '^\d{8}(T\d{2})?$'
+      - name: end
+        in: query
+        required: true
+        description: >-
+          The end date and hour in YYYYMMDDTHH format, for example
+          20220101T23. For multi-day exports, the format YYYYMMDD is also
+          accepted.
+        schema:
+          type: string
+          pattern: '^\d{8}(T\d{2})?$'
       responses:
         '200':
           description: Success - returns a zipped archive of JSON event files
@@ -74,6 +74,9 @@ paths:
         '404':
           description: >-
             No data found for the requested date range
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:

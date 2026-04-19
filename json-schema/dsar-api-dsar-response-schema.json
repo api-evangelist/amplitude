@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/dsar-api-dsar-response-schema.json",
+  "title": "DsarResponse",
+  "description": "DsarResponse schema from Amplitude Data Subject Access Request API",
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "description": "The unique identifier for the DSAR request."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the request."
+    }
+  }
+}

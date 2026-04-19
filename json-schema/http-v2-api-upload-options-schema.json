@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/http-v2-api-upload-options-schema.json",
+  "title": "UploadOptions",
+  "description": "UploadOptions schema from Amplitude HTTP V2 API",
+  "type": "object",
+  "properties": {
+    "min_id_length": {
+      "type": "integer",
+      "description": "Minimum length for user_id and device_id fields. Default is 5.",
+      "minimum": 1
+    }
+  }
+}

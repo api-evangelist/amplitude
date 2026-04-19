@@ -1,0 +1,331 @@
+vocabulary: 1.0.0
+info:
+  provider: Amplitude
+  description: Unified taxonomy for Amplitude APIs.
+  created: '2026-04-19'
+  modified: '2026-04-19'
+operational:
+  apis:
+  - name: Amplitude Attribution API
+    namespace: attribution-api
+    version: '2'
+    baseUrl: https://api2.amplitude.com
+    status: active
+  - name: Amplitude Behavioral Cohorts API
+    namespace: behavioral-cohorts-api
+    version: '3'
+    baseUrl: https://amplitude.com
+    status: active
+  - name: Amplitude Chart Annotations API
+    namespace: chart-annotations-api
+    version: '3'
+    baseUrl: https://amplitude.com
+    status: active
+  - name: Amplitude Dashboard REST API
+    namespace: dashboard-rest-api
+    version: '2'
+    baseUrl: https://amplitude.com
+    status: active
+  - name: Amplitude Data Subject Access Request API
+    namespace: dsar-api
+    version: '2'
+    baseUrl: https://amplitude.com
+    status: active
+  - name: Amplitude Experiment Evaluation API
+    namespace: experiment-evaluation-api
+    version: '1'
+    baseUrl: https://api.lab.amplitude.com
+    status: active
+  - name: Amplitude Experiment Management API
+    namespace: experiment-management-api
+    version: '1'
+    baseUrl: https://experiment.amplitude.com
+    status: active
+  - name: Amplitude Export API
+    namespace: export-api
+    version: '2'
+    baseUrl: https://amplitude.com
+    status: active
+  - name: Amplitude HTTP V2 API
+    namespace: http-v2-api
+    version: '2'
+    baseUrl: https://api2.amplitude.com
+    status: active
+  - name: Amplitude Identify API
+    namespace: identify-api
+    version: '1'
+    baseUrl: https://api2.amplitude.com
+    status: active
+  - name: Amplitude SCIM API
+    namespace: scim-api
+    version: '1'
+    baseUrl: https://core.amplitude.com
+    status: active
+  - name: Amplitude Taxonomy API
+    namespace: taxonomy-api
+    version: '2'
+    baseUrl: https://amplitude.com
+    status: active
+  - name: Amplitude User Mapping API
+    namespace: user-mapping-api
+    version: '2'
+    baseUrl: https://amplitude.com
+    status: active
+  - name: Amplitude User Profile API
+    namespace: user-profile-api
+    version: '1'
+    baseUrl: https://profile-api.amplitude.com
+    status: active
+  resources:
+  - name: Attribution
+    apis: &id001
+    - attribution-api
+    actions:
+    - sendAttribution
+  - name: Cohorts
+    apis: &id002
+    - behavioral-cohorts-api
+    actions:
+    - listCohorts
+    - requestCohortExport
+    - getCohortExportStatus
+    - downloadCohortExport
+    - uploadCohort
+  - name: Annotations
+    apis: &id003
+    - chart-annotations-api
+    actions:
+    - listAnnotations
+    - createAnnotation
+    - getAnnotation
+    - updateAnnotation
+    - deleteAnnotation
+  - name: Event Segmentation
+    apis: &id004
+    - dashboard-rest-api
+    actions:
+    - getEventSegmentation
+  - name: Funnel Analysis
+    apis: &id005
+    - dashboard-rest-api
+    actions:
+    - getFunnelAnalysis
+  - name: Retention Analysis
+    apis: &id006
+    - dashboard-rest-api
+    actions:
+    - getRetentionAnalysis
+  - name: User Activity
+    apis: &id007
+    - dashboard-rest-api
+    actions:
+    - getUserActivity
+    - searchUsers
+  - name: Revenue Analysis
+    apis: &id008
+    - dashboard-rest-api
+    actions:
+    - getRevenueLTV
+  - name: Event List
+    apis: &id009
+    - dashboard-rest-api
+    actions:
+    - listEventTypes
+  - name: Data Access
+    apis: &id010
+    - dsar-api
+    actions:
+    - createDsarRequest
+    - getDsarRequestStatus
+  - name: Data Deletion
+    apis:
+    - dsar-api
+    actions:
+    - listDeletionRequests
+    - createDeletionRequest
+  - name: Evaluation
+    apis:
+    - experiment-evaluation-api
+    actions:
+    - evaluateVariantsGet
+    - evaluateVariants
+  - name: Flags
+    apis:
+    - experiment-evaluation-api
+    - experiment-management-api
+    actions:
+    - getFlags
+    - listFlags
+    - createFlag
+    - getFlag
+    - updateFlag
+  - name: Experiments
+    apis:
+    - experiment-management-api
+    actions:
+    - listExperiments
+    - createExperiment
+    - getExperiment
+    - updateExperiment
+  - name: Deployments
+    apis:
+    - experiment-management-api
+    actions:
+    - listDeployments
+    - getDeployment
+  actions:
+  - verb: sen
+    method: POST
+    operationCount: 1
+  - verb: lis
+    method: GET
+    operationCount: 14
+  - verb: req
+    method: GET
+    operationCount: 1
+  - verb: get
+    method: GET
+    operationCount: 19
+  - verb: dow
+    method: GET
+    operationCount: 1
+  - verb: upl
+    method: POST
+    operationCount: 2
+  - verb: cre
+    method: POST
+    operationCount: 11
+  - verb: upd
+    method: PUT
+    operationCount: 9
+  - verb: del
+    method: DELETE
+    operationCount: 7
+  - verb: sea
+    method: GET
+    operationCount: 1
+  schemas:
+    core:
+    - name: AttributionRequest
+      api: attribution-api
+    - name: AttributionEvent
+      api: attribution-api
+    - name: AttributionResponse
+      api: attribution-api
+    - name: CohortListResponse
+      api: behavioral-cohorts-api
+    - name: Cohort
+      api: behavioral-cohorts-api
+    - name: CohortRequestResponse
+      api: behavioral-cohorts-api
+    - name: AnnotationListResponse
+      api: chart-annotations-api
+    - name: Annotation
+      api: chart-annotations-api
+    - name: CreateAnnotationRequest
+      api: chart-annotations-api
+    - name: SegmentationResult
+      api: dashboard-rest-api
+    - name: FunnelResult
+      api: dashboard-rest-api
+    - name: RetentionResult
+      api: dashboard-rest-api
+    - name: DsarRequest
+      api: dsar-api
+    - name: DsarResponse
+      api: dsar-api
+    - name: DsarStatusResponse
+      api: dsar-api
+  authentication:
+  - type: basic
+    description: HTTP Basic auth with API key and secret
+  - type: apiKey
+    description: API key in request body
+capability:
+  workflows:
+  - name: Amplitude Analytics Ingestion
+    file: amplitude-analytics-ingestion.yaml
+    description: Unified workflow for sending events and identifying users. For data engineers.
+    toolCount: 0
+  - name: Amplitude Data Export and Cohorts
+    file: amplitude-data-export-and-cohorts.yaml
+    description: Export raw event data and manage behavioral cohorts. For data analysts.
+    toolCount: 0
+  - name: Amplitude Experimentation
+    file: amplitude-experimentation.yaml
+    description: Manage and evaluate A/B experiments and feature flags. For product managers.
+    toolCount: 0
+  - name: Amplitude Governance and Taxonomy
+    file: amplitude-governance-and-taxonomy.yaml
+    description: Manage event schemas and chart annotations. For data governance teams.
+    toolCount: 0
+  - name: Amplitude Identity and Privacy
+    file: amplitude-identity-and-privacy.yaml
+    description: SCIM provisioning and privacy compliance. For IT admins and compliance teams.
+    toolCount: 0
+  personas:
+  - id: data-engineer
+    name: Data Engineer
+    description: Ingests and exports event data
+  - id: product-manager
+    name: Product Manager
+    description: Runs experiments and feature flags
+  - id: data-analyst
+    name: Data Analyst
+    description: Analyzes data and manages cohorts
+  - id: compliance-officer
+    name: Compliance Officer
+    description: Manages privacy and compliance
+  domains:
+  - Analytics
+  - Experimentation
+  - Data Governance
+  - Identity Management
+  - Privacy Compliance
+crossReference:
+- resource: Attribution
+  apis: *id001
+  actions:
+  - sendAttribution
+- resource: Cohorts
+  apis: *id002
+  actions:
+  - listCohorts
+  - requestCohortExport
+  - getCohortExportStatus
+- resource: Annotations
+  apis: *id003
+  actions:
+  - listAnnotations
+  - createAnnotation
+  - getAnnotation
+- resource: Event Segmentation
+  apis: *id004
+  actions:
+  - getEventSegmentation
+- resource: Funnel Analysis
+  apis: *id005
+  actions:
+  - getFunnelAnalysis
+- resource: Retention Analysis
+  apis: *id006
+  actions:
+  - getRetentionAnalysis
+- resource: User Activity
+  apis: *id007
+  actions:
+  - getUserActivity
+  - searchUsers
+- resource: Revenue Analysis
+  apis: *id008
+  actions:
+  - getRevenueLTV
+- resource: Event List
+  apis: *id009
+  actions:
+  - listEventTypes
+- resource: Data Access
+  apis: *id010
+  actions:
+  - createDsarRequest
+  - getDsarRequestStatus

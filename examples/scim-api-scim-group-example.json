@@ -1,0 +1,18 @@
+{
+  "schemas": [
+    "example_value"
+  ],
+  "id": "500123",
+  "displayName": "Example Name",
+  "members": [
+    {
+      "value": "example_value",
+      "display": "example_value"
+    }
+  ],
+  "meta": {
+    "resourceType": "standard",
+    "created": "2025-03-15T14:30:00Z",
+    "lastModified": "2025-03-15T14:30:00Z"
+  }
+}

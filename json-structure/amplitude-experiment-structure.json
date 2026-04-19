@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/amplitude-experiment-structure.json",
+  "name": "Amplitude Experiment",
+  "description": "Schema for an Amplitude experiment or feature flag configuration including variants, targeting segments, and deployment settings.",
+  "type": "object",
+  "required": [
+    "key"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the experiment or flag."
+    },
+    "projectId": {
+      "type": "string",
+      "description": "The project ID the experiment belongs to."
+    },
+    "key": {
+      "type": "string",
+      "description": "The unique key used to reference the experiment or flag in code.",
+      "minLength": 1,
+      "pattern": "^[a-z0-9_-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the experiment or flag.",
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the experiment's purpose and hypothesis."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of configuration.",
+      "enum": [
+        "experiment",
+        "flag",
+        "release"
+      ]
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the experiment or flag is currently enabled."
+    },
+    "evaluationMode": {
+      "type": "string",
+      "description": "The evaluation mode determining where variants are computed.",
+      "enum": [
+        "local",
+        "remote"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "description": "The lifecycle state of the experiment or flag.",
+      "enum": [
+        "draft",
+        "running",
+        "stopped",
+        "active",
+        "archived"
+      ]
+    },
+    "bucketingKey": {
+      "type": "string",
+      "description": "The user property used for deterministic bucketing."
+    },
+    "bucketingSalt": {
+      "type": "string",
+      "description": "The salt used with the bucketing key for hash computation."
+    },
+    "variants": {
+      "type": "array",
+      "description": "Array of variant configurations for the experiment.",
+      "items": {
+        "$ref": "#/$defs/Variant"
+      }
+    },
+    "segments": {
+      "type": "array",
+      "description": "Array of targeting segments that control which users see which variants.",
+      "items": {
+        "$ref": "#/$defs/Segment"
+      }
+    },
+    "deployments": {
+      "type": "array",
+      "description": "Array of deployment IDs where this experiment is active.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rolledOutVariant": {
+      "type": "string",
+      "description": "The variant key that was rolled out after the experiment concluded."
+    },
+    "startDate": {
+      "type": "datetime",
+      "description": "The date and time the experiment started."
+    },
+    "endDate": {
+      "type": "datetime",
+      "description": "The date and time the experiment ended."
+    }
+  },
+  "definitions": {
+    "Variant": {
+      "name": "Variant",
+      "type": "object",
+      "description": "A variant in an experiment or feature flag.",
+      "required": [
+        "key"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The unique key identifying this variant.",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the variant."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what this variant does."
+        },
+        "payload": {
+          "description": "An optional JSON payload associated with the variant for client-side configuration."
+        },
+        "rolloutWeight": {
+          "type": "int32",
+          "description": "The traffic allocation percentage for this variant.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "Segment": {
+      "name": "Segment",
+      "type": "object",
+      "description": "A targeting segment that defines which users receive a specific variant.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The display name of the segment."
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Array of targeting conditions that must all be true for the segment to match.",
+          "items": {
+            "$ref": "#/$defs/Condition"
+          }
+        },
+        "variant": {
+          "type": "string",
+          "description": "The variant key to assign when this segment matches."
+        },
+        "percentage": {
+          "type": "int32",
+          "description": "The percentage of matching users to include.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "Condition": {
+      "name": "Condition",
+      "type": "object",
+      "description": "A single targeting condition used in segment evaluation.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of targeting condition.",
+          "enum": [
+            "user_property",
+            "cohort",
+            "device_id",
+            "user_id"
+          ]
+        },
+        "prop": {
+          "type": "string",
+          "description": "The property name to evaluate."
+        },
+        "op": {
+          "type": "string",
+          "description": "The comparison operator.",
+          "enum": [
+            "is",
+            "is_not",
+            "contains",
+            "does_not_contain",
+            "greater_than",
+            "less_than",
+            "set",
+            "not_set",
+            "glob_match",
+            "glob_does_not_match"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "description": "The values to compare against.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

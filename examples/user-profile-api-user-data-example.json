@@ -1,0 +1,20 @@
+{
+  "user_id": "500123",
+  "user_properties": {},
+  "computed_properties": {},
+  "cohort_ids": [
+    "example_value"
+  ],
+  "recommendations": [
+    {
+      "rec_id": "500123",
+      "child_ids": [
+        {}
+      ],
+      "is_control": false,
+      "recommendation_type": "standard",
+      "title": "example_value"
+    }
+  ],
+  "amplitude_id": 200
+}

@@ -1,0 +1,112 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AttributionEvent": "amplitude:AttributionEvent",
+    "AttributionResponse": "amplitude:AttributionResponse",
+    "AttributionRequest": "amplitude:AttributionRequest",
+    "userId": {
+      "@id": "amplitude:user_id",
+      "@type": "xsd:string"
+    },
+    "deviceId": {
+      "@id": "amplitude:device_id",
+      "@type": "xsd:string"
+    },
+    "eventType": {
+      "@id": "amplitude:event_type",
+      "@type": "xsd:string"
+    },
+    "platform": {
+      "@id": "amplitude:platform",
+      "@type": "xsd:string"
+    },
+    "osName": {
+      "@id": "amplitude:os_name",
+      "@type": "xsd:string"
+    },
+    "osVersion": {
+      "@id": "amplitude:os_version",
+      "@type": "xsd:string"
+    },
+    "deviceBrand": {
+      "@id": "amplitude:device_brand",
+      "@type": "xsd:string"
+    },
+    "deviceManufacturer": {
+      "@id": "amplitude:device_manufacturer",
+      "@type": "xsd:string"
+    },
+    "deviceModel": {
+      "@id": "amplitude:device_model",
+      "@type": "xsd:string"
+    },
+    "carrier": {
+      "@id": "amplitude:carrier",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "amplitude:country",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "amplitude:region",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "amplitude:city",
+      "@type": "xsd:string"
+    },
+    "language": {
+      "@id": "amplitude:language",
+      "@type": "xsd:string"
+    },
+    "adid": {
+      "@id": "amplitude:adid",
+      "@type": "xsd:string"
+    },
+    "idfa": {
+      "@id": "amplitude:idfa",
+      "@type": "xsd:string"
+    },
+    "idfv": {
+      "@id": "amplitude:idfv",
+      "@type": "xsd:string"
+    },
+    "userProperties": {
+      "@id": "amplitude:user_properties",
+      "@type": "@id"
+    },
+    "eventProperties": {
+      "@id": "amplitude:event_properties",
+      "@type": "@id"
+    },
+    "time": {
+      "@id": "amplitude:time",
+      "@type": "xsd:integer"
+    },
+    "code": {
+      "@id": "amplitude:code",
+      "@type": "xsd:integer"
+    },
+    "eventsIngested": {
+      "@id": "amplitude:events_ingested",
+      "@type": "xsd:integer"
+    },
+    "serverUploadTime": {
+      "@id": "amplitude:server_upload_time",
+      "@type": "xsd:integer"
+    },
+    "apiKey": {
+      "@id": "amplitude:api_key",
+      "@type": "xsd:string"
+    },
+    "event": {
+      "@id": "amplitude:event",
+      "@type": "@id"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/taxonomy-api-user-property-structure.json",
+  "name": "UserProperty",
+  "description": "UserProperty schema from Amplitude Taxonomy API",
+  "type": "object",
+  "properties": {
+    "user_property": {
+      "type": "string",
+      "description": "The name of the user property."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the user property."
+    },
+    "type": {
+      "type": "string",
+      "description": "The data type of the property."
+    }
+  }
+}

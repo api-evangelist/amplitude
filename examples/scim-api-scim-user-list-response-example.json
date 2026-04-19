@@ -1,0 +1,33 @@
+{
+  "schemas": [
+    "example_value"
+  ],
+  "totalResults": 394,
+  "startIndex": 412,
+  "itemsPerPage": 26,
+  "Resources": [
+    {
+      "schemas": [
+        {}
+      ],
+      "id": "500123",
+      "userName": "analyst@example.com",
+      "name": {
+        "givenName": {},
+        "familyName": {}
+      },
+      "emails": [
+        {}
+      ],
+      "active": true,
+      "groups": [
+        {}
+      ],
+      "meta": {
+        "resourceType": {},
+        "created": {},
+        "lastModified": {}
+      }
+    }
+  ]
+}

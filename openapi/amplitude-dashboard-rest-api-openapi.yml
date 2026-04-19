@@ -18,84 +18,84 @@ externalDocs:
   description: Amplitude Dashboard REST API Documentation
   url: https://amplitude.com/docs/apis/analytics/dashboard-rest
 servers:
-  - url: https://amplitude.com
-    description: Amplitude Production Server
+- url: https://amplitude.com
+  description: Amplitude Production Server
 tags:
-  - name: Event List
-    description: Event listing operations
-  - name: Event Segmentation
-    description: Event segmentation analysis operations
-  - name: Funnel Analysis
-    description: Funnel analysis operations
-  - name: Retention Analysis
-    description: Retention analysis operations
-  - name: Revenue Analysis
-    description: Revenue analysis operations
-  - name: User Activity
-    description: User activity lookup operations
+- name: Event List
+  description: Event listing operations
+- name: Event Segmentation
+  description: Event segmentation analysis operations
+- name: Funnel Analysis
+  description: Funnel analysis operations
+- name: Retention Analysis
+  description: Retention analysis operations
+- name: Revenue Analysis
+  description: Revenue analysis operations
+- name: User Activity
+  description: User activity lookup operations
 security:
-  - basicAuth: []
+- basicAuth: []
 paths:
   /api/2/events/segmentation:
     get:
       operationId: getEventSegmentation
-      summary: Get event segmentation
+      summary: Amplitude Get Event Segmentation
       description: >-
         Get metrics for an event with segmentation. Returns event totals,
         unique users, or other metrics broken down by time intervals and
         optional segment or group-by properties.
       tags:
-        - Event Segmentation
+      - Event Segmentation
       parameters:
-        - $ref: '#/components/parameters/eventParam'
-        - $ref: '#/components/parameters/startDate'
-        - $ref: '#/components/parameters/endDate'
-        - name: m
-          in: query
-          description: >-
-            The metric to compute. Options include uniques, totals, pct_dau,
-            average, histogram, sums, value_avg, or formula.
-          schema:
-            type: string
-            enum:
-              - uniques
-              - totals
-              - pct_dau
-              - average
-              - histogram
-              - sums
-              - value_avg
-              - formula
-        - name: i
-          in: query
-          description: >-
-            Time interval granularity. Use -300000 for real-time, 1 for daily,
-            7 for weekly, or 30 for monthly.
-          schema:
-            type: integer
-        - name: s
-          in: query
-          description: >-
-            Segment definitions as a JSON-encoded array of segment objects for
-            filtering results.
-          schema:
-            type: string
-        - name: g
-          in: query
-          description: >-
-            The property to group results by, such as a user property or event
-            property name.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          description: >-
-            The number of group-by values to return. Default is 100, max is
-            1000.
-          schema:
-            type: integer
-            default: 100
-            maximum: 1000
+      - $ref: '#/components/parameters/eventParam'
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - name: m
+        in: query
+        description: >-
+          The metric to compute. Options include uniques, totals, pct_dau,
+          average, histogram, sums, value_avg, or formula.
+        schema:
+          type: string
+          enum:
+          - uniques
+          - totals
+          - pct_dau
+          - average
+          - histogram
+          - sums
+          - value_avg
+          - formula
+      - name: i
+        in: query
+        description: >-
+          Time interval granularity. Use -300000 for real-time, 1 for daily,
+          7 for weekly, or 30 for monthly.
+        schema:
+          type: integer
+      - name: s
+        in: query
+        description: >-
+          Segment definitions as a JSON-encoded array of segment objects for
+          filtering results.
+        schema:
+          type: string
+      - name: g
+        in: query
+        description: >-
+          The property to group results by, such as a user property or event
+          property name.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: >-
+          The number of group-by values to return. Default is 100, max is
+          1000.
+        schema:
+          type: integer
+          default: 100
+          maximum: 1000
       responses:
         '200':
           description: Success
@@ -103,41 +103,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SegmentationResult'
+              examples:
+                getEventSegmentation200Example:
+                  summary: Default getEventSegmentation 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                      series:
+                      - {}
+                      seriesLabels:
+                      - {}
+                      xValues:
+                      - {}
         '400':
           description: Bad request
         '401':
           description: Unauthorized - invalid or missing credentials
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/funnels:
     get:
       operationId: getFunnelAnalysis
-      summary: Get funnel analysis
+      summary: Amplitude Get Funnel Analysis
       description: >-
         Get funnel drop-off and conversion rates for a sequence of events.
         Each event parameter in the query string defines a step in the funnel.
       tags:
-        - Funnel Analysis
+      - Funnel Analysis
       parameters:
-        - $ref: '#/components/parameters/eventParam'
-        - $ref: '#/components/parameters/startDate'
-        - $ref: '#/components/parameters/endDate'
-        - name: n
-          in: query
-          description: >-
-            The conversion window in days. Default varies by project settings.
-          schema:
-            type: integer
-        - name: s
-          in: query
-          description: >-
-            Segment definitions as a JSON-encoded array.
-          schema:
-            type: string
-        - name: g
-          in: query
-          description: >-
-            The property to group results by.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/eventParam'
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - name: n
+        in: query
+        description: >-
+          The conversion window in days. Default varies by project settings.
+        schema:
+          type: integer
+      - name: s
+        in: query
+        description: >-
+          Segment definitions as a JSON-encoded array.
+        schema:
+          type: string
+      - name: g
+        in: query
+        description: >-
+          The property to group results by.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -145,53 +160,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FunnelResult'
+              examples:
+                getFunnelAnalysis200Example:
+                  summary: Default getFunnelAnalysis 200 response
+                  x-microcks-default: true
+                  value:
+                    data: {}
         '400':
           description: Bad request
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/retention:
     get:
       operationId: getRetentionAnalysis
-      summary: Get retention analysis
+      summary: Amplitude Get Retention Analysis
       description: >-
         Get user retention for specific starting and returning actions. Returns
         retention data broken down by cohort date showing the percentage of
         users who returned on each subsequent day.
       tags:
-        - Retention Analysis
+      - Retention Analysis
       parameters:
-        - name: se
-          in: query
-          required: true
-          description: >-
-            The starting event as a JSON-encoded object with event_type field.
-          schema:
-            type: string
-        - name: re
-          in: query
-          required: true
-          description: >-
-            The returning event as a JSON-encoded object with event_type field.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/startDate'
-        - $ref: '#/components/parameters/endDate'
-        - name: rm
-          in: query
-          description: >-
-            Retention mode. Use bracket for N-day retention or rolling for
-            unbounded retention.
-          schema:
-            type: string
-            enum:
-              - bracket
-              - rolling
-        - name: s
-          in: query
-          description: >-
-            Segment definitions as a JSON-encoded array.
-          schema:
-            type: string
+      - name: se
+        in: query
+        required: true
+        description: >-
+          The starting event as a JSON-encoded object with event_type field.
+        schema:
+          type: string
+      - name: re
+        in: query
+        required: true
+        description: >-
+          The returning event as a JSON-encoded object with event_type field.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - name: rm
+        in: query
+        description: >-
+          Retention mode. Use bracket for N-day retention or rolling for
+          unbounded retention.
+        schema:
+          type: string
+          enum:
+          - bracket
+          - rolling
+      - name: s
+        in: query
+        description: >-
+          Segment definitions as a JSON-encoded array.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -199,41 +223,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RetentionResult'
+              examples:
+                getRetentionAnalysis200Example:
+                  summary: Default getRetentionAnalysis 200 response
+                  x-microcks-default: true
+                  value:
+                    data: {}
         '400':
           description: Bad request
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/useractivity:
     get:
       operationId: getUserActivity
-      summary: Get user activity
+      summary: Amplitude Get User Activity
       description: >-
         Get a user's most recent events, with optional filters on event types.
         Returns up to 1000 of the most recent events for a given user.
       tags:
-        - User Activity
+      - User Activity
       parameters:
-        - name: user
-          in: query
-          required: true
-          description: >-
-            The user_id to look up activity for.
-          schema:
-            type: string
-        - name: offset
-          in: query
-          description: >-
-            The offset for pagination. Default is 0.
-          schema:
-            type: integer
-            default: 0
-        - name: limit
-          in: query
-          description: >-
-            The number of events to return. Default is 1000.
-          schema:
-            type: integer
-            default: 1000
+      - name: user
+        in: query
+        required: true
+        description: >-
+          The user_id to look up activity for.
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: >-
+          The offset for pagination. Default is 0.
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: >-
+          The number of events to return. Default is 1000.
+        schema:
+          type: integer
+          default: 1000
       responses:
         '200':
           description: Success
@@ -241,27 +274,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserActivityResult'
+              examples:
+                getUserActivity200Example:
+                  summary: Default getUserActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    userData: {}
+                    events:
+                    - {}
         '400':
           description: Bad request
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/usersearch:
     get:
       operationId: searchUsers
-      summary: Search users
+      summary: Amplitude Search Users
       description: >-
         Search for a user by user_id, device_id, or Amplitude ID. Returns
         matching user identifiers and their most recent event details.
       tags:
-        - User Activity
+      - User Activity
       parameters:
-        - name: user
-          in: query
-          required: true
-          description: >-
-            The user_id, device_id, or Amplitude ID to search for.
-          schema:
-            type: string
+      - name: user
+        in: query
+        required: true
+        description: >-
+          The user_id, device_id, or Amplitude ID to search for.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -269,40 +313,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserSearchResult'
+              examples:
+                searchUsers200Example:
+                  summary: Default searchUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    matches:
+                    - user_id: {}
+                      amplitude_id: {}
         '400':
           description: Bad request
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/revenue/day:
     get:
       operationId: getRevenueLTV
-      summary: Get revenue LTV data
+      summary: Amplitude Get Revenue LTV Data
       description: >-
         Get revenue lifetime value (LTV) data for new users acquired during
         the specified date range.
       tags:
-        - Revenue Analysis
+      - Revenue Analysis
       parameters:
-        - $ref: '#/components/parameters/startDate'
-        - $ref: '#/components/parameters/endDate'
-        - name: m
-          in: query
-          description: >-
-            The revenue metric to compute.
-          schema:
-            type: string
-        - name: s
-          in: query
-          description: >-
-            Segment definitions as a JSON-encoded array.
-          schema:
-            type: string
-        - name: g
-          in: query
-          description: >-
-            The property to group results by.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - name: m
+        in: query
+        description: >-
+          The revenue metric to compute.
+        schema:
+          type: string
+      - name: s
+        in: query
+        description: >-
+          Segment definitions as a JSON-encoded array.
+        schema:
+          type: string
+      - name: g
+        in: query
+        description: >-
+          The property to group results by.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -315,19 +370,28 @@ paths:
                     type: object
                     description: >-
                       Revenue LTV data organized by cohort date.
+              examples:
+                getRevenueLTV200Example:
+                  summary: Default getRevenueLTV 200 response
+                  x-microcks-default: true
+                  value:
+                    data: {}
         '400':
           description: Bad request
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/2/events/list:
     get:
       operationId: listEventTypes
-      summary: List event types
+      summary: Amplitude List Event Types
       description: >-
         Get the list of event types in the project along with their volume
         over the last 30 days.
       tags:
-        - Event List
+      - Event List
       responses:
         '200':
           description: Success
@@ -335,8 +399,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventListResult'
+              examples:
+                listEventTypes200Example:
+                  summary: Default listEventTypes 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - name: {}
+                      totals: {}
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     basicAuth:

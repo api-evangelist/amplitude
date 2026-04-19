@@ -1,0 +1,63 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amplitude": "https://amplitude.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "UserProfileResponse": "amplitude:UserProfileResponse",
+    "UserData": "amplitude:UserData",
+    "Recommendation": "amplitude:Recommendation",
+    "userData": {
+      "@id": "amplitude:userData",
+      "@type": "@id"
+    },
+    "userId": {
+      "@id": "amplitude:user_id",
+      "@type": "xsd:string"
+    },
+    "userProperties": {
+      "@id": "amplitude:user_properties",
+      "@type": "@id"
+    },
+    "computedProperties": {
+      "@id": "amplitude:computed_properties",
+      "@type": "@id"
+    },
+    "cohortIds": {
+      "@id": "amplitude:cohort_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "recommendations": {
+      "@id": "amplitude:recommendations",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "amplitudeId": {
+      "@id": "amplitude:amplitude_id",
+      "@type": "xsd:integer"
+    },
+    "recId": {
+      "@id": "amplitude:rec_id",
+      "@type": "xsd:string"
+    },
+    "childIds": {
+      "@id": "amplitude:child_ids",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "isControl": {
+      "@id": "amplitude:is_control",
+      "@type": "xsd:boolean"
+    },
+    "recommendationType": {
+      "@id": "amplitude:recommendation_type",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "amplitude:title",
+      "@type": "xsd:string"
+    }
+  }
+}

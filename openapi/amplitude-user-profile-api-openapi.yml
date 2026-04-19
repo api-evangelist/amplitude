@@ -18,66 +18,66 @@ externalDocs:
   description: Amplitude User Profile API Documentation
   url: https://amplitude.com/docs/apis/analytics/user-profile
 servers:
-  - url: https://profile-api.amplitude.com
-    description: Amplitude Profile API Server
+- url: https://profile-api.amplitude.com
+  description: Amplitude Profile API Server
 tags:
-  - name: Profiles
-    description: User profile retrieval operations
+- name: Profiles
+  description: User profile retrieval operations
 security:
-  - apiKeyAuth: []
+- apiKeyAuth: []
 paths:
   /v1/userprofile:
     get:
       operationId: getUserProfile
-      summary: Get a user profile
+      summary: Amplitude Get a User Profile
       description: >-
         Retrieve the profile for a specific user including user properties,
         computed properties, cohort memberships, and personalized
         recommendations. The response includes all enriched data Amplitude
         has computed for the user.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - name: user_id
-          in: query
-          required: true
-          description: >-
-            The user_id of the user whose profile to retrieve.
-          schema:
-            type: string
-        - name: comp_id
-          in: query
-          description: >-
-            The computed property ID or recommendation ID to retrieve
-            specific computed results for the user.
-          schema:
-            type: integer
-        - name: get_recs
-          in: query
-          description: >-
-            When true, include personalized recommendations in the response.
-          schema:
-            type: boolean
-            default: false
-        - name: rec_id
-          in: query
-          description: >-
-            The recommendation model ID to retrieve specific recommendation
-            results.
-          schema:
-            type: string
-        - name: rec_type
-          in: query
-          description: >-
-            The type of recommendation to retrieve.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          description: >-
-            The maximum number of recommendation results to return.
-          schema:
-            type: integer
+      - name: user_id
+        in: query
+        required: true
+        description: >-
+          The user_id of the user whose profile to retrieve.
+        schema:
+          type: string
+      - name: comp_id
+        in: query
+        description: >-
+          The computed property ID or recommendation ID to retrieve
+          specific computed results for the user.
+        schema:
+          type: integer
+      - name: get_recs
+        in: query
+        description: >-
+          When true, include personalized recommendations in the response.
+        schema:
+          type: boolean
+          default: false
+      - name: rec_id
+        in: query
+        description: >-
+          The recommendation model ID to retrieve specific recommendation
+          results.
+        schema:
+          type: string
+      - name: rec_type
+        in: query
+        description: >-
+          The type of recommendation to retrieve.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: >-
+          The maximum number of recommendation results to return.
+        schema:
+          type: integer
       responses:
         '200':
           description: Success
@@ -85,12 +85,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserProfileResponse'
+              examples:
+                getUserProfile200Example:
+                  summary: Default getUserProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    userData:
+                      user_id: {}
+                      user_properties: {}
+                      computed_properties: {}
+                      cohort_ids: {}
+                      recommendations: {}
+                      amplitude_id: {}
         '400':
           description: Bad request - missing user_id
         '401':
           description: Unauthorized - invalid or missing API key
         '404':
           description: User not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     apiKeyAuth:

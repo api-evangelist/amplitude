@@ -1,0 +1,15 @@
+{
+  "key": "example_value",
+  "name": "Example Name",
+  "description": "Example description",
+  "variants": [
+    {
+      "key": "example_value",
+      "name": "Example Name",
+      "payload": "example_value",
+      "description": "Example description",
+      "rolloutWeight": 1000
+    }
+  ],
+  "bucketingKey": "example_value"
+}

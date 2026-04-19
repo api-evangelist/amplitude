@@ -1,0 +1,416 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Dashboard REST API
+  description: The Amplitude Dashboard REST API provides programmatic access to the same data displayed in Amplitude's dashboard charts and graphs. It returns results in JSON format and supports 
+    queries filtered by event types, user segments, cohorts, and date ranges. Developers can use this API to build custom reporting tools, export chart data, or integrate Amplitude analytics into 
+    external dashboards and business intelligence systems.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dashboard-rest-api
+    baseUri: https://amplitude.com
+    description: The Amplitude Dashboard REST API provides programmatic access to the same data displayed in Amplitude's dashboard charts and graphs. It returns results in JSON format and supports 
+      queries filtered by event types, user segments, cohorts, and date ranges. Developers can use this API to build custom reporting tools, export chart data, or integrate Amplitude analytics into 
+      external dashboards and business intelligence systems.
+    resources:
+    - name: event-segmentation
+      path: /event-segmentation
+      description: Event Segmentation operations
+      operations:
+      - name: getEventSegmentation
+        method: GET
+        description: Amplitude Get Event Segmentation
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: m
+          in: query
+          type: string
+          required: false
+          description: The metric to compute. Options include uniques, totals, pct_dau, average, histogram, sums, value_avg, or formula.
+        - name: i
+          in: query
+          type: integer
+          required: false
+          description: Time interval granularity. Use -300000 for real-time, 1 for daily, 7 for weekly, or 30 for monthly.
+        - name: s
+          in: query
+          type: string
+          required: false
+          description: Segment definitions as a JSON-encoded array of segment objects for filtering results.
+        - name: g
+          in: query
+          type: string
+          required: false
+          description: The property to group results by, such as a user property or event property name.
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: The number of group-by values to return. Default is 100, max is 1000.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: funnel-analysis
+      path: /funnel-analysis
+      description: Funnel Analysis operations
+      operations:
+      - name: getFunnelAnalysis
+        method: GET
+        description: Amplitude Get Funnel Analysis
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: n
+          in: query
+          type: integer
+          required: false
+          description: The conversion window in days. Default varies by project settings.
+        - name: s
+          in: query
+          type: string
+          required: false
+          description: Segment definitions as a JSON-encoded array.
+        - name: g
+          in: query
+          type: string
+          required: false
+          description: The property to group results by.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: retention-analysis
+      path: /retention-analysis
+      description: Retention Analysis operations
+      operations:
+      - name: getRetentionAnalysis
+        method: GET
+        description: Amplitude Get Retention Analysis
+        inputParameters:
+        - name: se
+          in: query
+          type: string
+          required: true
+          description: The starting event as a JSON-encoded object with event_type field.
+        - name: re
+          in: query
+          type: string
+          required: true
+          description: The returning event as a JSON-encoded object with event_type field.
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: rm
+          in: query
+          type: string
+          required: false
+          description: Retention mode. Use bracket for N-day retention or rolling for unbounded retention.
+        - name: s
+          in: query
+          type: string
+          required: false
+          description: Segment definitions as a JSON-encoded array.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-activity
+      path: /user-activity
+      description: User Activity operations
+      operations:
+      - name: getUserActivity
+        method: GET
+        description: Amplitude Get User Activity
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          required: true
+          description: The user_id to look up activity for.
+        - name: offset
+          in: query
+          type: integer
+          required: false
+          description: The offset for pagination. Default is 0.
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: The number of events to return. Default is 1000.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: searchUsers
+        method: GET
+        description: Amplitude Search Users
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          required: true
+          description: The user_id, device_id, or Amplitude ID to search for.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: revenue-analysis
+      path: /revenue-analysis
+      description: Revenue Analysis operations
+      operations:
+      - name: getRevenueLTV
+        method: GET
+        description: Amplitude Get Revenue LTV Data
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        - name: m
+          in: query
+          type: string
+          required: false
+          description: The revenue metric to compute.
+        - name: s
+          in: query
+          type: string
+          required: false
+          description: Segment definitions as a JSON-encoded array.
+        - name: g
+          in: query
+          type: string
+          required: false
+          description: The property to group results by.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: event-list
+      path: /event-list
+      description: Event List operations
+      operations:
+      - name: listEventTypes
+        method: GET
+        description: Amplitude List Event Types
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{AMPLITUDE_API_KEY}}'
+      password: '{{AMPLITUDE_SECRET_KEY}}'
+  exposes:
+  - type: rest
+    port: 8103
+    namespace: dashboard-rest-api-rest
+    resources:
+    - path: /v1/event-segmentation
+      name: event-segmentation
+      description: Event Segmentation operations
+      operations:
+      - method: GET
+        name: getEventSegmentation
+        description: Amplitude Get Event Segmentation
+        call: dashboard-rest-api.getEventSegmentation
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/funnel-analysis
+      name: funnel-analysis
+      description: Funnel Analysis operations
+      operations:
+      - method: GET
+        name: getFunnelAnalysis
+        description: Amplitude Get Funnel Analysis
+        call: dashboard-rest-api.getFunnelAnalysis
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/retention-analysis
+      name: retention-analysis
+      description: Retention Analysis operations
+      operations:
+      - method: GET
+        name: getRetentionAnalysis
+        description: Amplitude Get Retention Analysis
+        call: dashboard-rest-api.getRetentionAnalysis
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-activity
+      name: user-activity
+      description: User Activity operations
+      operations:
+      - method: GET
+        name: getUserActivity
+        description: Amplitude Get User Activity
+        call: dashboard-rest-api.getUserActivity
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-activity
+      name: user-activity
+      description: User Activity operations
+      operations:
+      - method: GET
+        name: searchUsers
+        description: Amplitude Search Users
+        call: dashboard-rest-api.searchUsers
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/revenue-analysis
+      name: revenue-analysis
+      description: Revenue Analysis operations
+      operations:
+      - method: GET
+        name: getRevenueLTV
+        description: Amplitude Get Revenue LTV Data
+        call: dashboard-rest-api.getRevenueLTV
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/event-list
+      name: event-list
+      description: Event List operations
+      operations:
+      - method: GET
+        name: listEventTypes
+        description: Amplitude List Event Types
+        call: dashboard-rest-api.listEventTypes
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9103
+    namespace: dashboard-rest-api-mcp
+    transport: http
+    tools:
+    - name: getEventSegmentation
+      description: Amplitude Get Event Segmentation
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getEventSegmentation
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getFunnelAnalysis
+      description: Amplitude Get Funnel Analysis
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getFunnelAnalysis
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getRetentionAnalysis
+      description: Amplitude Get Retention Analysis
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getRetentionAnalysis
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getUserActivity
+      description: Amplitude Get User Activity
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getUserActivity
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchUsers
+      description: Amplitude Search Users
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.searchUsers
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getRevenueLTV
+      description: Amplitude Get Revenue LTV Data
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.getRevenueLTV
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listEventTypes
+      description: Amplitude List Event Types
+      hints:
+        readOnly: true
+      call: dashboard-rest-api.listEventTypes
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

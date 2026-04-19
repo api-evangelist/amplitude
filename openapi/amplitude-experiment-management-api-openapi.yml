@@ -18,42 +18,42 @@ externalDocs:
   description: Amplitude Experiment Management API Documentation
   url: https://amplitude.com/docs/apis/experiment/experiment-management-api
 servers:
-  - url: https://experiment.amplitude.com
-    description: Amplitude Experiment Management Server
+- url: https://experiment.amplitude.com
+  description: Amplitude Experiment Management Server
 tags:
-  - name: Deployments
-    description: Deployment management operations
-  - name: Experiments
-    description: Experiment management operations
-  - name: Flags
-    description: Feature flag management operations
-  - name: Versions
-    description: Flag and experiment version history operations
+- name: Deployments
+  description: Deployment management operations
+- name: Experiments
+  description: Experiment management operations
+- name: Flags
+  description: Feature flag management operations
+- name: Versions
+  description: Flag and experiment version history operations
 security:
-  - bearerAuth: []
+- bearerAuth: []
 paths:
   /api/1/flags:
     get:
       operationId: listFlags
-      summary: List all flags
+      summary: Amplitude List All Flags
       description: >-
         Retrieve a list of all feature flags in the project. Returns flag
         metadata including status, variants, and deployment information.
       tags:
-        - Flags
+      - Flags
       parameters:
-        - name: limit
-          in: query
-          description: >-
-            The maximum number of flags to return.
-          schema:
-            type: integer
-        - name: cursor
-          in: query
-          description: >-
-            A cursor for pagination returned from a previous request.
-          schema:
-            type: string
+      - name: limit
+        in: query
+        description: >-
+          The maximum number of flags to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: >-
+          A cursor for pagination returned from a previous request.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -61,16 +61,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FlagListResponse'
+              examples:
+                listFlags200Example:
+                  summary: Default listFlags 200 response
+                  x-microcks-default: true
+                  value:
+                    flags:
+                    - example_value
+                    nextCursor: example_value
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createFlag
-      summary: Create a flag
+      summary: Amplitude Create a Flag
       description: >-
         Create a new feature flag with the specified key, variants, and
         targeting configuration.
       tags:
-        - Flags
+      - Flags
       requestBody:
         required: true
         content:
@@ -84,23 +95,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Flag'
+              examples:
+                createFlag200Example:
+                  summary: Default createFlag 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
         '400':
           description: Bad request - invalid flag configuration
         '401':
           description: Unauthorized
         '409':
           description: Flag key already exists
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/1/flags/{id}:
     get:
       operationId: getFlag
-      summary: Get a flag
+      summary: Amplitude Get a Flag
       description: >-
         Retrieve a single feature flag by its ID including full configuration
         details such as deployments, variants, and targeting segments.
       tags:
-        - Flags
+      - Flags
       parameters:
-        - $ref: '#/components/parameters/flagId'
+      - $ref: '#/components/parameters/flagId'
       responses:
         '200':
           description: Success
@@ -108,20 +143,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Flag'
+              examples:
+                getFlag200Example:
+                  summary: Default getFlag 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
         '401':
           description: Unauthorized
         '404':
           description: Flag not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateFlag
-      summary: Update a flag
+      summary: Amplitude Update a Flag
       description: >-
         Update an existing feature flag's configuration. Only the fields
         included in the request body are updated.
       tags:
-        - Flags
+      - Flags
       parameters:
-        - $ref: '#/components/parameters/flagId'
+      - $ref: '#/components/parameters/flagId'
       requestBody:
         required: true
         content:
@@ -135,34 +194,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Flag'
+              examples:
+                updateFlag200Example:
+                  summary: Default updateFlag 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
         '400':
           description: Bad request
         '401':
           description: Unauthorized
         '404':
           description: Flag not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/1/experiments:
     get:
       operationId: listExperiments
-      summary: List all experiments
+      summary: Amplitude List All Experiments
       description: >-
         Retrieve a list of all experiments in the project. Returns experiment
         metadata including status, variants, and deployment information.
       tags:
-        - Experiments
+      - Experiments
       parameters:
-        - name: limit
-          in: query
-          description: >-
-            The maximum number of experiments to return.
-          schema:
-            type: integer
-        - name: cursor
-          in: query
-          description: >-
-            A cursor for pagination.
-          schema:
-            type: string
+      - name: limit
+        in: query
+        description: >-
+          The maximum number of experiments to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: >-
+          A cursor for pagination.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -170,16 +253,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExperimentListResponse'
+              examples:
+                listExperiments200Example:
+                  summary: Default listExperiments 200 response
+                  x-microcks-default: true
+                  value:
+                    experiments:
+                    - example_value
+                    nextCursor: example_value
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createExperiment
-      summary: Create an experiment
+      summary: Amplitude Create an Experiment
       description: >-
         Create a new A/B test experiment with the specified key, variants,
         and targeting configuration.
       tags:
-        - Experiments
+      - Experiments
       requestBody:
         required: true
         content:
@@ -193,23 +287,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Experiment'
+              examples:
+                createExperiment200Example:
+                  summary: Default createExperiment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+                    rolledOutVariant: example_value
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
         '400':
           description: Bad request
         '401':
           description: Unauthorized
         '409':
           description: Experiment key already exists
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/1/experiments/{id}:
     get:
       operationId: getExperiment
-      summary: Get an experiment
+      summary: Amplitude Get an Experiment
       description: >-
         Retrieve a single experiment by its ID including full configuration
         details.
       tags:
-        - Experiments
+      - Experiments
       parameters:
-        - $ref: '#/components/parameters/experimentId'
+      - $ref: '#/components/parameters/experimentId'
       responses:
         '200':
           description: Success
@@ -217,19 +338,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Experiment'
+              examples:
+                getExperiment200Example:
+                  summary: Default getExperiment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+                    rolledOutVariant: example_value
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
         '401':
           description: Unauthorized
         '404':
           description: Experiment not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateExperiment
-      summary: Update an experiment
+      summary: Amplitude Update an Experiment
       description: >-
         Update an existing experiment's configuration.
       tags:
-        - Experiments
+      - Experiments
       parameters:
-        - $ref: '#/components/parameters/experimentId'
+      - $ref: '#/components/parameters/experimentId'
       requestBody:
         required: true
         content:
@@ -243,22 +391,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Experiment'
+              examples:
+                updateExperiment200Example:
+                  summary: Default updateExperiment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+                    rolledOutVariant: example_value
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
         '400':
           description: Bad request
         '401':
           description: Unauthorized
         '404':
           description: Experiment not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/1/deployments:
     get:
       operationId: listDeployments
-      summary: List all deployments
+      summary: Amplitude List All Deployments
       description: >-
         Retrieve a list of all deployments that experiments and flags can
         be assigned to. Deployments represent environments or platforms
         where flags are evaluated.
       tags:
-        - Deployments
+      - Deployments
       responses:
         '200':
           description: Success
@@ -266,24 +441,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeploymentListResponse'
+              examples:
+                listDeployments200Example:
+                  summary: Default listDeployments 200 response
+                  x-microcks-default: true
+                  value:
+                    deployments:
+                    - example_value
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/1/deployments/{id}:
     get:
       operationId: getDeployment
-      summary: Get a deployment
+      summary: Amplitude Get a Deployment
       description: >-
         Retrieve a single deployment by its ID.
       tags:
-        - Deployments
+      - Deployments
       parameters:
-        - name: id
-          in: path
-          required: true
-          description: >-
-            The unique identifier of the deployment.
-          schema:
-            type: string
+      - name: id
+        in: path
+        required: true
+        description: >-
+          The unique identifier of the deployment.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -291,46 +476,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Deployment'
+              examples:
+                getDeployment200Example:
+                  summary: Default getDeployment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    label: example_value
+                    key: example_value
+                    deleted: true
         '401':
           description: Unauthorized
         '404':
           description: Deployment not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/1/versions:
     get:
       operationId: listVersions
-      summary: List flag and experiment versions
+      summary: Amplitude List Flag and Experiment Versions
       description: >-
         Retrieve the version history for flags and experiments. Returns
         a paginated list of version records with change details.
       tags:
-        - Versions
+      - Versions
       parameters:
-        - name: limit
-          in: query
-          description: >-
-            The maximum number of versions to return.
-          schema:
-            type: integer
-        - name: cursor
-          in: query
-          description: >-
-            A cursor for pagination.
-          schema:
-            type: string
-        - name: start
-          in: query
-          description: >-
-            The start date for filtering versions.
-          schema:
-            type: string
-            format: date
-        - name: end
-          in: query
-          description: >-
-            The end date for filtering versions.
-          schema:
-            type: string
-            format: date
+      - name: limit
+        in: query
+        description: >-
+          The maximum number of versions to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: >-
+          A cursor for pagination.
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: >-
+          The start date for filtering versions.
+        schema:
+          type: string
+          format: date
+      - name: end
+        in: query
+        description: >-
+          The end date for filtering versions.
+        schema:
+          type: string
+          format: date
       responses:
         '200':
           description: Success
@@ -338,8 +536,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VersionListResponse'
+              examples:
+                listVersions200Example:
+                  summary: Default listVersions 200 response
+                  x-microcks-default: true
+                  value:
+                    versions:
+                    - id: {}
+                      flagId: {}
+                      version: {}
+                      createdAt: {}
+                      createdBy: {}
+                    nextCursor: example_value
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -412,8 +625,8 @@ components:
           description: >-
             The evaluation mode, either local or remote.
           enum:
-            - local
-            - remote
+          - local
+          - remote
         bucketingKey:
           type: string
           description: >-
@@ -445,13 +658,13 @@ components:
           description: >-
             The current state of the flag.
           enum:
-            - draft
-            - active
-            - archived
+          - draft
+          - active
+          - archived
     CreateFlagRequest:
       type: object
       required:
-        - key
+      - key
       properties:
         key:
           type: string
@@ -547,8 +760,8 @@ components:
           description: >-
             The evaluation mode, either local or remote.
           enum:
-            - local
-            - remote
+          - local
+          - remote
         bucketingKey:
           type: string
           description: >-
@@ -581,10 +794,10 @@ components:
           description: >-
             The current state of the experiment.
           enum:
-            - draft
-            - running
-            - stopped
-            - archived
+          - draft
+          - running
+          - stopped
+          - archived
         rolledOutVariant:
           type: string
           description: >-
@@ -603,7 +816,7 @@ components:
     CreateExperimentRequest:
       type: object
       required:
-        - key
+      - key
       properties:
         key:
           type: string

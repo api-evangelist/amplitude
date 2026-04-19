@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/experiment-management-api-segment-structure.json",
+  "name": "Segment",
+  "description": "Segment schema from Amplitude Experiment Management API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The display name of the segment."
+    },
+    "conditions": {
+      "type": "array",
+      "description": "Array of targeting conditions that define this segment.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The condition type."
+          },
+          "prop": {
+            "type": "string",
+            "description": "The property to evaluate."
+          },
+          "op": {
+            "type": "string",
+            "description": "The comparison operator."
+          },
+          "values": {
+            "type": "array",
+            "description": "The values to compare against.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "variant": {
+      "type": "string",
+      "description": "The variant key to assign when this segment matches."
+    },
+    "percentage": {
+      "type": "int32",
+      "description": "The percentage of matching users to include (0-100).",
+      "minimum": 0,
+      "maximum": 100
+    }
+  }
+}

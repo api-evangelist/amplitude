@@ -1,0 +1,429 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude SCIM API
+  description: The Amplitude SCIM API implements the System for Cross-domain Identity Management (SCIM) 2.0 standard for automated user provisioning and deprovisioning. It allows identity providers 
+    such as Okta, Azure AD, and OneLogin to automatically create, update, and deactivate user accounts in Amplitude. This API is essential for enterprise organizations that need centralized user 
+    lifecycle management and compliance with security policies.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: scim-api
+    baseUri: https://core.amplitude.com
+    description: The Amplitude SCIM API implements the System for Cross-domain Identity Management (SCIM) 2.0 standard for automated user provisioning and deprovisioning. It allows identity providers 
+      such as Okta, Azure AD, and OneLogin to automatically create, update, and deactivate user accounts in Amplitude. This API is essential for enterprise organizations that need centralized user 
+      lifecycle management and compliance with security policies.
+    resources:
+    - name: users
+      path: /users
+      description: Users operations
+      operations:
+      - name: listScimUsers
+        method: GET
+        description: Amplitude List SCIM Users
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          required: false
+          description: A SCIM filter expression to narrow the results. For example, userName eq "user@example.com".
+        - name: startIndex
+          in: query
+          type: integer
+          required: false
+          description: The 1-based index of the first result in the current set of results. Default is 1.
+        - name: count
+          in: query
+          type: integer
+          required: false
+          description: The number of results per page. Default varies by implementation.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createScimUser
+        method: POST
+        description: Amplitude Create a SCIM User
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getScimUser
+        method: GET
+        description: Amplitude Get a SCIM User
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: replaceScimUser
+        method: PUT
+        description: Amplitude Replace a SCIM User
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateScimUser
+        method: PATCH
+        description: Amplitude Update a SCIM User
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteScimUser
+        method: DELETE
+        description: Amplitude Delete a SCIM User
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: groups
+      path: /groups
+      description: Groups operations
+      operations:
+      - name: listScimGroups
+        method: GET
+        description: Amplitude List SCIM Groups
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          required: false
+          description: A SCIM filter expression to narrow results.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createScimGroup
+        method: POST
+        description: Amplitude Create a SCIM Group
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getScimGroup
+        method: GET
+        description: Amplitude Get a SCIM Group
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateScimGroup
+        method: PATCH
+        description: Amplitude Update a SCIM Group
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteScimGroup
+        method: DELETE
+        description: Amplitude Delete a SCIM Group
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{AMPLITUDE_API_KEY}}'
+  exposes:
+  - type: rest
+    port: 8110
+    namespace: scim-api-rest
+    resources:
+    - path: /v1/users
+      name: users
+      description: Users operations
+      operations:
+      - method: GET
+        name: listScimUsers
+        description: Amplitude List SCIM Users
+        call: scim-api.listScimUsers
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: users
+      description: Users operations
+      operations:
+      - method: POST
+        name: createScimUser
+        description: Amplitude Create a SCIM User
+        call: scim-api.createScimUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: users
+      description: Users operations
+      operations:
+      - method: GET
+        name: getScimUser
+        description: Amplitude Get a SCIM User
+        call: scim-api.getScimUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: users
+      description: Users operations
+      operations:
+      - method: PUT
+        name: replaceScimUser
+        description: Amplitude Replace a SCIM User
+        call: scim-api.replaceScimUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: users
+      description: Users operations
+      operations:
+      - method: PATCH
+        name: updateScimUser
+        description: Amplitude Update a SCIM User
+        call: scim-api.updateScimUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: users
+      description: Users operations
+      operations:
+      - method: DELETE
+        name: deleteScimUser
+        description: Amplitude Delete a SCIM User
+        call: scim-api.deleteScimUser
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups
+      name: groups
+      description: Groups operations
+      operations:
+      - method: GET
+        name: listScimGroups
+        description: Amplitude List SCIM Groups
+        call: scim-api.listScimGroups
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups
+      name: groups
+      description: Groups operations
+      operations:
+      - method: POST
+        name: createScimGroup
+        description: Amplitude Create a SCIM Group
+        call: scim-api.createScimGroup
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups
+      name: groups
+      description: Groups operations
+      operations:
+      - method: GET
+        name: getScimGroup
+        description: Amplitude Get a SCIM Group
+        call: scim-api.getScimGroup
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups
+      name: groups
+      description: Groups operations
+      operations:
+      - method: PATCH
+        name: updateScimGroup
+        description: Amplitude Update a SCIM Group
+        call: scim-api.updateScimGroup
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/groups
+      name: groups
+      description: Groups operations
+      operations:
+      - method: DELETE
+        name: deleteScimGroup
+        description: Amplitude Delete a SCIM Group
+        call: scim-api.deleteScimGroup
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9110
+    namespace: scim-api-mcp
+    transport: http
+    tools:
+    - name: listScimUsers
+      description: Amplitude List SCIM Users
+      hints:
+        readOnly: true
+      call: scim-api.listScimUsers
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createScimUser
+      description: Amplitude Create a SCIM User
+      hints:
+        readOnly: false
+      call: scim-api.createScimUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getScimUser
+      description: Amplitude Get a SCIM User
+      hints:
+        readOnly: true
+      call: scim-api.getScimUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: replaceScimUser
+      description: Amplitude Replace a SCIM User
+      hints:
+        readOnly: false
+      call: scim-api.replaceScimUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateScimUser
+      description: Amplitude Update a SCIM User
+      hints:
+        readOnly: false
+      call: scim-api.updateScimUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteScimUser
+      description: Amplitude Delete a SCIM User
+      hints:
+        readOnly: false
+      call: scim-api.deleteScimUser
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listScimGroups
+      description: Amplitude List SCIM Groups
+      hints:
+        readOnly: true
+      call: scim-api.listScimGroups
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createScimGroup
+      description: Amplitude Create a SCIM Group
+      hints:
+        readOnly: false
+      call: scim-api.createScimGroup
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getScimGroup
+      description: Amplitude Get a SCIM Group
+      hints:
+        readOnly: true
+      call: scim-api.getScimGroup
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateScimGroup
+      description: Amplitude Update a SCIM Group
+      hints:
+        readOnly: false
+      call: scim-api.updateScimGroup
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteScimGroup
+      description: Amplitude Delete a SCIM Group
+      hints:
+        readOnly: false
+      call: scim-api.deleteScimGroup
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

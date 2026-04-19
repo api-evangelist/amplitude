@@ -1,0 +1,9 @@
+{
+  "mapping": [
+    {
+      "global_user_id": "500123",
+      "user_id": "500123",
+      "unmap": true
+    }
+  ]
+}

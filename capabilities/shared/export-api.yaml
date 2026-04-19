@@ -1,0 +1,81 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Export API
+  description: The Amplitude Export API enables bulk export of raw event data for a given project within a specified date range. Results are returned as zipped archives of JSON files containing 
+    complete event records with timestamps, user properties, device information, and attribution data. This API is commonly used for data warehousing, offline analysis, and feeding event data into 
+    external processing pipelines.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: export-api
+    baseUri: https://amplitude.com
+    description: The Amplitude Export API enables bulk export of raw event data for a given project within a specified date range. Results are returned as zipped archives of JSON files containing 
+      complete event records with timestamps, user properties, device information, and attribution data. This API is commonly used for data warehousing, offline analysis, and feeding event data into 
+      external processing pipelines.
+    resources:
+    - name: export
+      path: /export
+      description: Export operations
+      operations:
+      - name: exportEvents
+        method: GET
+        description: Amplitude Export Raw Event Data
+        inputParameters:
+        - name: start
+          in: query
+          type: string
+          required: true
+          description: The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted.
+        - name: end
+          in: query
+          type: string
+          required: true
+          description: The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{AMPLITUDE_API_KEY}}'
+      password: '{{AMPLITUDE_SECRET_KEY}}'
+  exposes:
+  - type: rest
+    port: 8107
+    namespace: export-api-rest
+    resources:
+    - path: /v1/export
+      name: export
+      description: Export operations
+      operations:
+      - method: GET
+        name: exportEvents
+        description: Amplitude Export Raw Event Data
+        call: export-api.exportEvents
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9107
+    namespace: export-api-mcp
+    transport: http
+    tools:
+    - name: exportEvents
+      description: Amplitude Export Raw Event Data
+      hints:
+        readOnly: true
+      call: export-api.exportEvents
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

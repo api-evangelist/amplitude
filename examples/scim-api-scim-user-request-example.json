@@ -1,0 +1,18 @@
+{
+  "schemas": [
+    "example_value"
+  ],
+  "userName": "analyst@example.com",
+  "name": {
+    "givenName": "Example Name",
+    "familyName": "Example Name"
+  },
+  "emails": [
+    {
+      "value": "analyst@example.com",
+      "primary": false,
+      "type": "standard"
+    }
+  ],
+  "active": false
+}

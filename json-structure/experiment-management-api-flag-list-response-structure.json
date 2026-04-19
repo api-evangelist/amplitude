@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/experiment-management-api-flag-list-response-structure.json",
+  "name": "FlagListResponse",
+  "description": "FlagListResponse schema from Amplitude Experiment Management API",
+  "type": "object",
+  "properties": {
+    "flags": {
+      "type": "array",
+      "description": "Array of feature flag objects.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the flag."
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The project ID the flag belongs to."
+          },
+          "key": {
+            "type": "string",
+            "description": "The unique key used to reference the flag in code."
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the flag."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the flag's purpose."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether the flag is enabled."
+          },
+          "evaluationMode": {
+            "type": "string",
+            "description": "The evaluation mode, either local or remote.",
+            "enum": [
+              "local",
+              "remote"
+            ]
+          },
+          "bucketingKey": {
+            "type": "string",
+            "description": "The property used for bucketing users into variants."
+          },
+          "bucketingSalt": {
+            "type": "string",
+            "description": "The salt used for hashing during bucketing."
+          },
+          "variants": {
+            "type": "array",
+            "description": "Array of variant configurations.",
+            "items": {
+              "$ref": "#/components/schemas/VariantConfig"
+            }
+          },
+          "deployments": {
+            "type": "array",
+            "description": "Array of deployment IDs the flag is deployed to.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "segments": {
+            "type": "array",
+            "description": "Array of targeting segment configurations.",
+            "items": {
+              "$ref": "#/components/schemas/Segment"
+            }
+          },
+          "state": {
+            "type": "string",
+            "description": "The current state of the flag.",
+            "enum": [
+              "draft",
+              "active",
+              "archived"
+            ]
+          }
+        }
+      }
+    },
+    "nextCursor": {
+      "type": "string",
+      "description": "A cursor for fetching the next page of results."
+    }
+  }
+}

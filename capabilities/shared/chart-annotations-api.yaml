@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amplitude Chart Annotations API
+  description: The Amplitude Chart Annotations API enables developers to programmatically create, retrieve, update, and delete annotations on Amplitude charts. Annotations mark significant events such
+    as product releases, marketing campaigns, or incidents on timeline-based charts. This API allows teams to automate annotation management as part of their deployment or release pipelines, ensuring 
+    that important context is always visible alongside analytics data.
+  tags:
+  - Amplitude
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: chart-annotations-api
+    baseUri: https://amplitude.com
+    description: The Amplitude Chart Annotations API enables developers to programmatically create, retrieve, update, and delete annotations on Amplitude charts. Annotations mark significant events 
+      such as product releases, marketing campaigns, or incidents on timeline-based charts. This API allows teams to automate annotation management as part of their deployment or release pipelines, 
+      ensuring that important context is always visible alongside analytics data.
+    resources:
+    - name: annotations
+      path: /annotations
+      description: Annotations operations
+      operations:
+      - name: listAnnotations
+        method: GET
+        description: Amplitude List All Annotations
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createAnnotation
+        method: POST
+        description: Amplitude Create an Annotation
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getAnnotation
+        method: GET
+        description: Amplitude Get an Annotation
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateAnnotation
+        method: PUT
+        description: Amplitude Update an Annotation
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteAnnotation
+        method: DELETE
+        description: Amplitude Delete an Annotation
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{AMPLITUDE_API_KEY}}'
+      password: '{{AMPLITUDE_SECRET_KEY}}'
+  exposes:
+  - type: rest
+    port: 8102
+    namespace: chart-annotations-api-rest
+    resources:
+    - path: /v1/annotations
+      name: annotations
+      description: Annotations operations
+      operations:
+      - method: GET
+        name: listAnnotations
+        description: Amplitude List All Annotations
+        call: chart-annotations-api.listAnnotations
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/annotations
+      name: annotations
+      description: Annotations operations
+      operations:
+      - method: POST
+        name: createAnnotation
+        description: Amplitude Create an Annotation
+        call: chart-annotations-api.createAnnotation
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/annotations
+      name: annotations
+      description: Annotations operations
+      operations:
+      - method: GET
+        name: getAnnotation
+        description: Amplitude Get an Annotation
+        call: chart-annotations-api.getAnnotation
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/annotations
+      name: annotations
+      description: Annotations operations
+      operations:
+      - method: PUT
+        name: updateAnnotation
+        description: Amplitude Update an Annotation
+        call: chart-annotations-api.updateAnnotation
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/annotations
+      name: annotations
+      description: Annotations operations
+      operations:
+      - method: DELETE
+        name: deleteAnnotation
+        description: Amplitude Delete an Annotation
+        call: chart-annotations-api.deleteAnnotation
+        with: {}
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9102
+    namespace: chart-annotations-api-mcp
+    transport: http
+    tools:
+    - name: listAnnotations
+      description: Amplitude List All Annotations
+      hints:
+        readOnly: true
+      call: chart-annotations-api.listAnnotations
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createAnnotation
+      description: Amplitude Create an Annotation
+      hints:
+        readOnly: false
+      call: chart-annotations-api.createAnnotation
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getAnnotation
+      description: Amplitude Get an Annotation
+      hints:
+        readOnly: true
+      call: chart-annotations-api.getAnnotation
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateAnnotation
+      description: Amplitude Update an Annotation
+      hints:
+        readOnly: false
+      call: chart-annotations-api.updateAnnotation
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteAnnotation
+      description: Amplitude Delete an Annotation
+      hints:
+        readOnly: false
+      call: chart-annotations-api.deleteAnnotation
+      with: {}
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/experiment-management-api-update-flag-request-schema.json",
+  "title": "UpdateFlagRequest",
+  "description": "UpdateFlagRequest schema from Amplitude Experiment Management API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The updated display name."
+    },
+    "description": {
+      "type": "string",
+      "description": "The updated description."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the flag should be enabled."
+    },
+    "variants": {
+      "type": "array",
+      "description": "Updated variant configurations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The unique key for the variant."
+          },
+          "name": {
+            "type": "string",
+            "description": "The display name of the variant."
+          },
+          "payload": {
+            "description": "An optional JSON payload associated with the variant."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what this variant does."
+          },
+          "rolloutWeight": {
+            "type": "integer",
+            "description": "The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "description": "Updated targeting segment configurations.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The display name of the segment."
+          },
+          "conditions": {
+            "type": "array",
+            "description": "Array of targeting conditions that define this segment.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The condition type."
+                },
+                "prop": {
+                  "type": "string",
+                  "description": "The property to evaluate."
+                },
+                "op": {
+                  "type": "string",
+                  "description": "The comparison operator."
+                },
+                "values": {
+                  "type": "array",
+                  "description": "The values to compare against.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "variant": {
+            "type": "string",
+            "description": "The variant key to assign when this segment matches."
+          },
+          "percentage": {
+            "type": "integer",
+            "description": "The percentage of matching users to include (0-100).",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    }
+  }
+}

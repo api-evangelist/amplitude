@@ -1,0 +1,25 @@
+{
+  "id": "500123",
+  "projectId": "example_value",
+  "key": "example_value",
+  "name": "Example Name",
+  "description": "Example description",
+  "type": "experiment",
+  "enabled": false,
+  "evaluationMode": "local",
+  "state": "draft",
+  "bucketingKey": "example_value",
+  "bucketingSalt": "example_value",
+  "variants": [
+    "example_value"
+  ],
+  "segments": [
+    "example_value"
+  ],
+  "deployments": [
+    "example_value"
+  ],
+  "rolledOutVariant": "example_value",
+  "startDate": "2025-03-15T14:30:00Z",
+  "endDate": "2025-03-15T14:30:00Z"
+}

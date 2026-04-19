@@ -1,0 +1,30 @@
+{
+  "schemas": [
+    "example_value"
+  ],
+  "id": "500123",
+  "userName": "analyst@example.com",
+  "name": {
+    "givenName": "Example Name",
+    "familyName": "Example Name"
+  },
+  "emails": [
+    {
+      "value": "analyst@example.com",
+      "primary": true,
+      "type": "standard"
+    }
+  ],
+  "active": false,
+  "groups": [
+    {
+      "value": "example_value",
+      "display": "example_value"
+    }
+  ],
+  "meta": {
+    "resourceType": "standard",
+    "created": "2025-03-15T14:30:00Z",
+    "lastModified": "2025-03-15T14:30:00Z"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/scim-api-scim-group-structure.json",
+  "name": "ScimGroup",
+  "description": "ScimGroup schema from Amplitude SCIM API",
+  "type": "object",
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The SCIM schema URIs for this resource."
+    },
+    "id": {
+      "type": "string",
+      "description": "The SCIM unique identifier for the group."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the group."
+    },
+    "members": {
+      "type": "array",
+      "description": "Array of group members.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The member user ID."
+          },
+          "display": {
+            "type": "string",
+            "description": "The member display name."
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "SCIM metadata for the resource.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The type of SCIM resource."
+        },
+        "created": {
+          "type": "datetime",
+          "description": "The date and time the resource was created."
+        },
+        "lastModified": {
+          "type": "datetime",
+          "description": "The date and time the resource was last modified."
+        }
+      }
+    }
+  }
+}

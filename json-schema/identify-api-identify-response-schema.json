@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/identify-api-identify-response-schema.json",
+  "title": "IdentifyResponse",
+  "description": "IdentifyResponse schema from Amplitude Identify API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "The HTTP status code of the response.",
+      "example": 200
+    },
+    "server_upload_time": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The time the server received the request in milliseconds since epoch."
+    },
+    "events_ingested": {
+      "type": "integer",
+      "description": "The number of identify operations successfully processed."
+    }
+  }
+}

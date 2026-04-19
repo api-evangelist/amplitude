@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "event_property": "example_value",
+      "event_type": "standard",
+      "description": "Example description",
+      "type": "standard",
+      "is_required": false
+    }
+  ]
+}

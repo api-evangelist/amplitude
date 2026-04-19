@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/user-mapping-api-user-map-response-schema.json",
+  "title": "UserMapResponse",
+  "description": "UserMapResponse schema from Amplitude User Mapping API",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "The HTTP status code of the response.",
+      "example": 200
+    },
+    "success": {
+      "type": "boolean",
+      "description": "Whether the mapping operation was successful."
+    }
+  }
+}

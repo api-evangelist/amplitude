@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/dashboard-rest-api-event-list-result-structure.json",
+  "name": "EventListResult",
+  "description": "EventListResult schema from Amplitude Dashboard REST API",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "Array of event type objects with names and volumes.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the event type."
+          },
+          "totals": {
+            "type": "int32",
+            "description": "The total number of times this event was fired in the last 30 days."
+          }
+        }
+      }
+    }
+  }
+}

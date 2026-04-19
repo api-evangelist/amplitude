@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-schema/experiment-management-api-deployment-list-response-schema.json",
+  "title": "DeploymentListResponse",
+  "description": "DeploymentListResponse schema from Amplitude Experiment Management API",
+  "type": "object",
+  "properties": {
+    "deployments": {
+      "type": "array",
+      "description": "Array of deployment objects.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the deployment."
+          },
+          "projectId": {
+            "type": "string",
+            "description": "The project the deployment belongs to."
+          },
+          "label": {
+            "type": "string",
+            "description": "The display label for the deployment."
+          },
+          "key": {
+            "type": "string",
+            "description": "The deployment key used for API authentication."
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "Whether the deployment has been deleted."
+          }
+        }
+      }
+    }
+  }
+}

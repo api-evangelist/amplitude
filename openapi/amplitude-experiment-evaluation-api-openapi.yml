@@ -18,27 +18,27 @@ externalDocs:
   description: Amplitude Experiment Evaluation API Documentation
   url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
 servers:
-  - url: https://api.lab.amplitude.com
-    description: Amplitude Experiment Evaluation Server
+- url: https://api.lab.amplitude.com
+  description: Amplitude Experiment Evaluation Server
 tags:
-  - name: Evaluation
-    description: Remote flag and experiment evaluation operations
-  - name: Flags
-    description: Flag configuration retrieval for local evaluation
+- name: Evaluation
+  description: Remote flag and experiment evaluation operations
+- name: Flags
+  description: Flag configuration retrieval for local evaluation
 security:
-  - apiKeyAuth: []
+- apiKeyAuth: []
 paths:
   /v1/vardata:
     post:
       operationId: evaluateVariants
-      summary: Evaluate variants for a user
+      summary: Amplitude Evaluate Variants for a User
       description: >-
         Remotely evaluate all active experiments and feature flags for a
         specific user. Returns the variant assignments based on the user's
         properties and targeting rules. Amplitude automatically tracks an
         Experiment Assignment event for each evaluation.
       tags:
-        - Evaluation
+      - Evaluation
       requestBody:
         required: true
         content:
@@ -52,32 +52,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationResponse'
+              examples:
+                evaluateVariants200Example:
+                  summary: Default evaluateVariants 200 response
+                  x-microcks-default: true
+                  value: {}
         '400':
           description: Bad request - missing user context
         '401':
           description: Unauthorized - invalid deployment key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     get:
       operationId: evaluateVariantsGet
-      summary: Evaluate variants for a user via GET
+      summary: Amplitude Evaluate Variants for a User via GET
       description: >-
         Remotely evaluate all active experiments and feature flags for a
         user identified by query parameters. Returns variant assignments
         based on targeting rules.
       tags:
-        - Evaluation
+      - Evaluation
       parameters:
-        - name: user_id
-          in: query
-          description: >-
-            The user ID to evaluate variants for.
-          schema:
-            type: string
-        - name: device_id
-          in: query
-          description: >-
-            The device ID to evaluate variants for.
-          schema:
-            type: string
+      - name: user_id
+        in: query
+        description: >-
+          The user ID to evaluate variants for.
+        schema:
+          type: string
+      - name: device_id
+        in: query
+        description: >-
+          The device ID to evaluate variants for.
+        schema:
+          type: string
       responses:
         '200':
           description: Success
@@ -85,12 +93,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationResponse'
+              examples:
+                evaluateVariantsGet200Example:
+                  summary: Default evaluateVariantsGet 200 response
+                  x-microcks-default: true
+                  value: {}
         '401':
           description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /v1/flags:
     get:
       operationId: getFlags
-      summary: Get flag configurations
+      summary: Amplitude Get Flag Configurations
       description: >-
         Download all flag configurations for local evaluation. This endpoint
         returns the full flag configuration including targeting rules,
@@ -98,7 +114,7 @@ paths:
         client-side local evaluation SDKs with initialFlags or running
         evaluation in edge environments.
       tags:
-        - Flags
+      - Flags
       responses:
         '200':
           description: Success
@@ -110,8 +126,17 @@ paths:
                   Array of flag configuration objects.
                 items:
                   $ref: '#/components/schemas/FlagConfiguration'
+              examples:
+                getFlags200Example:
+                  summary: Default getFlags 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
         '401':
           description: Unauthorized - invalid deployment key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     apiKeyAuth:

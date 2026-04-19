@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/json-structure/experiment-evaluation-api-flag-configuration-structure.json",
+  "name": "FlagConfiguration",
+  "description": "FlagConfiguration schema from Amplitude Experiment Evaluation API",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The unique key identifying the flag."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Metadata about the flag configuration.",
+      "properties": {
+        "deployed": {
+          "type": "boolean",
+          "description": "Whether the flag is currently deployed."
+        },
+        "evaluationMode": {
+          "type": "string",
+          "description": "The evaluation mode, either local or remote."
+        },
+        "flagType": {
+          "type": "string",
+          "description": "The type of flag, such as experiment or release."
+        },
+        "flagVersion": {
+          "type": "int32",
+          "description": "The version of the flag configuration."
+        }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "description": "Array of targeting segments for this flag.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "conditions": {
+            "type": "array",
+            "description": "Array of targeting conditions.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          "variant": {
+            "type": "string",
+            "description": "The variant key to assign when conditions are met."
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "object",
+      "description": "Map of variant keys to variant configuration objects.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The variant key."
+          },
+          "payload": {
+            "description": "Optional payload for the variant."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "key": "example_value",
+  "metadata": {
+    "deployed": true,
+    "evaluationMode": "example_value",
+    "flagType": "standard",
+    "flagVersion": 601
+  },
+  "segments": [
+    {
+      "conditions": [
+        {}
+      ],
+      "variant": "example_value"
+    }
+  ],
+  "variants": {}
+}
