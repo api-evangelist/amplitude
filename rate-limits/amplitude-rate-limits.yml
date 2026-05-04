@@ -1,0 +1,43 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Amplitude
+providerId: amplitude
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Analytics
+description: Amplitude HTTP V2 ingestion and Dashboard REST API rate limits.
+sources:
+  - https://amplitude.com/pricing
+  - https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/
+headers: {}
+responseCodes:
+  throttled: 429
+limits:
+  - name: HTTP V2 ingest (per device_id)
+    scope: device
+    metric: events_per_second
+    limit: 10
+    timeFrame: second
+  - name: HTTP V2 ingest (per user_id)
+    scope: user
+    metric: events_per_second
+    limit: 10
+    timeFrame: second
+  - name: Batch ingest
+    scope: project
+    metric: events_per_request
+    limit: 2000
+    timeFrame: request
+  - name: Dashboard REST
+    scope: project
+    metric: queries_per_hour
+    limit: 360
+    timeFrame: hour
+  - name: Cohort download
+    scope: project
+    metric: concurrent
+    limit: 1

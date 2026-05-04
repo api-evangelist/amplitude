@@ -1,0 +1,129 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Amplitude
+providerId: amplitude
+created: '2026-05-04'
+modified: '2026-05-04'
+reconciled: true
+tags:
+  - Product Analytics
+  - Experimentation
+description: Amplitude pricing across Starter / Plus / Growth / Enterprise.
+sources:
+  - https://amplitude.com/pricing
+plans:
+  - id: amplitude-starter
+    name: Starter
+    type: freemium
+    description: Free; 10K MTUs or up to 2M events; unlimited sources/destinations.
+    entries:
+      - label: MTUs
+        name: mtus
+        type: quota
+        metric: MTU
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Events
+        name: events
+        type: quota
+        metric: event
+        limit: 2000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Out-of-the-box analytics
+      - name: Session Replay
+      - name: Unlimited feature flags
+      - name: Web Experimentation
+      - name: AI Feedback
+  - id: amplitude-plus
+    name: Plus
+    type: paid
+    description: Starting $49/mo annual; up to 300K MTUs or 25M events.
+    entries:
+      - label: Monthly base
+        name: base
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '49.00'
+        userMultiplied: false
+      - label: MTUs
+        name: mtus
+        type: quota
+        metric: MTU
+        limit: 300000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Events
+        name: events
+        type: quota
+        metric: event
+        limit: 25000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Unlimited product analytics
+      - name: Behavioral cohorts
+      - name: Feature tagging
+      - name: Custom audiences
+      - name: Online support
+  - id: amplitude-growth
+    name: Growth
+    type: enterprise
+    description: Custom pricing; advanced analytics, Feature Experimentation, real-time syncs.
+    entries:
+      - label: Annual (custom)
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: true
+    elements:
+      - name: Advanced behavioral analysis
+      - name: Causal insights
+      - name: Feature Experimentation
+      - name: Predictive audiences
+      - name: Real-time streaming
+  - id: amplitude-enterprise
+    name: Enterprise
+    type: enterprise
+    description: Custom pricing; cross-product analysis, multi-armed bandits.
+    entries:
+      - label: Annual (custom)
+        name: seat
+        type: subscription
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: true
+    elements:
+      - name: Cross-product analysis
+      - name: Advanced data/permission controls
+      - name: Mutual exclusion groups
+      - name: Multi-armed bandit experiments
+      - name: Assigned account manager
