@@ -1,0 +1,13 @@
+{
+  "repo": "amplitude",
+  "feeds": [
+    {
+      "source": "https://amplitude.com/blog",
+      "feed_url": "https://amplitude.com/feed",
+      "saved": 10,
+      "title": "Amplitude"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:22:24Z"
+}
