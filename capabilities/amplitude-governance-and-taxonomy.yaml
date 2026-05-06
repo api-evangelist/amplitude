@@ -1,4 +1,4 @@
-naftiko: 1.0.0-alpha1
+naftiko: 1.0.0-alpha2
 info:
   label: Amplitude Governance and Taxonomy
   description: Manage event schemas and chart annotations. For data governance teams.
@@ -7,19 +7,438 @@ info:
   - Taxonomy
   - Data Governance
   created: '2026-04-19'
-  modified: '2026-04-19'
+  modified: '2026-05-06'
 binds:
 - namespace: env
   keys:
     AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
 capability:
   consumes:
-  - import: chart-annotations-api
-    location: ./shared/chart-annotations-api.yaml
-  - import: taxonomy-api
-    location: ./shared/taxonomy-api.yaml
-  - import: user-profile-api
-    location: ./shared/user-profile-api.yaml
+  - type: http
+    namespace: chart-annotations-api
+    baseUri: https://amplitude.com
+    description: The Amplitude Chart Annotations API enables developers to programmatically create, retrieve, update, and
+      delete annotations on Amplitude charts. Annotations mark significant events such as product releases, marketing campaigns,
+      or incidents on timeline-based charts. This API allows teams to automate annotation management as part of their deployment
+      or release pipelines, ensuring that important context is always visible alongside analytics data.
+    resources:
+    - name: annotations
+      path: /annotations
+      description: Annotations operations
+      operations:
+      - name: listAnnotations
+        method: GET
+        description: Amplitude List All Annotations
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createAnnotation
+        method: POST
+        description: Amplitude Create an Annotation
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getAnnotation
+        method: GET
+        description: Amplitude Get an Annotation
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateAnnotation
+        method: PUT
+        description: Amplitude Update an Annotation
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteAnnotation
+        method: DELETE
+        description: Amplitude Delete an Annotation
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{AMPLITUDE_API_KEY}}'
+      password: '{{AMPLITUDE_SECRET_KEY}}'
+  - type: http
+    namespace: taxonomy-api
+    baseUri: https://amplitude.com
+    description: The Amplitude Taxonomy API provides programmatic management of your analytics tracking plan. It supports
+      creating, reading, updating, and deleting event categories, event types, event properties, and user properties. This
+      API is essential for data governance workflows, enabling teams to maintain a consistent and well-organized event taxonomy
+      across their instrumentation without needing to use the Amplitude UI directly.
+    resources:
+    - name: event-categories
+      path: /event-categories
+      description: Event Categories operations
+      operations:
+      - name: listEventCategories
+        method: GET
+        description: Amplitude List All Event Categories
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createEventCategory
+        method: POST
+        description: Amplitude Create an Event Category
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getEventCategory
+        method: GET
+        description: Amplitude Get an Event Category
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateEventCategory
+        method: PUT
+        description: Amplitude Update an Event Category
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteEventCategory
+        method: DELETE
+        description: Amplitude Delete an Event Category
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: event-types
+      path: /event-types
+      description: Event Types operations
+      operations:
+      - name: listEventTypes
+        method: GET
+        description: Amplitude List All Event Types
+        inputParameters:
+        - name: showDeleted
+          in: query
+          type: boolean
+          required: false
+          description: When true, include deleted event types in the response.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createEventType
+        method: POST
+        description: Amplitude Create an Event Type
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getEventType
+        method: GET
+        description: Amplitude Get an Event Type
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateEventType
+        method: PUT
+        description: Amplitude Update an Event Type
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteEventType
+        method: DELETE
+        description: Amplitude Delete an Event Type
+        inputParameters:
+        - name: param
+          in: query
+          type: string
+          required: false
+          description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: event-properties
+      path: /event-properties
+      description: Event Properties operations
+      operations:
+      - name: listEventProperties
+        method: GET
+        description: Amplitude List All Event Properties
+        inputParameters:
+        - name: event_type
+          in: query
+          type: string
+          required: true
+          description: The event type to list properties for.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createEventProperty
+        method: POST
+        description: Amplitude Create an Event Property
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getEventProperty
+        method: GET
+        description: Amplitude Get an Event Property
+        inputParameters:
+        - name: event_property
+          in: path
+          type: string
+          required: true
+          description: The name of the event property.
+        - name: event_type
+          in: query
+          type: string
+          required: true
+          description: The event type the property belongs to.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateEventProperty
+        method: PUT
+        description: Amplitude Update an Event Property
+        inputParameters:
+        - name: event_property
+          in: path
+          type: string
+          required: true
+          description: The name of the event property to update.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteEventProperty
+        method: DELETE
+        description: Amplitude Delete an Event Property
+        inputParameters:
+        - name: event_property
+          in: path
+          type: string
+          required: true
+          description: The name of the event property to delete.
+        - name: event_type
+          in: query
+          type: string
+          required: true
+          description: The event type the property belongs to.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-properties
+      path: /user-properties
+      description: User Properties operations
+      operations:
+      - name: listUserProperties
+        method: GET
+        description: Amplitude List All User Properties
+        inputParameters:
+        - name: showDeleted
+          in: query
+          type: boolean
+          required: false
+          description: When true, include deleted user properties in the response.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createUserProperty
+        method: POST
+        description: Amplitude Create a User Property
+        inputParameters: []
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getUserProperty
+        method: GET
+        description: Amplitude Get a User Property
+        inputParameters:
+        - name: user_property
+          in: path
+          type: string
+          required: true
+          description: The name of the user property.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateUserProperty
+        method: PUT
+        description: Amplitude Update a User Property
+        inputParameters:
+        - name: user_property
+          in: path
+          type: string
+          required: true
+          description: The name of the user property to update.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteUserProperty
+        method: DELETE
+        description: Amplitude Delete a User Property
+        inputParameters:
+        - name: user_property
+          in: path
+          type: string
+          required: true
+          description: The name of the user property to delete.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{AMPLITUDE_API_KEY}}'
+      password: '{{AMPLITUDE_SECRET_KEY}}'
+  - type: http
+    namespace: user-profile-api
+    baseUri: https://profile-api.amplitude.com
+    description: The Amplitude User Profile API serves user profiles that include user properties, computed user properties,
+      a list of cohort IDs the user belongs to, and personalized recommendations. It enables real-time access to enriched
+      user data for powering personalization engines, in-app experiences, and targeted content delivery. This API is particularly
+      useful for retrieving recommendation results generated by Amplitude's machine learning models.
+    resources:
+    - name: profiles
+      path: /profiles
+      description: Profiles operations
+      operations:
+      - name: getUserProfile
+        method: GET
+        description: Amplitude Get a User Profile
+        inputParameters:
+        - name: user_id
+          in: query
+          type: string
+          required: true
+          description: The user_id of the user whose profile to retrieve.
+        - name: comp_id
+          in: query
+          type: integer
+          required: false
+          description: The computed property ID or recommendation ID to retrieve specific computed results for the user.
+        - name: get_recs
+          in: query
+          type: boolean
+          required: false
+          description: When true, include personalized recommendations in the response.
+        - name: rec_id
+          in: query
+          type: string
+          required: false
+          description: The recommendation model ID to retrieve specific recommendation results.
+        - name: rec_type
+          in: query
+          type: string
+          required: false
+          description: The type of recommendation to retrieve.
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: The maximum number of recommendation results to return.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{AMPLITUDE_API_KEY}}'
+      placement: header
   exposes:
   - type: rest
     port: 8083
