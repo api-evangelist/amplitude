@@ -493,6 +493,11 @@ common:
     url: json-structure/http-v2-api-event-structure.json
   - type: JSONStructure
     url: json-structure/experiment-evaluation-api-flag-configuration-structure.json
+  - type: Integrations
+    url: https://amplitude.com/integrations
+integrations:
+  - name: Module Apps
+  - name: Planhat Stream events into Planhat
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
