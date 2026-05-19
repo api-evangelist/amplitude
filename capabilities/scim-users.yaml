@@ -1,0 +1,253 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude SCIM API — Users
+  description: 'Amplitude SCIM API — Users. 6 operations. Lead operation: Amplitude List SCIM Users. Self-contained Naftiko
+    capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: scim-users
+    baseUri: https://core.amplitude.com
+    description: Amplitude SCIM API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: scim-1-Users
+      path: /scim/1/Users
+      operations:
+      - name: listscimusers
+        method: GET
+        description: Amplitude List SCIM Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: A SCIM filter expression to narrow the results. For example, userName eq "user@example.com".
+        - name: startIndex
+          in: query
+          type: integer
+          description: The 1-based index of the first result in the current set of results. Default is 1.
+        - name: count
+          in: query
+          type: integer
+          description: The number of results per page. Default varies by implementation.
+      - name: createscimuser
+        method: POST
+        description: Amplitude Create a SCIM User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: scim-1-Users-user_id
+      path: /scim/1/Users/{user_id}
+      operations:
+      - name: getscimuser
+        method: GET
+        description: Amplitude Get a SCIM User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: replacescimuser
+        method: PUT
+        description: Amplitude Replace a SCIM User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: updatescimuser
+        method: PATCH
+        description: Amplitude Update a SCIM User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletescimuser
+        method: DELETE
+        description: Amplitude Delete a SCIM User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.AMPLITUDE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: scim-users-rest
+    port: 8080
+    description: REST adapter for Amplitude SCIM API — Users. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/scim/1/users
+      name: scim-1-users
+      description: REST surface for scim-1-Users.
+      operations:
+      - method: GET
+        name: listscimusers
+        description: Amplitude List SCIM Users
+        call: scim-users.listscimusers
+        with:
+          filter: rest.filter
+          startIndex: rest.startIndex
+          count: rest.count
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createscimuser
+        description: Amplitude Create a SCIM User
+        call: scim-users.createscimuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scim/1/users/{user-id}
+      name: scim-1-users-user-id
+      description: REST surface for scim-1-Users-user_id.
+      operations:
+      - method: GET
+        name: getscimuser
+        description: Amplitude Get a SCIM User
+        call: scim-users.getscimuser
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: replacescimuser
+        description: Amplitude Replace a SCIM User
+        call: scim-users.replacescimuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatescimuser
+        description: Amplitude Update a SCIM User
+        call: scim-users.updatescimuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletescimuser
+        description: Amplitude Delete a SCIM User
+        call: scim-users.deletescimuser
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: scim-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude SCIM API — Users. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: amplitude-list-scim-users
+      description: Amplitude List SCIM Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scim-users.listscimusers
+      with:
+        filter: tools.filter
+        startIndex: tools.startIndex
+        count: tools.count
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-create-scim-user
+      description: Amplitude Create a SCIM User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: scim-users.createscimuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-get-scim-user
+      description: Amplitude Get a SCIM User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scim-users.getscimuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-replace-scim-user
+      description: Amplitude Replace a SCIM User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: scim-users.replacescimuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-update-scim-user
+      description: Amplitude Update a SCIM User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: scim-users.updatescimuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-delete-scim-user
+      description: Amplitude Delete a SCIM User
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: scim-users.deletescimuser
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude HTTP V2 API — Events
+  description: 'Amplitude HTTP V2 API — Events. 1 operations. Lead operation: Amplitude Upload Events. Self-contained Naftiko
+    capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: http-v2-events
+    baseUri: https://api2.amplitude.com
+    description: Amplitude HTTP V2 API — Events business capability. Self-contained, no shared references.
+    resources:
+    - name: 2-httpapi
+      path: /2/httpapi
+      operations:
+      - name: uploadevents
+        method: POST
+        description: Amplitude Upload Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: http-v2-events-rest
+    port: 8080
+    description: REST adapter for Amplitude HTTP V2 API — Events. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/2/httpapi
+      name: 2-httpapi
+      description: REST surface for 2-httpapi.
+      operations:
+      - method: POST
+        name: uploadevents
+        description: Amplitude Upload Events
+        call: http-v2-events.uploadevents
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: http-v2-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude HTTP V2 API — Events. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amplitude-upload-events
+      description: Amplitude Upload Events
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: http-v2-events.uploadevents
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

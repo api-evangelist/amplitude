@@ -1,0 +1,187 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Experiment Management API — Flags
+  description: 'Amplitude Experiment Management API — Flags. 4 operations. Lead operation: Amplitude List All Flags. Self-contained
+    Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Flags
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: experiment-management-flags
+    baseUri: https://experiment.amplitude.com
+    description: Amplitude Experiment Management API — Flags business capability. Self-contained, no shared references.
+    resources:
+    - name: api-1-flags
+      path: /api/1/flags
+      operations:
+      - name: listflags
+        method: GET
+        description: Amplitude List All Flags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: The maximum number of flags to return.
+        - name: cursor
+          in: query
+          type: string
+          description: A cursor for pagination returned from a previous request.
+      - name: createflag
+        method: POST
+        description: Amplitude Create a Flag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-1-flags-id
+      path: /api/1/flags/{id}
+      operations:
+      - name: getflag
+        method: GET
+        description: Amplitude Get a Flag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateflag
+        method: PATCH
+        description: Amplitude Update a Flag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.AMPLITUDE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: experiment-management-flags-rest
+    port: 8080
+    description: REST adapter for Amplitude Experiment Management API — Flags. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/1/flags
+      name: api-1-flags
+      description: REST surface for api-1-flags.
+      operations:
+      - method: GET
+        name: listflags
+        description: Amplitude List All Flags
+        call: experiment-management-flags.listflags
+        with:
+          limit: rest.limit
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createflag
+        description: Amplitude Create a Flag
+        call: experiment-management-flags.createflag
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/1/flags/{id}
+      name: api-1-flags-id
+      description: REST surface for api-1-flags-id.
+      operations:
+      - method: GET
+        name: getflag
+        description: Amplitude Get a Flag
+        call: experiment-management-flags.getflag
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateflag
+        description: Amplitude Update a Flag
+        call: experiment-management-flags.updateflag
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: experiment-management-flags-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Experiment Management API — Flags. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amplitude-list-all-flags
+      description: Amplitude List All Flags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: experiment-management-flags.listflags
+      with:
+        limit: tools.limit
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-create-flag
+      description: Amplitude Create a Flag
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: experiment-management-flags.createflag
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-get-flag
+      description: Amplitude Get a Flag
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: experiment-management-flags.getflag
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-update-flag
+      description: Amplitude Update a Flag
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: experiment-management-flags.updateflag
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

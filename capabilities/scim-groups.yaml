@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude SCIM API — Groups
+  description: 'Amplitude SCIM API — Groups. 5 operations. Lead operation: Amplitude List SCIM Groups. Self-contained Naftiko
+    capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: scim-groups
+    baseUri: https://core.amplitude.com
+    description: Amplitude SCIM API — Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: scim-1-Groups
+      path: /scim/1/Groups
+      operations:
+      - name: listscimgroups
+        method: GET
+        description: Amplitude List SCIM Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: filter
+          in: query
+          type: string
+          description: A SCIM filter expression to narrow results.
+      - name: createscimgroup
+        method: POST
+        description: Amplitude Create a SCIM Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: scim-1-Groups-group_id
+      path: /scim/1/Groups/{group_id}
+      operations:
+      - name: getscimgroup
+        method: GET
+        description: Amplitude Get a SCIM Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatescimgroup
+        method: PATCH
+        description: Amplitude Update a SCIM Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletescimgroup
+        method: DELETE
+        description: Amplitude Delete a SCIM Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.AMPLITUDE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: scim-groups-rest
+    port: 8080
+    description: REST adapter for Amplitude SCIM API — Groups. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/scim/1/groups
+      name: scim-1-groups
+      description: REST surface for scim-1-Groups.
+      operations:
+      - method: GET
+        name: listscimgroups
+        description: Amplitude List SCIM Groups
+        call: scim-groups.listscimgroups
+        with:
+          filter: rest.filter
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createscimgroup
+        description: Amplitude Create a SCIM Group
+        call: scim-groups.createscimgroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scim/1/groups/{group-id}
+      name: scim-1-groups-group-id
+      description: REST surface for scim-1-Groups-group_id.
+      operations:
+      - method: GET
+        name: getscimgroup
+        description: Amplitude Get a SCIM Group
+        call: scim-groups.getscimgroup
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatescimgroup
+        description: Amplitude Update a SCIM Group
+        call: scim-groups.updatescimgroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletescimgroup
+        description: Amplitude Delete a SCIM Group
+        call: scim-groups.deletescimgroup
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: scim-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude SCIM API — Groups. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amplitude-list-scim-groups
+      description: Amplitude List SCIM Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scim-groups.listscimgroups
+      with:
+        filter: tools.filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-create-scim-group
+      description: Amplitude Create a SCIM Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: scim-groups.createscimgroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-get-scim-group
+      description: Amplitude Get a SCIM Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: scim-groups.getscimgroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-update-scim-group
+      description: Amplitude Update a SCIM Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: scim-groups.updatescimgroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-delete-scim-group
+      description: Amplitude Delete a SCIM Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: scim-groups.deletescimgroup
+      outputParameters:
+      - type: object
+        mapping: $.

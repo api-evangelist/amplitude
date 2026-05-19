@@ -1,0 +1,90 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Export API — Export
+  description: 'Amplitude Export API — Export. 1 operations. Lead operation: Amplitude Export Raw Event Data. Self-contained
+    Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Export
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: export-export
+    baseUri: https://amplitude.com
+    description: Amplitude Export API — Export business capability. Self-contained, no shared references.
+    resources:
+    - name: api-2-export
+      path: /api/2/export
+      operations:
+      - name: exportevents
+        method: GET
+        description: Amplitude Export Raw Event Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start
+          in: query
+          type: string
+          description: The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the
+            format YYYYMMDD is also accepted.
+          required: true
+        - name: end
+          in: query
+          type: string
+          description: The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format
+            YYYYMMDD is also accepted.
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.AMPLITUDE_USER}}'
+      password: '{{env.AMPLITUDE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: export-export-rest
+    port: 8080
+    description: REST adapter for Amplitude Export API — Export. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/2/export
+      name: api-2-export
+      description: REST surface for api-2-export.
+      operations:
+      - method: GET
+        name: exportevents
+        description: Amplitude Export Raw Event Data
+        call: export-export.exportevents
+        with:
+          start: rest.start
+          end: rest.end
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: export-export-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Export API — Export. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amplitude-export-raw-event-data
+      description: Amplitude Export Raw Event Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: export-export.exportevents
+      with:
+        start: tools.start
+        end: tools.end
+      outputParameters:
+      - type: object
+        mapping: $.

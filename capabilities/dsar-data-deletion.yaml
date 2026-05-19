@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Data Subject Access Request API — Data Deletion
+  description: 'Amplitude Data Subject Access Request API — Data Deletion. 2 operations. Lead operation: Amplitude Request
+    User Data Deletion. Self-contained Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Data Deletion
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dsar-data-deletion
+    baseUri: https://amplitude.com
+    description: Amplitude Data Subject Access Request API — Data Deletion business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: api-2-deletions-users
+      path: /api/2/deletions/users
+      operations:
+      - name: createdeletionrequest
+        method: POST
+        description: Amplitude Request User Data Deletion
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listdeletionrequests
+        method: GET
+        description: Amplitude List Deletion Requests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start_day
+          in: query
+          type: string
+          description: The start date to filter deletion requests in YYYY-MM-DD format.
+        - name: end_day
+          in: query
+          type: string
+          description: The end date to filter deletion requests in YYYY-MM-DD format.
+    authentication:
+      type: basic
+      username: '{{env.AMPLITUDE_USER}}'
+      password: '{{env.AMPLITUDE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: dsar-data-deletion-rest
+    port: 8080
+    description: REST adapter for Amplitude Data Subject Access Request API — Data Deletion. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/2/deletions/users
+      name: api-2-deletions-users
+      description: REST surface for api-2-deletions-users.
+      operations:
+      - method: POST
+        name: createdeletionrequest
+        description: Amplitude Request User Data Deletion
+        call: dsar-data-deletion.createdeletionrequest
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listdeletionrequests
+        description: Amplitude List Deletion Requests
+        call: dsar-data-deletion.listdeletionrequests
+        with:
+          start_day: rest.start_day
+          end_day: rest.end_day
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dsar-data-deletion-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Data Subject Access Request API — Data Deletion. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: amplitude-request-user-data-deletion
+      description: Amplitude Request User Data Deletion
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dsar-data-deletion.createdeletionrequest
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-list-deletion-requests
+      description: Amplitude List Deletion Requests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dsar-data-deletion.listdeletionrequests
+      with:
+        start_day: tools.start_day
+        end_day: tools.end_day
+      outputParameters:
+      - type: object
+        mapping: $.

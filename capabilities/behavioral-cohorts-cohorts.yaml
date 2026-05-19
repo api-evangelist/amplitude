@@ -1,0 +1,245 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Behavioral Cohorts API — Cohorts
+  description: 'Amplitude Behavioral Cohorts API — Cohorts. 5 operations. Lead operation: Amplitude List All Cohorts. Self-contained
+    Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Cohorts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: behavioral-cohorts-cohorts
+    baseUri: https://amplitude.com
+    description: Amplitude Behavioral Cohorts API — Cohorts business capability. Self-contained, no shared references.
+    resources:
+    - name: api-3-cohorts
+      path: /api/3/cohorts
+      operations:
+      - name: listcohorts
+        method: GET
+        description: Amplitude List All Cohorts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-3-cohorts-upload
+      path: /api/3/cohorts/upload
+      operations:
+      - name: uploadcohort
+        method: POST
+        description: Amplitude Upload a Cohort
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-5-cohorts-request-cohort_id
+      path: /api/5/cohorts/request/{cohort_id}
+      operations:
+      - name: requestcohortexport
+        method: GET
+        description: Amplitude Request a Cohort Export
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cohort_id
+          in: path
+          type: string
+          description: The ID of the cohort to export.
+          required: true
+        - name: props
+          in: query
+          type: integer
+          description: Set to 1 to include user properties in the export.
+    - name: api-5-cohorts-request-cohort_id-file
+      path: /api/5/cohorts/request/{cohort_id}/file
+      operations:
+      - name: downloadcohortexport
+        method: GET
+        description: Amplitude Download Cohort Export File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cohort_id
+          in: path
+          type: string
+          description: The ID of the cohort to download.
+          required: true
+    - name: api-5-cohorts-request-cohort_id-status
+      path: /api/5/cohorts/request/{cohort_id}/status
+      operations:
+      - name: getcohortexportstatus
+        method: GET
+        description: Amplitude Get Cohort Export Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cohort_id
+          in: path
+          type: string
+          description: The ID of the cohort whose export status to check.
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.AMPLITUDE_USER}}'
+      password: '{{env.AMPLITUDE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: behavioral-cohorts-cohorts-rest
+    port: 8080
+    description: REST adapter for Amplitude Behavioral Cohorts API — Cohorts. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/3/cohorts
+      name: api-3-cohorts
+      description: REST surface for api-3-cohorts.
+      operations:
+      - method: GET
+        name: listcohorts
+        description: Amplitude List All Cohorts
+        call: behavioral-cohorts-cohorts.listcohorts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/3/cohorts/upload
+      name: api-3-cohorts-upload
+      description: REST surface for api-3-cohorts-upload.
+      operations:
+      - method: POST
+        name: uploadcohort
+        description: Amplitude Upload a Cohort
+        call: behavioral-cohorts-cohorts.uploadcohort
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/5/cohorts/request/{cohort-id}
+      name: api-5-cohorts-request-cohort-id
+      description: REST surface for api-5-cohorts-request-cohort_id.
+      operations:
+      - method: GET
+        name: requestcohortexport
+        description: Amplitude Request a Cohort Export
+        call: behavioral-cohorts-cohorts.requestcohortexport
+        with:
+          cohort_id: rest.cohort_id
+          props: rest.props
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/5/cohorts/request/{cohort-id}/file
+      name: api-5-cohorts-request-cohort-id-file
+      description: REST surface for api-5-cohorts-request-cohort_id-file.
+      operations:
+      - method: GET
+        name: downloadcohortexport
+        description: Amplitude Download Cohort Export File
+        call: behavioral-cohorts-cohorts.downloadcohortexport
+        with:
+          cohort_id: rest.cohort_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/5/cohorts/request/{cohort-id}/status
+      name: api-5-cohorts-request-cohort-id-status
+      description: REST surface for api-5-cohorts-request-cohort_id-status.
+      operations:
+      - method: GET
+        name: getcohortexportstatus
+        description: Amplitude Get Cohort Export Status
+        call: behavioral-cohorts-cohorts.getcohortexportstatus
+        with:
+          cohort_id: rest.cohort_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: behavioral-cohorts-cohorts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Behavioral Cohorts API — Cohorts. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amplitude-list-all-cohorts
+      description: Amplitude List All Cohorts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: behavioral-cohorts-cohorts.listcohorts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-upload-cohort
+      description: Amplitude Upload a Cohort
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: behavioral-cohorts-cohorts.uploadcohort
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-request-cohort-export
+      description: Amplitude Request a Cohort Export
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: behavioral-cohorts-cohorts.requestcohortexport
+      with:
+        cohort_id: tools.cohort_id
+        props: tools.props
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-download-cohort-export-file
+      description: Amplitude Download Cohort Export File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: behavioral-cohorts-cohorts.downloadcohortexport
+      with:
+        cohort_id: tools.cohort_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-get-cohort-export-status
+      description: Amplitude Get Cohort Export Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: behavioral-cohorts-cohorts.getcohortexportstatus
+      with:
+        cohort_id: tools.cohort_id
+      outputParameters:
+      - type: object
+        mapping: $.

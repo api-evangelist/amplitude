@@ -1,0 +1,92 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Dashboard REST API — Funnel Analysis
+  description: 'Amplitude Dashboard REST API — Funnel Analysis. 1 operations. Lead operation: Amplitude Get Funnel Analysis.
+    Self-contained Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Funnel Analysis
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dashboard-rest-funnel-analysis
+    baseUri: https://amplitude.com
+    description: Amplitude Dashboard REST API — Funnel Analysis business capability. Self-contained, no shared references.
+    resources:
+    - name: api-2-funnels
+      path: /api/2/funnels
+      operations:
+      - name: getfunnelanalysis
+        method: GET
+        description: Amplitude Get Funnel Analysis
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: n
+          in: query
+          type: integer
+          description: The conversion window in days. Default varies by project settings.
+        - name: s
+          in: query
+          type: string
+          description: Segment definitions as a JSON-encoded array.
+        - name: g
+          in: query
+          type: string
+          description: The property to group results by.
+    authentication:
+      type: basic
+      username: '{{env.AMPLITUDE_USER}}'
+      password: '{{env.AMPLITUDE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: dashboard-rest-funnel-analysis-rest
+    port: 8080
+    description: REST adapter for Amplitude Dashboard REST API — Funnel Analysis. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/2/funnels
+      name: api-2-funnels
+      description: REST surface for api-2-funnels.
+      operations:
+      - method: GET
+        name: getfunnelanalysis
+        description: Amplitude Get Funnel Analysis
+        call: dashboard-rest-funnel-analysis.getfunnelanalysis
+        with:
+          n: rest.n
+          s: rest.s
+          g: rest.g
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dashboard-rest-funnel-analysis-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Dashboard REST API — Funnel Analysis. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amplitude-get-funnel-analysis
+      description: Amplitude Get Funnel Analysis
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dashboard-rest-funnel-analysis.getfunnelanalysis
+      with:
+        n: tools.n
+        s: tools.s
+        g: tools.g
+      outputParameters:
+      - type: object
+        mapping: $.

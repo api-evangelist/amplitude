@@ -1,0 +1,112 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Experiment Management API — Deployments
+  description: 'Amplitude Experiment Management API — Deployments. 2 operations. Lead operation: Amplitude List All Deployments.
+    Self-contained Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Deployments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: experiment-management-deployments
+    baseUri: https://experiment.amplitude.com
+    description: Amplitude Experiment Management API — Deployments business capability. Self-contained, no shared references.
+    resources:
+    - name: api-1-deployments
+      path: /api/1/deployments
+      operations:
+      - name: listdeployments
+        method: GET
+        description: Amplitude List All Deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-1-deployments-id
+      path: /api/1/deployments/{id}
+      operations:
+      - name: getdeployment
+        method: GET
+        description: Amplitude Get a Deployment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the deployment.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.AMPLITUDE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: experiment-management-deployments-rest
+    port: 8080
+    description: REST adapter for Amplitude Experiment Management API — Deployments. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/1/deployments
+      name: api-1-deployments
+      description: REST surface for api-1-deployments.
+      operations:
+      - method: GET
+        name: listdeployments
+        description: Amplitude List All Deployments
+        call: experiment-management-deployments.listdeployments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/1/deployments/{id}
+      name: api-1-deployments-id
+      description: REST surface for api-1-deployments-id.
+      operations:
+      - method: GET
+        name: getdeployment
+        description: Amplitude Get a Deployment
+        call: experiment-management-deployments.getdeployment
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: experiment-management-deployments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Experiment Management API — Deployments. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: amplitude-list-all-deployments
+      description: Amplitude List All Deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: experiment-management-deployments.listdeployments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-get-deployment
+      description: Amplitude Get a Deployment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: experiment-management-deployments.getdeployment
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

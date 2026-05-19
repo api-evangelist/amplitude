@@ -1,0 +1,234 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Taxonomy API — User Properties
+  description: 'Amplitude Taxonomy API — User Properties. 5 operations. Lead operation: Amplitude List All User Properties.
+    Self-contained Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - User Properties
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: taxonomy-user-properties
+    baseUri: https://amplitude.com
+    description: Amplitude Taxonomy API — User Properties business capability. Self-contained, no shared references.
+    resources:
+    - name: api-2-taxonomy-user-property
+      path: /api/2/taxonomy/user-property
+      operations:
+      - name: listuserproperties
+        method: GET
+        description: Amplitude List All User Properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: showDeleted
+          in: query
+          type: boolean
+          description: When true, include deleted user properties in the response.
+      - name: createuserproperty
+        method: POST
+        description: Amplitude Create a User Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-2-taxonomy-user-property-user_property
+      path: /api/2/taxonomy/user-property/{user_property}
+      operations:
+      - name: getuserproperty
+        method: GET
+        description: Amplitude Get a User Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_property
+          in: path
+          type: string
+          description: The name of the user property.
+          required: true
+      - name: updateuserproperty
+        method: PUT
+        description: Amplitude Update a User Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_property
+          in: path
+          type: string
+          description: The name of the user property to update.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteuserproperty
+        method: DELETE
+        description: Amplitude Delete a User Property
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_property
+          in: path
+          type: string
+          description: The name of the user property to delete.
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.AMPLITUDE_USER}}'
+      password: '{{env.AMPLITUDE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: taxonomy-user-properties-rest
+    port: 8080
+    description: REST adapter for Amplitude Taxonomy API — User Properties. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/2/taxonomy/user-property
+      name: api-2-taxonomy-user-property
+      description: REST surface for api-2-taxonomy-user-property.
+      operations:
+      - method: GET
+        name: listuserproperties
+        description: Amplitude List All User Properties
+        call: taxonomy-user-properties.listuserproperties
+        with:
+          showDeleted: rest.showDeleted
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuserproperty
+        description: Amplitude Create a User Property
+        call: taxonomy-user-properties.createuserproperty
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/2/taxonomy/user-property/{user-property}
+      name: api-2-taxonomy-user-property-user-property
+      description: REST surface for api-2-taxonomy-user-property-user_property.
+      operations:
+      - method: GET
+        name: getuserproperty
+        description: Amplitude Get a User Property
+        call: taxonomy-user-properties.getuserproperty
+        with:
+          user_property: rest.user_property
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuserproperty
+        description: Amplitude Update a User Property
+        call: taxonomy-user-properties.updateuserproperty
+        with:
+          user_property: rest.user_property
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteuserproperty
+        description: Amplitude Delete a User Property
+        call: taxonomy-user-properties.deleteuserproperty
+        with:
+          user_property: rest.user_property
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: taxonomy-user-properties-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Taxonomy API — User Properties. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amplitude-list-all-user-properties
+      description: Amplitude List All User Properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: taxonomy-user-properties.listuserproperties
+      with:
+        showDeleted: tools.showDeleted
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-create-user-property
+      description: Amplitude Create a User Property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: taxonomy-user-properties.createuserproperty
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-get-user-property
+      description: Amplitude Get a User Property
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: taxonomy-user-properties.getuserproperty
+      with:
+        user_property: tools.user_property
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-update-user-property
+      description: Amplitude Update a User Property
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: taxonomy-user-properties.updateuserproperty
+      with:
+        user_property: tools.user_property
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-delete-user-property
+      description: Amplitude Delete a User Property
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: taxonomy-user-properties.deleteuserproperty
+      with:
+        user_property: tools.user_property
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,100 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Dashboard REST API — Retention Analysis
+  description: 'Amplitude Dashboard REST API — Retention Analysis. 1 operations. Lead operation: Amplitude Get Retention Analysis.
+    Self-contained Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - Retention Analysis
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dashboard-rest-retention-analysis
+    baseUri: https://amplitude.com
+    description: Amplitude Dashboard REST API — Retention Analysis business capability. Self-contained, no shared references.
+    resources:
+    - name: api-2-retention
+      path: /api/2/retention
+      operations:
+      - name: getretentionanalysis
+        method: GET
+        description: Amplitude Get Retention Analysis
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: se
+          in: query
+          type: string
+          description: The starting event as a JSON-encoded object with event_type field.
+          required: true
+        - name: re
+          in: query
+          type: string
+          description: The returning event as a JSON-encoded object with event_type field.
+          required: true
+        - name: rm
+          in: query
+          type: string
+          description: Retention mode. Use bracket for N-day retention or rolling for unbounded retention.
+        - name: s
+          in: query
+          type: string
+          description: Segment definitions as a JSON-encoded array.
+    authentication:
+      type: basic
+      username: '{{env.AMPLITUDE_USER}}'
+      password: '{{env.AMPLITUDE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: dashboard-rest-retention-analysis-rest
+    port: 8080
+    description: REST adapter for Amplitude Dashboard REST API — Retention Analysis. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/2/retention
+      name: api-2-retention
+      description: REST surface for api-2-retention.
+      operations:
+      - method: GET
+        name: getretentionanalysis
+        description: Amplitude Get Retention Analysis
+        call: dashboard-rest-retention-analysis.getretentionanalysis
+        with:
+          se: rest.se
+          re: rest.re
+          rm: rest.rm
+          s: rest.s
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dashboard-rest-retention-analysis-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Dashboard REST API — Retention Analysis. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: amplitude-get-retention-analysis
+      description: Amplitude Get Retention Analysis
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dashboard-rest-retention-analysis.getretentionanalysis
+      with:
+        se: tools.se
+        re: tools.re
+        rm: tools.rm
+        s: tools.s
+      outputParameters:
+      - type: object
+        mapping: $.

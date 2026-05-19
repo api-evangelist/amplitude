@@ -1,0 +1,135 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amplitude Dashboard REST API — User Activity
+  description: 'Amplitude Dashboard REST API — User Activity. 2 operations. Lead operation: Amplitude Get User Activity. Self-contained
+    Naftiko capability covering one Amplitude business surface.'
+  tags:
+  - Amplitude
+  - User Activity
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMPLITUDE_API_KEY: AMPLITUDE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dashboard-rest-user-activity
+    baseUri: https://amplitude.com
+    description: Amplitude Dashboard REST API — User Activity business capability. Self-contained, no shared references.
+    resources:
+    - name: api-2-useractivity
+      path: /api/2/useractivity
+      operations:
+      - name: getuseractivity
+        method: GET
+        description: Amplitude Get User Activity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: The user_id to look up activity for.
+          required: true
+        - name: offset
+          in: query
+          type: integer
+          description: The offset for pagination. Default is 0.
+        - name: limit
+          in: query
+          type: integer
+          description: The number of events to return. Default is 1000.
+    - name: api-2-usersearch
+      path: /api/2/usersearch
+      operations:
+      - name: searchusers
+        method: GET
+        description: Amplitude Search Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user
+          in: query
+          type: string
+          description: The user_id, device_id, or Amplitude ID to search for.
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.AMPLITUDE_USER}}'
+      password: '{{env.AMPLITUDE_PASS}}'
+  exposes:
+  - type: rest
+    namespace: dashboard-rest-user-activity-rest
+    port: 8080
+    description: REST adapter for Amplitude Dashboard REST API — User Activity. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/2/useractivity
+      name: api-2-useractivity
+      description: REST surface for api-2-useractivity.
+      operations:
+      - method: GET
+        name: getuseractivity
+        description: Amplitude Get User Activity
+        call: dashboard-rest-user-activity.getuseractivity
+        with:
+          user: rest.user
+          offset: rest.offset
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/2/usersearch
+      name: api-2-usersearch
+      description: REST surface for api-2-usersearch.
+      operations:
+      - method: GET
+        name: searchusers
+        description: Amplitude Search Users
+        call: dashboard-rest-user-activity.searchusers
+        with:
+          user: rest.user
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dashboard-rest-user-activity-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amplitude Dashboard REST API — User Activity. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: amplitude-get-user-activity
+      description: Amplitude Get User Activity
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dashboard-rest-user-activity.getuseractivity
+      with:
+        user: tools.user
+        offset: tools.offset
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amplitude-search-users
+      description: Amplitude Search Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: dashboard-rest-user-activity.searchusers
+      with:
+        user: tools.user
+      outputParameters:
+      - type: object
+        mapping: $.
