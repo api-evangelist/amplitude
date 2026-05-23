@@ -1,0 +1,20 @@
+{
+  "operationId": "getUserActivity",
+  "method": "GET",
+  "path": "/api/2/useractivity",
+  "summary": "Amplitude Get User Activity",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getUserActivity200Example",
+      "example": {
+        "userData": {},
+        "events": [
+          {}
+        ]
+      }
+    }
+  ]
+}

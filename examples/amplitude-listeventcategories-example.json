@@ -1,0 +1,19 @@
+{
+  "operationId": "listEventCategories",
+  "method": "GET",
+  "path": "/api/2/taxonomy/category",
+  "summary": "Amplitude List All Event Categories",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listEventCategories200Example",
+      "example": {
+        "data": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

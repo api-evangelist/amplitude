@@ -1,0 +1,17 @@
+{
+  "operationId": "uploadCohort",
+  "method": "POST",
+  "path": "/api/3/cohorts/upload",
+  "summary": "Amplitude Upload a Cohort",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "uploadCohort200Example",
+      "example": {
+        "cohort_id": "500123"
+      }
+    }
+  ]
+}

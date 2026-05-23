@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserProperty",
+  "title": "UserProperty",
+  "type": "object",
+  "properties": {
+    "user_property": {
+      "type": "string",
+      "description": "The name of the user property."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the user property."
+    },
+    "type": {
+      "type": "string",
+      "description": "The data type of the property."
+    }
+  }
+}

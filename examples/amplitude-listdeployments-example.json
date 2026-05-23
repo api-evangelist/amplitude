@@ -1,0 +1,19 @@
+{
+  "operationId": "listDeployments",
+  "method": "GET",
+  "path": "/api/1/deployments",
+  "summary": "Amplitude List All Deployments",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listDeployments200Example",
+      "example": {
+        "deployments": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "operationId": "listVersions",
+  "method": "GET",
+  "path": "/api/1/versions",
+  "summary": "Amplitude List Flag and Experiment Versions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listVersions200Example",
+      "example": {
+        "versions": [
+          {
+            "id": {},
+            "flagId": {},
+            "version": {},
+            "createdAt": {},
+            "createdBy": {}
+          }
+        ],
+        "nextCursor": "example_value"
+      }
+    }
+  ]
+}

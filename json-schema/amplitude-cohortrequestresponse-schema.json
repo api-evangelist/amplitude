@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CohortRequestResponse",
+  "title": "CohortRequestResponse",
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "description": "The ID of the export request for polling status."
+    },
+    "cohort_id": {
+      "type": "string",
+      "description": "The ID of the cohort being exported."
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EvaluationResponse",
+  "title": "EvaluationResponse",
+  "type": "object",
+  "description": "A map of flag keys to variant objects representing the evaluated variant assignments for the user.",
+  "additionalProperties": {
+    "$ref": "#/components/schemas/Variant"
+  }
+}

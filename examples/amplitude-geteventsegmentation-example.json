@@ -1,0 +1,27 @@
+{
+  "operationId": "getEventSegmentation",
+  "method": "GET",
+  "path": "/api/2/events/segmentation",
+  "summary": "Amplitude Get Event Segmentation",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getEventSegmentation200Example",
+      "example": {
+        "data": {
+          "series": [
+            {}
+          ],
+          "seriesLabels": [
+            {}
+          ],
+          "xValues": [
+            {}
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "operationId": "getFunnelAnalysis",
+  "method": "GET",
+  "path": "/api/2/funnels",
+  "summary": "Amplitude Get Funnel Analysis",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getFunnelAnalysis200Example",
+      "example": {
+        "data": {}
+      }
+    }
+  ]
+}

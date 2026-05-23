@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScimGroupRequest",
+  "title": "ScimGroupRequest",
+  "type": "object",
+  "required": [
+    "schemas",
+    "displayName"
+  ],
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The SCIM schema URIs."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the group."
+    },
+    "members": {
+      "type": "array",
+      "description": "Array of initial group members.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The member user ID."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/EvaluationRequest",
+  "title": "EvaluationRequest",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "The user ID to evaluate experiments and flags for."
+    },
+    "device_id": {
+      "type": "string",
+      "description": "The device ID to evaluate experiments and flags for."
+    },
+    "user_properties": {
+      "type": "object",
+      "description": "User properties to use for targeting rule evaluation.",
+      "additionalProperties": true
+    },
+    "groups": {
+      "type": "object",
+      "description": "Group type to group name mappings for group-level targeting.",
+      "additionalProperties": true
+    },
+    "group_properties": {
+      "type": "object",
+      "description": "Group properties to use for targeting rule evaluation.",
+      "additionalProperties": true
+    }
+  }
+}

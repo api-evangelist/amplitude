@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FlagListResponse",
+  "title": "FlagListResponse",
+  "type": "object",
+  "properties": {
+    "flags": {
+      "type": "array",
+      "description": "Array of feature flag objects.",
+      "items": {
+        "$ref": "#/components/schemas/Flag"
+      }
+    },
+    "nextCursor": {
+      "type": "string",
+      "description": "A cursor for fetching the next page of results."
+    }
+  }
+}

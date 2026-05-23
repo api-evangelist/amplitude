@@ -1,0 +1,15 @@
+{
+  "operationId": "downloadCohortExport",
+  "method": "GET",
+  "path": "/api/5/cohorts/request/{cohort_id}/file",
+  "summary": "Amplitude Download Cohort Export File",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "downloadCohortExport200Example",
+      "example": {}
+    }
+  ]
+}

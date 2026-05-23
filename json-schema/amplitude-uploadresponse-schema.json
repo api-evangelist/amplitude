@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UploadResponse",
+  "title": "UploadResponse",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "The HTTP status code of the response.",
+      "example": 200
+    },
+    "events_ingested": {
+      "type": "integer",
+      "description": "The number of events successfully ingested."
+    },
+    "payload_size_bytes": {
+      "type": "integer",
+      "description": "The size of the request payload in bytes."
+    },
+    "server_upload_time": {
+      "type": "integer",
+      "format": "int64",
+      "description": "The time the server received the upload in milliseconds since epoch."
+    }
+  }
+}

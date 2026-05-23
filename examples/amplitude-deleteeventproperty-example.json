@@ -1,0 +1,17 @@
+{
+  "operationId": "deleteEventProperty",
+  "method": "DELETE",
+  "path": "/api/2/taxonomy/event-property/{event_property}",
+  "summary": "Amplitude Delete an Event Property",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "deleteEventProperty200Example",
+      "example": {
+        "success": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateExperimentRequest",
+  "title": "CreateExperimentRequest",
+  "type": "object",
+  "required": [
+    "key"
+  ],
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The unique key for the experiment."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the experiment."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the experiment."
+    },
+    "variants": {
+      "type": "array",
+      "description": "Array of variant configurations.",
+      "items": {
+        "$ref": "#/components/schemas/VariantConfig"
+      }
+    },
+    "bucketingKey": {
+      "type": "string",
+      "description": "The property used for bucketing."
+    }
+  }
+}

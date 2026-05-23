@@ -1,0 +1,22 @@
+{
+  "operationId": "searchUsers",
+  "method": "GET",
+  "path": "/api/2/usersearch",
+  "summary": "Amplitude Search Users",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "searchUsers200Example",
+      "example": {
+        "matches": [
+          {
+            "user_id": {},
+            "amplitude_id": {}
+          }
+        ]
+      }
+    }
+  ]
+}

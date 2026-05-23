@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UploadOptions",
+  "title": "UploadOptions",
+  "type": "object",
+  "properties": {
+    "min_id_length": {
+      "type": "integer",
+      "description": "Minimum length for user_id and device_id fields. Default is 5.",
+      "minimum": 1
+    }
+  }
+}

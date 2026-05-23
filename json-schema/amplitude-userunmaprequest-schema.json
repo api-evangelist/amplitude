@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserUnmapRequest",
+  "title": "UserUnmapRequest",
+  "type": "object",
+  "required": [
+    "mapping"
+  ],
+  "properties": {
+    "mapping": {
+      "type": "array",
+      "description": "An array of user mapping objects to reverse.",
+      "items": {
+        "$ref": "#/components/schemas/UserMapping"
+      }
+    }
+  }
+}

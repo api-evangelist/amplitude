@@ -1,0 +1,22 @@
+{
+  "operationId": "listEventTypes",
+  "method": "GET",
+  "path": "/api/2/events/list",
+  "summary": "Amplitude List Event Types",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listEventTypes200Example",
+      "example": {
+        "data": [
+          {
+            "name": {},
+            "totals": {}
+          }
+        ]
+      }
+    }
+  ]
+}

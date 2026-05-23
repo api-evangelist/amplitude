@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VersionListResponse",
+  "title": "VersionListResponse",
+  "type": "object",
+  "properties": {
+    "versions": {
+      "type": "array",
+      "description": "Array of version records.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The version record ID."
+          },
+          "flagId": {
+            "type": "string",
+            "description": "The flag or experiment ID."
+          },
+          "version": {
+            "type": "integer",
+            "description": "The version number."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the version was created."
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "The user who created this version."
+          }
+        }
+      }
+    },
+    "nextCursor": {
+      "type": "string",
+      "description": "A cursor for fetching the next page."
+    }
+  }
+}

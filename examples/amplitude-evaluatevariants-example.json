@@ -1,0 +1,15 @@
+{
+  "operationId": "evaluateVariants",
+  "method": "POST",
+  "path": "/v1/vardata",
+  "summary": "Amplitude Evaluate Variants for a User",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "evaluateVariants200Example",
+      "example": {}
+    }
+  ]
+}

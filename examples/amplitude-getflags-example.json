@@ -1,0 +1,17 @@
+{
+  "operationId": "getFlags",
+  "method": "GET",
+  "path": "/v1/flags",
+  "summary": "Amplitude Get Flag Configurations",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getFlags200Example",
+      "example": [
+        "example_value"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UploadRequestBody",
+  "title": "UploadRequestBody",
+  "type": "object",
+  "required": [
+    "api_key",
+    "events"
+  ],
+  "properties": {
+    "api_key": {
+      "type": "string",
+      "description": "The API key for the Amplitude project to which events will be sent."
+    },
+    "events": {
+      "type": "array",
+      "description": "An array of event objects to upload. Maximum of 10 events per batch is recommended.",
+      "maxItems": 2000,
+      "items": {
+        "$ref": "#/components/schemas/Event"
+      }
+    },
+    "options": {
+      "$ref": "#/components/schemas/UploadOptions"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CohortListResponse",
+  "title": "CohortListResponse",
+  "type": "object",
+  "properties": {
+    "cohorts": {
+      "type": "array",
+      "description": "Array of cohort metadata objects.",
+      "items": {
+        "$ref": "#/components/schemas/Cohort"
+      }
+    }
+  }
+}

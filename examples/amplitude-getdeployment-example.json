@@ -1,0 +1,21 @@
+{
+  "operationId": "getDeployment",
+  "method": "GET",
+  "path": "/api/1/deployments/{id}",
+  "summary": "Amplitude Get a Deployment",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getDeployment200Example",
+      "example": {
+        "id": "500123",
+        "projectId": "500123",
+        "label": "example_value",
+        "key": "example_value",
+        "deleted": true
+      }
+    }
+  ]
+}

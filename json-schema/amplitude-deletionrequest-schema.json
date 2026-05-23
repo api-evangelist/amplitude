@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DeletionRequest",
+  "title": "DeletionRequest",
+  "type": "object",
+  "properties": {
+    "amplitude_ids": {
+      "type": "array",
+      "description": "Array of Amplitude internal user IDs to delete data for. Maximum 100 per request.",
+      "maxItems": 100,
+      "items": {
+        "type": "integer",
+        "format": "int64"
+      }
+    },
+    "user_ids": {
+      "type": "array",
+      "description": "Array of user IDs to delete data for. Maximum 100 per request.",
+      "maxItems": 100,
+      "items": {
+        "type": "string"
+      }
+    },
+    "requester": {
+      "type": "string",
+      "description": "The email address of the person requesting the deletion for audit purposes."
+    }
+  }
+}

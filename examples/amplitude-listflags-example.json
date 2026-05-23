@@ -1,0 +1,20 @@
+{
+  "operationId": "listFlags",
+  "method": "GET",
+  "path": "/api/1/flags",
+  "summary": "Amplitude List All Flags",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listFlags200Example",
+      "example": {
+        "flags": [
+          "example_value"
+        ],
+        "nextCursor": "example_value"
+      }
+    }
+  ]
+}

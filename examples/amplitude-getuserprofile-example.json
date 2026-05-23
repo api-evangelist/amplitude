@@ -1,0 +1,24 @@
+{
+  "operationId": "getUserProfile",
+  "method": "GET",
+  "path": "/v1/userprofile",
+  "summary": "Amplitude Get a User Profile",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getUserProfile200Example",
+      "example": {
+        "userData": {
+          "user_id": {},
+          "user_properties": {},
+          "computed_properties": {},
+          "cohort_ids": {},
+          "recommendations": {},
+          "amplitude_id": {}
+        }
+      }
+    }
+  ]
+}

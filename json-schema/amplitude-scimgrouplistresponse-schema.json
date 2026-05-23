@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ScimGroupListResponse",
+  "title": "ScimGroupListResponse",
+  "type": "object",
+  "properties": {
+    "schemas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The SCIM schema URIs for this response."
+    },
+    "totalResults": {
+      "type": "integer",
+      "description": "The total number of matching groups."
+    },
+    "Resources": {
+      "type": "array",
+      "description": "Array of SCIM group resources.",
+      "items": {
+        "$ref": "#/components/schemas/ScimGroup"
+      }
+    }
+  }
+}

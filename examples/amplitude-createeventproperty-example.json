@@ -1,0 +1,17 @@
+{
+  "operationId": "createEventProperty",
+  "method": "POST",
+  "path": "/api/2/taxonomy/event-property",
+  "summary": "Amplitude Create an Event Property",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "createEventProperty200Example",
+      "example": {
+        "success": true
+      }
+    }
+  ]
+}

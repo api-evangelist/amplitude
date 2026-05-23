@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DeletionResponse",
+  "title": "DeletionResponse",
+  "type": "object",
+  "properties": {
+    "day": {
+      "type": "string",
+      "format": "date",
+      "description": "The day the deletion job is scheduled for processing."
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the deletion request."
+    }
+  }
+}

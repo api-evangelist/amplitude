@@ -1,0 +1,17 @@
+{
+  "operationId": "updateEventProperty",
+  "method": "PUT",
+  "path": "/api/2/taxonomy/event-property/{event_property}",
+  "summary": "Amplitude Update an Event Property",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "updateEventProperty200Example",
+      "example": {
+        "success": true
+      }
+    }
+  ]
+}

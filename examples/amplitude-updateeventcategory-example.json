@@ -1,0 +1,17 @@
+{
+  "operationId": "updateEventCategory",
+  "method": "PUT",
+  "path": "/api/2/taxonomy/category/{category_id}",
+  "summary": "Amplitude Update an Event Category",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "updateEventCategory200Example",
+      "example": {
+        "success": true
+      }
+    }
+  ]
+}

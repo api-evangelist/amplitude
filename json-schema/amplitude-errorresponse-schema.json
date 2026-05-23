@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorResponse",
+  "title": "ErrorResponse",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "The HTTP status code of the error."
+    },
+    "error": {
+      "type": "string",
+      "description": "A human-readable error message describing the issue."
+    },
+    "missing_field": {
+      "type": "string",
+      "description": "The name of the required field that is missing, if applicable."
+    },
+    "events_with_invalid_fields": {
+      "type": "object",
+      "description": "A map of field names to arrays of event indices that had invalid values for those fields.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    },
+    "events_with_missing_fields": {
+      "type": "object",
+      "description": "A map of field names to arrays of event indices that were missing required fields.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

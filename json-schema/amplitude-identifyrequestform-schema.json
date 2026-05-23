@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IdentifyRequestForm",
+  "title": "IdentifyRequestForm",
+  "type": "object",
+  "required": [
+    "api_key",
+    "identification"
+  ],
+  "properties": {
+    "api_key": {
+      "type": "string",
+      "description": "The API key for the Amplitude project."
+    },
+    "identification": {
+      "type": "string",
+      "description": "A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties."
+    }
+  }
+}

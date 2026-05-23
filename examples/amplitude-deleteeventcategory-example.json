@@ -1,0 +1,17 @@
+{
+  "operationId": "deleteEventCategory",
+  "method": "DELETE",
+  "path": "/api/2/taxonomy/category/{category_id}",
+  "summary": "Amplitude Delete an Event Category",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "deleteEventCategory200Example",
+      "example": {
+        "success": true
+      }
+    }
+  ]
+}

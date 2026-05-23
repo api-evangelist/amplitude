@@ -1,0 +1,20 @@
+{
+  "operationId": "listExperiments",
+  "method": "GET",
+  "path": "/api/1/experiments",
+  "summary": "Amplitude List All Experiments",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listExperiments200Example",
+      "example": {
+        "experiments": [
+          "example_value"
+        ],
+        "nextCursor": "example_value"
+      }
+    }
+  ]
+}

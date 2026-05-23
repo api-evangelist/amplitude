@@ -1,0 +1,35 @@
+{
+  "operationId": "createFlag",
+  "method": "POST",
+  "path": "/api/1/flags",
+  "summary": "Amplitude Create a Flag",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "createFlag200Example",
+      "example": {
+        "id": "500123",
+        "projectId": "500123",
+        "key": "example_value",
+        "name": "Example Name",
+        "description": "Example description text",
+        "enabled": true,
+        "evaluationMode": "local",
+        "bucketingKey": "example_value",
+        "bucketingSalt": "example_value",
+        "variants": [
+          "example_value"
+        ],
+        "deployments": [
+          "example_value"
+        ],
+        "segments": [
+          "example_value"
+        ],
+        "state": "draft"
+      }
+    }
+  ]
+}

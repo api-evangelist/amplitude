@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Identification",
+  "title": "Identification",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "A readable ID specified by you. Required unless device_id is present."
+    },
+    "device_id": {
+      "type": "string",
+      "description": "A device-specific identifier. Required unless user_id is present."
+    },
+    "user_properties": {
+      "$ref": "#/components/schemas/UserPropertyOperations"
+    }
+  }
+}

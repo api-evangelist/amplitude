@@ -1,0 +1,24 @@
+{
+  "operationId": "listDeletionRequests",
+  "method": "GET",
+  "path": "/api/2/deletions/users",
+  "summary": "Amplitude List Deletion Requests",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listDeletionRequests200Example",
+      "example": {
+        "deletions": [
+          {
+            "day": {},
+            "status": {},
+            "amplitude_ids": {},
+            "user_ids": {}
+          }
+        ]
+      }
+    }
+  ]
+}

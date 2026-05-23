@@ -1,0 +1,32 @@
+{
+  "operationId": "uploadEvents",
+  "method": "POST",
+  "path": "/2/httpapi",
+  "summary": "Amplitude Upload Events",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "uploadEvents200Example",
+      "example": {
+        "code": 100,
+        "events_ingested": 100,
+        "payload_size_bytes": 100,
+        "server_upload_time": 1718153645993
+      }
+    },
+    {
+      "status": "400",
+      "contentType": "application/json",
+      "name": "uploadEvents400Example",
+      "example": {
+        "code": 100,
+        "error": "example_value",
+        "missing_field": "example_value",
+        "events_with_invalid_fields": {},
+        "events_with_missing_fields": {}
+      }
+    }
+  ]
+}

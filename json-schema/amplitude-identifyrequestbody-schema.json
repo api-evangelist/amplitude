@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IdentifyRequestBody",
+  "title": "IdentifyRequestBody",
+  "type": "object",
+  "required": [
+    "api_key",
+    "identification"
+  ],
+  "properties": {
+    "api_key": {
+      "type": "string",
+      "description": "The API key for the Amplitude project."
+    },
+    "identification": {
+      "type": "array",
+      "description": "An array of identification objects containing user_id or device_id and user_properties.",
+      "items": {
+        "$ref": "#/components/schemas/Identification"
+      }
+    }
+  }
+}

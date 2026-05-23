@@ -1,0 +1,19 @@
+{
+  "operationId": "listAnnotations",
+  "method": "GET",
+  "path": "/api/3/annotations",
+  "summary": "Amplitude List All Annotations",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listAnnotations200Example",
+      "example": {
+        "data": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

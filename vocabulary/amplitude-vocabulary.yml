@@ -1,0 +1,13 @@
+name: Amplitude Domain Vocabulary
+provider: Amplitude
+providerId: amplitude
+description: Tag-derived vocabulary for the Amplitude API surface; sourced from openapi/ tags.
+terms:
+- term: Event Categories
+  description: Operations for managing event categories
+- term: Event Properties
+  description: Operations for managing event properties
+- term: Event Types
+  description: Operations for managing event types
+- term: User Properties
+  description: Operations for managing user properties

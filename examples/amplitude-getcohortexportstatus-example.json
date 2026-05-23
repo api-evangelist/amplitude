@@ -1,0 +1,18 @@
+{
+  "operationId": "getCohortExportStatus",
+  "method": "GET",
+  "path": "/api/5/cohorts/request/{cohort_id}/status",
+  "summary": "Amplitude Get Cohort Export Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getCohortExportStatus200Example",
+      "example": {
+        "request_id": "500123",
+        "status": "queued"
+      }
+    }
+  ]
+}

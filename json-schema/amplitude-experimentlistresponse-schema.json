@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ExperimentListResponse",
+  "title": "ExperimentListResponse",
+  "type": "object",
+  "properties": {
+    "experiments": {
+      "type": "array",
+      "description": "Array of experiment objects.",
+      "items": {
+        "$ref": "#/components/schemas/Experiment"
+      }
+    },
+    "nextCursor": {
+      "type": "string",
+      "description": "A cursor for fetching the next page."
+    }
+  }
+}

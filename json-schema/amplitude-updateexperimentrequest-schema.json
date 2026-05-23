@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateExperimentRequest",
+  "title": "UpdateExperimentRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The updated display name."
+    },
+    "description": {
+      "type": "string",
+      "description": "The updated description."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether the experiment should be enabled."
+    },
+    "variants": {
+      "type": "array",
+      "description": "Updated variant configurations.",
+      "items": {
+        "$ref": "#/components/schemas/VariantConfig"
+      }
+    },
+    "segments": {
+      "type": "array",
+      "description": "Updated targeting segments.",
+      "items": {
+        "$ref": "#/components/schemas/Segment"
+      }
+    }
+  }
+}

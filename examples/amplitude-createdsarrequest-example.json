@@ -1,0 +1,18 @@
+{
+  "operationId": "createDsarRequest",
+  "method": "POST",
+  "path": "/api/2/dsar/requests",
+  "summary": "Amplitude Create a Data Subject Access Request",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "createDsarRequest200Example",
+      "example": {
+        "request_id": "500123",
+        "status": "active"
+      }
+    }
+  ]
+}

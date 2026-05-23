@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CohortUploadResponse",
+  "title": "CohortUploadResponse",
+  "type": "object",
+  "properties": {
+    "cohort_id": {
+      "type": "string",
+      "description": "The ID of the created or updated cohort."
+    }
+  }
+}

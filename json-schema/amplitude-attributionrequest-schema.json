@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AttributionRequest",
+  "title": "AttributionRequest",
+  "type": "object",
+  "required": [
+    "api_key",
+    "event"
+  ],
+  "properties": {
+    "api_key": {
+      "type": "string",
+      "description": "The API key for the Amplitude project."
+    },
+    "event": {
+      "$ref": "#/components/schemas/AttributionEvent"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "operationId": "sendAttribution",
+  "method": "POST",
+  "path": "/attribution",
+  "summary": "Amplitude Send Attribution Data",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "sendAttribution200Example",
+      "example": {
+        "code": 100,
+        "events_ingested": 100,
+        "server_upload_time": 1718153645993
+      }
+    }
+  ]
+}

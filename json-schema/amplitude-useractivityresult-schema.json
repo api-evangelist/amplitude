@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UserActivityResult",
+  "title": "UserActivityResult",
+  "type": "object",
+  "properties": {
+    "userData": {
+      "type": "object",
+      "description": "User metadata including user_id and Amplitude ID."
+    },
+    "events": {
+      "type": "array",
+      "description": "Array of recent events for the user.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  }
+}

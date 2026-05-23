@@ -1,0 +1,22 @@
+{
+  "operationId": "getEventType",
+  "method": "GET",
+  "path": "/api/2/taxonomy/event/{event_type}",
+  "summary": "Amplitude Get an Event Type",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getEventType200Example",
+      "example": {
+        "event_type": "standard",
+        "category": {
+          "id": {},
+          "name": {}
+        },
+        "description": "Example description text"
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "operationId": "requestCohortExport",
+  "method": "GET",
+  "path": "/api/5/cohorts/request/{cohort_id}",
+  "summary": "Amplitude Request a Cohort Export",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "requestCohortExport200Example",
+      "example": {
+        "request_id": "500123",
+        "cohort_id": "500123"
+      }
+    }
+  ]
+}

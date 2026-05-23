@@ -1,0 +1,17 @@
+{
+  "operationId": "getRevenueLTV",
+  "method": "GET",
+  "path": "/api/2/revenue/day",
+  "summary": "Amplitude Get Revenue LTV Data",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getRevenueLTV200Example",
+      "example": {
+        "data": {}
+      }
+    }
+  ]
+}

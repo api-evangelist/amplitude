@@ -1,0 +1,38 @@
+{
+  "operationId": "getExperiment",
+  "method": "GET",
+  "path": "/api/1/experiments/{id}",
+  "summary": "Amplitude Get an Experiment",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getExperiment200Example",
+      "example": {
+        "id": "500123",
+        "projectId": "500123",
+        "key": "example_value",
+        "name": "Example Name",
+        "description": "Example description text",
+        "enabled": true,
+        "evaluationMode": "local",
+        "bucketingKey": "example_value",
+        "bucketingSalt": "example_value",
+        "variants": [
+          "example_value"
+        ],
+        "deployments": [
+          "example_value"
+        ],
+        "segments": [
+          "example_value"
+        ],
+        "state": "draft",
+        "rolledOutVariant": "example_value",
+        "startDate": "2025-03-15T14:30:00Z",
+        "endDate": "2025-03-15T14:30:00Z"
+      }
+    }
+  ]
+}

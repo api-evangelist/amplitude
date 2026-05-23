@@ -1,0 +1,17 @@
+{
+  "operationId": "updateUserProperty",
+  "method": "PUT",
+  "path": "/api/2/taxonomy/user-property/{user_property}",
+  "summary": "Amplitude Update a User Property",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "updateUserProperty200Example",
+      "example": {
+        "success": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "operationId": "deleteEventType",
+  "method": "DELETE",
+  "path": "/api/2/taxonomy/event/{event_type}",
+  "summary": "Amplitude Delete an Event Type",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "deleteEventType200Example",
+      "example": {
+        "success": true
+      }
+    }
+  ]
+}

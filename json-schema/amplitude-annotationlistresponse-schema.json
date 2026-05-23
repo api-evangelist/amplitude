@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AnnotationListResponse",
+  "title": "AnnotationListResponse",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "Array of annotation objects.",
+      "items": {
+        "$ref": "#/components/schemas/Annotation"
+      }
+    }
+  }
+}

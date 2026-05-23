@@ -1,0 +1,18 @@
+{
+  "operationId": "mapUser",
+  "method": "POST",
+  "path": "/api/2/usermap",
+  "summary": "Amplitude Map User Identities",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "mapUser200Example",
+      "example": {
+        "code": 100,
+        "success": true
+      }
+    }
+  ]
+}

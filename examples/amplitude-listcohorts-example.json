@@ -1,0 +1,19 @@
+{
+  "operationId": "listCohorts",
+  "method": "GET",
+  "path": "/api/3/cohorts",
+  "summary": "Amplitude List All Cohorts",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listCohorts200Example",
+      "example": {
+        "cohorts": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

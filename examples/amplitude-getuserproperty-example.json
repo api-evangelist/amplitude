@@ -1,0 +1,19 @@
+{
+  "operationId": "getUserProperty",
+  "method": "GET",
+  "path": "/api/2/taxonomy/user-property/{user_property}",
+  "summary": "Amplitude Get a User Property",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getUserProperty200Example",
+      "example": {
+        "user_property": "example_value",
+        "description": "Example description text",
+        "type": "standard"
+      }
+    }
+  ]
+}

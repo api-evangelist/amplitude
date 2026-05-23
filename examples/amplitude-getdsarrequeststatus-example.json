@@ -1,0 +1,19 @@
+{
+  "operationId": "getDsarRequestStatus",
+  "method": "GET",
+  "path": "/api/2/dsar/requests/{request_id}",
+  "summary": "Amplitude Get DSAR Request Status",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getDsarRequestStatus200Example",
+      "example": {
+        "request_id": "500123",
+        "status": "pending",
+        "download_url": "https://example.com/path"
+      }
+    }
+  ]
+}

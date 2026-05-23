@@ -1,0 +1,19 @@
+{
+  "operationId": "listEventProperties",
+  "method": "GET",
+  "path": "/api/2/taxonomy/event-property",
+  "summary": "Amplitude List All Event Properties",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listEventProperties200Example",
+      "example": {
+        "data": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

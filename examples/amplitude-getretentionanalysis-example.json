@@ -1,0 +1,17 @@
+{
+  "operationId": "getRetentionAnalysis",
+  "method": "GET",
+  "path": "/api/2/retention",
+  "summary": "Amplitude Get Retention Analysis",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getRetentionAnalysis200Example",
+      "example": {
+        "data": {}
+      }
+    }
+  ]
+}

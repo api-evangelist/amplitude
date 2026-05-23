@@ -1,0 +1,18 @@
+{
+  "operationId": "unmapUser",
+  "method": "POST",
+  "path": "/api/2/userunmap",
+  "summary": "Amplitude Unmap User Identities",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "unmapUser200Example",
+      "example": {
+        "code": 100,
+        "success": true
+      }
+    }
+  ]
+}

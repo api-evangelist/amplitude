@@ -1,0 +1,19 @@
+{
+  "operationId": "listUserProperties",
+  "method": "GET",
+  "path": "/api/2/taxonomy/user-property",
+  "summary": "Amplitude List All User Properties",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "listUserProperties200Example",
+      "example": {
+        "data": [
+          "example_value"
+        ]
+      }
+    }
+  ]
+}

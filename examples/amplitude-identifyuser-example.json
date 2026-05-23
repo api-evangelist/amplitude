@@ -1,0 +1,19 @@
+{
+  "operationId": "identifyUser",
+  "method": "POST",
+  "path": "/identify",
+  "summary": "Amplitude Identify a User",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "identifyUser200Example",
+      "example": {
+        "code": 100,
+        "server_upload_time": 1718153645993,
+        "events_ingested": 100
+      }
+    }
+  ]
+}

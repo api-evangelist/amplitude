@@ -1,0 +1,246 @@
+{
+  "provider": "Amplitude",
+  "providerId": "amplitude",
+  "kind": "json-structure",
+  "description": "Structural overview of the Amplitude API surface; extracted from openapi/.",
+  "schemaCount": 9,
+  "operationCount": 20,
+  "schemas": [
+    {
+      "name": "SuccessResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "CategoryListResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Category",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "EventTypeListResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "EventType",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "EventPropertyListResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "EventProperty",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "UserPropertyListResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "UserProperty",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/2/taxonomy/category",
+      "operationId": "listEventCategories",
+      "summary": "Amplitude List All Event Categories",
+      "tags": [
+        "Event Categories"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/2/taxonomy/category",
+      "operationId": "createEventCategory",
+      "summary": "Amplitude Create an Event Category",
+      "tags": [
+        "Event Categories"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/2/taxonomy/category/{category_id}",
+      "operationId": "getEventCategory",
+      "summary": "Amplitude Get an Event Category",
+      "tags": [
+        "Event Categories"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/2/taxonomy/category/{category_id}",
+      "operationId": "updateEventCategory",
+      "summary": "Amplitude Update an Event Category",
+      "tags": [
+        "Event Categories"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/2/taxonomy/category/{category_id}",
+      "operationId": "deleteEventCategory",
+      "summary": "Amplitude Delete an Event Category",
+      "tags": [
+        "Event Categories"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/2/taxonomy/event",
+      "operationId": "listEventTypes",
+      "summary": "Amplitude List All Event Types",
+      "tags": [
+        "Event Types"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/2/taxonomy/event",
+      "operationId": "createEventType",
+      "summary": "Amplitude Create an Event Type",
+      "tags": [
+        "Event Types"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/2/taxonomy/event/{event_type}",
+      "operationId": "getEventType",
+      "summary": "Amplitude Get an Event Type",
+      "tags": [
+        "Event Types"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/2/taxonomy/event/{event_type}",
+      "operationId": "updateEventType",
+      "summary": "Amplitude Update an Event Type",
+      "tags": [
+        "Event Types"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/2/taxonomy/event/{event_type}",
+      "operationId": "deleteEventType",
+      "summary": "Amplitude Delete an Event Type",
+      "tags": [
+        "Event Types"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/2/taxonomy/event-property",
+      "operationId": "listEventProperties",
+      "summary": "Amplitude List All Event Properties",
+      "tags": [
+        "Event Properties"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/2/taxonomy/event-property",
+      "operationId": "createEventProperty",
+      "summary": "Amplitude Create an Event Property",
+      "tags": [
+        "Event Properties"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/2/taxonomy/event-property/{event_property}",
+      "operationId": "getEventProperty",
+      "summary": "Amplitude Get an Event Property",
+      "tags": [
+        "Event Properties"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/2/taxonomy/event-property/{event_property}",
+      "operationId": "updateEventProperty",
+      "summary": "Amplitude Update an Event Property",
+      "tags": [
+        "Event Properties"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/2/taxonomy/event-property/{event_property}",
+      "operationId": "deleteEventProperty",
+      "summary": "Amplitude Delete an Event Property",
+      "tags": [
+        "Event Properties"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/2/taxonomy/user-property",
+      "operationId": "listUserProperties",
+      "summary": "Amplitude List All User Properties",
+      "tags": [
+        "User Properties"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/2/taxonomy/user-property",
+      "operationId": "createUserProperty",
+      "summary": "Amplitude Create a User Property",
+      "tags": [
+        "User Properties"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/2/taxonomy/user-property/{user_property}",
+      "operationId": "getUserProperty",
+      "summary": "Amplitude Get a User Property",
+      "tags": [
+        "User Properties"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/2/taxonomy/user-property/{user_property}",
+      "operationId": "updateUserProperty",
+      "summary": "Amplitude Update a User Property",
+      "tags": [
+        "User Properties"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/2/taxonomy/user-property/{user_property}",
+      "operationId": "deleteUserProperty",
+      "summary": "Amplitude Delete a User Property",
+      "tags": [
+        "User Properties"
+      ]
+    }
+  ]
+}

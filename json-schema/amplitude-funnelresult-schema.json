@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FunnelResult",
+  "title": "FunnelResult",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Funnel conversion data including step-by-step drop-off rates."
+    }
+  }
+}

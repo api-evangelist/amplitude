@@ -1,0 +1,35 @@
+{
+  "operationId": "getFlag",
+  "method": "GET",
+  "path": "/api/1/flags/{id}",
+  "summary": "Amplitude Get a Flag",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "getFlag200Example",
+      "example": {
+        "id": "500123",
+        "projectId": "500123",
+        "key": "example_value",
+        "name": "Example Name",
+        "description": "Example description text",
+        "enabled": true,
+        "evaluationMode": "local",
+        "bucketingKey": "example_value",
+        "bucketingSalt": "example_value",
+        "variants": [
+          "example_value"
+        ],
+        "deployments": [
+          "example_value"
+        ],
+        "segments": [
+          "example_value"
+        ],
+        "state": "draft"
+      }
+    }
+  ]
+}
