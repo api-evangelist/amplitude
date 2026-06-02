@@ -1,6 +1,6 @@
 aid: amplitude
 url: https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/apis.yml
-modified: '2026-05-19'
+modified: '2026-05-30'
 name: Amplitude
 description: Amplitude is a digital analytics platform that helps product teams understand user behavior, run experiments,
   and drive growth. It provides a suite of APIs for event ingestion, user management, cohort syncing, taxonomy governance,
@@ -418,6 +418,31 @@ apis:
     supports creating, updating, activating, and archiving experiments and flags, as well as managing deployments, variants,
     holdout groups, and mutual exclusion groups. This API enables teams to integrate experiment lifecycle management into
     their CI/CD pipelines, automate flag rollouts, and manage experimentation workflows without using the Amplitude UI.
+- aid: amplitude:webhooks-cohort-sync
+  name: Amplitude Webhooks and Cohort Sync
+  tags:
+  - Cohort Sync
+  - Destinations
+  - Events
+  - Streaming
+  - Webhooks
+  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://amplitude.com/docs/data/destination-catalog/webhooks
+  properties:
+  - url: https://amplitude.com/docs/data/destination-catalog/webhooks
+    type: Documentation
+  - url: https://amplitude.com/docs/data/destinations/syncs
+    type: Documentation
+  - url: https://amplitude.com/docs/data/destinations
+    type: Documentation
+  - url: asyncapi/amplitude-webhooks-cohort-sync-asyncapi.yml
+    type: AsyncAPI
+  description: The Webhooks Streaming destination forwards Amplitude event and user payloads to a customer-configured HTTPS
+    endpoint, and the Cohort Sync family of destinations pushes cohort membership changes to downstream tools such as Iterable,
+    Braze, MoEngage, Customer.io, Intercom, HubSpot, Google Ads, Bing Ads, Google Pub/Sub, Amazon Kinesis, and Amazon S3.
+    Sync types include on-demand, automated (hourly or daily), and real-time (per-minute) modes. This AsyncAPI document models
+    the subscriber-side HTTP contract for Webhooks Streaming and the generic cohort membership change shape; vendor-specific
+    cohort sync destinations conform to each downstream tool's own API contract.
 common:
 - type: LinkedIn
   url: https://www.linkedin.com/company/amplitude-analytics

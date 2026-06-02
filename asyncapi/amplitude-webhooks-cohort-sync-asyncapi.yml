@@ -1,0 +1,503 @@
+asyncapi: 2.6.0
+info:
+  title: Amplitude Webhooks and Cohort Sync
+  version: '1.0.0'
+  description: |-
+    AsyncAPI description of two outbound, push-style surfaces offered by
+    Amplitude's Data destination catalog:
+
+      1. Webhooks Streaming destination - a generic event/user forwarding
+         destination that delivers Amplitude event and user payloads to a
+         customer-configured HTTPS URL.
+      2. Cohort Sync destinations - the family of pre-built destinations
+         that push cohort membership (and, where supported, user
+         properties, computations, and predictions) to downstream tools
+         such as Iterable, Braze, MoEngage, Customer.io, Intercom,
+         HubSpot, Google Ads, Bing Ads, Google Pub/Sub, Amazon Kinesis,
+         and Amazon S3.
+
+    This document models the integration contract on the *subscriber*
+    side: HTTP POST callbacks that Amplitude initiates against the
+    receiving system. The contract for individual pre-built cohort sync
+    destinations (Iterable, Braze, etc.) is defined by those vendors;
+    only the generic Webhooks Streaming and Google Pub/Sub destinations
+    expose a publicly documented HTTP/JSON shape that can be modelled in
+    AsyncAPI. Where vendor-specific schemas apply, the catalog entry is
+    enumerated in `info.x-cohort-sync-destinations` for discovery and
+    the message shape is left to that vendor's own contract.
+
+    Sync types (per Amplitude's Syncs documentation):
+      - on-demand: one-time export, typically used for campaign testing
+      - automated: hourly or daily scheduled membership refresh
+      - real-time: incremental updates every minute as users enter or
+        exit the cohort; cohort membership only (no computations,
+        properties, or predictions); not supported by ad platforms or
+        S3 destinations
+
+    Source documentation:
+      - APIs index:               https://amplitude.com/docs/apis
+      - Webhooks Streaming dest:  https://amplitude.com/docs/data/destination-catalog/webhooks
+      - Destinations catalog:     https://amplitude.com/docs/data/destinations
+      - Syncs overview:           https://amplitude.com/docs/data/destinations/syncs
+      - Event format reference:   https://amplitude.com/docs/apis/analytics/export
+      - User format reference:    https://amplitude.com/docs/apis/analytics/identify
+      - Behavioral Cohorts API:   https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+
+    Notes on scope:
+      - Notification webhooks for chart/dashboard alerts are mentioned by
+        Amplitude integrations marketing but are not described by a
+        publicly documented payload schema at the URLs surveyed for this
+        spec, so they are not modelled here. The Slack integration is
+        documented as the supported channel for automated alerts.
+      - Data warehouse exports to Amazon S3 and Snowflake are pull/load
+        flows, not subscriber HTTP callbacks, so they are out of scope
+        for this AsyncAPI document. They remain modelled as REST in the
+        Export API OpenAPI spec.
+
+  x-cohort-sync-destinations:
+    description: |-
+      Destinations that Amplitude lists as supporting Cohort Sync in
+      the public destination catalog. Each entry is a pre-built
+      integration; the destination's own API contract governs the
+      payload shape Amplitude delivers. Listed here for discovery, not
+      modelled with a message schema in this document.
+    source: https://amplitude.com/docs/data/destinations
+    items:
+      - name: Braze
+        category: Customer Engagement
+      - name: Customer.io
+        category: Customer Engagement
+      - name: HubSpot
+        category: Sales
+      - name: Iterable
+        category: Marketing Automation
+      - name: Mailchimp
+        category: Marketing Automation
+      - name: Marketo Static List
+        category: Marketing Automation
+      - name: MoEngage
+        category: Customer Engagement
+      - name: Notifly
+        category: Customer Engagement
+      - name: Salesforce Marketing Cloud
+        category: Marketing Automation
+      - name: Userlist
+        category: Customer Engagement
+      - name: Bing Ads
+        category: Ad Networks
+      - name: Google Ads
+        category: Ad Networks
+      - name: Bento
+        category: Customer Engagement
+      - name: Candu
+        category: Customer Engagement
+      - name: Clevertap
+        category: Customer Engagement
+      - name: Google Pub/Sub
+        category: Messaging
+      - name: Intercom
+        category: Customer Engagement
+      - name: Plotline
+        category: Customer Engagement
+      - name: Pushwoosh
+        category: Messaging
+      - name: Voxie
+        category: Messaging
+      - name: Amazon Kinesis
+        category: Storage
+      - name: Appsflyer
+        category: Attribution
+      - name: Liveramp
+        category: Other
+      - name: Refiner
+        category: Qualitative Feedback
+      - name: Amazon S3
+        category: Storage
+      - name: Statsig
+        category: Experimentation
+
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/support
+  license:
+    name: Amplitude Terms of Service
+    url: https://amplitude.com/terms
+
+defaultContentType: application/json
+
+servers:
+  subscriber:
+    url: '{webhookUrl}'
+    protocol: https
+    description: |-
+      Customer-hosted HTTPS endpoint that receives POSTs from the
+      Amplitude Webhooks Streaming destination. The URL is configured
+      per destination instance in the Amplitude Data UI.
+    variables:
+      webhookUrl:
+        default: https://example.com/amplitude/webhook
+        description: Fully qualified HTTPS URL of the subscriber endpoint.
+    security:
+      - customHeader: []
+
+channels:
+  /webhooks/streaming:
+    description: |-
+      The Webhooks Streaming destination. Amplitude POSTs one JSON
+      payload per HTTP request to the configured webhook URL. The
+      destination can be configured to forward event payloads, user
+      payloads, or both; subscribers receive one of two message shapes,
+      discriminated by the presence of `event_type` (event payload) vs.
+      absence of `event_type` with a user identity present (user
+      payload). Payloads may also be transformed by a FreeMarker
+      template configured in the destination, in which case the
+      delivered shape is template-defined rather than the defaults
+      documented here.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: receiveAmplitudeWebhook
+      summary: Receive an Amplitude Webhooks Streaming payload.
+      description: |-
+        Amplitude POSTs the payload with `Content-Type: application/json`
+        and `User-Agent: Amplitude/Webhook/1.0`. Up to five additional
+        custom headers may be configured on the destination (commonly
+        used to carry a bearer token or shared secret for subscriber
+        authentication). On failure, Amplitude makes nine additional
+        attempts over four hours. For 5xx responses and HTTP 429
+        throttling, Amplitude additionally performs up to three
+        immediate retries with exponential backoff (initial wait
+        100 ms, doubling, 50% jitter, capped at four seconds). This
+        destination does not support transformed events.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/WebhookEvent'
+          - $ref: '#/components/messages/WebhookUser'
+
+  /cohort-sync/google-pubsub:
+    description: |-
+      Cohort Sync destination targeting Google Cloud Pub/Sub. Amplitude
+      publishes cohort membership change messages to a customer-owned
+      Pub/Sub topic. This is the one Cohort Sync destination in the
+      catalog whose transport (Pub/Sub) is generic enough to express as
+      an AsyncAPI subscriber channel; vendor-specific Cohort Sync
+      destinations (Iterable, Braze, MoEngage, etc.) deliver payloads
+      shaped to each vendor's own API and are listed in
+      `info.x-cohort-sync-destinations` rather than channelised here.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: receiveCohortMembershipChange
+      summary: Receive a cohort membership change message.
+      description: |-
+        Sent when a user is added to or removed from a cohort. For
+        real-time syncs, Amplitude streams these messages roughly once
+        per minute. For automated syncs, batched membership changes are
+        emitted on the configured hourly or daily cadence. The exact
+        Pub/Sub envelope is governed by Google Pub/Sub; the application
+        payload shape modelled here mirrors the per-user row Amplitude
+        exposes in the CSV sync log (Amplitude ID, operation,
+        mapped user properties, skip reason).
+      message:
+        $ref: '#/components/messages/CohortMembershipChange'
+
+components:
+  securitySchemes:
+    customHeader:
+      type: httpApiKey
+      description: |-
+        Subscriber-defined static credential. The Webhooks Streaming
+        destination allows up to five custom HTTP headers to be
+        configured alongside the preset `Content-Type` and `User-Agent`
+        headers. Subscribers typically configure a header such as
+        `Authorization: Bearer <token>` or `X-Webhook-Secret: <secret>`
+        and verify it on receipt. Amplitude does not document an HMAC
+        signature header for this destination.
+      name: Authorization
+      in: header
+
+  messages:
+    WebhookEvent:
+      name: WebhookEvent
+      title: Event payload
+      summary: Default Amplitude event payload forwarded by the Webhooks Streaming destination.
+      description: |-
+        Sent when an event is ingested by Amplitude and the destination
+        is configured for event forwarding. Shape follows the Amplitude
+        event format documented in the Export API reference.
+      contentType: application/json
+      bindings:
+        http:
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                const: application/json
+              User-Agent:
+                type: string
+                const: Amplitude/Webhook/1.0
+          bindingVersion: '0.3.0'
+      payload:
+        $ref: '#/components/schemas/AmplitudeEvent'
+
+    WebhookUser:
+      name: WebhookUser
+      title: User payload
+      summary: Default Amplitude user payload forwarded by the Webhooks Streaming destination.
+      description: |-
+        Sent when an event is ingested or an Identify API call is made
+        and the destination is configured for user forwarding. Shape
+        follows the Amplitude user format documented in the Identify
+        API reference.
+      contentType: application/json
+      bindings:
+        http:
+          headers:
+            type: object
+            properties:
+              Content-Type:
+                type: string
+                const: application/json
+              User-Agent:
+                type: string
+                const: Amplitude/Webhook/1.0
+          bindingVersion: '0.3.0'
+      payload:
+        $ref: '#/components/schemas/AmplitudeUser'
+
+    CohortMembershipChange:
+      name: CohortMembershipChange
+      title: Cohort membership change
+      summary: A user entered or exited a synced cohort.
+      description: |-
+        Per-user row reflecting an addition to or removal from a cohort,
+        as seen in Amplitude's cohort sync logs. The exact wire envelope
+        depends on the destination transport (e.g. Pub/Sub message
+        attributes plus base64 data).
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/CohortMembershipChangePayload'
+
+  schemas:
+    AmplitudeEvent:
+      type: object
+      description: |-
+        Amplitude raw event format, as documented in the Export API
+        reference. All fields are optional unless required by the event
+        ingestion contract.
+      properties:
+        server_received_time:
+          type: string
+          format: date-time
+          description: UTC ISO-8601 timestamp when Amplitude received the event.
+        app:
+          type: integer
+          description: Amplitude project ID the event belongs to.
+        device_carrier:
+          type: string
+        city:
+          type: string
+        user_id:
+          type: string
+          description: Customer-assigned user identifier.
+        uuid:
+          type: string
+          format: uuid
+          description: Per-event UUID generated by Amplitude.
+        event_time:
+          type: string
+          format: date-time
+        platform:
+          type: string
+        os_version:
+          type: string
+        amplitude_id:
+          type: integer
+          format: int64
+          description: Amplitude-assigned canonical user ID.
+        processed_time:
+          type: string
+          format: date-time
+        version_name:
+          type: string
+        ip_address:
+          type: string
+        paying:
+          type: boolean
+        dma:
+          type: string
+        group_properties:
+          type: object
+          additionalProperties: true
+        user_properties:
+          type: object
+          additionalProperties: true
+        client_upload_time:
+          type: string
+          format: date-time
+        $insert_id:
+          type: string
+        event_type:
+          type: string
+        library:
+          type: string
+        amplitude_attribution_ids:
+          type: string
+        device_type:
+          type: string
+        start_version:
+          type: string
+        location_lng:
+          type: number
+          format: float
+        server_upload_time:
+          type: string
+          format: date-time
+        event_id:
+          type: integer
+        location_lat:
+          type: number
+          format: float
+        os_name:
+          type: string
+        groups:
+          type: object
+          additionalProperties: true
+        event_properties:
+          type: object
+          additionalProperties: true
+        data:
+          type: object
+          additionalProperties: true
+        device_id:
+          type: string
+        language:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        session_id:
+          type: integer
+          format: int64
+        device_family:
+          type: string
+        sample_rate:
+          type: 'null'
+        client_event_time:
+          type: string
+          format: date-time
+
+    AmplitudeUser:
+      type: object
+      description: |-
+        Amplitude user payload, as documented in the Identify API
+        reference. Either `user_id` or `device_id` must identify the
+        user; the remaining fields enrich the user record. The
+        `user_properties` object supports Identify operators
+        (`$set`, `$setOnce`, `$add`, `$append`, `$prepend`, `$unset`,
+        `$preInsert`, `$postInsert`, `$remove`).
+      anyOf:
+        - required: [user_id]
+        - required: [device_id]
+      properties:
+        user_id:
+          type: string
+        device_id:
+          type: string
+        user_properties:
+          type: object
+          additionalProperties: true
+        groups:
+          type: object
+          additionalProperties: true
+        app_version:
+          type: string
+        platform:
+          type: string
+        os_name:
+          type: string
+        os_version:
+          type: string
+        device_brand:
+          type: string
+        device_manufacturer:
+          type: string
+        device_model:
+          type: string
+        carrier:
+          type: string
+        country:
+          type: string
+        region:
+          type: string
+        city:
+          type: string
+        dma:
+          type: string
+        language:
+          type: string
+        paying:
+          type: boolean
+        start_version:
+          type: string
+
+    CohortMembershipChangePayload:
+      type: object
+      description: |-
+        Per-user cohort membership delta. Field set mirrors the columns
+        Amplitude exposes in the cohort sync CSV log (Amplitude ID,
+        operation, mapped properties, skip reason). Additional mapped
+        properties configured on the destination are surfaced as
+        additional keys under `mapped_properties`.
+      required:
+        - amplitude_id
+        - cohort_id
+        - operation
+      properties:
+        amplitude_id:
+          type: integer
+          format: int64
+          description: Amplitude canonical user ID.
+        user_id:
+          type: string
+          description: Customer-assigned user identifier, when known.
+        cohort_id:
+          type: string
+          description: Identifier of the cohort whose membership changed.
+        cohort_name:
+          type: string
+        operation:
+          type: string
+          enum: [added, removed]
+          description: Whether the user entered or exited the cohort.
+        sync_type:
+          type: string
+          enum: [on-demand, automated, real-time]
+          description: Sync mode that produced the change.
+        synced_at:
+          type: string
+          format: date-time
+          description: Timestamp at which the membership change was emitted.
+        mapped_properties:
+          type: object
+          additionalProperties: true
+          description: |-
+            User properties mapped to destination fields, per the
+            destination's mapping configuration. Keys vary by
+            destination.
+        skip_reason:
+          type: string
+          description: |-
+            Populated when the row was skipped rather than delivered;
+            common values include "Unresolved mapping" (mapped user
+            property missing or NULL) and "Invalid mapped properties".
+            Real-time syncs do not surface skip reasons in CSV exports;
+            this field is populated only for hourly/daily syncs.
