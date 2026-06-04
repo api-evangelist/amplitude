@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude User 360 Lookup
+  summary: Search for a user, pull their recent activity, and retrieve their enriched profile with recommendations.
+  description: >-
+    Assembles a 360-degree view of a single user by chaining the Dashboard REST
+    user search and activity endpoints with the User Profile API. The workflow
+    searches for a user by any identifier, branches on whether a match was
+    found, then retrieves the user's recent event activity and finally pulls the
+    enriched profile including computed properties, cohort memberships, and
+    personalized recommendations. The Dashboard endpoints use HTTP Basic auth
+    while the Profile API uses an Api-Key authorization header. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dashboardRestApi
+  url: ../openapi/amplitude-dashboard-rest-api-openapi.yml
+  type: openapi
+- name: userProfileApi
+  url: ../openapi/amplitude-user-profile-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: user-360-lookup
+  summary: Find a user, fetch recent activity, and retrieve their enriched profile.
+  description: >-
+    Searches for a user, and when a match is found pulls their recent events and
+    enriched profile so a complete support or personalization view is assembled
+    in one pass.
+  inputs:
+    type: object
+    required:
+    - basicAuth
+    - apiKeyAuth
+    - user
+    properties:
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for the Dashboard REST Basic auth.
+      apiKeyAuth:
+        type: string
+        description: The deployment/API key used as the Profile API Authorization value (without the Api-Key prefix).
+      user:
+        type: string
+        description: The user_id, device_id, or Amplitude ID to look up.
+      activityLimit:
+        type: integer
+        description: The number of recent events to return for the user.
+        default: 100
+  steps:
+  - stepId: searchUser
+    description: >-
+      Search for the user by identifier. When a match is found the workflow
+      proceeds to pull recent activity; otherwise it ends.
+    operationId: searchUsers
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: user
+      in: query
+      value: $inputs.user
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matches: $response.body#/matches
+      matchedUserId: $response.body#/matches/0/user_id
+    onSuccess:
+    - name: userFound
+      type: goto
+      stepId: getActivity
+      criteria:
+      - context: $response.body
+        condition: $.matches.length > 0
+        type: jsonpath
+    - name: noMatch
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.matches.length == 0
+        type: jsonpath
+  - stepId: getActivity
+    description: >-
+      Retrieve the matched user's most recent events.
+    operationId: getUserActivity
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: user
+      in: query
+      value: $steps.searchUser.outputs.matchedUserId
+    - name: limit
+      in: query
+      value: $inputs.activityLimit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      events: $response.body#/events
+      userData: $response.body#/userData
+  - stepId: getProfile
+    description: >-
+      Retrieve the enriched user profile including computed properties, cohort
+      memberships, and personalized recommendations.
+    operationId: getUserProfile
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Api-Key $inputs.apiKeyAuth"
+    - name: user_id
+      in: query
+      value: $steps.searchUser.outputs.matchedUserId
+    - name: get_recs
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      profile: $response.body#/userData
+  outputs:
+    matchedUserId: $steps.searchUser.outputs.matchedUserId
+    events: $steps.getActivity.outputs.events
+    profile: $steps.getProfile.outputs.profile

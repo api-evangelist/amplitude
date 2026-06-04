@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Taxonomy Event Governance
+  summary: Plan a tracking event end to end by creating its category, the event type, and an event property, then reading the event back.
+  description: >-
+    A data-governance flow that builds out a planned event in the Amplitude
+    tracking plan. The workflow creates an event category, creates an event type
+    assigned to that category, attaches a typed event property to the event, and
+    then retrieves the event type to confirm the plan is in place. The category
+    and event-type creates use form-urlencoded bodies as the Taxonomy API
+    requires. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: taxonomyApi
+  url: ../openapi/amplitude-taxonomy-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: govern-planned-event
+  summary: Create a category, an event type, and an event property, then read the event type back.
+  description: >-
+    Establishes a fully governed planned event by chaining category creation,
+    event type creation, event property creation, and a final read of the event
+    type to confirm the taxonomy is consistent.
+  inputs:
+    type: object
+    required:
+    - basicAuth
+    - categoryName
+    - eventType
+    - eventProperty
+    properties:
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for HTTP Basic auth.
+      categoryName:
+        type: string
+        description: The name of the event category to create.
+      eventType:
+        type: string
+        description: The name of the event type to create and assign to the category.
+      eventDescription:
+        type: string
+        description: A description of the event type.
+      eventProperty:
+        type: string
+        description: The name of the event property to create on the event type.
+      propertyType:
+        type: string
+        description: The data type of the event property.
+        enum:
+        - string
+        - number
+        - boolean
+        - enum
+        - any
+        default: string
+  steps:
+  - stepId: createCategory
+    description: >-
+      Create a new event category to group the planned event type under.
+    operationId: createEventCategory
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        category_name: $inputs.categoryName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      success: $response.body#/success
+  - stepId: createEventType
+    description: >-
+      Create the planned event type and assign it to the category created in the
+      previous step.
+    operationId: createEventType
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        event_type: $inputs.eventType
+        category: $inputs.categoryName
+        description: $inputs.eventDescription
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      success: $response.body#/success
+  - stepId: createEventProperty
+    description: >-
+      Attach a typed event property to the newly planned event type.
+    operationId: createEventProperty
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        event_type: $inputs.eventType
+        event_property: $inputs.eventProperty
+        type: $inputs.propertyType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      success: $response.body#/success
+  - stepId: getEventType
+    description: >-
+      Retrieve the event type to confirm it exists with the expected category
+      assignment.
+    operationId: getEventType
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: event_type
+      in: path
+      value: $inputs.eventType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventType: $response.body#/event_type
+      category: $response.body#/category
+  outputs:
+    eventType: $steps.getEventType.outputs.eventType
+    category: $steps.getEventType.outputs.category

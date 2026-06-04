@@ -444,6 +444,48 @@ apis:
     the subscriber-side HTTP contract for Webhooks Streaming and the generic cohort membership change shape; vendor-specific
     cohort sync destinations conform to each downstream tool's own API contract.
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amplitude-annotation-lifecycle-workflow.yml
+    name: Amplitude Chart Annotation Lifecycle
+    summary: Create a chart annotation, read it back, update its details, and confirm it in the annotation list.
+  - url: arazzo/amplitude-cohort-export-workflow.yml
+    name: Amplitude Behavioral Cohort Export
+    summary: Request an asynchronous cohort export, poll until it is ready, then download the membership file.
+  - url: arazzo/amplitude-cohort-upload-verify-workflow.yml
+    name: Amplitude Cohort Upload and Verify
+    summary: Upload an externally-sourced cohort of user IDs into Amplitude and confirm it appears in the cohort list.
+  - url: arazzo/amplitude-dsar-request-workflow.yml
+    name: Amplitude DSAR Request and Poll
+    summary: Submit a data subject access request, poll its status until complete, and capture the download URL.
+  - url: arazzo/amplitude-event-property-lifecycle-workflow.yml
+    name: Amplitude Event Property Lifecycle
+    summary: Create an event property on an event type, read it back, update its metadata, and list all properties for the event.
+  - url: arazzo/amplitude-experiment-lifecycle-workflow.yml
+    name: Amplitude Experiment Lifecycle
+    summary: Create an A/B experiment, read it back, start it by enabling, and confirm it in the experiment list.
+  - url: arazzo/amplitude-flag-rollout-workflow.yml
+    name: Amplitude Feature Flag Rollout
+    summary: Create a feature flag, read it back, enable it, and confirm it appears in the flag list.
+  - url: arazzo/amplitude-identity-merge-workflow.yml
+    name: Amplitude Identity Merge and Verify
+    summary: Set user properties on an account, alias an anonymous identity into it, then read the merged profile back.
+  - url: arazzo/amplitude-ingest-and-segment-workflow.yml
+    name: Amplitude Ingest Events and Segment
+    summary: Upload a batch of events through the HTTP V2 API, then query event segmentation to verify the metric.
+  - url: arazzo/amplitude-scim-user-provisioning-workflow.yml
+    name: Amplitude SCIM User Provisioning
+    summary: Provision a SCIM user, read the account back, then deactivate it via a SCIM patch.
+  - url: arazzo/amplitude-taxonomy-event-governance-workflow.yml
+    name: Amplitude Taxonomy Event Governance
+    summary: Plan a tracking event end to end by creating its category, the event type, and an event property, then reading the event back.
+  - url: arazzo/amplitude-user-360-lookup-workflow.yml
+    name: Amplitude User 360 Lookup
+    summary: Search for a user, pull their recent activity, and retrieve their enriched profile with recommendations.
+  - url: arazzo/amplitude-variant-evaluation-workflow.yml
+    name: Amplitude Variant Evaluation
+    summary: Download flag configurations for local evaluation, then remotely evaluate variant assignments for a user.
 - type: LinkedIn
   url: https://www.linkedin.com/company/amplitude-analytics
 - type: Portal

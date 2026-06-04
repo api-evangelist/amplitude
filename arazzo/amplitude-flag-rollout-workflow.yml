@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Feature Flag Rollout
+  summary: Create a feature flag, read it back, enable it, and confirm it appears in the flag list.
+  description: >-
+    Automates a feature flag rollout through the Amplitude Experiment Management
+    API. The workflow creates a new flag with variants, retrieves it by its
+    returned ID to confirm the configuration, patches it to enable the flag, and
+    lists all flags to confirm the rollout. This is the pattern teams wire into
+    CI/CD pipelines to manage flag lifecycle without the Amplitude UI. All steps
+    authenticate with a Management API key as a bearer token. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: experimentManagementApi
+  url: ../openapi/amplitude-experiment-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: roll-out-flag
+  summary: Create a feature flag, read it, enable it, and list all flags.
+  description: >-
+    Drives a feature flag from creation through enablement, reading it back and
+    confirming it is present in the project flag list so the full rollout is
+    exercised end to end.
+  inputs:
+    type: object
+    required:
+    - bearerToken
+    - key
+    properties:
+      bearerToken:
+        type: string
+        description: The Experiment Management API key passed as a bearer token.
+      key:
+        type: string
+        description: The unique key for the flag, used to reference it in code.
+      name:
+        type: string
+        description: The display name of the flag.
+      description:
+        type: string
+        description: A description of the flag's purpose.
+      variants:
+        type: array
+        description: Array of variant configurations for the flag.
+        items:
+          type: object
+      bucketingKey:
+        type: string
+        description: The property used for bucketing users into variants.
+  steps:
+  - stepId: createFlag
+    description: >-
+      Create a new feature flag with the supplied key, variants, and bucketing
+      configuration.
+    operationId: createFlag
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        key: $inputs.key
+        name: $inputs.name
+        description: $inputs.description
+        variants: $inputs.variants
+        bucketingKey: $inputs.bucketingKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      flagId: $response.body#/id
+      state: $response.body#/state
+  - stepId: getFlag
+    description: >-
+      Retrieve the newly created flag by its ID to confirm its full
+      configuration including variants and deployments.
+    operationId: getFlag
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    - name: id
+      in: path
+      value: $steps.createFlag.outputs.flagId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      key: $response.body#/key
+      enabled: $response.body#/enabled
+  - stepId: enableFlag
+    description: >-
+      Patch the flag to enable it. Only the enabled field is changed; all other
+      configuration is left intact.
+    operationId: updateFlag
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    - name: id
+      in: path
+      value: $steps.createFlag.outputs.flagId
+    requestBody:
+      contentType: application/json
+      payload:
+        enabled: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      enabled: $response.body#/enabled
+      state: $response.body#/state
+  - stepId: listFlags
+    description: >-
+      List all flags in the project to confirm the enabled flag is present.
+    operationId: listFlags
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      flags: $response.body#/flags
+  outputs:
+    flagId: $steps.createFlag.outputs.flagId
+    enabled: $steps.enableFlag.outputs.enabled
+    flags: $steps.listFlags.outputs.flags

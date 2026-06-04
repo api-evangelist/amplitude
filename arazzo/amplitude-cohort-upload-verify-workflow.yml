@@ -1,0 +1,85 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Cohort Upload and Verify
+  summary: Upload an externally-sourced cohort of user IDs into Amplitude and confirm it appears in the cohort list.
+  description: >-
+    Imports an audience segment from an external system such as a CRM or
+    marketing platform into Amplitude as a behavioral cohort, then verifies the
+    upload by listing all cohorts and confirming the returned cohort ID is
+    present. This closes the loop on a one-way sync so that downstream automation
+    can trust the cohort was created before targeting it. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: behavioralCohortsApi
+  url: ../openapi/amplitude-behavioral-cohorts-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upload-and-verify-cohort
+  summary: Upload a list of user IDs as a cohort and confirm it exists in the project.
+  description: >-
+    Creates or updates a cohort from an external list of identifiers and then
+    reads back the project cohort list to confirm the upload succeeded and the
+    new cohort ID is retrievable.
+  inputs:
+    type: object
+    required:
+    - basicAuth
+    - name
+    - ids
+    properties:
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for HTTP Basic auth.
+      name:
+        type: string
+        description: The name of the cohort to create or update.
+      ids:
+        type: array
+        description: Array of user_id or amplitude_id values to include in the cohort.
+        items:
+          type: string
+      owner:
+        type: string
+        description: The email address of the cohort owner.
+      existingCohortId:
+        type: string
+        description: If provided, updates the existing cohort with this ID instead of creating a new one.
+  steps:
+  - stepId: uploadCohort
+    description: >-
+      Create or update a cohort by uploading the supplied list of user IDs or
+      Amplitude IDs.
+    operationId: uploadCohort
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.name
+        ids: $inputs.ids
+        owner: $inputs.owner
+        existing_cohort_id: $inputs.existingCohortId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cohortId: $response.body#/cohort_id
+  - stepId: listCohorts
+    description: >-
+      List all cohorts in the project to confirm the uploaded cohort is present
+      and its metadata is retrievable.
+    operationId: listCohorts
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cohorts: $response.body#/cohorts
+  outputs:
+    cohortId: $steps.uploadCohort.outputs.cohortId
+    cohorts: $steps.listCohorts.outputs.cohorts

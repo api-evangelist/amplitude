@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude DSAR Request and Poll
+  summary: Submit a data subject access request, poll its status until complete, and capture the download URL.
+  description: >-
+    A privacy-compliance flow built on the Amplitude DSAR API for GDPR and CCPA
+    workflows. The workflow submits a data subject access request for one or
+    more user IDs, then polls the request status endpoint until the asynchronous
+    job reports a complete state, capturing the download URL for the requested
+    data. The polling step branches on the reported status so it loops while the
+    request is pending or processing. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dsarApi
+  url: ../openapi/amplitude-dsar-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: submit-and-poll-dsar
+  summary: Submit a DSAR and poll until the data export is ready for download.
+  description: >-
+    Resolves a data subject access request from submission through completion by
+    submitting the request, polling the status endpoint until complete, and
+    surfacing the download URL.
+  inputs:
+    type: object
+    required:
+    - basicAuth
+    - userIds
+    properties:
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for HTTP Basic auth.
+      userIds:
+        type: array
+        description: Array of user IDs to retrieve data for.
+        items:
+          type: string
+  steps:
+  - stepId: createRequest
+    description: >-
+      Submit a data subject access request for the supplied user IDs. The
+      request is processed asynchronously.
+    operationId: createDsarRequest
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    requestBody:
+      contentType: application/json
+      payload:
+        user_ids: $inputs.userIds
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestId: $response.body#/request_id
+      status: $response.body#/status
+  - stepId: pollStatus
+    description: >-
+      Poll the DSAR status endpoint. While the request is pending or processing
+      the step loops; once it is complete it ends and captures the download URL.
+    operationId: getDsarRequestStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: request_id
+      in: path
+      value: $steps.createRequest.outputs.requestId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      downloadUrl: $response.body#/download_url
+    onSuccess:
+    - name: requestComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "complete"
+        type: jsonpath
+    - name: stillProcessing
+      type: goto
+      stepId: pollStatus
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending" || $.status == "processing"
+        type: jsonpath
+  outputs:
+    requestId: $steps.createRequest.outputs.requestId
+    finalStatus: $steps.pollStatus.outputs.status
+    downloadUrl: $steps.pollStatus.outputs.downloadUrl

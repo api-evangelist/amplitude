@@ -1,0 +1,79 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Variant Evaluation
+  summary: Download flag configurations for local evaluation, then remotely evaluate variant assignments for a user.
+  description: >-
+    Bootstraps and exercises the Amplitude Experiment Evaluation API. The
+    workflow first downloads the full flag configuration set used for local
+    evaluation and edge bootstrapping, then performs a remote evaluation for a
+    specific user to retrieve their variant assignments across all active
+    experiments and flags. Both steps authenticate with a deployment key passed
+    as an Api-Key authorization header. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: experimentEvaluationApi
+  url: ../openapi/amplitude-experiment-evaluation-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: evaluate-user-variants
+  summary: Fetch flag configurations and remotely evaluate variant assignments for a user.
+  description: >-
+    Downloads the flag configurations for local evaluation, then remotely
+    evaluates the active experiments and flags for a single user, returning
+    their variant assignments.
+  inputs:
+    type: object
+    required:
+    - deploymentKey
+    properties:
+      deploymentKey:
+        type: string
+        description: The deployment key used as the Authorization value (without the Api-Key prefix).
+      userId:
+        type: string
+        description: The user ID to evaluate variants for.
+      deviceId:
+        type: string
+        description: The device ID to evaluate variants for.
+      userProperties:
+        type: object
+        description: User properties used for targeting rule evaluation.
+  steps:
+  - stepId: getFlagConfigs
+    description: >-
+      Download all flag configurations for local evaluation including targeting
+      rules, variants, and segment definitions.
+    operationId: getFlags
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Api-Key $inputs.deploymentKey"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      flagConfigurations: $response.body
+  - stepId: evaluateUser
+    description: >-
+      Remotely evaluate all active experiments and feature flags for the
+      supplied user, returning the variant assignments. Amplitude tracks an
+      assignment event for each evaluation.
+    operationId: evaluateVariants
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Api-Key $inputs.deploymentKey"
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $inputs.userId
+        device_id: $inputs.deviceId
+        user_properties: $inputs.userProperties
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      variants: $response.body
+  outputs:
+    flagConfigurations: $steps.getFlagConfigs.outputs.flagConfigurations
+    variants: $steps.evaluateUser.outputs.variants

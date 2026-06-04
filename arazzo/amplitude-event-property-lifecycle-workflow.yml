@@ -1,0 +1,142 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Event Property Lifecycle
+  summary: Create an event property on an event type, read it back, update its metadata, and list all properties for the event.
+  description: >-
+    Manages the full lifecycle of a single event property within the Amplitude
+    tracking plan. The workflow creates a typed event property for a given event
+    type, retrieves it to confirm creation, updates its description and required
+    flag, and lists every property on the event type to confirm the change. The
+    create and update steps use form-urlencoded bodies and the get and list
+    steps pass the event_type as a query parameter, exactly as the Taxonomy API
+    requires. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: taxonomyApi
+  url: ../openapi/amplitude-taxonomy-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: event-property-lifecycle
+  summary: Create, read, update, and list an event property on an event type.
+  description: >-
+    Drives one event property through creation, retrieval, an update, and a
+    list of all properties on its event type so the complete property lifecycle
+    is exercised.
+  inputs:
+    type: object
+    required:
+    - basicAuth
+    - eventType
+    - eventProperty
+    properties:
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for HTTP Basic auth.
+      eventType:
+        type: string
+        description: The event type the property belongs to.
+      eventProperty:
+        type: string
+        description: The name of the event property.
+      propertyType:
+        type: string
+        description: The data type of the property.
+        enum:
+        - string
+        - number
+        - boolean
+        - enum
+        - any
+        default: string
+      description:
+        type: string
+        description: A description of the event property.
+      updatedDescription:
+        type: string
+        description: The updated description to apply during the update step.
+      isRequired:
+        type: boolean
+        description: Whether the property should be marked required during the update.
+        default: false
+  steps:
+  - stepId: createProperty
+    description: >-
+      Create a new typed event property for the supplied event type.
+    operationId: createEventProperty
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        event_type: $inputs.eventType
+        event_property: $inputs.eventProperty
+        type: $inputs.propertyType
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      success: $response.body#/success
+  - stepId: getProperty
+    description: >-
+      Retrieve the event property by name for its event type to confirm it was
+      created.
+    operationId: getEventProperty
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: event_property
+      in: path
+      value: $inputs.eventProperty
+    - name: event_type
+      in: query
+      value: $inputs.eventType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventProperty: $response.body#/event_property
+      type: $response.body#/type
+  - stepId: updateProperty
+    description: >-
+      Update the property's description and required flag while keeping it on the
+      same event type.
+    operationId: updateEventProperty
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: event_property
+      in: path
+      value: $inputs.eventProperty
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        event_type: $inputs.eventType
+        description: $inputs.updatedDescription
+        is_required: $inputs.isRequired
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      success: $response.body#/success
+  - stepId: listProperties
+    description: >-
+      List all event properties for the event type to confirm the updated
+      property is present.
+    operationId: listEventProperties
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: event_type
+      in: query
+      value: $inputs.eventType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      properties: $response.body#/data
+  outputs:
+    eventProperty: $steps.getProperty.outputs.eventProperty
+    properties: $steps.listProperties.outputs.properties

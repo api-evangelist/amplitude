@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Behavioral Cohort Export
+  summary: Request an asynchronous cohort export, poll until it is ready, then download the membership file.
+  description: >-
+    The canonical three-step Amplitude Behavioral Cohorts export flow. The
+    workflow first requests an asynchronous export of a specific cohort, then
+    polls the export status endpoint until the job reports a complete state,
+    and finally downloads the cohort membership data file. The polling step
+    branches on the reported status so it loops while the job is queued or
+    computing and only proceeds to download once the export is complete. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: behavioralCohortsApi
+  url: ../openapi/amplitude-behavioral-cohorts-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: export-cohort-members
+  summary: Export a behavioral cohort's membership list by polling the async export job to completion.
+  description: >-
+    Resolves a cohort export from request through completion. The workflow
+    submits the export request, polls the status endpoint until the job is
+    complete, and downloads the resulting membership file for use in downstream
+    marketing, CRM, or activation systems.
+  inputs:
+    type: object
+    required:
+    - basicAuth
+    - cohortId
+    properties:
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for HTTP Basic auth.
+      cohortId:
+        type: string
+        description: The ID of the cohort to export.
+      includeProps:
+        type: integer
+        description: Set to 1 to include user properties in the export, 0 to omit them.
+        enum:
+        - 0
+        - 1
+        default: 0
+  steps:
+  - stepId: requestExport
+    description: >-
+      Request an asynchronous export of the cohort. This is the first step in
+      the three-step export process and returns the request identifier.
+    operationId: requestCohortExport
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: cohort_id
+      in: path
+      value: $inputs.cohortId
+    - name: props
+      in: query
+      value: $inputs.includeProps
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      requestId: $response.body#/request_id
+      requestedCohortId: $response.body#/cohort_id
+  - stepId: pollStatus
+    description: >-
+      Poll the export status endpoint. While the job is queued or computing the
+      step loops back on itself; once the status is complete it proceeds to the
+      download step.
+    operationId: getCohortExportStatus
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: cohort_id
+      in: path
+      value: $inputs.cohortId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: exportReady
+      type: goto
+      stepId: downloadExport
+      criteria:
+      - context: $response.body
+        condition: $.status == "complete"
+        type: jsonpath
+    - name: stillProcessing
+      type: goto
+      stepId: pollStatus
+      criteria:
+      - context: $response.body
+        condition: $.status == "queued" || $.status == "computing"
+        type: jsonpath
+  - stepId: downloadExport
+    description: >-
+      Download the exported cohort membership data file once the export status
+      has reported completion.
+    operationId: downloadCohortExport
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: cohort_id
+      in: path
+      value: $inputs.cohortId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cohortFile: $response.body
+  outputs:
+    requestId: $steps.requestExport.outputs.requestId
+    finalStatus: $steps.pollStatus.outputs.status
+    cohortFile: $steps.downloadExport.outputs.cohortFile

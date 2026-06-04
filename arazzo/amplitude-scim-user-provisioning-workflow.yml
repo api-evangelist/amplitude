@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude SCIM User Provisioning
+  summary: Provision a SCIM user, read the account back, then deactivate it via a SCIM patch.
+  description: >-
+    Implements an identity-provider style user lifecycle against the Amplitude
+    SCIM 2.0 API. The workflow provisions a new user, retrieves the created
+    account by its SCIM ID to confirm provisioning, and then applies a SCIM
+    PatchOp to deactivate the account, mirroring an offboarding flow. All steps
+    use the application/scim+json content type and authenticate with a SCIM
+    token as a bearer token. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: scimApi
+  url: ../openapi/amplitude-scim-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-and-deactivate-user
+  summary: Create a SCIM user, read it back, and deactivate it.
+  description: >-
+    Drives a SCIM user through provisioning, retrieval, and deactivation so the
+    onboarding-to-offboarding lifecycle is exercised end to end.
+  inputs:
+    type: object
+    required:
+    - bearerToken
+    - userName
+    properties:
+      bearerToken:
+        type: string
+        description: The SCIM API token passed as a bearer token.
+      userName:
+        type: string
+        description: The user's email address, used as the primary SCIM identifier.
+      givenName:
+        type: string
+        description: The user's first name.
+      familyName:
+        type: string
+        description: The user's last name.
+  steps:
+  - stepId: createUser
+    description: >-
+      Provision a new SCIM user with the supplied user name and name components.
+      Confirms creation by checking for the 201 Created status.
+    operationId: createScimUser
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    requestBody:
+      contentType: application/scim+json
+      payload:
+        schemas:
+        - "urn:ietf:params:scim:schemas:core:2.0:User"
+        userName: $inputs.userName
+        name:
+          givenName: $inputs.givenName
+          familyName: $inputs.familyName
+        active: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      userId: $response.body#/id
+      active: $response.body#/active
+  - stepId: getUser
+    description: >-
+      Retrieve the newly provisioned user by their SCIM ID to confirm the
+      account exists and is active.
+    operationId: getScimUser
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    - name: user_id
+      in: path
+      value: $steps.createUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userName: $response.body#/userName
+      active: $response.body#/active
+  - stepId: deactivateUser
+    description: >-
+      Apply a SCIM PatchOp that replaces the active attribute with false to
+      deactivate the account during offboarding.
+    operationId: updateScimUser
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    - name: user_id
+      in: path
+      value: $steps.createUser.outputs.userId
+    requestBody:
+      contentType: application/scim+json
+      payload:
+        schemas:
+        - "urn:ietf:params:scim:api:messages:2.0:PatchOp"
+        Operations:
+        - op: replace
+          path: active
+          value: false
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      active: $response.body#/active
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    active: $steps.deactivateUser.outputs.active

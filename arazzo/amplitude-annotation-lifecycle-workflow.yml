@@ -1,0 +1,134 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Chart Annotation Lifecycle
+  summary: Create a chart annotation, read it back, update its details, and confirm it in the annotation list.
+  description: >-
+    Automates a release-marker annotation lifecycle on Amplitude charts. The
+    workflow creates a new annotation for a significant event such as a product
+    release, retrieves it by its returned ID to confirm creation, updates its
+    label and details, and finally lists all annotations to confirm the change
+    is reflected. This is the pattern teams wire into deployment pipelines so
+    that release context always appears alongside analytics. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: chartAnnotationsApi
+  url: ../openapi/amplitude-chart-annotations-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: annotation-lifecycle
+  summary: Create, read, update, and list a chart annotation.
+  description: >-
+    Drives a single annotation through creation, retrieval, an update, and a
+    final listing so the full create-get-update-list lifecycle is exercised
+    end to end.
+  inputs:
+    type: object
+    required:
+    - basicAuth
+    - label
+    - date
+    properties:
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for HTTP Basic auth.
+      label:
+        type: string
+        description: The display label for the annotation.
+      date:
+        type: string
+        description: The date of the annotation in YYYY-MM-DD format.
+      details:
+        type: string
+        description: Additional details or notes for the annotation.
+      category:
+        type: string
+        description: The category to assign to the annotation.
+      chartId:
+        type: integer
+        description: The ID of the chart to associate the annotation with. Omit for project-wide annotations.
+      updatedLabel:
+        type: string
+        description: The updated label to apply during the update step.
+      updatedDetails:
+        type: string
+        description: The updated details to apply during the update step.
+  steps:
+  - stepId: createAnnotation
+    description: >-
+      Create a new chart annotation with the supplied label, date, and optional
+      category and chart association.
+    operationId: createAnnotation
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    requestBody:
+      contentType: application/json
+      payload:
+        label: $inputs.label
+        date: $inputs.date
+        details: $inputs.details
+        category: $inputs.category
+        chart_id: $inputs.chartId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      annotationId: $response.body#/id
+  - stepId: getAnnotation
+    description: >-
+      Retrieve the newly created annotation by its ID to confirm it was created
+      with the expected fields.
+    operationId: getAnnotation
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: annotation_id
+      in: path
+      value: $steps.createAnnotation.outputs.annotationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      label: $response.body#/label
+      date: $response.body#/date
+  - stepId: updateAnnotation
+    description: >-
+      Update the annotation's label and details. Only the supplied fields are
+      changed; all other fields remain intact.
+    operationId: updateAnnotation
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: annotation_id
+      in: path
+      value: $steps.createAnnotation.outputs.annotationId
+    requestBody:
+      contentType: application/json
+      payload:
+        label: $inputs.updatedLabel
+        details: $inputs.updatedDetails
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedLabel: $response.body#/label
+      updatedAt: $response.body#/updated_at
+  - stepId: listAnnotations
+    description: >-
+      List all annotations in the project to confirm the updated annotation is
+      present in the collection.
+    operationId: listAnnotations
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      annotations: $response.body#/data
+  outputs:
+    annotationId: $steps.createAnnotation.outputs.annotationId
+    updatedLabel: $steps.updateAnnotation.outputs.updatedLabel
+    annotations: $steps.listAnnotations.outputs.annotations

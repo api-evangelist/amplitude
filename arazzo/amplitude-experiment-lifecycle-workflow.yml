@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Experiment Lifecycle
+  summary: Create an A/B experiment, read it back, start it by enabling, and confirm it in the experiment list.
+  description: >-
+    Manages an A/B test experiment through the Amplitude Experiment Management
+    API. The workflow creates a new experiment with control and treatment
+    variants, retrieves it by ID to confirm its configuration, patches it to
+    enable it, and lists all experiments to confirm the experiment is live. All
+    steps authenticate with a Management API key as a bearer token. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: experimentManagementApi
+  url: ../openapi/amplitude-experiment-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: run-experiment-lifecycle
+  summary: Create an experiment, read it, enable it, and list all experiments.
+  description: >-
+    Drives an experiment from creation through enablement, reading it back and
+    confirming it appears in the project experiment list so the full lifecycle
+    is exercised.
+  inputs:
+    type: object
+    required:
+    - bearerToken
+    - key
+    properties:
+      bearerToken:
+        type: string
+        description: The Experiment Management API key passed as a bearer token.
+      key:
+        type: string
+        description: The unique key for the experiment, used to reference it in code.
+      name:
+        type: string
+        description: The display name of the experiment.
+      description:
+        type: string
+        description: A description of the experiment's purpose.
+      variants:
+        type: array
+        description: Array of variant configurations including control and treatment groups.
+        items:
+          type: object
+      bucketingKey:
+        type: string
+        description: The property used for bucketing users into variants.
+  steps:
+  - stepId: createExperiment
+    description: >-
+      Create a new A/B test experiment with the supplied key, variants, and
+      bucketing configuration.
+    operationId: createExperiment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    requestBody:
+      contentType: application/json
+      payload:
+        key: $inputs.key
+        name: $inputs.name
+        description: $inputs.description
+        variants: $inputs.variants
+        bucketingKey: $inputs.bucketingKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      experimentId: $response.body#/id
+      state: $response.body#/state
+  - stepId: getExperiment
+    description: >-
+      Retrieve the newly created experiment by its ID to confirm its full
+      configuration.
+    operationId: getExperiment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    - name: id
+      in: path
+      value: $steps.createExperiment.outputs.experimentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      key: $response.body#/key
+      enabled: $response.body#/enabled
+  - stepId: enableExperiment
+    description: >-
+      Patch the experiment to enable it. Only the enabled field is changed; all
+      other configuration is preserved.
+    operationId: updateExperiment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    - name: id
+      in: path
+      value: $steps.createExperiment.outputs.experimentId
+    requestBody:
+      contentType: application/json
+      payload:
+        enabled: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      enabled: $response.body#/enabled
+      state: $response.body#/state
+  - stepId: listExperiments
+    description: >-
+      List all experiments in the project to confirm the enabled experiment is
+      present.
+    operationId: listExperiments
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.bearerToken"
+    - name: limit
+      in: query
+      value: 100
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      experiments: $response.body#/experiments
+  outputs:
+    experimentId: $steps.createExperiment.outputs.experimentId
+    enabled: $steps.enableExperiment.outputs.enabled
+    experiments: $steps.listExperiments.outputs.experiments

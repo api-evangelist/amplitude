@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Identity Merge and Verify
+  summary: Set user properties on an account, alias an anonymous identity into it, then read the merged profile back.
+  description: >-
+    Handles the common anonymous-to-known identity merge in Amplitude. The
+    workflow first sets user properties on the known account through the
+    Identify API, then maps an anonymous user_id to the known global user
+    through the User Mapping API so both identities are consolidated, and finally
+    reads the merged user profile to confirm the consolidation. The Identify call
+    needs no auth, the user-mapping call uses HTTP Basic auth, and the profile
+    call uses an Api-Key authorization header. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: identifyApi
+  url: ../openapi/amplitude-identify-api-openapi.yml
+  type: openapi
+- name: userMappingApi
+  url: ../openapi/amplitude-user-mapping-api-openapi.yml
+  type: openapi
+- name: userProfileApi
+  url: ../openapi/amplitude-user-profile-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: merge-identities
+  summary: Set properties, alias an anonymous ID into a known user, and verify the merged profile.
+  description: >-
+    Sets user properties on the known account, maps the anonymous identity to
+    the global user, and reads the resulting profile so the merge is verified end
+    to end.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - basicAuth
+    - apiKeyAuth
+    - globalUserId
+    - anonymousUserId
+    properties:
+      apiKey:
+        type: string
+        description: The Amplitude project API key used for the Identify call.
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for the User Mapping Basic auth.
+      apiKeyAuth:
+        type: string
+        description: The deployment/API key used as the Profile API Authorization value (without the Api-Key prefix).
+      globalUserId:
+        type: string
+        description: The primary user ID that the anonymous identity will be mapped to.
+      anonymousUserId:
+        type: string
+        description: The anonymous user ID to map into the global user.
+      userProperties:
+        type: object
+        description: A map of $set/$setOnce/$add operations to apply to the known user's properties.
+  steps:
+  - stepId: setProperties
+    description: >-
+      Set user properties on the known account through the Identify API without
+      sending an event.
+    operationId: identifyUser
+    requestBody:
+      contentType: application/json
+      payload:
+        api_key: $inputs.apiKey
+        identification:
+        - user_id: $inputs.globalUserId
+          user_properties: $inputs.userProperties
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventsIngested: $response.body#/events_ingested
+  - stepId: mapIdentity
+    description: >-
+      Map the anonymous user_id to the global user so both identities are
+      consolidated into a single profile.
+    operationId: mapUser
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    requestBody:
+      contentType: application/json
+      payload:
+        mapping:
+        - global_user_id: $inputs.globalUserId
+          user_id: $inputs.anonymousUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      success: $response.body#/success
+  - stepId: verifyProfile
+    description: >-
+      Read the merged user profile for the global user to confirm the
+      consolidated properties and identity.
+    operationId: getUserProfile
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Api-Key $inputs.apiKeyAuth"
+    - name: user_id
+      in: query
+      value: $inputs.globalUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      profile: $response.body#/userData
+  outputs:
+    mappingSuccess: $steps.mapIdentity.outputs.success
+    profile: $steps.verifyProfile.outputs.profile

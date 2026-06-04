@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Amplitude Ingest Events and Segment
+  summary: Upload a batch of events through the HTTP V2 API, then query event segmentation to verify the metric.
+  description: >-
+    A round-trip data-quality flow that sends a batch of events into Amplitude
+    through the HTTP V2 ingestion endpoint and then queries the Dashboard REST
+    event segmentation endpoint for the same event type to confirm the data is
+    being counted. The ingestion step branches on the returned code so the
+    segmentation query only runs after events were accepted. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: httpV2Api
+  url: ../openapi/amplitude-http-v2-api-openapi.yml
+  type: openapi
+- name: dashboardRestApi
+  url: ../openapi/amplitude-dashboard-rest-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: ingest-and-segment
+  summary: Upload events and then segment the same event type to validate ingestion.
+  description: >-
+    Sends a batch of events for a user, confirms the ingestion code, and then
+    runs an event segmentation query over a date window to retrieve totals or
+    unique counts for the ingested event type.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - basicAuth
+    - userId
+    - eventType
+    - start
+    - end
+    properties:
+      apiKey:
+        type: string
+        description: The Amplitude project API key used for HTTP V2 ingestion.
+      basicAuth:
+        type: string
+        description: Base64-encoded api_key:secret_key credentials for the Dashboard REST Basic auth.
+      userId:
+        type: string
+        description: A readable user ID for the event (minimum length 5).
+      eventType:
+        type: string
+        description: The name of the event being tracked and later segmented.
+      eventProperties:
+        type: object
+        description: A dictionary of event properties to attach to the event.
+      start:
+        type: string
+        description: The segmentation start date in YYYYMMDD format.
+      end:
+        type: string
+        description: The segmentation end date in YYYYMMDD format.
+  steps:
+  - stepId: uploadEvents
+    description: >-
+      Send a single event for the user to Amplitude. The step proceeds only when
+      the response reports events were ingested successfully.
+    operationId: uploadEvents
+    requestBody:
+      contentType: application/json
+      payload:
+        api_key: $inputs.apiKey
+        events:
+        - user_id: $inputs.userId
+          event_type: $inputs.eventType
+          event_properties: $inputs.eventProperties
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventsIngested: $response.body#/events_ingested
+      serverUploadTime: $response.body#/server_upload_time
+    onSuccess:
+    - name: ingested
+      type: goto
+      stepId: segmentEvent
+      criteria:
+      - context: $response.body
+        condition: $.events_ingested > 0
+        type: jsonpath
+  - stepId: segmentEvent
+    description: >-
+      Query event segmentation for the ingested event type over the supplied
+      date window, returning daily unique-user counts.
+    operationId: getEventSegmentation
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Basic $inputs.basicAuth"
+    - name: e
+      in: query
+      value: "{\"event_type\":\"$inputs.eventType\"}"
+    - name: start
+      in: query
+      value: $inputs.start
+    - name: end
+      in: query
+      value: $inputs.end
+    - name: m
+      in: query
+      value: uniques
+    - name: i
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      series: $response.body#/data/series
+      xValues: $response.body#/data/xValues
+  outputs:
+    eventsIngested: $steps.uploadEvents.outputs.eventsIngested
+    series: $steps.segmentEvent.outputs.series
