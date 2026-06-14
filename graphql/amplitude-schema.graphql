@@ -1,0 +1,1368 @@
+"""
+Amplitude GraphQL Schema
+Conceptual data model derived from Amplitude REST APIs.
+Amplitude does not expose a native public GraphQL endpoint.
+This schema represents the full surface area of Amplitude's analytics,
+experimentation, taxonomy, cohort, identity, and privacy APIs.
+Docs: https://www.docs.developers.amplitude.com/
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar JSON
+scalar DateTime
+scalar Long
+scalar URL
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum EventStatus {
+  SUCCESS
+  INVALID
+  PAYLOAD_TOO_LARGE
+  TOO_MANY_REQUESTS
+  TIMEOUT
+  REQUEST_BODY_INVALID
+}
+
+enum CohortStatus {
+  REQUESTED
+  QUEUED
+  IN_PROGRESS
+  DONE
+  FAILED
+}
+
+enum CohortSyncType {
+  ON_DEMAND
+  AUTOMATED
+  REALTIME
+}
+
+enum ExperimentStatus {
+  DRAFT
+  RUNNING
+  PAUSED
+  COMPLETED
+  ARCHIVED
+}
+
+enum FlagStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum VariantType {
+  STRING
+  NUMBER
+  JSON
+}
+
+enum PropertyType {
+  STRING
+  NUMBER
+  BOOLEAN
+  ARRAY
+  ENUM
+  ANY
+}
+
+enum AnnotationType {
+  CHART
+  DASHBOARD
+}
+
+enum DSARStatus {
+  NEW
+  IN_PROGRESS
+  DONE
+  FAILED
+}
+
+enum PrivacyRequestType {
+  DELETION
+  SUPPRESSION
+}
+
+enum SCIMUserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum RetentionType {
+  N_DAY
+  UNBOUNDED
+  CUSTOM
+}
+
+enum FunnelOrdering {
+  ORDERED
+  UNORDERED
+}
+
+enum SegmentationInterval {
+  DAY
+  WEEK
+  MONTH
+  QUARTER
+}
+
+enum MutationType {
+  SET
+  UNSET
+  ADD
+  APPEND
+  PREPEND
+  PRE_INSERT
+  POST_INSERT
+  REMOVE
+}
+
+enum EvaluationMode {
+  LOCAL
+  REMOTE
+}
+
+enum AssignmentStatus {
+  ASSIGNED
+  OFF
+}
+
+enum DataExportFormat {
+  JSON
+  CSV
+  PARQUET
+}
+
+# ---------------------------------------------------------------------------
+# Core Analytics: Event
+# ---------------------------------------------------------------------------
+
+"""
+A single user interaction event tracked in Amplitude.
+"""
+type Event {
+  userId: String
+  deviceId: String
+  eventType: String!
+  time: Long
+  eventProperties: JSON
+  userProperties: JSON
+  groups: JSON
+  groupProperties: JSON
+  appVersion: String
+  platform: String
+  osName: String
+  osVersion: String
+  deviceBrand: String
+  deviceManufacturer: String
+  deviceModel: String
+  carrier: String
+  country: String
+  region: String
+  city: String
+  dma: String
+  language: String
+  price: Float
+  quantity: Int
+  revenue: Float
+  productId: String
+  revenueType: String
+  locationLat: Float
+  locationLng: Float
+  ip: String
+  idfa: String
+  idfv: String
+  adid: String
+  androidId: String
+  eventId: Int
+  sessionId: Long
+  insertId: String
+  plan: EventPlan
+  ingestionMetadata: IngestionMetadata
+  partnerId: String
+  versionName: String
+  library: String
+  serverUploadTime: Long
+  uuid: String
+  serverReceivedTime: Long
+  amplitude_id: Long
+  amplitude_event_type: String
+}
+
+type EventPlan {
+  branch: String
+  source: String
+  version: String
+  versionId: String
+}
+
+type IngestionMetadata {
+  sourceName: String
+  sourceVersion: String
+}
+
+type EventBatch {
+  events: [Event!]!
+  status: EventStatus!
+  code: Int
+  invalidRequestReason: String
+  payloadSizeBytes: Int
+  eventsIngested: Int
+  serverUploadTime: Long
+}
+
+"""
+A blocked event that failed validation or was suppressed.
+"""
+type BlockedEvent {
+  eventType: String!
+  reason: String
+  eventId: Int
+  time: Long
+}
+
+"""
+A transformed event after server-side transformation rules have been applied.
+"""
+type TransformedEvent {
+  original: Event
+  transformed: Event
+  transformationName: String
+  applied: Boolean
+}
+
+"""
+A revenue-enriched event after revenue validation.
+"""
+type RevenueEvent {
+  event: Event!
+  revenueIsValid: Boolean
+  revenue: Float
+  price: Float
+  quantity: Int
+  productId: String
+  revenueType: String
+}
+
+"""
+A formatted/normalized event from data export pipelines.
+"""
+type FormattedEvent {
+  amplitudeId: Long
+  userId: String
+  deviceId: String
+  eventType: String
+  eventTime: DateTime
+  eventProperties: JSON
+  userProperties: JSON
+  groupProperties: JSON
+  appVersion: String
+  platform: String
+  osName: String
+  osVersion: String
+  deviceBrand: String
+  deviceModel: String
+  country: String
+  region: String
+  city: String
+  dma: String
+  language: String
+  price: Float
+  quantity: Int
+  revenue: Float
+  productId: String
+  revenueType: String
+  ip: String
+  sessionId: Long
+  uuid: String
+  serverUploadTime: DateTime
+  serverReceivedTime: DateTime
+  globalUserProperties: JSON
+}
+
+# ---------------------------------------------------------------------------
+# Event and User Properties
+# ---------------------------------------------------------------------------
+
+"""
+A property attached to a specific event type in the tracking plan.
+"""
+type EventProperty {
+  id: String!
+  eventTypeId: String
+  eventType: String
+  name: String!
+  type: PropertyType
+  description: String
+  regex: String
+  enumValues: [String]
+  isRequired: Boolean
+  isArray: Boolean
+  isActive: Boolean
+}
+
+"""
+A user-level property tracked on user profiles.
+"""
+type UserProperty {
+  id: String!
+  name: String!
+  type: PropertyType
+  description: String
+  regex: String
+  enumValues: [String]
+  isArray: Boolean
+  isActive: Boolean
+}
+
+"""
+A group-level property attached to group entities.
+"""
+type GroupProperty {
+  groupType: String!
+  name: String!
+  value: String
+}
+
+"""
+A single allowed value for an enumerated property.
+"""
+type PropertyValue {
+  id: String!
+  value: String!
+  description: String
+}
+
+# ---------------------------------------------------------------------------
+# User Identity
+# ---------------------------------------------------------------------------
+
+"""
+Represents a resolved user identity in Amplitude.
+"""
+type UserIdentity {
+  userId: String
+  deviceId: String
+  amplitudeId: Long
+  mergedAmplitudeIds: [Long]
+  userProperties: JSON
+  computedUserProperties: JSON
+  cohortIds: [String]
+  recommendations: [Recommendation]
+}
+
+"""
+A machine-learning recommendation record returned from the User Profile API.
+"""
+type Recommendation {
+  recommendationName: String
+  recommendationId: String
+  items: [RecommendationItem]
+  isControl: Boolean
+  hasBeenExposed: Boolean
+}
+
+type RecommendationItem {
+  itemId: String
+  score: Float
+  rank: Int
+}
+
+"""
+A user profile enriched with properties and cohort memberships.
+"""
+type UserProfile {
+  userId: String
+  deviceId: String
+  amplitudeId: Long
+  userProperties: JSON
+  computedUserProperties: JSON
+  cohortIds: [String]
+  recommendations: [Recommendation]
+}
+
+"""
+An identity mapping (alias) record linking two user IDs.
+"""
+type UserMapping {
+  userId: String!
+  globalUserId: String!
+  mergeTime: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Group Identity
+# ---------------------------------------------------------------------------
+
+"""
+A group entity (company, team, account) tracked in Amplitude.
+"""
+type GroupIdentity {
+  groupType: String!
+  groupValue: String!
+  groupProperties: JSON
+}
+
+# ---------------------------------------------------------------------------
+# Cohorts
+# ---------------------------------------------------------------------------
+
+"""
+A behavioral cohort — a set of users matching a shared definition.
+"""
+type Cohort {
+  id: String!
+  name: String!
+  description: String
+  appId: Int
+  size: Int
+  lastMod: DateTime
+  type: String
+  published: Boolean
+  archived: Boolean
+  owners: [String]
+  viewers: [String]
+  hidden: Boolean
+  definition: JSON
+  properties: [String]
+  syncedProperties: [String]
+  editId: String
+}
+
+"""
+A single membership record for a cohort.
+"""
+type CohortMembership {
+  cohortId: String!
+  userId: String
+  deviceId: String
+}
+
+"""
+A cohort export job result.
+"""
+type CohortExport {
+  cohortId: String!
+  requestId: String
+  status: CohortStatus!
+  url: URL
+  userIds: [String]
+  deviceIds: [String]
+  computedTime: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Taxonomy
+# ---------------------------------------------------------------------------
+
+"""
+A category grouping related event types in the tracking plan.
+"""
+type EventCategory {
+  id: String!
+  name: String!
+  description: String
+}
+
+"""
+An event type in the tracking plan taxonomy.
+"""
+type EventType {
+  id: String!
+  name: String!
+  description: String
+  categoryId: String
+  category: EventCategory
+  properties: [EventProperty]
+  tags: [String]
+  isActive: Boolean
+  isDeleted: Boolean
+  ownerId: Int
+  ownerUsername: String
+  autohidden: Boolean
+  hidden: Boolean
+}
+
+"""
+A user property definition in the tracking plan taxonomy.
+"""
+type TaxonomyUserProperty {
+  id: String!
+  name: String!
+  description: String
+  type: PropertyType
+  regex: String
+  enumValues: [String]
+  isArray: Boolean
+  isActive: Boolean
+  hidden: Boolean
+}
+
+"""
+An event property definition linked to an event type in the taxonomy.
+"""
+type TaxonomyEventProperty {
+  id: String!
+  name: String!
+  description: String
+  type: PropertyType
+  regex: String
+  enumValues: [String]
+  isRequired: Boolean
+  isArray: Boolean
+  isActive: Boolean
+  eventType: String
+  hidden: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Analytics Queries (Dashboard REST API shapes)
+# ---------------------------------------------------------------------------
+
+"""
+A segment filter clause for analytics queries.
+"""
+type Filter {
+  prop: String!
+  op: String!
+  values: [String!]!
+  type: String
+}
+
+"""
+A group-by dimension for segmentation analysis.
+"""
+type GroupBy {
+  type: String!
+  value: String!
+  groupType: String
+}
+
+"""
+A breakout configuration used in funnel and retention analysis.
+"""
+type Breakout {
+  prop: String!
+  op: String
+  values: [String]
+  type: String
+}
+
+"""
+A single data series returned by the event segmentation endpoint.
+"""
+type Segmentation {
+  series: [[Float]]!
+  seriesLabels: [String]
+  seriesCollapsed: [JSON]
+  xValues: [String]!
+  metaData: JSON
+}
+
+"""
+A funnel analysis result including conversion rates.
+"""
+type Funnel {
+  events: [FunnelEvent!]!
+  segments: [FunnelSegment]
+  startDate: String
+  endDate: String
+}
+
+type FunnelEvent {
+  name: String!
+  totals: [Int]
+  conversionRatios: [Float]
+  ordering: FunnelOrdering
+}
+
+type FunnelSegment {
+  name: String
+  filters: [Filter]
+}
+
+"""
+A retention analysis result.
+"""
+type Retention {
+  xValues: [String]!
+  yValues: [[Float]]!
+  segments: [String]
+  retentionType: RetentionType
+  interval: Int
+}
+
+# ---------------------------------------------------------------------------
+# Charts and Dashboards
+# ---------------------------------------------------------------------------
+
+"""
+A saved chart in Amplitude.
+"""
+type Chart {
+  id: String!
+  title: String!
+  type: String
+  description: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  ownerId: Int
+  ownerUsername: String
+  projectId: String
+  isPublic: Boolean
+  url: URL
+  definition: JSON
+}
+
+"""
+A dashboard grouping multiple charts.
+"""
+type Dashboard {
+  id: String!
+  title: String!
+  description: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  ownerId: Int
+  ownerUsername: String
+  projectId: String
+  charts: [Chart]
+  isPublic: Boolean
+  url: URL
+}
+
+"""
+A chart or timeline annotation.
+"""
+type Annotation {
+  id: Int!
+  label: String!
+  date: String!
+  details: String
+  chartId: String
+  dashboardId: String
+  type: AnnotationType
+  ownerId: Int
+  ownerUsername: String
+}
+
+# ---------------------------------------------------------------------------
+# Sessions
+# ---------------------------------------------------------------------------
+
+"""
+A user session aggregating a sequence of events.
+"""
+type Session {
+  sessionId: Long!
+  userId: String
+  deviceId: String
+  startTime: DateTime
+  endTime: DateTime
+  duration: Long
+  eventCount: Int
+  events: [Event]
+  platform: String
+  osName: String
+  country: String
+  city: String
+}
+
+# ---------------------------------------------------------------------------
+# Data Export
+# ---------------------------------------------------------------------------
+
+"""
+A data export job targeting a date range of raw event data.
+"""
+type DataExport {
+  id: String
+  startDate: String!
+  endDate: String!
+  status: String
+  url: URL
+  sizeBytes: Long
+  format: DataExportFormat
+  outputFiles: [String]
+}
+
+# ---------------------------------------------------------------------------
+# Attribution
+# ---------------------------------------------------------------------------
+
+"""
+A marketing attribution event linking a user to a campaign.
+"""
+type AttributionEvent {
+  userId: String
+  deviceId: String
+  campaignId: String
+  campaignName: String
+  source: String
+  medium: String
+  term: String
+  content: String
+  network: String
+  clickId: String
+  adGroup: String
+  creative: String
+  installTime: DateTime
+  eventType: String
+  time: Long
+  country: String
+  platform: String
+}
+
+# ---------------------------------------------------------------------------
+# Releases
+# ---------------------------------------------------------------------------
+
+"""
+A software release or deployment record.
+"""
+type Release {
+  id: String!
+  version: String!
+  title: String
+  releaseStart: DateTime
+  platforms: [String]
+  distributionPercentage: Float
+  createdAt: DateTime
+  projectId: String
+}
+
+# ---------------------------------------------------------------------------
+# Session Replay
+# ---------------------------------------------------------------------------
+
+"""
+A session replay recording associated with a session.
+"""
+type SessionReplay {
+  sessionId: Long!
+  userId: String
+  deviceId: String
+  startTime: DateTime
+  endTime: DateTime
+  duration: Long
+  events: [ReplayEvent]
+  projectId: String
+  platform: String
+}
+
+type ReplayEvent {
+  type: Int
+  timestamp: Long
+  data: JSON
+}
+
+# ---------------------------------------------------------------------------
+# Experimentation
+# ---------------------------------------------------------------------------
+
+"""
+A deployment target for an experiment or feature flag.
+"""
+type DeploymentConfig {
+  id: String!
+  key: String!
+  name: String
+  type: String
+  projectId: String
+  flags: [FlagConfig]
+}
+
+"""
+A local evaluation flag configuration downloaded from Amplitude Experiment.
+"""
+type FlagConfig {
+  flagKey: String!
+  flagType: String
+  flagVersion: Int
+  defaultValue: String
+  segments: [FlagSegment]
+  variants: [Variant]
+  enabled: Boolean
+  deployments: [String]
+  bucketingSalt: String
+  bucketingKey: String
+}
+
+type FlagSegment {
+  rule: JSON
+  variant: String
+  percentage: Int
+  metadata: JSON
+}
+
+"""
+A variant in an experiment or feature flag.
+"""
+type Variant {
+  key: String!
+  payload: JSON
+  name: String
+  description: String
+  type: VariantType
+}
+
+"""
+A complete experiment definition.
+"""
+type Experiment {
+  id: String!
+  key: String!
+  name: String
+  description: String
+  status: ExperimentStatus!
+  enabled: Boolean
+  projectId: String
+  deploymentId: String
+  variants: [Variant]
+  controlVariantKey: String
+  startDate: DateTime
+  endDate: DateTime
+  exposureEventType: String
+  metrics: [MetricResult]
+  holdoutGroupId: String
+  mutualExclusionGroupId: String
+  bucketingSalt: String
+  bucketingKey: String
+  tags: [String]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""
+A feature flag definition managed via Experiment.
+"""
+type Flag {
+  id: String!
+  key: String!
+  name: String
+  description: String
+  status: FlagStatus!
+  enabled: Boolean
+  projectId: String
+  deploymentId: String
+  variants: [Variant]
+  defaultValue: String
+  bucketingSalt: String
+  bucketingKey: String
+  tags: [String]
+  rolloutPercentage: Int
+  segments: [FlagSegment]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""
+An exposure event recording that a user was exposed to a variant.
+"""
+type Exposure {
+  flagKey: String!
+  variant: String!
+  experimentKey: String
+  userId: String
+  deviceId: String
+  time: Long
+  metadata: JSON
+}
+
+"""
+An assignment record from remote evaluation.
+"""
+type Assignment {
+  flagKey: String!
+  variant: Variant
+  status: AssignmentStatus!
+  userId: String
+  deviceId: String
+  evaluationMode: EvaluationMode
+  reason: String
+}
+
+"""
+A metric result from experiment analysis.
+"""
+type MetricResult {
+  metricId: String!
+  metricName: String
+  variantKey: String
+  controlKey: String
+  delta: Float
+  relativeChange: Float
+  pValue: Float
+  confidenceInterval: ConfidenceInterval
+  isSignificant: Boolean
+  sampleSize: Int
+  baseline: Float
+  treatment: Float
+}
+
+type ConfidenceInterval {
+  lower: Float
+  upper: Float
+  level: Float
+}
+
+"""
+An analytics query definition for programmatic chart data retrieval.
+"""
+type AnalyticsQuery {
+  eventType: String!
+  filters: [Filter]
+  groupBy: [GroupBy]
+  startDate: String!
+  endDate: String!
+  interval: SegmentationInterval
+  limit: Int
+  metric: String
+}
+
+# ---------------------------------------------------------------------------
+# Privacy
+# ---------------------------------------------------------------------------
+
+"""
+A GDPR/CCPA user data deletion or suppression request.
+"""
+type PrivacyDeletionRequest {
+  id: String!
+  userId: String
+  deviceId: String
+  type: PrivacyRequestType!
+  status: String
+  requestedAt: DateTime
+  completedAt: DateTime
+}
+
+"""
+A CCPA Data Subject Access Request (DSAR) job.
+"""
+type DSARRequest {
+  requestId: String!
+  userId: String
+  amplitudeId: Long
+  status: DSARStatus!
+  url: URL
+  fileList: [String]
+  requestedAt: DateTime
+  completedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# SCIM Provisioning
+# ---------------------------------------------------------------------------
+
+"""
+A SCIM 2.0 user managed via Amplitude's SCIM API.
+"""
+type SCIMUser {
+  id: String!
+  externalId: String
+  userName: String!
+  name: SCIMName
+  emails: [SCIMEmail]
+  active: Boolean
+  status: SCIMUserStatus
+  groups: [SCIMGroupRef]
+  roles: [String]
+  meta: SCIMMeta
+}
+
+type SCIMName {
+  formatted: String
+  givenName: String
+  familyName: String
+}
+
+type SCIMEmail {
+  value: String!
+  primary: Boolean
+  type: String
+}
+
+type SCIMGroupRef {
+  value: String
+  display: String
+}
+
+"""
+A SCIM 2.0 group managed via Amplitude's SCIM API.
+"""
+type SCIMGroup {
+  id: String!
+  externalId: String
+  displayName: String!
+  members: [SCIMGroupMember]
+  meta: SCIMMeta
+}
+
+type SCIMGroupMember {
+  value: String!
+  display: String
+}
+
+type SCIMMeta {
+  resourceType: String
+  created: DateTime
+  lastModified: DateTime
+  location: URL
+  version: String
+}
+
+# ---------------------------------------------------------------------------
+# Identify Operations
+# ---------------------------------------------------------------------------
+
+"""
+A user property mutation operation sent via the Identify API.
+"""
+type IdentifyOperation {
+  userId: String
+  deviceId: String
+  userProperties: [PropertyMutation!]!
+  groups: JSON
+  groupProperties: [GroupPropertyMutation]
+}
+
+type PropertyMutation {
+  mutation: MutationType!
+  property: String!
+  value: JSON
+}
+
+type GroupPropertyMutation {
+  groupType: String!
+  groupValue: String!
+  mutation: MutationType!
+  property: String!
+  value: JSON
+}
+
+# ---------------------------------------------------------------------------
+# Query Root
+# ---------------------------------------------------------------------------
+
+type Query {
+  # User Profile
+  userProfile(userId: String, deviceId: String, getRecommendations: Boolean, recommendationName: String): UserProfile
+  userIdentity(userId: String, deviceId: String): UserIdentity
+
+  # Cohorts
+  cohort(cohortId: String!): Cohort
+  cohorts: [Cohort]
+  cohortExport(requestId: String!): CohortExport
+
+  # Taxonomy
+  eventTypes: [EventType]
+  eventType(eventTypeId: String!): EventType
+  eventCategories: [EventCategory]
+  eventProperties(eventType: String!): [EventProperty]
+  userProperties: [UserProperty]
+
+  # Charts and Dashboards
+  chart(chartId: String!): Chart
+  charts: [Chart]
+  dashboard(dashboardId: String!): Dashboard
+  dashboards: [Dashboard]
+
+  # Annotations
+  annotation(annotationId: Int!): Annotation
+  annotations(start: String, end: String): [Annotation]
+
+  # Analytics
+  segmentation(query: AnalyticsQueryInput!): Segmentation
+  funnel(query: FunnelQueryInput!): Funnel
+  retention(query: RetentionQueryInput!): Retention
+
+  # Sessions
+  session(sessionId: Long!, userId: String, deviceId: String): Session
+
+  # Data Export
+  dataExport(jobId: String!): DataExport
+
+  # Experimentation
+  experiment(experimentId: String!): Experiment
+  experiments(projectId: String, status: ExperimentStatus): [Experiment]
+  flag(flagId: String!): Flag
+  flags(projectId: String, status: FlagStatus): [Flag]
+  flagConfigs(deploymentKey: String!): [FlagConfig]
+  assignment(userId: String, deviceId: String, flagKeys: [String!]!): [Assignment]
+
+  # Privacy
+  privacyDeletionRequest(requestId: String!): PrivacyDeletionRequest
+  dsarRequest(requestId: String!): DSARRequest
+
+  # SCIM
+  scimUser(userId: String!): SCIMUser
+  scimUsers(filter: String): [SCIMUser]
+  scimGroup(groupId: String!): SCIMGroup
+  scimGroups: [SCIMGroup]
+
+  # Releases
+  release(releaseId: String!): Release
+  releases(projectId: String): [Release]
+
+  # Session Replay
+  sessionReplay(sessionId: Long!): SessionReplay
+}
+
+# ---------------------------------------------------------------------------
+# Input Types
+# ---------------------------------------------------------------------------
+
+input FilterInput {
+  prop: String!
+  op: String!
+  values: [String!]!
+  type: String
+}
+
+input GroupByInput {
+  type: String!
+  value: String!
+  groupType: String
+}
+
+input AnalyticsQueryInput {
+  eventType: String!
+  filters: [FilterInput]
+  groupBy: [GroupByInput]
+  startDate: String!
+  endDate: String!
+  interval: SegmentationInterval
+  limit: Int
+  metric: String
+}
+
+input FunnelQueryInput {
+  events: [String!]!
+  startDate: String!
+  endDate: String!
+  filters: [FilterInput]
+  ordering: FunnelOrdering
+  conversionWindow: Int
+}
+
+input RetentionQueryInput {
+  startEvent: String!
+  returnEvent: String!
+  startDate: String!
+  endDate: String!
+  retentionType: RetentionType
+  interval: Int
+  filters: [FilterInput]
+}
+
+input EventInput {
+  userId: String
+  deviceId: String
+  eventType: String!
+  time: Long
+  eventProperties: JSON
+  userProperties: JSON
+  groups: JSON
+  groupProperties: JSON
+  appVersion: String
+  platform: String
+  osName: String
+  price: Float
+  quantity: Int
+  revenue: Float
+  productId: String
+  revenueType: String
+  ip: String
+  insertId: String
+  sessionId: Long
+}
+
+input CohortInput {
+  name: String!
+  description: String
+  appId: Int!
+  userIds: [String]
+  deviceIds: [String]
+}
+
+input AnnotationInput {
+  label: String!
+  date: String!
+  details: String
+  chartId: String
+  dashboardId: String
+}
+
+input ExperimentInput {
+  key: String!
+  name: String!
+  description: String
+  projectId: String!
+  deploymentId: String
+  variants: [VariantInput!]!
+  controlVariantKey: String
+  bucketingKey: String
+}
+
+input FlagInput {
+  key: String!
+  name: String!
+  description: String
+  projectId: String!
+  deploymentId: String
+  variants: [VariantInput!]
+  rolloutPercentage: Int
+  bucketingKey: String
+}
+
+input VariantInput {
+  key: String!
+  payload: JSON
+  name: String
+  description: String
+}
+
+input IdentifyOperationInput {
+  userId: String
+  deviceId: String
+  userProperties: [PropertyMutationInput!]!
+  groups: JSON
+}
+
+input PropertyMutationInput {
+  mutation: MutationType!
+  property: String!
+  value: JSON
+}
+
+input SCIMUserInput {
+  externalId: String
+  userName: String!
+  name: SCIMNameInput
+  emails: [SCIMEmailInput!]!
+  active: Boolean
+}
+
+input SCIMNameInput {
+  givenName: String
+  familyName: String
+  formatted: String
+}
+
+input SCIMEmailInput {
+  value: String!
+  primary: Boolean
+  type: String
+}
+
+input SCIMGroupInput {
+  externalId: String
+  displayName: String!
+  members: [SCIMGroupMemberInput]
+}
+
+input SCIMGroupMemberInput {
+  value: String!
+  display: String
+}
+
+input PrivacyDeletionInput {
+  userId: String
+  deviceId: String
+  type: PrivacyRequestType!
+}
+
+input ReleaseInput {
+  version: String!
+  title: String
+  releaseStart: DateTime
+  platforms: [String]
+  distributionPercentage: Float
+  projectId: String
+}
+
+# ---------------------------------------------------------------------------
+# Mutation Root
+# ---------------------------------------------------------------------------
+
+type Mutation {
+  # Ingestion
+  uploadEvent(event: EventInput!): EventBatch
+  uploadEvents(events: [EventInput!]!): EventBatch
+  identifyUser(operation: IdentifyOperationInput!): Boolean
+  identifyGroup(groupType: String!, groupValue: String!, groupProperties: JSON!): Boolean
+  uploadAttribution(event: EventInput!): Boolean
+
+  # Cohorts
+  createCohort(input: CohortInput!): Cohort
+  requestCohortExport(cohortId: String!): CohortExport
+
+  # Taxonomy
+  createEventCategory(name: String!, description: String): EventCategory
+  updateEventCategory(id: String!, name: String, description: String): EventCategory
+  deleteEventCategory(id: String!): Boolean
+
+  createEventType(name: String!, description: String, categoryId: String): EventType
+  updateEventType(id: String!, name: String, description: String, categoryId: String, hidden: Boolean): EventType
+  deleteEventType(id: String!): Boolean
+
+  createEventProperty(eventType: String!, name: String!, type: PropertyType, description: String, enumValues: [String], isRequired: Boolean): EventProperty
+  updateEventProperty(eventType: String!, propertyId: String!, name: String, description: String, type: PropertyType, hidden: Boolean): EventProperty
+  deleteEventProperty(eventType: String!, propertyId: String!): Boolean
+
+  createUserProperty(name: String!, type: PropertyType, description: String, enumValues: [String]): TaxonomyUserProperty
+  updateUserProperty(propertyId: String!, name: String, description: String, type: PropertyType, hidden: Boolean): TaxonomyUserProperty
+  deleteUserProperty(propertyId: String!): Boolean
+
+  # Annotations
+  createAnnotation(input: AnnotationInput!): Annotation
+  updateAnnotation(id: Int!, input: AnnotationInput!): Annotation
+  deleteAnnotation(id: Int!): Boolean
+
+  # User Mapping
+  mapUser(userId: String!, globalUserId: String!): UserMapping
+
+  # Privacy
+  requestDeletion(input: PrivacyDeletionInput!): PrivacyDeletionRequest
+  requestDSAR(userId: String, amplitudeId: Long): DSARRequest
+
+  # SCIM
+  createSCIMUser(input: SCIMUserInput!): SCIMUser
+  updateSCIMUser(userId: String!, input: SCIMUserInput!): SCIMUser
+  patchSCIMUser(userId: String!, operations: JSON!): SCIMUser
+  deleteSCIMUser(userId: String!): Boolean
+
+  createSCIMGroup(input: SCIMGroupInput!): SCIMGroup
+  updateSCIMGroup(groupId: String!, input: SCIMGroupInput!): SCIMGroup
+  patchSCIMGroup(groupId: String!, operations: JSON!): SCIMGroup
+  deleteSCIMGroup(groupId: String!): Boolean
+
+  # Experimentation
+  createExperiment(input: ExperimentInput!): Experiment
+  updateExperiment(experimentId: String!, input: ExperimentInput!): Experiment
+  activateExperiment(experimentId: String!): Experiment
+  pauseExperiment(experimentId: String!): Experiment
+  archiveExperiment(experimentId: String!): Experiment
+  deleteExperiment(experimentId: String!): Boolean
+
+  createFlag(input: FlagInput!): Flag
+  updateFlag(flagId: String!, input: FlagInput!): Flag
+  enableFlag(flagId: String!): Flag
+  disableFlag(flagId: String!): Flag
+  archiveFlag(flagId: String!): Flag
+  deleteFlag(flagId: String!): Boolean
+
+  trackExposure(flagKey: String!, variant: String!, userId: String, deviceId: String): Boolean
+
+  # Releases
+  createRelease(input: ReleaseInput!): Release
+  updateRelease(releaseId: String!, input: ReleaseInput!): Release
+  deleteRelease(releaseId: String!): Boolean
+}
