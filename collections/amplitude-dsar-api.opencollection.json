@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Data Subject Access Request API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Access",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Create a Data Subject Access Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/2/dsar/requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a data subject access request (DSAR) to retrieve all data Amplitude has collected for a specific user. The request is processed asynchronously and results are made available for download when complete. This endpoint supports CCPA and GDPR compliance workflows."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get DSAR Request Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/dsar/requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the DSAR request to check."
+              }
+            ]
+          },
+          "docs": "Check the status of a previously submitted data subject access request. Returns the processing status and download URL when complete."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Deletion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List Deletion Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/deletions/users",
+            "params": [
+              {
+                "name": "start_day",
+                "value": "",
+                "type": "query",
+                "description": "The start date to filter deletion requests in YYYY-MM-DD format."
+              },
+              {
+                "name": "end_day",
+                "value": "",
+                "type": "query",
+                "description": "The end date to filter deletion requests in YYYY-MM-DD format."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of previously submitted deletion requests and their processing status."
+        },
+        {
+          "info": {
+            "name": "Amplitude Request User Data Deletion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/2/deletions/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a request to delete all event data and user properties for one or more users identified by Amplitude IDs or user IDs. Each HTTP request can contain up to 100 amplitude_ids or user_ids. Rate limited to 1 request per second. Amplitude emails all account admins with deletion details when a request is submitted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

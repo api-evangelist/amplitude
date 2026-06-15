@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude User Mapping API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Mapping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Map User Identities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/2/usermap",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merge two user identities together by mapping one user_id to another. After mapping, all events and user properties from both identities are consolidated into a single user profile. This is typically used when an anonymous user creates an account."
+        },
+        {
+          "info": {
+            "name": "Amplitude Unmap User Identities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/2/userunmap",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reverse a previously created user identity mapping. After unmapping, the two identities are treated as separate users again. This does not retroactively separate events that were already merged."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

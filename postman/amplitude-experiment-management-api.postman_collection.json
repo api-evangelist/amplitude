@@ -1,0 +1,2293 @@
+{
+  "info": {
+    "_postman_id": "e29efde8-d302-42d8-914a-86d57b4362ae",
+    "name": "Amplitude Experiment Management API",
+    "description": "The Amplitude Experiment Management API provides programmatic control over feature flags and experiments. It supports creating, updating, activating, and archiving experiments and flags, as well as managing deployments, variants, holdout groups, and mutual exclusion groups. This API enables teams to integrate experiment lifecycle management into their CI/CD pipelines, automate flag rollouts, and manage experimentation workflows without using the Amplitude UI.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:40.000Z",
+    "updatedAt": "2026-06-05T15:05:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e29efde8-d302-42d8-914a-86d57b4362ae"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "1",
+          "item": [
+            {
+              "name": "flags",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Amplitude Get a Flag",
+                      "id": "5f5f0074-8f95-493e-959b-45cf9e34a1a4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/flags/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "flags",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "445b305f-14e5-4b0b-b0ac-e3152c62752b",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the feature flag."
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single feature flag by its ID including full configuration details such as deployments, variants, and targeting segments."
+                      },
+                      "response": [
+                        {
+                          "id": "74b82161-6d8e-4314-9002-6642aaa8dc72",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/flags/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "flags",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"<string>\",\n  \"bucketingSalt\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"deployments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ],\n  \"state\": \"active\"\n}",
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-74b82161-6d8e-4314-9002-6642aaa8dc72"
+                        },
+                        {
+                          "id": "8d9e8856-f5c9-4aae-a019-c9153ac99c31",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/flags/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "flags",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-8d9e8856-f5c9-4aae-a019-c9153ac99c31"
+                        },
+                        {
+                          "id": "b73f8a0f-2879-478e-a884-20d608cb13a7",
+                          "name": "Flag not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/flags/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "flags",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-b73f8a0f-2879-478e-a884-20d608cb13a7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-5f5f0074-8f95-493e-959b-45cf9e34a1a4"
+                    },
+                    {
+                      "name": "Amplitude Update a Flag",
+                      "id": "31f4ec63-6ec6-4239-99d4-7ac14deffae1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/flags/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "flags",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7b4d8b75-b664-42e6-99d5-df60cad3eb81",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the feature flag."
+                            }
+                          ]
+                        },
+                        "description": "Update an existing feature flag's configuration. Only the fields included in the request body are updated."
+                      },
+                      "response": [
+                        {
+                          "id": "28e879c4-c0b9-47f0-9bdd-bef37a485bb4",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/flags/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "flags",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"<string>\",\n  \"bucketingSalt\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"deployments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ],\n  \"state\": \"active\"\n}",
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-28e879c4-c0b9-47f0-9bdd-bef37a485bb4"
+                        },
+                        {
+                          "id": "edd52597-2225-442e-867a-ac80de8fd29f",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/flags/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "flags",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-edd52597-2225-442e-867a-ac80de8fd29f"
+                        },
+                        {
+                          "id": "bafe2849-4715-4eb5-9825-8501e8d214d1",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/flags/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "flags",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-bafe2849-4715-4eb5-9825-8501e8d214d1"
+                        },
+                        {
+                          "id": "074265d5-a05d-469d-bb57-05fe1c9e128d",
+                          "name": "Flag not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/flags/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "flags",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-074265d5-a05d-469d-bb57-05fe1c9e128d"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-31f4ec63-6ec6-4239-99d4-7ac14deffae1"
+                    }
+                  ],
+                  "id": "03207a34-4741-492f-912c-ac271a37c9e5",
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-03207a34-4741-492f-912c-ac271a37c9e5"
+                },
+                {
+                  "name": "Amplitude List All Flags",
+                  "id": "5e13c09a-cec8-4943-bea7-e8962d7320c9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/1/flags?limit=<integer>&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "1",
+                        "flags"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of flags to return.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "A cursor for pagination returned from a previous request.",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of all feature flags in the project. Returns flag metadata including status, variants, and deployment information."
+                  },
+                  "response": [
+                    {
+                      "id": "74c95fae-e35c-42cd-aaba-26405a6f9588",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/flags?limit=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "flags"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of flags to return.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "A cursor for pagination returned from a previous request.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"flags\": [\n    {\n      \"id\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"evaluationMode\": \"remote\",\n      \"bucketingKey\": \"<string>\",\n      \"bucketingSalt\": \"<string>\",\n      \"variants\": [\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payload\": {\n            \"description\": \"An optional JSON payload associated with the variant.\"\n          },\n          \"description\": \"<string>\",\n          \"rolloutWeight\": \"<integer>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payload\": {\n            \"description\": \"An optional JSON payload associated with the variant.\"\n          },\n          \"description\": \"<string>\",\n          \"rolloutWeight\": \"<integer>\"\n        }\n      ],\n      \"deployments\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"segments\": [\n        {\n          \"name\": \"<string>\",\n          \"conditions\": [\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"variant\": \"<string>\",\n          \"percentage\": \"<integer>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"conditions\": [\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"variant\": \"<string>\",\n          \"percentage\": \"<integer>\"\n        }\n      ],\n      \"state\": \"active\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"evaluationMode\": \"remote\",\n      \"bucketingKey\": \"<string>\",\n      \"bucketingSalt\": \"<string>\",\n      \"variants\": [\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payload\": {\n            \"description\": \"An optional JSON payload associated with the variant.\"\n          },\n          \"description\": \"<string>\",\n          \"rolloutWeight\": \"<integer>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payload\": {\n            \"description\": \"An optional JSON payload associated with the variant.\"\n          },\n          \"description\": \"<string>\",\n          \"rolloutWeight\": \"<integer>\"\n        }\n      ],\n      \"deployments\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"segments\": [\n        {\n          \"name\": \"<string>\",\n          \"conditions\": [\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"variant\": \"<string>\",\n          \"percentage\": \"<integer>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"conditions\": [\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"variant\": \"<string>\",\n          \"percentage\": \"<integer>\"\n        }\n      ],\n      \"state\": \"archived\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-74c95fae-e35c-42cd-aaba-26405a6f9588"
+                    },
+                    {
+                      "id": "6e68ef0e-1a8b-4863-a117-7defa2e33045",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/flags?limit=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "flags"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of flags to return.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "A cursor for pagination returned from a previous request.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-6e68ef0e-1a8b-4863-a117-7defa2e33045"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-5e13c09a-cec8-4943-bea7-e8962d7320c9"
+                },
+                {
+                  "name": "Amplitude Create a Flag",
+                  "id": "410fc5b1-1661-4f84-a4d4-a318cc3caa66",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/1/flags",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "1",
+                        "flags"
+                      ]
+                    },
+                    "description": "Create a new feature flag with the specified key, variants, and targeting configuration."
+                  },
+                  "response": [
+                    {
+                      "id": "6f79643b-da78-4d18-8724-9c172ddaaa9e",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/flags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "flags"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"<string>\",\n  \"bucketingSalt\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"deployments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ],\n  \"state\": \"active\"\n}",
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-6f79643b-da78-4d18-8724-9c172ddaaa9e"
+                    },
+                    {
+                      "id": "bdd7b5a4-8038-4b43-92f1-6bfb94e13127",
+                      "name": "Bad request - invalid flag configuration",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/flags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "flags"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-bdd7b5a4-8038-4b43-92f1-6bfb94e13127"
+                    },
+                    {
+                      "id": "c446f9f5-85e8-42e5-83e8-840465c47214",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/flags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "flags"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-c446f9f5-85e8-42e5-83e8-840465c47214"
+                    },
+                    {
+                      "id": "00a482d9-4298-4687-9339-fb0dfdc26363",
+                      "name": "Flag key already exists",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/flags",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "flags"
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-00a482d9-4298-4687-9339-fb0dfdc26363"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-410fc5b1-1661-4f84-a4d4-a318cc3caa66"
+                }
+              ],
+              "id": "c5e7d602-0a46-4f43-bec6-59c4eda57ee9",
+              "createdAt": "2026-06-05T15:05:40.000Z",
+              "updatedAt": "2026-06-05T15:05:40.000Z",
+              "uid": "35240-c5e7d602-0a46-4f43-bec6-59c4eda57ee9"
+            },
+            {
+              "name": "experiments",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Amplitude Get an Experiment",
+                      "id": "8d91b403-8273-4ff7-8a9c-eea1283377cb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/experiments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "experiments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1e89980a-b798-442a-9cb3-963c6c579d37",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the experiment."
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single experiment by its ID including full configuration details."
+                      },
+                      "response": [
+                        {
+                          "id": "5821d827-079d-45c4-afa4-92c927eac611",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/experiments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "experiments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"evaluationMode\": \"remote\",\n  \"bucketingKey\": \"<string>\",\n  \"bucketingSalt\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"deployments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ],\n  \"state\": \"stopped\",\n  \"rolledOutVariant\": \"<string>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-5821d827-079d-45c4-afa4-92c927eac611"
+                        },
+                        {
+                          "id": "9f3e63cf-249b-4c77-a48c-3e503c1cedc3",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/experiments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "experiments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-9f3e63cf-249b-4c77-a48c-3e503c1cedc3"
+                        },
+                        {
+                          "id": "9ab24e62-be03-4671-9e76-b0efc678755c",
+                          "name": "Experiment not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/experiments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "experiments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-9ab24e62-be03-4671-9e76-b0efc678755c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-8d91b403-8273-4ff7-8a9c-eea1283377cb"
+                    },
+                    {
+                      "name": "Amplitude Update an Experiment",
+                      "id": "7aab460e-31de-418e-a418-098a6a2b3be3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/experiments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "experiments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9e369f35-9b89-4663-a3cd-fcc4e4bc8de1",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the experiment."
+                            }
+                          ]
+                        },
+                        "description": "Update an existing experiment's configuration."
+                      },
+                      "response": [
+                        {
+                          "id": "282167c5-193b-4693-aec9-04608f0a8275",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/experiments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "experiments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"evaluationMode\": \"remote\",\n  \"bucketingKey\": \"<string>\",\n  \"bucketingSalt\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"deployments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ],\n  \"state\": \"stopped\",\n  \"rolledOutVariant\": \"<string>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-282167c5-193b-4693-aec9-04608f0a8275"
+                        },
+                        {
+                          "id": "36370c5b-a13d-4ff9-825a-609fe2d1896f",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/experiments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "experiments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-36370c5b-a13d-4ff9-825a-609fe2d1896f"
+                        },
+                        {
+                          "id": "97c636c8-84e6-4795-887f-2471e5f2b82b",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/experiments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "experiments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-97c636c8-84e6-4795-887f-2471e5f2b82b"
+                        },
+                        {
+                          "id": "f7a05ec7-c5ff-430b-a3ce-b1ae5a1d088c",
+                          "name": "Experiment not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/experiments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "experiments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-f7a05ec7-c5ff-430b-a3ce-b1ae5a1d088c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-7aab460e-31de-418e-a418-098a6a2b3be3"
+                    }
+                  ],
+                  "id": "1caebc63-6d38-497a-a500-7edc7fb849cc",
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-1caebc63-6d38-497a-a500-7edc7fb849cc"
+                },
+                {
+                  "name": "Amplitude List All Experiments",
+                  "id": "2f34a67b-3e99-4694-abc6-dbf01b89aa79",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/1/experiments?limit=<integer>&cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "1",
+                        "experiments"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of experiments to return.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "A cursor for pagination.",
+                          "key": "cursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of all experiments in the project. Returns experiment metadata including status, variants, and deployment information."
+                  },
+                  "response": [
+                    {
+                      "id": "2c8ae06a-8c55-4b42-9aed-a14307615b41",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/experiments?limit=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "experiments"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of experiments to return.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "A cursor for pagination.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"experiments\": [\n    {\n      \"id\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"evaluationMode\": \"remote\",\n      \"bucketingKey\": \"<string>\",\n      \"bucketingSalt\": \"<string>\",\n      \"variants\": [\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payload\": {\n            \"description\": \"An optional JSON payload associated with the variant.\"\n          },\n          \"description\": \"<string>\",\n          \"rolloutWeight\": \"<integer>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payload\": {\n            \"description\": \"An optional JSON payload associated with the variant.\"\n          },\n          \"description\": \"<string>\",\n          \"rolloutWeight\": \"<integer>\"\n        }\n      ],\n      \"deployments\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"segments\": [\n        {\n          \"name\": \"<string>\",\n          \"conditions\": [\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"variant\": \"<string>\",\n          \"percentage\": \"<integer>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"conditions\": [\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"variant\": \"<string>\",\n          \"percentage\": \"<integer>\"\n        }\n      ],\n      \"state\": \"stopped\",\n      \"rolledOutVariant\": \"<string>\",\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"evaluationMode\": \"remote\",\n      \"bucketingKey\": \"<string>\",\n      \"bucketingSalt\": \"<string>\",\n      \"variants\": [\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payload\": {\n            \"description\": \"An optional JSON payload associated with the variant.\"\n          },\n          \"description\": \"<string>\",\n          \"rolloutWeight\": \"<integer>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"name\": \"<string>\",\n          \"payload\": {\n            \"description\": \"An optional JSON payload associated with the variant.\"\n          },\n          \"description\": \"<string>\",\n          \"rolloutWeight\": \"<integer>\"\n        }\n      ],\n      \"deployments\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"segments\": [\n        {\n          \"name\": \"<string>\",\n          \"conditions\": [\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"variant\": \"<string>\",\n          \"percentage\": \"<integer>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"conditions\": [\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            {\n              \"type\": \"<string>\",\n              \"prop\": \"<string>\",\n              \"op\": \"<string>\",\n              \"values\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          ],\n          \"variant\": \"<string>\",\n          \"percentage\": \"<integer>\"\n        }\n      ],\n      \"state\": \"stopped\",\n      \"rolledOutVariant\": \"<string>\",\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-2c8ae06a-8c55-4b42-9aed-a14307615b41"
+                    },
+                    {
+                      "id": "17ac913f-e978-4a63-98f4-d7e6acde19ac",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/experiments?limit=<integer>&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "experiments"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of experiments to return.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "A cursor for pagination.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-17ac913f-e978-4a63-98f4-d7e6acde19ac"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-2f34a67b-3e99-4694-abc6-dbf01b89aa79"
+                },
+                {
+                  "name": "Amplitude Create an Experiment",
+                  "id": "9af960b9-5b48-42ea-9d22-04b37cbb1eda",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/1/experiments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "1",
+                        "experiments"
+                      ]
+                    },
+                    "description": "Create a new A/B test experiment with the specified key, variants, and targeting configuration."
+                  },
+                  "response": [
+                    {
+                      "id": "546dc01a-5d94-4dd4-a4e2-1f5601d0690e",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/experiments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "experiments"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"evaluationMode\": \"remote\",\n  \"bucketingKey\": \"<string>\",\n  \"bucketingSalt\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"deployments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ],\n  \"state\": \"stopped\",\n  \"rolledOutVariant\": \"<string>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-546dc01a-5d94-4dd4-a4e2-1f5601d0690e"
+                    },
+                    {
+                      "id": "64c36dec-2791-4d72-9dfa-52efefc4dc50",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/experiments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "experiments"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-64c36dec-2791-4d72-9dfa-52efefc4dc50"
+                    },
+                    {
+                      "id": "d79f570d-42c8-4bf8-96d3-f4bbb3207393",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/experiments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "experiments"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-d79f570d-42c8-4bf8-96d3-f4bbb3207393"
+                    },
+                    {
+                      "id": "5d025458-c221-498a-b93d-c677e5666e9f",
+                      "name": "Experiment key already exists",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {\n        \"description\": \"An optional JSON payload associated with the variant.\"\n      },\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/experiments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "experiments"
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-5d025458-c221-498a-b93d-c677e5666e9f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-9af960b9-5b48-42ea-9d22-04b37cbb1eda"
+                }
+              ],
+              "id": "6a0bae4b-4655-4443-b58c-8c3c051e7ef6",
+              "createdAt": "2026-06-05T15:05:40.000Z",
+              "updatedAt": "2026-06-05T15:05:40.000Z",
+              "uid": "35240-6a0bae4b-4655-4443-b58c-8c3c051e7ef6"
+            },
+            {
+              "name": "deployments",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Amplitude Get a Deployment",
+                      "id": "532e2e21-0076-4d8b-8499-231f417a7865",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/deployments/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "deployments",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "45606cd7-f285-4ddd-b10e-f7fa079bbd3a",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the deployment."
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single deployment by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "12a6c161-1c3e-4e3a-9e27-1a1b75576f5e",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/deployments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "deployments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"projectId\": \"<string>\",\n  \"label\": \"<string>\",\n  \"key\": \"<string>\",\n  \"deleted\": \"<boolean>\"\n}",
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-12a6c161-1c3e-4e3a-9e27-1a1b75576f5e"
+                        },
+                        {
+                          "id": "217b4050-1406-4e09-8742-95232447a6b0",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/deployments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "deployments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-217b4050-1406-4e09-8742-95232447a6b0"
+                        },
+                        {
+                          "id": "ec9b67bb-e47b-477f-8653-6b5817066734",
+                          "name": "Deployment not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/1/deployments/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "1",
+                                "deployments",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:40.000Z",
+                          "updatedAt": "2026-06-05T15:05:40.000Z",
+                          "uid": "35240-ec9b67bb-e47b-477f-8653-6b5817066734"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-532e2e21-0076-4d8b-8499-231f417a7865"
+                    }
+                  ],
+                  "id": "fd1063bb-e55a-4e45-a267-e59b3d72b7dd",
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-fd1063bb-e55a-4e45-a267-e59b3d72b7dd"
+                },
+                {
+                  "name": "Amplitude List All Deployments",
+                  "id": "9eb7feae-f2e7-49eb-ac08-afec29e3e5c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/1/deployments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "1",
+                        "deployments"
+                      ]
+                    },
+                    "description": "Retrieve a list of all deployments that experiments and flags can be assigned to. Deployments represent environments or platforms where flags are evaluated."
+                  },
+                  "response": [
+                    {
+                      "id": "6cdf48f4-0a8e-4b21-a952-0bbf95bf132e",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/deployments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "deployments"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"deployments\": [\n    {\n      \"id\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"label\": \"<string>\",\n      \"key\": \"<string>\",\n      \"deleted\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"projectId\": \"<string>\",\n      \"label\": \"<string>\",\n      \"key\": \"<string>\",\n      \"deleted\": \"<boolean>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-6cdf48f4-0a8e-4b21-a952-0bbf95bf132e"
+                    },
+                    {
+                      "id": "bf98b8e8-db30-46cd-ad08-f251e3415f0d",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/deployments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "deployments"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-bf98b8e8-db30-46cd-ad08-f251e3415f0d"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-9eb7feae-f2e7-49eb-ac08-afec29e3e5c5"
+                }
+              ],
+              "id": "e152ca69-318e-46ee-b281-9e162280682d",
+              "createdAt": "2026-06-05T15:05:40.000Z",
+              "updatedAt": "2026-06-05T15:05:40.000Z",
+              "uid": "35240-e152ca69-318e-46ee-b281-9e162280682d"
+            },
+            {
+              "name": "versions",
+              "item": [
+                {
+                  "name": "Amplitude List Flag and Experiment Versions",
+                  "id": "09f58378-dc04-475c-9b57-3600f3d39db9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/1/versions?limit=<integer>&cursor=<string>&start=<date>&end=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "1",
+                        "versions"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of versions to return.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "A cursor for pagination.",
+                          "key": "cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The start date for filtering versions.",
+                          "key": "start",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "The end date for filtering versions.",
+                          "key": "end",
+                          "value": "<date>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the version history for flags and experiments. Returns a paginated list of version records with change details."
+                  },
+                  "response": [
+                    {
+                      "id": "5625f89f-fbf8-4ce5-8a99-c0489cc0f78d",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/versions?limit=<integer>&cursor=<string>&start=<date>&end=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "versions"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of versions to return.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "A cursor for pagination.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The start date for filtering versions.",
+                              "key": "start",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "The end date for filtering versions.",
+                              "key": "end",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"versions\": [\n    {\n      \"id\": \"<string>\",\n      \"flagId\": \"<string>\",\n      \"version\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"createdBy\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"flagId\": \"<string>\",\n      \"version\": \"<integer>\",\n      \"createdAt\": \"<dateTime>\",\n      \"createdBy\": \"<string>\"\n    }\n  ],\n  \"nextCursor\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-5625f89f-fbf8-4ce5-8a99-c0489cc0f78d"
+                    },
+                    {
+                      "id": "b5972c97-0b12-4412-aa8d-be70b7c99209",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/1/versions?limit=<integer>&cursor=<string>&start=<date>&end=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "1",
+                            "versions"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of versions to return.",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "A cursor for pagination.",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The start date for filtering versions.",
+                              "key": "start",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "The end date for filtering versions.",
+                              "key": "end",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:40.000Z",
+                      "updatedAt": "2026-06-05T15:05:40.000Z",
+                      "uid": "35240-b5972c97-0b12-4412-aa8d-be70b7c99209"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:40.000Z",
+                  "updatedAt": "2026-06-05T15:05:40.000Z",
+                  "uid": "35240-09f58378-dc04-475c-9b57-3600f3d39db9"
+                }
+              ],
+              "id": "f3dd1bdb-49e0-4988-b58d-6879fc4961c1",
+              "createdAt": "2026-06-05T15:05:40.000Z",
+              "updatedAt": "2026-06-05T15:05:40.000Z",
+              "uid": "35240-f3dd1bdb-49e0-4988-b58d-6879fc4961c1"
+            }
+          ],
+          "id": "c1ca58df-5746-4b5b-8921-c7177239da9e",
+          "createdAt": "2026-06-05T15:05:40.000Z",
+          "updatedAt": "2026-06-05T15:05:40.000Z",
+          "uid": "35240-c1ca58df-5746-4b5b-8921-c7177239da9e"
+        }
+      ],
+      "id": "ef9d87ed-aa10-43ce-9187-a81e95f290eb",
+      "createdAt": "2026-06-05T15:05:40.000Z",
+      "updatedAt": "2026-06-05T15:05:40.000Z",
+      "uid": "35240-ef9d87ed-aa10-43ce-9187-a81e95f290eb"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://experiment.amplitude.com"
+    }
+  ]
+}

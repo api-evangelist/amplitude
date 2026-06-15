@@ -1,0 +1,328 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Dashboard REST API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Segmentation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get Event Segmentation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/events/segmentation",
+            "params": [
+              {
+                "name": "e",
+                "value": "",
+                "type": "query",
+                "description": "A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date in YYYYMMDD format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date in YYYYMMDD format."
+              },
+              {
+                "name": "m",
+                "value": "",
+                "type": "query",
+                "description": "The metric to compute. Options include uniques, totals, pct_dau, average, histogram, sums, value_avg, or formula."
+              },
+              {
+                "name": "i",
+                "value": "",
+                "type": "query",
+                "description": "Time interval granularity. Use -300000 for real-time, 1 for daily, 7 for weekly, or 30 for monthly."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Segment definitions as a JSON-encoded array of segment objects for filtering results."
+              },
+              {
+                "name": "g",
+                "value": "",
+                "type": "query",
+                "description": "The property to group results by, such as a user property or event property name."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of group-by values to return. Default is 100, max is 1000."
+              }
+            ]
+          },
+          "docs": "Get metrics for an event with segmentation. Returns event totals, unique users, or other metrics broken down by time intervals and optional segment or group-by properties."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Funnel Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get Funnel Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/funnels",
+            "params": [
+              {
+                "name": "e",
+                "value": "",
+                "type": "query",
+                "description": "A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date in YYYYMMDD format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date in YYYYMMDD format."
+              },
+              {
+                "name": "n",
+                "value": "",
+                "type": "query",
+                "description": "The conversion window in days. Default varies by project settings."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Segment definitions as a JSON-encoded array."
+              },
+              {
+                "name": "g",
+                "value": "",
+                "type": "query",
+                "description": "The property to group results by."
+              }
+            ]
+          },
+          "docs": "Get funnel drop-off and conversion rates for a sequence of events. Each event parameter in the query string defines a step in the funnel."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Retention Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get Retention Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/retention",
+            "params": [
+              {
+                "name": "se",
+                "value": "",
+                "type": "query",
+                "description": "The starting event as a JSON-encoded object with event_type field."
+              },
+              {
+                "name": "re",
+                "value": "",
+                "type": "query",
+                "description": "The returning event as a JSON-encoded object with event_type field."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date in YYYYMMDD format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date in YYYYMMDD format."
+              },
+              {
+                "name": "rm",
+                "value": "",
+                "type": "query",
+                "description": "Retention mode. Use bracket for N-day retention or rolling for unbounded retention."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Segment definitions as a JSON-encoded array."
+              }
+            ]
+          },
+          "docs": "Get user retention for specific starting and returning actions. Returns retention data broken down by cohort date showing the percentage of users who returned on each subsequent day."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Activity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get User Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/useractivity",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The user_id to look up activity for."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset for pagination. Default is 0."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of events to return. Default is 1000."
+              }
+            ]
+          },
+          "docs": "Get a user's most recent events, with optional filters on event types. Returns up to 1000 of the most recent events for a given user."
+        },
+        {
+          "info": {
+            "name": "Amplitude Search Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/usersearch",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The user_id, device_id, or Amplitude ID to search for."
+              }
+            ]
+          },
+          "docs": "Search for a user by user_id, device_id, or Amplitude ID. Returns matching user identifiers and their most recent event details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Revenue Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get Revenue LTV Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/revenue/day",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date in YYYYMMDD format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date in YYYYMMDD format."
+              },
+              {
+                "name": "m",
+                "value": "",
+                "type": "query",
+                "description": "The revenue metric to compute."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Segment definitions as a JSON-encoded array."
+              },
+              {
+                "name": "g",
+                "value": "",
+                "type": "query",
+                "description": "The property to group results by."
+              }
+            ]
+          },
+          "docs": "Get revenue lifetime value (LTV) data for new users acquired during the specified date range."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Event List",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/events/list"
+          },
+          "docs": "Get the list of event types in the project along with their volume over the last 30 days."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

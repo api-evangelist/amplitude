@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude HTTP V2 API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Upload Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/2/httpapi",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send up to 10 events per request to Amplitude for ingestion. Each event must include either a user_id or device_id, and an event_type. The API validates the request and returns detailed error reporting for any invalid events in the batch."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

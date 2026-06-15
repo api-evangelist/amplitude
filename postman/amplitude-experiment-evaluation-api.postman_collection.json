@@ -1,0 +1,520 @@
+{
+  "info": {
+    "_postman_id": "4720fa5d-56ab-464d-bfa8-3197cc5049fb",
+    "name": "Amplitude Experiment Evaluation API",
+    "description": "The Amplitude Experiment Evaluation API retrieves variant assignment data for users through remote evaluation. When called, it evaluates targeting rules and returns the assigned variant for each active experiment or feature flag. The API also tracks assignment events automatically in Amplitude Analytics. It is used by server-side applications that need to determine which experiment variant or feature flag value to serve to a given user in real time.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:38.000Z",
+    "updatedAt": "2026-06-05T15:05:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4720fa5d-56ab-464d-bfa8-3197cc5049fb"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "vardata",
+          "item": [
+            {
+              "name": "Amplitude Evaluate Variants for a User",
+              "id": "fd9ca760-4865-420b-a3a7-714bebd4b802",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_properties\": {\n    \"eiusmodcd\": 93028036,\n    \"sedc\": 47044522.66226852\n  },\n  \"groups\": {\n    \"fugiat74a\": -95293110.77119096,\n    \"eac\": false\n  },\n  \"group_properties\": {\n    \"ullamco_9c8\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/vardata",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "vardata"
+                  ]
+                },
+                "description": "Remotely evaluate all active experiments and feature flags for a specific user. Returns the variant assignments based on the user's properties and targeting rules. Amplitude automatically tracks an Experiment Assignment event for each evaluation."
+              },
+              "response": [
+                {
+                  "id": "6a1ea8b5-4814-4bc1-ba08-9ef70c5bcdd0",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_properties\": {\n    \"eiusmodcd\": 93028036,\n    \"sedc\": 47044522.66226852\n  },\n  \"groups\": {\n    \"fugiat74a\": -95293110.77119096,\n    \"eac\": false\n  },\n  \"group_properties\": {\n    \"ullamco_9c8\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/vardata",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "vardata"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"consequat8\": {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"payload\": {\n      \"description\": \"An optional JSON payload associated with the variant.\"\n    },\n    \"metadata\": {\n      \"experimentKey\": \"<string>\",\n      \"flagType\": \"<string>\",\n      \"flagVersion\": \"<integer>\",\n      \"default\": \"<boolean>\"\n    }\n  },\n  \"Excepteur6f\": {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"payload\": {\n      \"description\": \"An optional JSON payload associated with the variant.\"\n    },\n    \"metadata\": {\n      \"experimentKey\": \"<string>\",\n      \"flagType\": \"<string>\",\n      \"flagVersion\": \"<integer>\",\n      \"default\": \"<boolean>\"\n    }\n  },\n  \"consectetur_9\": {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"payload\": {\n      \"description\": \"An optional JSON payload associated with the variant.\"\n    },\n    \"metadata\": {\n      \"experimentKey\": \"<string>\",\n      \"flagType\": \"<string>\",\n      \"flagVersion\": \"<integer>\",\n      \"default\": \"<boolean>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:05:39.000Z",
+                  "updatedAt": "2026-06-05T15:05:39.000Z",
+                  "uid": "35240-6a1ea8b5-4814-4bc1-ba08-9ef70c5bcdd0"
+                },
+                {
+                  "id": "9dd2ab38-5ee3-4e5b-9708-68f3b5fb6794",
+                  "name": "Bad request - missing user context",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_properties\": {\n    \"eiusmodcd\": 93028036,\n    \"sedc\": 47044522.66226852\n  },\n  \"groups\": {\n    \"fugiat74a\": -95293110.77119096,\n    \"eac\": false\n  },\n  \"group_properties\": {\n    \"ullamco_9c8\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/vardata",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "vardata"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:39.000Z",
+                  "updatedAt": "2026-06-05T15:05:39.000Z",
+                  "uid": "35240-9dd2ab38-5ee3-4e5b-9708-68f3b5fb6794"
+                },
+                {
+                  "id": "661536d2-f9ec-4197-be3d-66b097321779",
+                  "name": "Unauthorized - invalid deployment key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_properties\": {\n    \"eiusmodcd\": 93028036,\n    \"sedc\": 47044522.66226852\n  },\n  \"groups\": {\n    \"fugiat74a\": -95293110.77119096,\n    \"eac\": false\n  },\n  \"group_properties\": {\n    \"ullamco_9c8\": true\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/vardata",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "vardata"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:39.000Z",
+                  "updatedAt": "2026-06-05T15:05:39.000Z",
+                  "uid": "35240-661536d2-f9ec-4197-be3d-66b097321779"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:39.000Z",
+              "updatedAt": "2026-06-05T15:05:39.000Z",
+              "uid": "35240-fd9ca760-4865-420b-a3a7-714bebd4b802"
+            },
+            {
+              "name": "Amplitude Evaluate Variants for a User via GET",
+              "id": "af1b2b9c-6f1e-4345-9e91-216e91db4782",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/vardata?user_id=<string>&device_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "vardata"
+                  ],
+                  "query": [
+                    {
+                      "description": "The user ID to evaluate variants for.",
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The device ID to evaluate variants for.",
+                      "key": "device_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Remotely evaluate all active experiments and feature flags for a user identified by query parameters. Returns variant assignments based on targeting rules."
+              },
+              "response": [
+                {
+                  "id": "70e8e8cd-bcb9-4eb9-804f-edbace0c8e67",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/vardata?user_id=<string>&device_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "vardata"
+                      ],
+                      "query": [
+                        {
+                          "description": "The user ID to evaluate variants for.",
+                          "key": "user_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The device ID to evaluate variants for.",
+                          "key": "device_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"consequat8\": {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"payload\": {\n      \"description\": \"An optional JSON payload associated with the variant.\"\n    },\n    \"metadata\": {\n      \"experimentKey\": \"<string>\",\n      \"flagType\": \"<string>\",\n      \"flagVersion\": \"<integer>\",\n      \"default\": \"<boolean>\"\n    }\n  },\n  \"Excepteur6f\": {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"payload\": {\n      \"description\": \"An optional JSON payload associated with the variant.\"\n    },\n    \"metadata\": {\n      \"experimentKey\": \"<string>\",\n      \"flagType\": \"<string>\",\n      \"flagVersion\": \"<integer>\",\n      \"default\": \"<boolean>\"\n    }\n  },\n  \"consectetur_9\": {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\",\n    \"payload\": {\n      \"description\": \"An optional JSON payload associated with the variant.\"\n    },\n    \"metadata\": {\n      \"experimentKey\": \"<string>\",\n      \"flagType\": \"<string>\",\n      \"flagVersion\": \"<integer>\",\n      \"default\": \"<boolean>\"\n    }\n  }\n}",
+                  "createdAt": "2026-06-05T15:05:39.000Z",
+                  "updatedAt": "2026-06-05T15:05:39.000Z",
+                  "uid": "35240-70e8e8cd-bcb9-4eb9-804f-edbace0c8e67"
+                },
+                {
+                  "id": "974e33f1-6e04-457d-a539-cb99d181d159",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/vardata?user_id=<string>&device_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "vardata"
+                      ],
+                      "query": [
+                        {
+                          "description": "The user ID to evaluate variants for.",
+                          "key": "user_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The device ID to evaluate variants for.",
+                          "key": "device_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:39.000Z",
+                  "updatedAt": "2026-06-05T15:05:39.000Z",
+                  "uid": "35240-974e33f1-6e04-457d-a539-cb99d181d159"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:39.000Z",
+              "updatedAt": "2026-06-05T15:05:39.000Z",
+              "uid": "35240-af1b2b9c-6f1e-4345-9e91-216e91db4782"
+            }
+          ],
+          "id": "ab49fb43-56f3-4ed0-b968-f3434f299cab",
+          "createdAt": "2026-06-05T15:05:39.000Z",
+          "updatedAt": "2026-06-05T15:05:39.000Z",
+          "uid": "35240-ab49fb43-56f3-4ed0-b968-f3434f299cab"
+        },
+        {
+          "name": "flags",
+          "item": [
+            {
+              "name": "Amplitude Get Flag Configurations",
+              "id": "6b7a9398-c95d-4c74-9c03-eda164ba3407",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/flags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "flags"
+                  ]
+                },
+                "description": "Download all flag configurations for local evaluation. This endpoint returns the full flag configuration including targeting rules, variants, and segment definitions. Useful for bootstrapping client-side local evaluation SDKs with initialFlags or running evaluation in edge environments."
+              },
+              "response": [
+                {
+                  "id": "1b212816-11c3-40c7-b88f-b599d3ee3ce1",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/flags",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "flags"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"key\": \"<string>\",\n    \"metadata\": {\n      \"deployed\": \"<boolean>\",\n      \"evaluationMode\": \"<string>\",\n      \"flagType\": \"<string>\",\n      \"flagVersion\": \"<integer>\"\n    },\n    \"segments\": [\n      {\n        \"conditions\": [\n          {\n            \"esse9\": true,\n            \"Lorem_d\": true\n          },\n          {\n            \"id7f5\": \"enim anim qui\",\n            \"Utb78\": true\n          }\n        ],\n        \"variant\": \"<string>\"\n      },\n      {\n        \"conditions\": [\n          {\n            \"eiusmodf\": \"esse deserunt\"\n          },\n          {\n            \"ipsum872\": 83999667.8288064\n          }\n        ],\n        \"variant\": \"<string>\"\n      }\n    ],\n    \"variants\": {\n      \"occaecat_8\": {\n        \"key\": \"<string>\",\n        \"payload\": {\n          \"description\": \"Optional payload for the variant.\"\n        }\n      }\n    }\n  },\n  {\n    \"key\": \"<string>\",\n    \"metadata\": {\n      \"deployed\": \"<boolean>\",\n      \"evaluationMode\": \"<string>\",\n      \"flagType\": \"<string>\",\n      \"flagVersion\": \"<integer>\"\n    },\n    \"segments\": [\n      {\n        \"conditions\": [\n          {\n            \"quisbed\": \"enim irure\",\n            \"ex_c17\": \"ullamco in\",\n            \"officiad0\": true,\n            \"in_d1\": -8849098.094844043\n          },\n          {\n            \"eu50\": false\n          }\n        ],\n        \"variant\": \"<string>\"\n      },\n      {\n        \"conditions\": [\n          {\n            \"reprehenderit571\": \"esse quis ut\",\n            \"ea_a\": \"sit nulla\"\n          },\n          {\n            \"in_c_8\": true,\n            \"et9a\": false\n          }\n        ],\n        \"variant\": \"<string>\"\n      }\n    ],\n    \"variants\": {\n      \"Utce9\": {\n        \"key\": \"<string>\",\n        \"payload\": {\n          \"description\": \"Optional payload for the variant.\"\n        }\n      }\n    }\n  }\n]",
+                  "createdAt": "2026-06-05T15:05:39.000Z",
+                  "updatedAt": "2026-06-05T15:05:39.000Z",
+                  "uid": "35240-1b212816-11c3-40c7-b88f-b599d3ee3ce1"
+                },
+                {
+                  "id": "94a114d9-1f05-4ae9-b9e1-6752b3e3518f",
+                  "name": "Unauthorized - invalid deployment key",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Authorization",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/flags",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "flags"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:39.000Z",
+                  "updatedAt": "2026-06-05T15:05:39.000Z",
+                  "uid": "35240-94a114d9-1f05-4ae9-b9e1-6752b3e3518f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:39.000Z",
+              "updatedAt": "2026-06-05T15:05:39.000Z",
+              "uid": "35240-6b7a9398-c95d-4c74-9c03-eda164ba3407"
+            }
+          ],
+          "id": "db9a6d28-9d6c-49e7-96c6-4a2ad71aedfb",
+          "createdAt": "2026-06-05T15:05:39.000Z",
+          "updatedAt": "2026-06-05T15:05:39.000Z",
+          "uid": "35240-db9a6d28-9d6c-49e7-96c6-4a2ad71aedfb"
+        }
+      ],
+      "id": "5cbbb45b-2e9d-4fdf-bffb-33ab3963f8c2",
+      "createdAt": "2026-06-05T15:05:39.000Z",
+      "updatedAt": "2026-06-05T15:05:39.000Z",
+      "uid": "35240-5cbbb45b-2e9d-4fdf-bffb-33ab3963f8c2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lab.amplitude.com"
+    }
+  ]
+}

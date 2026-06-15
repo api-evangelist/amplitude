@@ -1,0 +1,941 @@
+{
+  "info": {
+    "_postman_id": "4b0a3d7d-4e21-4f0c-b024-73134e326f20",
+    "name": "Amplitude Data Subject Access Request API",
+    "description": "The Amplitude Data Subject Access Request (DSAR) API enables organizations to programmatically handle privacy requests in compliance with GDPR, CCPA, and other data protection regulations. It supports submitting deletion requests for user data based on user IDs or device IDs, and retrieving all data associated with a user. This API allows companies to automate their privacy compliance workflows and ensure timely processing of data subject requests at scale.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:37.000Z",
+    "updatedAt": "2026-06-05T15:05:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4b0a3d7d-4e21-4f0c-b024-73134e326f20"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2",
+          "item": [
+            {
+              "name": "dsar",
+              "item": [
+                {
+                  "name": "requests",
+                  "item": [
+                    {
+                      "name": "{request_id}",
+                      "item": [
+                        {
+                          "name": "Amplitude Get DSAR Request Status",
+                          "id": "7610c677-b5a7-41d3-9055-dcfd871e0b26",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/dsar/requests/:request_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "dsar",
+                                "requests",
+                                ":request_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "55faf001-4a42-48ad-a306-14a86ac64518",
+                                  "key": "request_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the DSAR request to check."
+                                }
+                              ]
+                            },
+                            "description": "Check the status of a previously submitted data subject access request. Returns the processing status and download URL when complete."
+                          },
+                          "response": [
+                            {
+                              "id": "be7495c1-3ce8-4432-9884-bb0bf0da3d07",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2/dsar/requests/:request_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2",
+                                    "dsar",
+                                    "requests",
+                                    ":request_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "request_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"request_id\": \"<string>\",\n  \"status\": \"processing\",\n  \"download_url\": \"<uri>\"\n}",
+                              "createdAt": "2026-06-05T15:05:38.000Z",
+                              "updatedAt": "2026-06-05T15:05:38.000Z",
+                              "uid": "35240-be7495c1-3ce8-4432-9884-bb0bf0da3d07"
+                            },
+                            {
+                              "id": "f6de0026-a48e-48dc-ac64-0c68e6d1afca",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2/dsar/requests/:request_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2",
+                                    "dsar",
+                                    "requests",
+                                    ":request_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "request_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:38.000Z",
+                              "updatedAt": "2026-06-05T15:05:38.000Z",
+                              "uid": "35240-f6de0026-a48e-48dc-ac64-0c68e6d1afca"
+                            },
+                            {
+                              "id": "d2fd8ec0-a937-4dce-b899-62e36fb10c92",
+                              "name": "DSAR request not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/2/dsar/requests/:request_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "2",
+                                    "dsar",
+                                    "requests",
+                                    ":request_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "request_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:38.000Z",
+                              "updatedAt": "2026-06-05T15:05:38.000Z",
+                              "uid": "35240-d2fd8ec0-a937-4dce-b899-62e36fb10c92"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-7610c677-b5a7-41d3-9055-dcfd871e0b26"
+                        }
+                      ],
+                      "id": "08662c75-8a3d-4db6-b07d-e5f1bbc8f3d4",
+                      "createdAt": "2026-06-05T15:05:38.000Z",
+                      "updatedAt": "2026-06-05T15:05:38.000Z",
+                      "uid": "35240-08662c75-8a3d-4db6-b07d-e5f1bbc8f3d4"
+                    },
+                    {
+                      "name": "Amplitude Create a Data Subject Access Request",
+                      "id": "36d59853-92cb-41cb-b78c-4306e15c958a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/dsar/requests",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "dsar",
+                            "requests"
+                          ]
+                        },
+                        "description": "Submit a data subject access request (DSAR) to retrieve all data Amplitude has collected for a specific user. The request is processed asynchronously and results are made available for download when complete. This endpoint supports CCPA and GDPR compliance workflows."
+                      },
+                      "response": [
+                        {
+                          "id": "cc88e069-fe5f-4602-82c7-7f9df50617fa",
+                          "name": "Success - DSAR request submitted",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/dsar/requests",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "dsar",
+                                "requests"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"request_id\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-cc88e069-fe5f-4602-82c7-7f9df50617fa"
+                        },
+                        {
+                          "id": "7af52852-f8d8-421a-966d-6b5afcbaf13f",
+                          "name": "Bad request - invalid user identifier",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/dsar/requests",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "dsar",
+                                "requests"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-7af52852-f8d8-421a-966d-6b5afcbaf13f"
+                        },
+                        {
+                          "id": "d2c167de-b016-4341-a06e-e6368a54bfe6",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/dsar/requests",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "dsar",
+                                "requests"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-d2c167de-b016-4341-a06e-e6368a54bfe6"
+                        },
+                        {
+                          "id": "fb07a302-e4f3-43f8-8eb5-82e466a9a91b",
+                          "name": "Too many requests",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/dsar/requests",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "dsar",
+                                "requests"
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-fb07a302-e4f3-43f8-8eb5-82e466a9a91b"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:38.000Z",
+                      "updatedAt": "2026-06-05T15:05:38.000Z",
+                      "uid": "35240-36d59853-92cb-41cb-b78c-4306e15c958a"
+                    }
+                  ],
+                  "id": "4db8ccc8-7db6-430f-a042-bc7ca9828cc4",
+                  "createdAt": "2026-06-05T15:05:38.000Z",
+                  "updatedAt": "2026-06-05T15:05:38.000Z",
+                  "uid": "35240-4db8ccc8-7db6-430f-a042-bc7ca9828cc4"
+                }
+              ],
+              "id": "8812896e-2b52-4e0f-88b0-bfcc5fc46b19",
+              "createdAt": "2026-06-05T15:05:38.000Z",
+              "updatedAt": "2026-06-05T15:05:38.000Z",
+              "uid": "35240-8812896e-2b52-4e0f-88b0-bfcc5fc46b19"
+            },
+            {
+              "name": "deletions",
+              "item": [
+                {
+                  "name": "users",
+                  "item": [
+                    {
+                      "name": "Amplitude Request User Data Deletion",
+                      "id": "91da6fcc-af0e-4fe6-9a0f-ada5780a2a26",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/deletions/users",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "deletions",
+                            "users"
+                          ]
+                        },
+                        "description": "Submit a request to delete all event data and user properties for one or more users identified by Amplitude IDs or user IDs. Each HTTP request can contain up to 100 amplitude_ids or user_ids. Rate limited to 1 request per second. Amplitude emails all account admins with deletion details when a request is submitted."
+                      },
+                      "response": [
+                        {
+                          "id": "2b167c18-985c-41b6-b241-ec306b0bcf30",
+                          "name": "Success - deletion request accepted",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/deletions/users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "deletions",
+                                "users"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"day\": \"<date>\",\n  \"status\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-2b167c18-985c-41b6-b241-ec306b0bcf30"
+                        },
+                        {
+                          "id": "06b725de-6f69-41fc-9bfd-262666dccc11",
+                          "name": "Bad request - invalid identifiers or exceeds 100 IDs",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/deletions/users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "deletions",
+                                "users"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-06b725de-6f69-41fc-9bfd-262666dccc11"
+                        },
+                        {
+                          "id": "3128ab18-fb6a-455b-9da6-93abb764724d",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/deletions/users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "deletions",
+                                "users"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-3128ab18-fb6a-455b-9da6-93abb764724d"
+                        },
+                        {
+                          "id": "2c7da4d3-332c-441b-9740-8e80e1802153",
+                          "name": "Too many requests - rate limit of 1 per second exceeded",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/deletions/users",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "deletions",
+                                "users"
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-2c7da4d3-332c-441b-9740-8e80e1802153"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:38.000Z",
+                      "updatedAt": "2026-06-05T15:05:38.000Z",
+                      "uid": "35240-91da6fcc-af0e-4fe6-9a0f-ada5780a2a26"
+                    },
+                    {
+                      "name": "Amplitude List Deletion Requests",
+                      "id": "b3fd33bf-60c9-4fbf-913c-197a0a7402dc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/deletions/users?start_day=<date>&end_day=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "deletions",
+                            "users"
+                          ],
+                          "query": [
+                            {
+                              "description": "The start date to filter deletion requests in YYYY-MM-DD format.",
+                              "key": "start_day",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "The end date to filter deletion requests in YYYY-MM-DD format.",
+                              "key": "end_day",
+                              "value": "<date>"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a list of previously submitted deletion requests and their processing status."
+                      },
+                      "response": [
+                        {
+                          "id": "4763cf1f-5089-4be6-9ab0-859870e224b6",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/deletions/users?start_day=<date>&end_day=<date>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "deletions",
+                                "users"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The start date to filter deletion requests in YYYY-MM-DD format.",
+                                  "key": "start_day",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "description": "The end date to filter deletion requests in YYYY-MM-DD format.",
+                                  "key": "end_day",
+                                  "value": "<date>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"deletions\": [\n    {\n      \"day\": \"<date>\",\n      \"status\": \"staging\",\n      \"amplitude_ids\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"user_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"day\": \"<date>\",\n      \"status\": \"done\",\n      \"amplitude_ids\": [\n        \"<long>\",\n        \"<long>\"\n      ],\n      \"user_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-4763cf1f-5089-4be6-9ab0-859870e224b6"
+                        },
+                        {
+                          "id": "08e23b0b-8af7-4e96-a2dd-e3722eebde7b",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/deletions/users?start_day=<date>&end_day=<date>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "deletions",
+                                "users"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The start date to filter deletion requests in YYYY-MM-DD format.",
+                                  "key": "start_day",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "description": "The end date to filter deletion requests in YYYY-MM-DD format.",
+                                  "key": "end_day",
+                                  "value": "<date>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:38.000Z",
+                          "updatedAt": "2026-06-05T15:05:38.000Z",
+                          "uid": "35240-08e23b0b-8af7-4e96-a2dd-e3722eebde7b"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:38.000Z",
+                      "updatedAt": "2026-06-05T15:05:38.000Z",
+                      "uid": "35240-b3fd33bf-60c9-4fbf-913c-197a0a7402dc"
+                    }
+                  ],
+                  "id": "d284b23d-0f4d-4a24-af3b-f83215255f8d",
+                  "createdAt": "2026-06-05T15:05:38.000Z",
+                  "updatedAt": "2026-06-05T15:05:38.000Z",
+                  "uid": "35240-d284b23d-0f4d-4a24-af3b-f83215255f8d"
+                }
+              ],
+              "id": "2817658d-a13d-4126-9a6d-4118fed645a1",
+              "createdAt": "2026-06-05T15:05:38.000Z",
+              "updatedAt": "2026-06-05T15:05:38.000Z",
+              "uid": "35240-2817658d-a13d-4126-9a6d-4118fed645a1"
+            }
+          ],
+          "id": "566956f6-b41a-447e-925a-209729e7b897",
+          "createdAt": "2026-06-05T15:05:38.000Z",
+          "updatedAt": "2026-06-05T15:05:38.000Z",
+          "uid": "35240-566956f6-b41a-447e-925a-209729e7b897"
+        }
+      ],
+      "id": "1c9ad4b4-9afe-4550-aca8-bc00601cf9c3",
+      "createdAt": "2026-06-05T15:05:38.000Z",
+      "updatedAt": "2026-06-05T15:05:38.000Z",
+      "uid": "35240-1c9ad4b4-9afe-4550-aca8-bc00601cf9c3"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://amplitude.com"
+    }
+  ]
+}

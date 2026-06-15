@@ -1,0 +1,274 @@
+{
+  "info": {
+    "_postman_id": "068372b6-58dc-4ed2-a5e8-48b83ccebf12",
+    "name": "Amplitude HTTP V2 API",
+    "description": "The Amplitude HTTP V2 API enables developers to send event data directly from servers or clients to Amplitude's analytics platform. It supports uploading individual or batched events along with user properties, event properties, and group properties. This API is the primary method for server-side event ingestion and is designed for high-throughput data collection with built-in validation and error reporting.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:18.000Z",
+    "updatedAt": "2026-06-05T15:05:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-068372b6-58dc-4ed2-a5e8-48b83ccebf12"
+  },
+  "item": [
+    {
+      "name": "2",
+      "item": [
+        {
+          "name": "httpapi",
+          "item": [
+            {
+              "name": "Amplitude Upload Events",
+              "id": "663e9fa8-4de5-4967-85dd-93e87b0f4bb8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"events\": [\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed_0\": \"est qui id in deserunt\",\n        \"qui_475\": -15633588\n      },\n      \"user_properties\": {\n        \"Duis_3\": 28966657.00822556\n      },\n      \"groups\": {\n        \"proident_08\": -67557445.44157779,\n        \"Utf07\": -86732827.68127128\n      },\n      \"group_properties\": {\n        \"voluptate_ef5\": 78401554,\n        \"ex0fc\": true,\n        \"consectetur1f\": 21172203.0227699\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    },\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed0e8\": 49801256\n      },\n      \"user_properties\": {\n        \"ad50\": -5438508,\n        \"exd5\": 45407322.1154753\n      },\n      \"groups\": {\n        \"nulla___\": -59353446,\n        \"essea\": false\n      },\n      \"group_properties\": {\n        \"pariatur__4\": \"amet\",\n        \"deserunt6\": 1803511.0265812725\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    }\n  ],\n  \"options\": {\n    \"min_id_length\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/2/httpapi",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "2",
+                    "httpapi"
+                  ]
+                },
+                "description": "Send up to 10 events per request to Amplitude for ingestion. Each event must include either a user_id or device_id, and an event_type. The API validates the request and returns detailed error reporting for any invalid events in the batch."
+              },
+              "response": [
+                {
+                  "id": "7ba84503-71a1-49c7-8ef9-c7c6858d4158",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"api_key\": \"<string>\",\n  \"events\": [\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed_0\": \"est qui id in deserunt\",\n        \"qui_475\": -15633588\n      },\n      \"user_properties\": {\n        \"Duis_3\": 28966657.00822556\n      },\n      \"groups\": {\n        \"proident_08\": -67557445.44157779,\n        \"Utf07\": -86732827.68127128\n      },\n      \"group_properties\": {\n        \"voluptate_ef5\": 78401554,\n        \"ex0fc\": true,\n        \"consectetur1f\": 21172203.0227699\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    },\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed0e8\": 49801256\n      },\n      \"user_properties\": {\n        \"ad50\": -5438508,\n        \"exd5\": 45407322.1154753\n      },\n      \"groups\": {\n        \"nulla___\": -59353446,\n        \"essea\": false\n      },\n      \"group_properties\": {\n        \"pariatur__4\": \"amet\",\n        \"deserunt6\": 1803511.0265812725\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    }\n  ],\n  \"options\": {\n    \"min_id_length\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/2/httpapi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "2",
+                        "httpapi"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"events_ingested\": \"<integer>\",\n  \"payload_size_bytes\": \"<integer>\",\n  \"server_upload_time\": \"<long>\"\n}",
+                  "createdAt": "2026-06-05T15:05:19.000Z",
+                  "updatedAt": "2026-06-05T15:05:19.000Z",
+                  "uid": "35240-7ba84503-71a1-49c7-8ef9-c7c6858d4158"
+                },
+                {
+                  "id": "6a23e749-3975-4764-b47a-cf5fdd8319ae",
+                  "name": "Bad request - invalid events or missing required fields",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"api_key\": \"<string>\",\n  \"events\": [\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed_0\": \"est qui id in deserunt\",\n        \"qui_475\": -15633588\n      },\n      \"user_properties\": {\n        \"Duis_3\": 28966657.00822556\n      },\n      \"groups\": {\n        \"proident_08\": -67557445.44157779,\n        \"Utf07\": -86732827.68127128\n      },\n      \"group_properties\": {\n        \"voluptate_ef5\": 78401554,\n        \"ex0fc\": true,\n        \"consectetur1f\": 21172203.0227699\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    },\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed0e8\": 49801256\n      },\n      \"user_properties\": {\n        \"ad50\": -5438508,\n        \"exd5\": 45407322.1154753\n      },\n      \"groups\": {\n        \"nulla___\": -59353446,\n        \"essea\": false\n      },\n      \"group_properties\": {\n        \"pariatur__4\": \"amet\",\n        \"deserunt6\": 1803511.0265812725\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    }\n  ],\n  \"options\": {\n    \"min_id_length\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/2/httpapi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "2",
+                        "httpapi"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"error\": \"<string>\",\n  \"missing_field\": \"<string>\",\n  \"events_with_invalid_fields\": {\n    \"voluptate_9\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  \"events_with_missing_fields\": {\n    \"ametd09\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:05:19.000Z",
+                  "updatedAt": "2026-06-05T15:05:19.000Z",
+                  "uid": "35240-6a23e749-3975-4764-b47a-cf5fdd8319ae"
+                },
+                {
+                  "id": "bd3a19f4-112d-42ae-8ad0-0e058b42e3ae",
+                  "name": "Payload too large",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"api_key\": \"<string>\",\n  \"events\": [\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed_0\": \"est qui id in deserunt\",\n        \"qui_475\": -15633588\n      },\n      \"user_properties\": {\n        \"Duis_3\": 28966657.00822556\n      },\n      \"groups\": {\n        \"proident_08\": -67557445.44157779,\n        \"Utf07\": -86732827.68127128\n      },\n      \"group_properties\": {\n        \"voluptate_ef5\": 78401554,\n        \"ex0fc\": true,\n        \"consectetur1f\": 21172203.0227699\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    },\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed0e8\": 49801256\n      },\n      \"user_properties\": {\n        \"ad50\": -5438508,\n        \"exd5\": 45407322.1154753\n      },\n      \"groups\": {\n        \"nulla___\": -59353446,\n        \"essea\": false\n      },\n      \"group_properties\": {\n        \"pariatur__4\": \"amet\",\n        \"deserunt6\": 1803511.0265812725\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    }\n  ],\n  \"options\": {\n    \"min_id_length\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/2/httpapi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "2",
+                        "httpapi"
+                      ]
+                    }
+                  },
+                  "status": "Request Entity Too Large",
+                  "code": 413,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:19.000Z",
+                  "updatedAt": "2026-06-05T15:05:19.000Z",
+                  "uid": "35240-bd3a19f4-112d-42ae-8ad0-0e058b42e3ae"
+                },
+                {
+                  "id": "5236c623-20da-4667-9caf-8973391712df",
+                  "name": "Too many requests - rate limit exceeded",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"api_key\": \"<string>\",\n  \"events\": [\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed_0\": \"est qui id in deserunt\",\n        \"qui_475\": -15633588\n      },\n      \"user_properties\": {\n        \"Duis_3\": 28966657.00822556\n      },\n      \"groups\": {\n        \"proident_08\": -67557445.44157779,\n        \"Utf07\": -86732827.68127128\n      },\n      \"group_properties\": {\n        \"voluptate_ef5\": 78401554,\n        \"ex0fc\": true,\n        \"consectetur1f\": 21172203.0227699\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    },\n    {\n      \"event_type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"device_id\": \"<string>\",\n      \"time\": \"<long>\",\n      \"event_properties\": {\n        \"sed0e8\": 49801256\n      },\n      \"user_properties\": {\n        \"ad50\": -5438508,\n        \"exd5\": 45407322.1154753\n      },\n      \"groups\": {\n        \"nulla___\": -59353446,\n        \"essea\": false\n      },\n      \"group_properties\": {\n        \"pariatur__4\": \"amet\",\n        \"deserunt6\": 1803511.0265812725\n      },\n      \"app_version\": \"<string>\",\n      \"platform\": \"<string>\",\n      \"os_name\": \"<string>\",\n      \"os_version\": \"<string>\",\n      \"device_brand\": \"<string>\",\n      \"device_manufacturer\": \"<string>\",\n      \"device_model\": \"<string>\",\n      \"carrier\": \"<string>\",\n      \"country\": \"<string>\",\n      \"region\": \"<string>\",\n      \"city\": \"<string>\",\n      \"dma\": \"<string>\",\n      \"language\": \"<string>\",\n      \"price\": \"<number>\",\n      \"quantity\": \"<integer>\",\n      \"revenue\": \"<number>\",\n      \"productId\": \"<string>\",\n      \"revenueType\": \"<string>\",\n      \"location_lat\": \"<double>\",\n      \"location_lng\": \"<double>\",\n      \"ip\": \"<string>\",\n      \"idfa\": \"<string>\",\n      \"idfv\": \"<string>\",\n      \"adid\": \"<string>\",\n      \"android_id\": \"<string>\",\n      \"event_id\": \"<integer>\",\n      \"session_id\": \"<long>\",\n      \"insert_id\": \"<string>\"\n    }\n  ],\n  \"options\": {\n    \"min_id_length\": \"<integer>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/2/httpapi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "2",
+                        "httpapi"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:05:19.000Z",
+                  "updatedAt": "2026-06-05T15:05:19.000Z",
+                  "uid": "35240-5236c623-20da-4667-9caf-8973391712df"
+                }
+              ],
+              "createdAt": "2026-06-05T15:05:19.000Z",
+              "updatedAt": "2026-06-05T15:05:19.000Z",
+              "uid": "35240-663e9fa8-4de5-4967-85dd-93e87b0f4bb8"
+            }
+          ],
+          "id": "ec262f94-74b8-47e9-bb36-89250728a6db",
+          "createdAt": "2026-06-05T15:05:19.000Z",
+          "updatedAt": "2026-06-05T15:05:19.000Z",
+          "uid": "35240-ec262f94-74b8-47e9-bb36-89250728a6db"
+        }
+      ],
+      "id": "837fdb0d-0ad2-435c-9b6d-7fedfd1061a5",
+      "createdAt": "2026-06-05T15:05:19.000Z",
+      "updatedAt": "2026-06-05T15:05:19.000Z",
+      "uid": "35240-837fdb0d-0ad2-435c-9b6d-7fedfd1061a5"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api2.amplitude.com"
+    }
+  ]
+}

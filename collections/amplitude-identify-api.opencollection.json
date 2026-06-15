@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Identify API",
+    "version": "1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identify",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Identify a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/identify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set or update user properties for a specific user without sending an event. Supports operations including set, setOnce, add, append, prepend, unset, and remove on user properties. The request can be sent as form data or JSON."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attribution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Send Attribution Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/attribution",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a campaign attribution event to Amplitude to associate a user with the marketing campaign, channel, or creative that drove their acquisition or re-engagement. The event object should contain attribution-specific fields such as campaign name, source, medium, and ad creative."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

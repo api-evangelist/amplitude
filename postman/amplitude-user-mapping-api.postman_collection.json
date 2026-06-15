@@ -1,0 +1,477 @@
+{
+  "info": {
+    "_postman_id": "ff157794-1bc5-4158-92cb-f143e9947b78",
+    "name": "Amplitude User Mapping API",
+    "description": "The Amplitude User Mapping (Aliasing) API allows developers to merge users with different user IDs together in Amplitude. This is useful when a user initially interacts with a product anonymously and later creates an account, or when users have multiple identifiers across different systems. The API maps these distinct identities into a single unified user profile to ensure accurate analytics and attribution.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:33.000Z",
+    "updatedAt": "2026-06-05T15:05:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ff157794-1bc5-4158-92cb-f143e9947b78"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2",
+          "item": [
+            {
+              "name": "usermap",
+              "item": [
+                {
+                  "name": "Amplitude Map User Identities",
+                  "id": "c8ed4cab-678b-4d7a-afd1-79e72638cc64",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2/usermap",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2",
+                        "usermap"
+                      ]
+                    },
+                    "description": "Merge two user identities together by mapping one user_id to another. After mapping, all events and user properties from both identities are consolidated into a single user profile. This is typically used when an anonymous user creates an account."
+                  },
+                  "response": [
+                    {
+                      "id": "86c8f7a5-dec2-4449-bb11-61a2167c26b7",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/usermap",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "usermap"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"success\": \"<boolean>\"\n}",
+                      "createdAt": "2026-06-05T15:05:34.000Z",
+                      "updatedAt": "2026-06-05T15:05:34.000Z",
+                      "uid": "35240-86c8f7a5-dec2-4449-bb11-61a2167c26b7"
+                    },
+                    {
+                      "id": "0ecb2269-d701-43cc-b636-53bc4c36be63",
+                      "name": "Bad request - invalid mapping data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/usermap",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "usermap"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:34.000Z",
+                      "updatedAt": "2026-06-05T15:05:34.000Z",
+                      "uid": "35240-0ecb2269-d701-43cc-b636-53bc4c36be63"
+                    },
+                    {
+                      "id": "d9243b3d-4184-4646-af72-271f56c6b1df",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/usermap",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "usermap"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:34.000Z",
+                      "updatedAt": "2026-06-05T15:05:34.000Z",
+                      "uid": "35240-d9243b3d-4184-4646-af72-271f56c6b1df"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:34.000Z",
+                  "updatedAt": "2026-06-05T15:05:34.000Z",
+                  "uid": "35240-c8ed4cab-678b-4d7a-afd1-79e72638cc64"
+                }
+              ],
+              "id": "2e922911-3723-4533-9114-14c20a4dd1f6",
+              "createdAt": "2026-06-05T15:05:34.000Z",
+              "updatedAt": "2026-06-05T15:05:34.000Z",
+              "uid": "35240-2e922911-3723-4533-9114-14c20a4dd1f6"
+            },
+            {
+              "name": "userunmap",
+              "item": [
+                {
+                  "name": "Amplitude Unmap User Identities",
+                  "id": "8f4f3fde-32bf-4abf-b9df-db6928006359",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2/userunmap",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2",
+                        "userunmap"
+                      ]
+                    },
+                    "description": "Reverse a previously created user identity mapping. After unmapping, the two identities are treated as separate users again. This does not retroactively separate events that were already merged."
+                  },
+                  "response": [
+                    {
+                      "id": "a998c403-f6cf-4376-ba35-b86d2a6b4b0b",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/userunmap",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "userunmap"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"success\": \"<boolean>\"\n}",
+                      "createdAt": "2026-06-05T15:05:34.000Z",
+                      "updatedAt": "2026-06-05T15:05:34.000Z",
+                      "uid": "35240-a998c403-f6cf-4376-ba35-b86d2a6b4b0b"
+                    },
+                    {
+                      "id": "d4ff9b86-04de-4d2d-883d-93d9615c7652",
+                      "name": "Bad request - invalid unmap data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/userunmap",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "userunmap"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:34.000Z",
+                      "updatedAt": "2026-06-05T15:05:34.000Z",
+                      "uid": "35240-d4ff9b86-04de-4d2d-883d-93d9615c7652"
+                    },
+                    {
+                      "id": "1c5aff7f-e5a2-48b7-8a91-45fc5ef11a34",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/userunmap",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "userunmap"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:34.000Z",
+                      "updatedAt": "2026-06-05T15:05:34.000Z",
+                      "uid": "35240-1c5aff7f-e5a2-48b7-8a91-45fc5ef11a34"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:34.000Z",
+                  "updatedAt": "2026-06-05T15:05:34.000Z",
+                  "uid": "35240-8f4f3fde-32bf-4abf-b9df-db6928006359"
+                }
+              ],
+              "id": "75d6be70-648a-436b-9ce5-cd48ec9d204d",
+              "createdAt": "2026-06-05T15:05:34.000Z",
+              "updatedAt": "2026-06-05T15:05:34.000Z",
+              "uid": "35240-75d6be70-648a-436b-9ce5-cd48ec9d204d"
+            }
+          ],
+          "id": "0f583de6-98a9-4130-b16e-0555d8ee2e33",
+          "createdAt": "2026-06-05T15:05:34.000Z",
+          "updatedAt": "2026-06-05T15:05:34.000Z",
+          "uid": "35240-0f583de6-98a9-4130-b16e-0555d8ee2e33"
+        }
+      ],
+      "id": "94b201a1-d36e-427d-8b25-9d4eea723c4c",
+      "createdAt": "2026-06-05T15:05:34.000Z",
+      "updatedAt": "2026-06-05T15:05:34.000Z",
+      "uid": "35240-94b201a1-d36e-427d-8b25-9d4eea723c4c"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://amplitude.com"
+    }
+  ]
+}

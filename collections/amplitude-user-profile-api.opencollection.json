@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude User Profile API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get a User Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://profile-api.amplitude.com/v1/userprofile",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user_id of the user whose profile to retrieve."
+              },
+              {
+                "name": "comp_id",
+                "value": "",
+                "type": "query",
+                "description": "The computed property ID or recommendation ID to retrieve specific computed results for the user."
+              },
+              {
+                "name": "get_recs",
+                "value": "",
+                "type": "query",
+                "description": "When true, include personalized recommendations in the response."
+              },
+              {
+                "name": "rec_id",
+                "value": "",
+                "type": "query",
+                "description": "The recommendation model ID to retrieve specific recommendation results."
+              },
+              {
+                "name": "rec_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of recommendation to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of recommendation results to return."
+              }
+            ]
+          },
+          "docs": "Retrieve the profile for a specific user including user properties, computed properties, cohort memberships, and personalized recommendations. The response includes all enriched data Amplitude has computed for the user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

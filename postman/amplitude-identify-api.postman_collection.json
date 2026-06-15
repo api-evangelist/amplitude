@@ -1,0 +1,229 @@
+{
+  "info": {
+    "_postman_id": "1ba8f768-ee4b-46d6-8003-1fb400565485",
+    "name": "Amplitude Identify API",
+    "description": "The Amplitude Identify API allows developers to update user properties for a specific user without needing to send an accompanying event. This is useful for setting or modifying user attributes such as demographics, subscription status, or preferences outside of the normal event tracking flow. The API supports operations like set, unset, append, and prepend on user properties.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:21.000Z",
+    "updatedAt": "2026-06-05T15:05:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1ba8f768-ee4b-46d6-8003-1fb400565485"
+  },
+  "item": [
+    {
+      "name": "identify",
+      "item": [
+        {
+          "name": "Amplitude Identify a User",
+          "id": "15bb228d-799e-474f-904c-f86d9e811c13",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) The API key for the Amplitude project.",
+                  "key": "api_key",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties.",
+                  "key": "identification",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/identify",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "identify"
+              ]
+            },
+            "description": "Set or update user properties for a specific user without sending an event. Supports operations including set, setOnce, add, append, prepend, unset, and remove on user properties. The request can be sent as form data or JSON."
+          },
+          "response": [
+            {
+              "id": "fac17f2c-a15a-4e1b-81bb-ba9c4a4e3ca3",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The API key for the Amplitude project.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties.",
+                      "key": "identification",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identify",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identify"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"server_upload_time\": \"<long>\",\n  \"events_ingested\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:05:21.000Z",
+              "updatedAt": "2026-06-05T15:05:21.000Z",
+              "uid": "35240-fac17f2c-a15a-4e1b-81bb-ba9c4a4e3ca3"
+            },
+            {
+              "id": "6e00c98e-711f-4b21-bdfe-81d83e13a2aa",
+              "name": "Bad request - missing required fields or invalid data",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The API key for the Amplitude project.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties.",
+                      "key": "identification",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identify",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identify"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:21.000Z",
+              "updatedAt": "2026-06-05T15:05:21.000Z",
+              "uid": "35240-6e00c98e-711f-4b21-bdfe-81d83e13a2aa"
+            },
+            {
+              "id": "0219632b-a326-4dc0-b202-df3ea0101422",
+              "name": "Too many requests - rate limit exceeded",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The API key for the Amplitude project.",
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties.",
+                      "key": "identification",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/identify",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "identify"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:21.000Z",
+              "updatedAt": "2026-06-05T15:05:21.000Z",
+              "uid": "35240-0219632b-a326-4dc0-b202-df3ea0101422"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:21.000Z",
+          "updatedAt": "2026-06-05T15:05:21.000Z",
+          "uid": "35240-15bb228d-799e-474f-904c-f86d9e811c13"
+        }
+      ],
+      "id": "7084d06c-0175-4ea8-829e-e0724da9e768",
+      "createdAt": "2026-06-05T15:05:21.000Z",
+      "updatedAt": "2026-06-05T15:05:21.000Z",
+      "uid": "35240-7084d06c-0175-4ea8-829e-e0724da9e768"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api2.amplitude.com"
+    }
+  ]
+}

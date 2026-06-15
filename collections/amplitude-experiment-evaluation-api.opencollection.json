@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Experiment Evaluation API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Evaluation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Evaluate Variants for a User via GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lab.amplitude.com/v1/vardata",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID to evaluate variants for."
+              },
+              {
+                "name": "device_id",
+                "value": "",
+                "type": "query",
+                "description": "The device ID to evaluate variants for."
+              }
+            ]
+          },
+          "docs": "Remotely evaluate all active experiments and feature flags for a user identified by query parameters. Returns variant assignments based on targeting rules."
+        },
+        {
+          "info": {
+            "name": "Amplitude Evaluate Variants for a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lab.amplitude.com/v1/vardata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remotely evaluate all active experiments and feature flags for a specific user. Returns the variant assignments based on the user's properties and targeting rules. Amplitude automatically tracks an Experiment Assignment event for each evaluation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get Flag Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lab.amplitude.com/v1/flags"
+          },
+          "docs": "Download all flag configurations for local evaluation. This endpoint returns the full flag configuration including targeting rules, variants, and segment definitions. Useful for bootstrapping client-side local evaluation SDKs with initialFlags or running evaluation in edge environments."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

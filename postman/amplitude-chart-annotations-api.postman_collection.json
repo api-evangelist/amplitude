@@ -1,0 +1,1005 @@
+{
+  "info": {
+    "_postman_id": "816b5e68-42fc-4ca4-baab-00a8eb165cfc",
+    "name": "Amplitude Chart Annotations API",
+    "description": "The Amplitude Chart Annotations API enables developers to programmatically create, retrieve, update, and delete annotations on Amplitude charts. Annotations mark significant events such as product releases, marketing campaigns, or incidents on timeline-based charts. This API allows teams to automate annotation management as part of their deployment or release pipelines, ensuring that important context is always visible alongside analytics data.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:32.000Z",
+    "updatedAt": "2026-06-05T15:05:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-816b5e68-42fc-4ca4-baab-00a8eb165cfc"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "3",
+          "item": [
+            {
+              "name": "annotations",
+              "item": [
+                {
+                  "name": "{annotation_id}",
+                  "item": [
+                    {
+                      "name": "Amplitude Get an Annotation",
+                      "id": "83107f86-70a1-4c68-a831-2c6cd1c4909a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "annotations",
+                            ":annotation_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "52ae4e8d-a8a6-4a74-a9f1-d6012ae46a45",
+                              "key": "annotation_id",
+                              "value": "<integer>",
+                              "description": "(Required) The unique identifier of the annotation."
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a single chart annotation by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "d43d8af5-dbc3-4349-978d-c86e8af0c337",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-d43d8af5-dbc3-4349-978d-c86e8af0c337"
+                        },
+                        {
+                          "id": "37338b3a-daf4-4329-8b05-f08013159ef5",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-37338b3a-daf4-4329-8b05-f08013159ef5"
+                        },
+                        {
+                          "id": "0efedd89-96a7-4234-94d4-701119d046fb",
+                          "name": "Annotation not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-0efedd89-96a7-4234-94d4-701119d046fb"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:32.000Z",
+                      "updatedAt": "2026-06-05T15:05:32.000Z",
+                      "uid": "35240-83107f86-70a1-4c68-a831-2c6cd1c4909a"
+                    },
+                    {
+                      "name": "Amplitude Update an Annotation",
+                      "id": "3171c705-3b9f-41a9-94d1-bf97ff784433",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "annotations",
+                            ":annotation_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "838cdbf5-a09e-411d-aa56-57fc442ae3c4",
+                              "key": "annotation_id",
+                              "value": "<integer>",
+                              "description": "(Required) The unique identifier of the annotation."
+                            }
+                          ]
+                        },
+                        "description": "Update an existing annotation. Only the fields included in the request body are updated; other fields remain unchanged."
+                      },
+                      "response": [
+                        {
+                          "id": "58c7a404-f30a-48f6-b96a-65818deae88f",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-58c7a404-f30a-48f6-b96a-65818deae88f"
+                        },
+                        {
+                          "id": "8b25d705-50c8-4b42-ab32-955571d872c1",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-8b25d705-50c8-4b42-ab32-955571d872c1"
+                        },
+                        {
+                          "id": "1236b694-6183-4395-b23c-cebf8d7cbf9f",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-1236b694-6183-4395-b23c-cebf8d7cbf9f"
+                        },
+                        {
+                          "id": "4f2e1561-bcfe-49c9-8a1c-7e3d57663d8f",
+                          "name": "Annotation not found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-4f2e1561-bcfe-49c9-8a1c-7e3d57663d8f"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:32.000Z",
+                      "updatedAt": "2026-06-05T15:05:32.000Z",
+                      "uid": "35240-3171c705-3b9f-41a9-94d1-bf97ff784433"
+                    },
+                    {
+                      "name": "Amplitude Delete an Annotation",
+                      "id": "aa799af7-f056-443f-a6c5-1ad1297d65f8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "annotations",
+                            ":annotation_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "05876622-b941-4ee0-a7f9-80e453324bf1",
+                              "key": "annotation_id",
+                              "value": "<integer>",
+                              "description": "(Required) The unique identifier of the annotation."
+                            }
+                          ]
+                        },
+                        "description": "Delete a chart annotation by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "24e33bc2-64de-4e97-9b44-8e326b6722c9",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-24e33bc2-64de-4e97-9b44-8e326b6722c9"
+                        },
+                        {
+                          "id": "0d685ff8-cc3a-44bd-8120-0971fafca1e6",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-0d685ff8-cc3a-44bd-8120-0971fafca1e6"
+                        },
+                        {
+                          "id": "84864b79-72ec-4ff8-aa80-316a9dea8347",
+                          "name": "Annotation not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/annotations/:annotation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "annotations",
+                                ":annotation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "annotation_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:32.000Z",
+                          "updatedAt": "2026-06-05T15:05:32.000Z",
+                          "uid": "35240-84864b79-72ec-4ff8-aa80-316a9dea8347"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:32.000Z",
+                      "updatedAt": "2026-06-05T15:05:32.000Z",
+                      "uid": "35240-aa799af7-f056-443f-a6c5-1ad1297d65f8"
+                    }
+                  ],
+                  "id": "9ceab9c5-fac7-4c63-a7ce-4fdaca0cf613",
+                  "createdAt": "2026-06-05T15:05:32.000Z",
+                  "updatedAt": "2026-06-05T15:05:32.000Z",
+                  "uid": "35240-9ceab9c5-fac7-4c63-a7ce-4fdaca0cf613"
+                },
+                {
+                  "name": "Amplitude List All Annotations",
+                  "id": "45f44f1c-7504-4019-ab8f-60366476c9b4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/3/annotations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "3",
+                        "annotations"
+                      ]
+                    },
+                    "description": "Retrieve all chart annotations in the project. Supports filtering by category, chart, and date range."
+                  },
+                  "response": [
+                    {
+                      "id": "3fec51cf-2002-43c6-9c4a-b74746e5e559",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/annotations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "annotations"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<integer>\",\n      \"label\": \"<string>\",\n      \"date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"details\": \"<string>\",\n      \"category\": \"<string>\",\n      \"chart_id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"label\": \"<string>\",\n      \"date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"details\": \"<string>\",\n      \"category\": \"<string>\",\n      \"chart_id\": \"<integer>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:05:32.000Z",
+                      "updatedAt": "2026-06-05T15:05:32.000Z",
+                      "uid": "35240-3fec51cf-2002-43c6-9c4a-b74746e5e559"
+                    },
+                    {
+                      "id": "264e4522-ea61-4493-8a6a-25d62cb5e50d",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/annotations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "annotations"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:32.000Z",
+                      "updatedAt": "2026-06-05T15:05:32.000Z",
+                      "uid": "35240-264e4522-ea61-4493-8a6a-25d62cb5e50d"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:32.000Z",
+                  "updatedAt": "2026-06-05T15:05:32.000Z",
+                  "uid": "35240-45f44f1c-7504-4019-ab8f-60366476c9b4"
+                },
+                {
+                  "name": "Amplitude Create an Annotation",
+                  "id": "7eb1675c-f3d2-4779-9fb3-dd1a34b36370",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/3/annotations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "3",
+                        "annotations"
+                      ]
+                    },
+                    "description": "Create a new chart annotation with a label, date or date range, optional category, and optional chart association. Annotations appear on timeline-based charts to provide context for significant events."
+                  },
+                  "response": [
+                    {
+                      "id": "2e7729d7-ddea-48ac-b45f-0f54e7ebda30",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/annotations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "annotations"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:05:32.000Z",
+                      "updatedAt": "2026-06-05T15:05:32.000Z",
+                      "uid": "35240-2e7729d7-ddea-48ac-b45f-0f54e7ebda30"
+                    },
+                    {
+                      "id": "f830a484-209a-40aa-b687-94b635995af3",
+                      "name": "Bad request - invalid annotation data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/annotations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "annotations"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:32.000Z",
+                      "updatedAt": "2026-06-05T15:05:32.000Z",
+                      "uid": "35240-f830a484-209a-40aa-b687-94b635995af3"
+                    },
+                    {
+                      "id": "6513a55e-6144-45ac-9d8c-230e67d77cea",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"label\": \"<string>\",\n  \"date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"details\": \"<string>\",\n  \"category\": \"<string>\",\n  \"chart_id\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/annotations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "annotations"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:32.000Z",
+                      "updatedAt": "2026-06-05T15:05:32.000Z",
+                      "uid": "35240-6513a55e-6144-45ac-9d8c-230e67d77cea"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:32.000Z",
+                  "updatedAt": "2026-06-05T15:05:32.000Z",
+                  "uid": "35240-7eb1675c-f3d2-4779-9fb3-dd1a34b36370"
+                }
+              ],
+              "id": "147cc4c4-f057-44ca-a3f7-cbdbfd5e20da",
+              "createdAt": "2026-06-05T15:05:32.000Z",
+              "updatedAt": "2026-06-05T15:05:32.000Z",
+              "uid": "35240-147cc4c4-f057-44ca-a3f7-cbdbfd5e20da"
+            }
+          ],
+          "id": "a955f40c-bcdc-4891-9c4f-e75dc51d9e59",
+          "createdAt": "2026-06-05T15:05:32.000Z",
+          "updatedAt": "2026-06-05T15:05:32.000Z",
+          "uid": "35240-a955f40c-bcdc-4891-9c4f-e75dc51d9e59"
+        }
+      ],
+      "id": "b6df8412-2262-44f3-8eb3-d5900913efcf",
+      "createdAt": "2026-06-05T15:05:32.000Z",
+      "updatedAt": "2026-06-05T15:05:32.000Z",
+      "uid": "35240-b6df8412-2262-44f3-8eb3-d5900913efcf"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://amplitude.com"
+    }
+  ]
+}

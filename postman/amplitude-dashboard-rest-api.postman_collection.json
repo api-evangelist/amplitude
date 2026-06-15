@@ -1,0 +1,1767 @@
+{
+  "info": {
+    "_postman_id": "403bd07a-52fc-43aa-aac3-24c8a02c2264",
+    "name": "Amplitude Dashboard REST API",
+    "description": "The Amplitude Dashboard REST API provides programmatic access to the same data displayed in Amplitude's dashboard charts and graphs. It returns results in JSON format and supports queries filtered by event types, user segments, cohorts, and date ranges. Developers can use this API to build custom reporting tools, export chart data, or integrate Amplitude analytics into external dashboards and business intelligence systems.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:24.000Z",
+    "updatedAt": "2026-06-05T15:05:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-403bd07a-52fc-43aa-aac3-24c8a02c2264"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2",
+          "item": [
+            {
+              "name": "events",
+              "item": [
+                {
+                  "name": "segmentation",
+                  "item": [
+                    {
+                      "name": "Amplitude Get Event Segmentation",
+                      "id": "ce252af4-b406-46ab-a590-421da1db1608",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/events/segmentation?e=<string>&start=12472580&end=12472580&m=histogram&i=<integer>&s=<string>&g=<string>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "events",
+                            "segmentation"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.",
+                              "key": "e",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start date in YYYYMMDD format.",
+                              "key": "start",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "(Required) The end date in YYYYMMDD format.",
+                              "key": "end",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "The metric to compute. Options include uniques, totals, pct_dau, average, histogram, sums, value_avg, or formula.",
+                              "key": "m",
+                              "value": "histogram"
+                            },
+                            {
+                              "description": "Time interval granularity. Use -300000 for real-time, 1 for daily, 7 for weekly, or 30 for monthly.",
+                              "key": "i",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Segment definitions as a JSON-encoded array of segment objects for filtering results.",
+                              "key": "s",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The property to group results by, such as a user property or event property name.",
+                              "key": "g",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The number of group-by values to return. Default is 100, max is 1000.",
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        },
+                        "description": "Get metrics for an event with segmentation. Returns event totals, unique users, or other metrics broken down by time intervals and optional segment or group-by properties."
+                      },
+                      "response": [
+                        {
+                          "id": "bed6f1f0-daf9-497d-a329-ed16cf74c522",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/events/segmentation?e=<string>&start=12472580&end=12472580&m=histogram&i=<integer>&s=<string>&g=<string>&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "events",
+                                "segmentation"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.",
+                                  "key": "e",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) The start date in YYYYMMDD format.",
+                                  "key": "start",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "(Required) The end date in YYYYMMDD format.",
+                                  "key": "end",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "The metric to compute. Options include uniques, totals, pct_dau, average, histogram, sums, value_avg, or formula.",
+                                  "key": "m",
+                                  "value": "histogram"
+                                },
+                                {
+                                  "description": "Time interval granularity. Use -300000 for real-time, 1 for daily, 7 for weekly, or 30 for monthly.",
+                                  "key": "i",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Segment definitions as a JSON-encoded array of segment objects for filtering results.",
+                                  "key": "s",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The property to group results by, such as a user property or event property name.",
+                                  "key": "g",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The number of group-by values to return. Default is 100, max is 1000.",
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"series\": [\n      {\n        \"essea\": 15207153\n      },\n      {\n        \"cillum023\": false\n      }\n    ],\n    \"seriesLabels\": [\n      [\n        \"<string>\",\n        \"<string>\"\n      ],\n      [\n        \"<string>\",\n        \"<string>\"\n      ]\n    ],\n    \"xValues\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-06-05T15:05:24.000Z",
+                          "updatedAt": "2026-06-05T15:05:24.000Z",
+                          "uid": "35240-bed6f1f0-daf9-497d-a329-ed16cf74c522"
+                        },
+                        {
+                          "id": "d7767b10-83df-4594-b808-8ae3b7d1e3b0",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/events/segmentation?e=<string>&start=12472580&end=12472580&m=histogram&i=<integer>&s=<string>&g=<string>&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "events",
+                                "segmentation"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.",
+                                  "key": "e",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) The start date in YYYYMMDD format.",
+                                  "key": "start",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "(Required) The end date in YYYYMMDD format.",
+                                  "key": "end",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "The metric to compute. Options include uniques, totals, pct_dau, average, histogram, sums, value_avg, or formula.",
+                                  "key": "m",
+                                  "value": "histogram"
+                                },
+                                {
+                                  "description": "Time interval granularity. Use -300000 for real-time, 1 for daily, 7 for weekly, or 30 for monthly.",
+                                  "key": "i",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Segment definitions as a JSON-encoded array of segment objects for filtering results.",
+                                  "key": "s",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The property to group results by, such as a user property or event property name.",
+                                  "key": "g",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The number of group-by values to return. Default is 100, max is 1000.",
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:24.000Z",
+                          "updatedAt": "2026-06-05T15:05:24.000Z",
+                          "uid": "35240-d7767b10-83df-4594-b808-8ae3b7d1e3b0"
+                        },
+                        {
+                          "id": "a6d3d60c-b3c3-4d3b-b307-d139df33e5a3",
+                          "name": "Unauthorized - invalid or missing credentials",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/events/segmentation?e=<string>&start=12472580&end=12472580&m=histogram&i=<integer>&s=<string>&g=<string>&limit=100",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "events",
+                                "segmentation"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.",
+                                  "key": "e",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) The start date in YYYYMMDD format.",
+                                  "key": "start",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "(Required) The end date in YYYYMMDD format.",
+                                  "key": "end",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "The metric to compute. Options include uniques, totals, pct_dau, average, histogram, sums, value_avg, or formula.",
+                                  "key": "m",
+                                  "value": "histogram"
+                                },
+                                {
+                                  "description": "Time interval granularity. Use -300000 for real-time, 1 for daily, 7 for weekly, or 30 for monthly.",
+                                  "key": "i",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Segment definitions as a JSON-encoded array of segment objects for filtering results.",
+                                  "key": "s",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The property to group results by, such as a user property or event property name.",
+                                  "key": "g",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The number of group-by values to return. Default is 100, max is 1000.",
+                                  "key": "limit",
+                                  "value": "100"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:24.000Z",
+                          "updatedAt": "2026-06-05T15:05:24.000Z",
+                          "uid": "35240-a6d3d60c-b3c3-4d3b-b307-d139df33e5a3"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-ce252af4-b406-46ab-a590-421da1db1608"
+                    }
+                  ],
+                  "id": "64395d9e-5eae-4a06-b38f-b0eafa92af5b",
+                  "createdAt": "2026-06-05T15:05:24.000Z",
+                  "updatedAt": "2026-06-05T15:05:24.000Z",
+                  "uid": "35240-64395d9e-5eae-4a06-b38f-b0eafa92af5b"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "Amplitude List Event Types",
+                      "id": "23064d8e-8b7e-41a3-96f4-b34d6b5b8dfb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/events/list",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "events",
+                            "list"
+                          ]
+                        },
+                        "description": "Get the list of event types in the project along with their volume over the last 30 days."
+                      },
+                      "response": [
+                        {
+                          "id": "07f6de62-4bf8-4fe1-9c55-540fb0f09882",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/events/list",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "events",
+                                "list"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"totals\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"totals\": \"<integer>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:05:24.000Z",
+                          "updatedAt": "2026-06-05T15:05:24.000Z",
+                          "uid": "35240-07f6de62-4bf8-4fe1-9c55-540fb0f09882"
+                        },
+                        {
+                          "id": "c0069c2d-b1ae-44bb-9ed2-d6a45b9bd4a7",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/events/list",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "events",
+                                "list"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:24.000Z",
+                          "updatedAt": "2026-06-05T15:05:24.000Z",
+                          "uid": "35240-c0069c2d-b1ae-44bb-9ed2-d6a45b9bd4a7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-23064d8e-8b7e-41a3-96f4-b34d6b5b8dfb"
+                    }
+                  ],
+                  "id": "48057607-82f5-40e8-be38-35494a5b6328",
+                  "createdAt": "2026-06-05T15:05:24.000Z",
+                  "updatedAt": "2026-06-05T15:05:24.000Z",
+                  "uid": "35240-48057607-82f5-40e8-be38-35494a5b6328"
+                }
+              ],
+              "id": "feaa8930-7609-4b38-8224-1143defc02a3",
+              "createdAt": "2026-06-05T15:05:24.000Z",
+              "updatedAt": "2026-06-05T15:05:24.000Z",
+              "uid": "35240-feaa8930-7609-4b38-8224-1143defc02a3"
+            },
+            {
+              "name": "funnels",
+              "item": [
+                {
+                  "name": "Amplitude Get Funnel Analysis",
+                  "id": "555942e0-c416-4dc3-81ce-bc30d720df2c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2/funnels?e=<string>&start=12472580&end=12472580&n=<integer>&s=<string>&g=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2",
+                        "funnels"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.",
+                          "key": "e",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The start date in YYYYMMDD format.",
+                          "key": "start",
+                          "value": "12472580"
+                        },
+                        {
+                          "description": "(Required) The end date in YYYYMMDD format.",
+                          "key": "end",
+                          "value": "12472580"
+                        },
+                        {
+                          "description": "The conversion window in days. Default varies by project settings.",
+                          "key": "n",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Segment definitions as a JSON-encoded array.",
+                          "key": "s",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The property to group results by.",
+                          "key": "g",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Get funnel drop-off and conversion rates for a sequence of events. Each event parameter in the query string defines a step in the funnel."
+                  },
+                  "response": [
+                    {
+                      "id": "2ec943ee-e767-4aa5-ab9a-7f2237a7a112",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/funnels?e=<string>&start=12472580&end=12472580&n=<integer>&s=<string>&g=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "funnels"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.",
+                              "key": "e",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start date in YYYYMMDD format.",
+                              "key": "start",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "(Required) The end date in YYYYMMDD format.",
+                              "key": "end",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "The conversion window in days. Default varies by project settings.",
+                              "key": "n",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Segment definitions as a JSON-encoded array.",
+                              "key": "s",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The property to group results by.",
+                              "key": "g",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {}\n}",
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-2ec943ee-e767-4aa5-ab9a-7f2237a7a112"
+                    },
+                    {
+                      "id": "942b3f7d-1ffb-4e2a-aa23-94fa4d249599",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/funnels?e=<string>&start=12472580&end=12472580&n=<integer>&s=<string>&g=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "funnels"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.",
+                              "key": "e",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start date in YYYYMMDD format.",
+                              "key": "start",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "(Required) The end date in YYYYMMDD format.",
+                              "key": "end",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "The conversion window in days. Default varies by project settings.",
+                              "key": "n",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Segment definitions as a JSON-encoded array.",
+                              "key": "s",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The property to group results by.",
+                              "key": "g",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-942b3f7d-1ffb-4e2a-aa23-94fa4d249599"
+                    },
+                    {
+                      "id": "64cc4c30-c749-4c5c-a4ce-247da9c8d1e0",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/funnels?e=<string>&start=12472580&end=12472580&n=<integer>&s=<string>&g=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "funnels"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.",
+                              "key": "e",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start date in YYYYMMDD format.",
+                              "key": "start",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "(Required) The end date in YYYYMMDD format.",
+                              "key": "end",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "The conversion window in days. Default varies by project settings.",
+                              "key": "n",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Segment definitions as a JSON-encoded array.",
+                              "key": "s",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The property to group results by.",
+                              "key": "g",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-64cc4c30-c749-4c5c-a4ce-247da9c8d1e0"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:24.000Z",
+                  "updatedAt": "2026-06-05T15:05:24.000Z",
+                  "uid": "35240-555942e0-c416-4dc3-81ce-bc30d720df2c"
+                }
+              ],
+              "id": "08520d12-51ec-4e10-9abb-89e6d6cbba48",
+              "createdAt": "2026-06-05T15:05:24.000Z",
+              "updatedAt": "2026-06-05T15:05:24.000Z",
+              "uid": "35240-08520d12-51ec-4e10-9abb-89e6d6cbba48"
+            },
+            {
+              "name": "retention",
+              "item": [
+                {
+                  "name": "Amplitude Get Retention Analysis",
+                  "id": "702ef405-b52d-4a49-888b-7af69d0db31b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2/retention?se=<string>&re=<string>&start=12472580&end=12472580&rm=bracket&s=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2",
+                        "retention"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The starting event as a JSON-encoded object with event_type field.",
+                          "key": "se",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The returning event as a JSON-encoded object with event_type field.",
+                          "key": "re",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The start date in YYYYMMDD format.",
+                          "key": "start",
+                          "value": "12472580"
+                        },
+                        {
+                          "description": "(Required) The end date in YYYYMMDD format.",
+                          "key": "end",
+                          "value": "12472580"
+                        },
+                        {
+                          "description": "Retention mode. Use bracket for N-day retention or rolling for unbounded retention.",
+                          "key": "rm",
+                          "value": "bracket"
+                        },
+                        {
+                          "description": "Segment definitions as a JSON-encoded array.",
+                          "key": "s",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Get user retention for specific starting and returning actions. Returns retention data broken down by cohort date showing the percentage of users who returned on each subsequent day."
+                  },
+                  "response": [
+                    {
+                      "id": "9161a94a-1e56-48c0-9f0d-211dfba1326e",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/retention?se=<string>&re=<string>&start=12472580&end=12472580&rm=bracket&s=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "retention"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The starting event as a JSON-encoded object with event_type field.",
+                              "key": "se",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The returning event as a JSON-encoded object with event_type field.",
+                              "key": "re",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start date in YYYYMMDD format.",
+                              "key": "start",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "(Required) The end date in YYYYMMDD format.",
+                              "key": "end",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "Retention mode. Use bracket for N-day retention or rolling for unbounded retention.",
+                              "key": "rm",
+                              "value": "bracket"
+                            },
+                            {
+                              "description": "Segment definitions as a JSON-encoded array.",
+                              "key": "s",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {}\n}",
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-9161a94a-1e56-48c0-9f0d-211dfba1326e"
+                    },
+                    {
+                      "id": "8df06f57-111c-40c0-b582-337d0a803212",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/retention?se=<string>&re=<string>&start=12472580&end=12472580&rm=bracket&s=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "retention"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The starting event as a JSON-encoded object with event_type field.",
+                              "key": "se",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The returning event as a JSON-encoded object with event_type field.",
+                              "key": "re",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start date in YYYYMMDD format.",
+                              "key": "start",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "(Required) The end date in YYYYMMDD format.",
+                              "key": "end",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "Retention mode. Use bracket for N-day retention or rolling for unbounded retention.",
+                              "key": "rm",
+                              "value": "bracket"
+                            },
+                            {
+                              "description": "Segment definitions as a JSON-encoded array.",
+                              "key": "s",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-8df06f57-111c-40c0-b582-337d0a803212"
+                    },
+                    {
+                      "id": "0be2c342-6ac6-4d79-9bb6-7abca3f7c0fd",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/retention?se=<string>&re=<string>&start=12472580&end=12472580&rm=bracket&s=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "retention"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The starting event as a JSON-encoded object with event_type field.",
+                              "key": "se",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The returning event as a JSON-encoded object with event_type field.",
+                              "key": "re",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) The start date in YYYYMMDD format.",
+                              "key": "start",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "(Required) The end date in YYYYMMDD format.",
+                              "key": "end",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "Retention mode. Use bracket for N-day retention or rolling for unbounded retention.",
+                              "key": "rm",
+                              "value": "bracket"
+                            },
+                            {
+                              "description": "Segment definitions as a JSON-encoded array.",
+                              "key": "s",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-0be2c342-6ac6-4d79-9bb6-7abca3f7c0fd"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:24.000Z",
+                  "updatedAt": "2026-06-05T15:05:24.000Z",
+                  "uid": "35240-702ef405-b52d-4a49-888b-7af69d0db31b"
+                }
+              ],
+              "id": "1d65855a-2d8f-4bb0-a4c4-9288e9153c13",
+              "createdAt": "2026-06-05T15:05:24.000Z",
+              "updatedAt": "2026-06-05T15:05:24.000Z",
+              "uid": "35240-1d65855a-2d8f-4bb0-a4c4-9288e9153c13"
+            },
+            {
+              "name": "useractivity",
+              "item": [
+                {
+                  "name": "Amplitude Get User Activity",
+                  "id": "ad933cfe-9a7d-4f11-bf03-043c581975d8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2/useractivity?user=<string>&offset=0&limit=1000",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2",
+                        "useractivity"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The user_id to look up activity for.",
+                          "key": "user",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The offset for pagination. Default is 0.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "The number of events to return. Default is 1000.",
+                          "key": "limit",
+                          "value": "1000"
+                        }
+                      ]
+                    },
+                    "description": "Get a user's most recent events, with optional filters on event types. Returns up to 1000 of the most recent events for a given user."
+                  },
+                  "response": [
+                    {
+                      "id": "4131b268-ee9c-4258-ac59-34d50e055eb7",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/useractivity?user=<string>&offset=0&limit=1000",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "useractivity"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The user_id to look up activity for.",
+                              "key": "user",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The offset for pagination. Default is 0.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "The number of events to return. Default is 1000.",
+                              "key": "limit",
+                              "value": "1000"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"userData\": {},\n  \"events\": [\n    {\n      \"sit5\": 62348990.8607496,\n      \"doa3f\": -15077655.943807498\n    },\n    {\n      \"do_3\": true,\n      \"inf92\": -28321119,\n      \"ea_9\": \"voluptate\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-4131b268-ee9c-4258-ac59-34d50e055eb7"
+                    },
+                    {
+                      "id": "4aba8e1a-9293-426a-b43d-198ef2da053a",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/useractivity?user=<string>&offset=0&limit=1000",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "useractivity"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The user_id to look up activity for.",
+                              "key": "user",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The offset for pagination. Default is 0.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "The number of events to return. Default is 1000.",
+                              "key": "limit",
+                              "value": "1000"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-4aba8e1a-9293-426a-b43d-198ef2da053a"
+                    },
+                    {
+                      "id": "e915b0be-ad02-4e08-8d17-5d470cc6aa3a",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/useractivity?user=<string>&offset=0&limit=1000",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "useractivity"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The user_id to look up activity for.",
+                              "key": "user",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The offset for pagination. Default is 0.",
+                              "key": "offset",
+                              "value": "0"
+                            },
+                            {
+                              "description": "The number of events to return. Default is 1000.",
+                              "key": "limit",
+                              "value": "1000"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-e915b0be-ad02-4e08-8d17-5d470cc6aa3a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:24.000Z",
+                  "updatedAt": "2026-06-05T15:05:24.000Z",
+                  "uid": "35240-ad933cfe-9a7d-4f11-bf03-043c581975d8"
+                }
+              ],
+              "id": "f6f9a3d3-eca4-4d59-8cd3-dbf980c71932",
+              "createdAt": "2026-06-05T15:05:24.000Z",
+              "updatedAt": "2026-06-05T15:05:24.000Z",
+              "uid": "35240-f6f9a3d3-eca4-4d59-8cd3-dbf980c71932"
+            },
+            {
+              "name": "usersearch",
+              "item": [
+                {
+                  "name": "Amplitude Search Users",
+                  "id": "9c07b20e-df79-4735-a7a1-1ad5162c3dc0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2/usersearch?user=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2",
+                        "usersearch"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The user_id, device_id, or Amplitude ID to search for.",
+                          "key": "user",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Search for a user by user_id, device_id, or Amplitude ID. Returns matching user identifiers and their most recent event details."
+                  },
+                  "response": [
+                    {
+                      "id": "3fd3270c-a3a4-4dbe-a744-fc8ff48f6212",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/usersearch?user=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "usersearch"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The user_id, device_id, or Amplitude ID to search for.",
+                              "key": "user",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"matches\": [\n    {\n      \"user_id\": \"<string>\",\n      \"amplitude_id\": \"<long>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"amplitude_id\": \"<long>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-3fd3270c-a3a4-4dbe-a744-fc8ff48f6212"
+                    },
+                    {
+                      "id": "e3593055-b7c0-4970-bd0d-e2d68d707fd1",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/usersearch?user=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "usersearch"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The user_id, device_id, or Amplitude ID to search for.",
+                              "key": "user",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-e3593055-b7c0-4970-bd0d-e2d68d707fd1"
+                    },
+                    {
+                      "id": "696d600d-8d54-436a-93c9-df775babdc38",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/usersearch?user=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "usersearch"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The user_id, device_id, or Amplitude ID to search for.",
+                              "key": "user",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-696d600d-8d54-436a-93c9-df775babdc38"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:24.000Z",
+                  "updatedAt": "2026-06-05T15:05:24.000Z",
+                  "uid": "35240-9c07b20e-df79-4735-a7a1-1ad5162c3dc0"
+                }
+              ],
+              "id": "226ef7c1-2ef7-4df0-bd9f-bd609deee399",
+              "createdAt": "2026-06-05T15:05:24.000Z",
+              "updatedAt": "2026-06-05T15:05:24.000Z",
+              "uid": "35240-226ef7c1-2ef7-4df0-bd9f-bd609deee399"
+            },
+            {
+              "name": "revenue",
+              "item": [
+                {
+                  "name": "day",
+                  "item": [
+                    {
+                      "name": "Amplitude Get Revenue LTV Data",
+                      "id": "635dff41-c24a-4c89-8d1b-1e828f6ce0bd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/revenue/day?start=12472580&end=12472580&m=<string>&s=<string>&g=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "revenue",
+                            "day"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The start date in YYYYMMDD format.",
+                              "key": "start",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "(Required) The end date in YYYYMMDD format.",
+                              "key": "end",
+                              "value": "12472580"
+                            },
+                            {
+                              "description": "The revenue metric to compute.",
+                              "key": "m",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Segment definitions as a JSON-encoded array.",
+                              "key": "s",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The property to group results by.",
+                              "key": "g",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Get revenue lifetime value (LTV) data for new users acquired during the specified date range."
+                      },
+                      "response": [
+                        {
+                          "id": "262ac616-60dd-4078-9a70-a35952c6b6fb",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/revenue/day?start=12472580&end=12472580&m=<string>&s=<string>&g=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "revenue",
+                                "day"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The start date in YYYYMMDD format.",
+                                  "key": "start",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "(Required) The end date in YYYYMMDD format.",
+                                  "key": "end",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "The revenue metric to compute.",
+                                  "key": "m",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Segment definitions as a JSON-encoded array.",
+                                  "key": "s",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The property to group results by.",
+                                  "key": "g",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {}\n}",
+                          "createdAt": "2026-06-05T15:05:24.000Z",
+                          "updatedAt": "2026-06-05T15:05:24.000Z",
+                          "uid": "35240-262ac616-60dd-4078-9a70-a35952c6b6fb"
+                        },
+                        {
+                          "id": "553371ad-11a6-4c82-867a-29907197930a",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/revenue/day?start=12472580&end=12472580&m=<string>&s=<string>&g=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "revenue",
+                                "day"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The start date in YYYYMMDD format.",
+                                  "key": "start",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "(Required) The end date in YYYYMMDD format.",
+                                  "key": "end",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "The revenue metric to compute.",
+                                  "key": "m",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Segment definitions as a JSON-encoded array.",
+                                  "key": "s",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The property to group results by.",
+                                  "key": "g",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:24.000Z",
+                          "updatedAt": "2026-06-05T15:05:24.000Z",
+                          "uid": "35240-553371ad-11a6-4c82-867a-29907197930a"
+                        },
+                        {
+                          "id": "d84970c6-af56-4ff2-ab90-60a2b19944c7",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/2/revenue/day?start=12472580&end=12472580&m=<string>&s=<string>&g=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "2",
+                                "revenue",
+                                "day"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) The start date in YYYYMMDD format.",
+                                  "key": "start",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "(Required) The end date in YYYYMMDD format.",
+                                  "key": "end",
+                                  "value": "12472580"
+                                },
+                                {
+                                  "description": "The revenue metric to compute.",
+                                  "key": "m",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Segment definitions as a JSON-encoded array.",
+                                  "key": "s",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The property to group results by.",
+                                  "key": "g",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:24.000Z",
+                          "updatedAt": "2026-06-05T15:05:24.000Z",
+                          "uid": "35240-d84970c6-af56-4ff2-ab90-60a2b19944c7"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:24.000Z",
+                      "updatedAt": "2026-06-05T15:05:24.000Z",
+                      "uid": "35240-635dff41-c24a-4c89-8d1b-1e828f6ce0bd"
+                    }
+                  ],
+                  "id": "050f83a2-82c2-4aeb-99dd-8556fc09167b",
+                  "createdAt": "2026-06-05T15:05:24.000Z",
+                  "updatedAt": "2026-06-05T15:05:24.000Z",
+                  "uid": "35240-050f83a2-82c2-4aeb-99dd-8556fc09167b"
+                }
+              ],
+              "id": "178c4e77-d545-439e-8d00-d81e2e6bab14",
+              "createdAt": "2026-06-05T15:05:24.000Z",
+              "updatedAt": "2026-06-05T15:05:24.000Z",
+              "uid": "35240-178c4e77-d545-439e-8d00-d81e2e6bab14"
+            }
+          ],
+          "id": "7d094b90-3d20-49d9-9811-a46e877e4cf9",
+          "createdAt": "2026-06-05T15:05:24.000Z",
+          "updatedAt": "2026-06-05T15:05:24.000Z",
+          "uid": "35240-7d094b90-3d20-49d9-9811-a46e877e4cf9"
+        }
+      ],
+      "id": "8e4170d4-bf61-489b-a190-14007b85bc2e",
+      "createdAt": "2026-06-05T15:05:24.000Z",
+      "updatedAt": "2026-06-05T15:05:24.000Z",
+      "uid": "35240-8e4170d4-bf61-489b-a190-14007b85bc2e"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://amplitude.com"
+    }
+  ]
+}

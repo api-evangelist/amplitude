@@ -1,0 +1,209 @@
+{
+  "info": {
+    "_postman_id": "4ca8a722-29c1-4e56-a3de-7abdc291618c",
+    "name": "Amplitude Attribution API",
+    "description": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:31.000Z",
+    "updatedAt": "2026-06-05T15:05:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4ca8a722-29c1-4e56-a3de-7abdc291618c"
+  },
+  "item": [
+    {
+      "name": "attribution",
+      "item": [
+        {
+          "name": "Amplitude Send Attribution Data",
+          "id": "d4244986-c436-433e-8d5a-58a38af966fd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"device_id\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"os_name\": \"<string>\",\n    \"os_version\": \"<string>\",\n    \"device_brand\": \"<string>\",\n    \"device_manufacturer\": \"<string>\",\n    \"device_model\": \"<string>\",\n    \"carrier\": \"<string>\",\n    \"country\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"language\": \"<string>\",\n    \"adid\": \"<string>\",\n    \"idfa\": \"<string>\",\n    \"idfv\": \"<string>\",\n    \"user_properties\": {\n      \"elit_38_\": false\n    },\n    \"event_properties\": {\n      \"commodo_9d\": \"Duis nisi\",\n      \"sed_cf\": \"voluptate tempor dolore Lorem irure\"\n    },\n    \"time\": \"<long>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/attribution",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "attribution"
+              ]
+            },
+            "description": "Send a campaign attribution event to Amplitude to associate a user with the marketing campaign, channel, or creative that drove their acquisition or re-engagement. The event object should contain attribution-specific fields such as campaign name, source, medium, and ad creative."
+          },
+          "response": [
+            {
+              "id": "4221afbe-3625-4d81-946d-09820d3273cc",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"device_id\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"os_name\": \"<string>\",\n    \"os_version\": \"<string>\",\n    \"device_brand\": \"<string>\",\n    \"device_manufacturer\": \"<string>\",\n    \"device_model\": \"<string>\",\n    \"carrier\": \"<string>\",\n    \"country\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"language\": \"<string>\",\n    \"adid\": \"<string>\",\n    \"idfa\": \"<string>\",\n    \"idfv\": \"<string>\",\n    \"user_properties\": {\n      \"elit_38_\": false\n    },\n    \"event_properties\": {\n      \"commodo_9d\": \"Duis nisi\",\n      \"sed_cf\": \"voluptate tempor dolore Lorem irure\"\n    },\n    \"time\": \"<long>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/attribution",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attribution"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"code\": \"<integer>\",\n  \"events_ingested\": \"<integer>\",\n  \"server_upload_time\": \"<long>\"\n}",
+              "createdAt": "2026-06-05T15:05:31.000Z",
+              "updatedAt": "2026-06-05T15:05:31.000Z",
+              "uid": "35240-4221afbe-3625-4d81-946d-09820d3273cc"
+            },
+            {
+              "id": "72fd14bd-28f3-4029-8f6a-b0b5a51949dc",
+              "name": "Bad request - missing required fields",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"device_id\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"os_name\": \"<string>\",\n    \"os_version\": \"<string>\",\n    \"device_brand\": \"<string>\",\n    \"device_manufacturer\": \"<string>\",\n    \"device_model\": \"<string>\",\n    \"carrier\": \"<string>\",\n    \"country\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"language\": \"<string>\",\n    \"adid\": \"<string>\",\n    \"idfa\": \"<string>\",\n    \"idfv\": \"<string>\",\n    \"user_properties\": {\n      \"elit_38_\": false\n    },\n    \"event_properties\": {\n      \"commodo_9d\": \"Duis nisi\",\n      \"sed_cf\": \"voluptate tempor dolore Lorem irure\"\n    },\n    \"time\": \"<long>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/attribution",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attribution"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:31.000Z",
+              "updatedAt": "2026-06-05T15:05:31.000Z",
+              "uid": "35240-72fd14bd-28f3-4029-8f6a-b0b5a51949dc"
+            },
+            {
+              "id": "048059b8-75ea-4128-8e37-72c59b88da5b",
+              "name": "Too many requests - rate limit exceeded",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"device_id\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"os_name\": \"<string>\",\n    \"os_version\": \"<string>\",\n    \"device_brand\": \"<string>\",\n    \"device_manufacturer\": \"<string>\",\n    \"device_model\": \"<string>\",\n    \"carrier\": \"<string>\",\n    \"country\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"language\": \"<string>\",\n    \"adid\": \"<string>\",\n    \"idfa\": \"<string>\",\n    \"idfv\": \"<string>\",\n    \"user_properties\": {\n      \"elit_38_\": false\n    },\n    \"event_properties\": {\n      \"commodo_9d\": \"Duis nisi\",\n      \"sed_cf\": \"voluptate tempor dolore Lorem irure\"\n    },\n    \"time\": \"<long>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/attribution",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "attribution"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:05:31.000Z",
+              "updatedAt": "2026-06-05T15:05:31.000Z",
+              "uid": "35240-048059b8-75ea-4128-8e37-72c59b88da5b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:05:31.000Z",
+          "updatedAt": "2026-06-05T15:05:31.000Z",
+          "uid": "35240-d4244986-c436-433e-8d5a-58a38af966fd"
+        }
+      ],
+      "id": "3792a14c-64cb-4fab-b636-3c4845502a87",
+      "createdAt": "2026-06-05T15:05:31.000Z",
+      "updatedAt": "2026-06-05T15:05:31.000Z",
+      "uid": "35240-3792a14c-64cb-4fab-b636-3c4845502a87"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api2.amplitude.com"
+    }
+  ]
+}

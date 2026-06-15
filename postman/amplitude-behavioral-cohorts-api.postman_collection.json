@@ -1,0 +1,1063 @@
+{
+  "info": {
+    "_postman_id": "81864033-880a-4f8f-9f03-fabfc489bc24",
+    "name": "Amplitude Behavioral Cohorts API",
+    "description": "The Amplitude Behavioral Cohorts API allows developers to list, export, and upload cohorts in Amplitude. Cohorts are groups of users defined by shared behavioral patterns or properties. This API supports downloading cohort membership lists, creating new cohorts from external data, and retrieving cohort metadata. It is commonly used for syncing audience segments with marketing platforms, CRMs, and other downstream tools.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:26.000Z",
+    "updatedAt": "2026-06-05T15:05:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-81864033-880a-4f8f-9f03-fabfc489bc24"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "3",
+          "item": [
+            {
+              "name": "cohorts",
+              "item": [
+                {
+                  "name": "upload",
+                  "item": [
+                    {
+                      "name": "Amplitude Upload a Cohort",
+                      "id": "eca4b4d5-d546-404c-97f1-806d78897fd6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\",\n  \"existing_cohort_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/cohorts/upload",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "cohorts",
+                            "upload"
+                          ]
+                        },
+                        "description": "Create or update a cohort by uploading a list of user IDs or Amplitude IDs. This allows importing audience segments from external systems into Amplitude for analysis and targeting."
+                      },
+                      "response": [
+                        {
+                          "id": "46d9800e-1946-4de1-8fba-2f678beb72c7",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\",\n  \"existing_cohort_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/cohorts/upload",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "cohorts",
+                                "upload"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"cohort_id\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:05:26.000Z",
+                          "updatedAt": "2026-06-05T15:05:26.000Z",
+                          "uid": "35240-46d9800e-1946-4de1-8fba-2f678beb72c7"
+                        },
+                        {
+                          "id": "c4140ba4-e5b1-467f-821e-47e751bab03d",
+                          "name": "Bad request - invalid cohort data",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\",\n  \"existing_cohort_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/cohorts/upload",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "cohorts",
+                                "upload"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:26.000Z",
+                          "updatedAt": "2026-06-05T15:05:26.000Z",
+                          "uid": "35240-c4140ba4-e5b1-467f-821e-47e751bab03d"
+                        },
+                        {
+                          "id": "c4f46652-09ea-45e5-983f-6a0d6599e3e6",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\",\n  \"existing_cohort_id\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/3/cohorts/upload",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "3",
+                                "cohorts",
+                                "upload"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:05:26.000Z",
+                          "updatedAt": "2026-06-05T15:05:26.000Z",
+                          "uid": "35240-c4f46652-09ea-45e5-983f-6a0d6599e3e6"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:05:26.000Z",
+                      "updatedAt": "2026-06-05T15:05:26.000Z",
+                      "uid": "35240-eca4b4d5-d546-404c-97f1-806d78897fd6"
+                    }
+                  ],
+                  "id": "5d2f8274-e68d-4e6d-a915-2f400940c46f",
+                  "createdAt": "2026-06-05T15:05:26.000Z",
+                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                  "uid": "35240-5d2f8274-e68d-4e6d-a915-2f400940c46f"
+                },
+                {
+                  "name": "Amplitude List All Cohorts",
+                  "id": "32c57c37-38a5-4377-982e-c1682c664a46",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/3/cohorts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "3",
+                        "cohorts"
+                      ]
+                    },
+                    "description": "Retrieve a list of all cohorts in the project including their metadata such as name, description, size, and last computed date."
+                  },
+                  "response": [
+                    {
+                      "id": "6ed6180b-78ee-4ba4-81eb-daeb0e00b5a9",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/cohorts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "cohorts"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"cohorts\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"lastComputed\": \"<dateTime>\",\n      \"archived\": \"<boolean>\",\n      \"owner\": \"<string>\",\n      \"appId\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"size\": \"<integer>\",\n      \"lastComputed\": \"<dateTime>\",\n      \"archived\": \"<boolean>\",\n      \"owner\": \"<string>\",\n      \"appId\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:05:26.000Z",
+                      "updatedAt": "2026-06-05T15:05:26.000Z",
+                      "uid": "35240-6ed6180b-78ee-4ba4-81eb-daeb0e00b5a9"
+                    },
+                    {
+                      "id": "7232184c-af95-4809-a782-b917ed5773b4",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/3/cohorts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "3",
+                            "cohorts"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:26.000Z",
+                      "updatedAt": "2026-06-05T15:05:26.000Z",
+                      "uid": "35240-7232184c-af95-4809-a782-b917ed5773b4"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:26.000Z",
+                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                  "uid": "35240-32c57c37-38a5-4377-982e-c1682c664a46"
+                }
+              ],
+              "id": "b2692583-6329-40b5-9fcb-98bb49ef75b4",
+              "createdAt": "2026-06-05T15:05:26.000Z",
+              "updatedAt": "2026-06-05T15:05:26.000Z",
+              "uid": "35240-b2692583-6329-40b5-9fcb-98bb49ef75b4"
+            }
+          ],
+          "id": "5cc8fab7-8d34-4fdf-8376-abd8f8a89f48",
+          "createdAt": "2026-06-05T15:05:26.000Z",
+          "updatedAt": "2026-06-05T15:05:26.000Z",
+          "uid": "35240-5cc8fab7-8d34-4fdf-8376-abd8f8a89f48"
+        },
+        {
+          "name": "5",
+          "item": [
+            {
+              "name": "cohorts",
+              "item": [
+                {
+                  "name": "request",
+                  "item": [
+                    {
+                      "name": "{cohort_id}",
+                      "item": [
+                        {
+                          "name": "status",
+                          "item": [
+                            {
+                              "name": "Amplitude Get Cohort Export Status",
+                              "id": "8f5f6dba-dffe-42d6-9cbf-d42e40b88d46",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id/status",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "5",
+                                    "cohorts",
+                                    "request",
+                                    ":cohort_id",
+                                    "status"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "5274d991-be15-4e4e-8dfc-f004927dcda0",
+                                      "key": "cohort_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID of the cohort whose export status to check."
+                                    }
+                                  ]
+                                },
+                                "description": "Poll the status of a previously requested cohort export. Returns the current state of the export job. Continue polling until the status indicates the export is complete."
+                              },
+                              "response": [
+                                {
+                                  "id": "a416e148-68b0-4eaa-bd82-a10a242b67ee",
+                                  "name": "Success",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id/status",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "5",
+                                        "cohorts",
+                                        "request",
+                                        ":cohort_id",
+                                        "status"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cohort_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"request_id\": \"<string>\",\n  \"status\": \"computing\"\n}",
+                                  "createdAt": "2026-06-05T15:05:26.000Z",
+                                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                                  "uid": "35240-a416e148-68b0-4eaa-bd82-a10a242b67ee"
+                                },
+                                {
+                                  "id": "15493d3b-c6fd-4a6b-8c37-9363c55915f0",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id/status",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "5",
+                                        "cohorts",
+                                        "request",
+                                        ":cohort_id",
+                                        "status"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cohort_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:05:26.000Z",
+                                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                                  "uid": "35240-15493d3b-c6fd-4a6b-8c37-9363c55915f0"
+                                },
+                                {
+                                  "id": "802f4f9c-704d-4698-9268-2612855ab5a5",
+                                  "name": "Cohort not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id/status",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "5",
+                                        "cohorts",
+                                        "request",
+                                        ":cohort_id",
+                                        "status"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cohort_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:05:26.000Z",
+                                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                                  "uid": "35240-802f4f9c-704d-4698-9268-2612855ab5a5"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:05:26.000Z",
+                              "updatedAt": "2026-06-05T15:05:26.000Z",
+                              "uid": "35240-8f5f6dba-dffe-42d6-9cbf-d42e40b88d46"
+                            }
+                          ],
+                          "id": "24edd293-719d-4998-9870-c6f30a91f820",
+                          "createdAt": "2026-06-05T15:05:26.000Z",
+                          "updatedAt": "2026-06-05T15:05:26.000Z",
+                          "uid": "35240-24edd293-719d-4998-9870-c6f30a91f820"
+                        },
+                        {
+                          "name": "file",
+                          "item": [
+                            {
+                              "name": "Amplitude Download Cohort Export File",
+                              "id": "3d574c54-eb41-4c28-ab93-f6517695a785",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id/file",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "5",
+                                    "cohorts",
+                                    "request",
+                                    ":cohort_id",
+                                    "file"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "4095248a-cf32-4d11-a3de-83c6ff26f022",
+                                      "key": "cohort_id",
+                                      "value": "<string>",
+                                      "description": "(Required) The ID of the cohort to download."
+                                    }
+                                  ]
+                                },
+                                "description": "Download the exported cohort membership data file. This endpoint should only be called after the export status indicates completion."
+                              },
+                              "response": [
+                                {
+                                  "id": "753ba6af-0b1a-42dc-9ab9-647fe0f86e95",
+                                  "name": "Success - returns the cohort data file",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id/file",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "5",
+                                        "cohorts",
+                                        "request",
+                                        ":cohort_id",
+                                        "file"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cohort_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{}",
+                                  "createdAt": "2026-06-05T15:05:26.000Z",
+                                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                                  "uid": "35240-753ba6af-0b1a-42dc-9ab9-647fe0f86e95"
+                                },
+                                {
+                                  "id": "613486c1-8700-4a1a-b4a6-8c00b2dd7c95",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id/file",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "5",
+                                        "cohorts",
+                                        "request",
+                                        ":cohort_id",
+                                        "file"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cohort_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:05:26.000Z",
+                                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                                  "uid": "35240-613486c1-8700-4a1a-b4a6-8c00b2dd7c95"
+                                },
+                                {
+                                  "id": "58c3da84-db54-4672-81f5-5f4a28832db1",
+                                  "name": "Cohort not found or export not ready",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: basic",
+                                        "key": "Authorization",
+                                        "value": "Basic <credentials>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id/file",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "5",
+                                        "cohorts",
+                                        "request",
+                                        ":cohort_id",
+                                        "file"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "cohort_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-06-05T15:05:26.000Z",
+                                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                                  "uid": "35240-58c3da84-db54-4672-81f5-5f4a28832db1"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:05:26.000Z",
+                              "updatedAt": "2026-06-05T15:05:26.000Z",
+                              "uid": "35240-3d574c54-eb41-4c28-ab93-f6517695a785"
+                            }
+                          ],
+                          "id": "327921b2-2b39-43c4-b6d5-cebb3cd63e5f",
+                          "createdAt": "2026-06-05T15:05:26.000Z",
+                          "updatedAt": "2026-06-05T15:05:26.000Z",
+                          "uid": "35240-327921b2-2b39-43c4-b6d5-cebb3cd63e5f"
+                        },
+                        {
+                          "name": "Amplitude Request a Cohort Export",
+                          "id": "92adb405-3b91-439e-ae04-cfd81518d9ae",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id?props=0",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "5",
+                                "cohorts",
+                                "request",
+                                ":cohort_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Set to 1 to include user properties in the export.",
+                                  "key": "props",
+                                  "value": "0"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4c96f0b4-f4ff-47d2-8d8c-1218fddf4690",
+                                  "key": "cohort_id",
+                                  "value": "<string>",
+                                  "description": "(Required) The ID of the cohort to export."
+                                }
+                              ]
+                            },
+                            "description": "Request an asynchronous export of a specific cohort. This is the first step in a three-step process to download cohort membership data. After requesting, poll the status endpoint, then download the file when ready."
+                          },
+                          "response": [
+                            {
+                              "id": "8fe189df-1dc7-4ae0-be9a-e1eded89768e",
+                              "name": "Success - export request accepted",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id?props=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "5",
+                                    "cohorts",
+                                    "request",
+                                    ":cohort_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Set to 1 to include user properties in the export.",
+                                      "key": "props",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cohort_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"request_id\": \"<string>\",\n  \"cohort_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:05:26.000Z",
+                              "updatedAt": "2026-06-05T15:05:26.000Z",
+                              "uid": "35240-8fe189df-1dc7-4ae0-be9a-e1eded89768e"
+                            },
+                            {
+                              "id": "0f4f0f93-315d-40a6-9d37-67fd4656e7fa",
+                              "name": "Bad request",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id?props=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "5",
+                                    "cohorts",
+                                    "request",
+                                    ":cohort_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Set to 1 to include user properties in the export.",
+                                      "key": "props",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cohort_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:26.000Z",
+                              "updatedAt": "2026-06-05T15:05:26.000Z",
+                              "uid": "35240-0f4f0f93-315d-40a6-9d37-67fd4656e7fa"
+                            },
+                            {
+                              "id": "c623b465-aa90-4cef-bdf8-aa1e72885e2f",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id?props=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "5",
+                                    "cohorts",
+                                    "request",
+                                    ":cohort_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Set to 1 to include user properties in the export.",
+                                      "key": "props",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cohort_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:26.000Z",
+                              "updatedAt": "2026-06-05T15:05:26.000Z",
+                              "uid": "35240-c623b465-aa90-4cef-bdf8-aa1e72885e2f"
+                            },
+                            {
+                              "id": "6b07ace6-819f-4de1-aa4e-4e192e121555",
+                              "name": "Cohort not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/5/cohorts/request/:cohort_id?props=0",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "5",
+                                    "cohorts",
+                                    "request",
+                                    ":cohort_id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Set to 1 to include user properties in the export.",
+                                      "key": "props",
+                                      "value": "0"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "cohort_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:05:26.000Z",
+                              "updatedAt": "2026-06-05T15:05:26.000Z",
+                              "uid": "35240-6b07ace6-819f-4de1-aa4e-4e192e121555"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:05:26.000Z",
+                          "updatedAt": "2026-06-05T15:05:26.000Z",
+                          "uid": "35240-92adb405-3b91-439e-ae04-cfd81518d9ae"
+                        }
+                      ],
+                      "id": "37f0afb3-53a0-49ee-b97f-e3d0295cd657",
+                      "createdAt": "2026-06-05T15:05:26.000Z",
+                      "updatedAt": "2026-06-05T15:05:26.000Z",
+                      "uid": "35240-37f0afb3-53a0-49ee-b97f-e3d0295cd657"
+                    }
+                  ],
+                  "id": "04e3ba4d-0fec-4a44-9879-4540550687d1",
+                  "createdAt": "2026-06-05T15:05:26.000Z",
+                  "updatedAt": "2026-06-05T15:05:26.000Z",
+                  "uid": "35240-04e3ba4d-0fec-4a44-9879-4540550687d1"
+                }
+              ],
+              "id": "d0dd4e65-cf10-4199-b734-f10030a00f48",
+              "createdAt": "2026-06-05T15:05:26.000Z",
+              "updatedAt": "2026-06-05T15:05:26.000Z",
+              "uid": "35240-d0dd4e65-cf10-4199-b734-f10030a00f48"
+            }
+          ],
+          "id": "85c34611-0492-4db4-95c3-0eb4faec7e69",
+          "createdAt": "2026-06-05T15:05:26.000Z",
+          "updatedAt": "2026-06-05T15:05:26.000Z",
+          "uid": "35240-85c34611-0492-4db4-95c3-0eb4faec7e69"
+        }
+      ],
+      "id": "dad21a70-303a-446b-a712-45a725feeb16",
+      "createdAt": "2026-06-05T15:05:26.000Z",
+      "updatedAt": "2026-06-05T15:05:26.000Z",
+      "uid": "35240-dad21a70-303a-446b-a712-45a725feeb16"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://amplitude.com"
+    }
+  ]
+}

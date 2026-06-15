@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Chart Annotations API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Annotations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Annotations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/3/annotations"
+          },
+          "docs": "Retrieve all chart annotations in the project. Supports filtering by category, chart, and date range."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create an Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/3/annotations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new chart annotation with a label, date or date range, optional category, and optional chart association. Annotations appear on timeline-based charts to provide context for significant events."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get an Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/3/annotations/:annotation_id",
+            "params": [
+              {
+                "name": "annotation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the annotation."
+              }
+            ]
+          },
+          "docs": "Retrieve a single chart annotation by its ID."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update an Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://amplitude.com/api/3/annotations/:annotation_id",
+            "params": [
+              {
+                "name": "annotation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the annotation."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing annotation. Only the fields included in the request body are updated; other fields remain unchanged."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete an Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://amplitude.com/api/3/annotations/:annotation_id",
+            "params": [
+              {
+                "name": "annotation_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the annotation."
+              }
+            ]
+          },
+          "docs": "Delete a chart annotation by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

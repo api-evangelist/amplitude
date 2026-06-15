@@ -1,0 +1,537 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Taxonomy API",
+    "version": "2"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Event Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/taxonomy/category"
+          },
+          "docs": "Retrieve all event categories in the project. Categories help organize event types into logical groups for easier data governance."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create an Event Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/2/taxonomy/category",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "category_name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new event category to organize event types into logical groups."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get an Event Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/taxonomy/category/:category_id",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event category."
+              }
+            ]
+          },
+          "docs": "Retrieve a single event category by its ID."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update an Event Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://amplitude.com/api/2/taxonomy/category/:category_id",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event category."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "category_name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update the name of an existing event category."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete an Event Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://amplitude.com/api/2/taxonomy/category/:category_id",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event category."
+              }
+            ]
+          },
+          "docs": "Delete an event category. Event types previously assigned to this category will become uncategorized."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Event Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/taxonomy/event",
+            "params": [
+              {
+                "name": "showDeleted",
+                "value": "",
+                "type": "query",
+                "description": "When true, include deleted event types in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve all event types in the project. Optionally include deleted event types using the showDeleted parameter."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/2/taxonomy/event",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "event_type",
+                  "value": ""
+                },
+                {
+                  "name": "category",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new event type in the tracking plan. This is for planning purposes and does not affect event ingestion."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/taxonomy/event/:event_type",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event type."
+              }
+            ]
+          },
+          "docs": "Retrieve a single event type by its name."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://amplitude.com/api/2/taxonomy/event/:event_type",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event type."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "new_event_type",
+                  "value": ""
+                },
+                {
+                  "name": "category",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an existing event type's metadata such as description or category assignment."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://amplitude.com/api/2/taxonomy/event/:event_type",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event type."
+              }
+            ]
+          },
+          "docs": "Delete a planned event type. This is intended for removing event types that have not yet received data. Deleting an event type that has received data does not remove the data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Event Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Event Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/taxonomy/event-property",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The event type to list properties for."
+              }
+            ]
+          },
+          "docs": "Retrieve all event properties for a given event type in the project."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create an Event Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/2/taxonomy/event-property",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "event_type",
+                  "value": ""
+                },
+                {
+                  "name": "event_property",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                },
+                {
+                  "name": "is_required",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new event property in the tracking plan for a specific event type."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get an Event Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/taxonomy/event-property/:event_property",
+            "params": [
+              {
+                "name": "event_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event property."
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The event type the property belongs to."
+              }
+            ]
+          },
+          "docs": "Retrieve a single event property by its name for a given event type."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update an Event Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://amplitude.com/api/2/taxonomy/event-property/:event_property",
+            "params": [
+              {
+                "name": "event_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event property to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "event_type",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "new_event_property",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                },
+                {
+                  "name": "is_required",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an existing event property's metadata."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete an Event Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://amplitude.com/api/2/taxonomy/event-property/:event_property",
+            "params": [
+              {
+                "name": "event_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event property to delete."
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The event type the property belongs to."
+              }
+            ]
+          },
+          "docs": "Delete a planned event property. This is intended for properties that have not yet received data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All User Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/taxonomy/user-property",
+            "params": [
+              {
+                "name": "showDeleted",
+                "value": "",
+                "type": "query",
+                "description": "When true, include deleted user properties in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve all user properties in the project. Optionally include deleted user properties."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create a User Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/2/taxonomy/user-property",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "user_property",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new user property in the tracking plan."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get a User Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/2/taxonomy/user-property/:user_property",
+            "params": [
+              {
+                "name": "user_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user property."
+              }
+            ]
+          },
+          "docs": "Retrieve a single user property by its name."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update a User Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://amplitude.com/api/2/taxonomy/user-property/:user_property",
+            "params": [
+              {
+                "name": "user_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user property to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "new_user_property",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an existing user property's metadata."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete a User Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://amplitude.com/api/2/taxonomy/user-property/:user_property",
+            "params": [
+              {
+                "name": "user_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user property to delete."
+              }
+            ]
+          },
+          "docs": "Delete a planned user property. This is intended for properties that have not yet received data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

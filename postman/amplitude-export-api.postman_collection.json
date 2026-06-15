@@ -1,0 +1,304 @@
+{
+  "info": {
+    "_postman_id": "547fa2ef-de05-45b5-a490-6fee530a3edc",
+    "name": "Amplitude Export API",
+    "description": "The Amplitude Export API enables bulk export of raw event data for a given project within a specified date range. Results are returned as zipped archives of JSON files containing complete event records with timestamps, user properties, device information, and attribution data. This API is commonly used for data warehousing, offline analysis, and feeding event data into external processing pipelines.\n\nContact Support:\n Name: Amplitude Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:05:25.000Z",
+    "updatedAt": "2026-06-05T15:05:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-547fa2ef-de05-45b5-a490-6fee530a3edc"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "2",
+          "item": [
+            {
+              "name": "export",
+              "item": [
+                {
+                  "name": "Amplitude Export Raw Event Data",
+                  "id": "7b1515c8-c6eb-47f5-a0a3-73985ea76a09",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/zip"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/2/export?start=81385290T29&end=81385290T29",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "2",
+                        "export"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted.",
+                          "key": "start",
+                          "value": "81385290T29"
+                        },
+                        {
+                          "description": "(Required) The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted.",
+                          "key": "end",
+                          "value": "81385290T29"
+                        }
+                      ]
+                    },
+                    "description": "Export raw event data for the specified date range as a zipped archive of JSON files. The maximum queryable period is 365 days and the maximum response size is 4 GB. Data is available for export at a minimum within 2 hours of server ingestion. Dates older than 30 days before the current date may not be available."
+                  },
+                  "response": [
+                    {
+                      "id": "b0aed913-f98c-47a0-80bf-a0b19f14b355",
+                      "name": "Success - returns a zipped archive of JSON event files",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/zip"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/export?start=81385290T29&end=81385290T29",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "export"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted.",
+                              "key": "start",
+                              "value": "81385290T29"
+                            },
+                            {
+                              "description": "(Required) The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted.",
+                              "key": "end",
+                              "value": "81385290T29"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/zip"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<binary>",
+                      "createdAt": "2026-06-05T15:05:25.000Z",
+                      "updatedAt": "2026-06-05T15:05:25.000Z",
+                      "uid": "35240-b0aed913-f98c-47a0-80bf-a0b19f14b355"
+                    },
+                    {
+                      "id": "f4f6a801-b03d-4dd4-91af-4948186b7bf7",
+                      "name": "Bad request - the exported data exceeds the 4 GB size limit",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/export?start=81385290T29&end=81385290T29",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "export"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted.",
+                              "key": "start",
+                              "value": "81385290T29"
+                            },
+                            {
+                              "description": "(Required) The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted.",
+                              "key": "end",
+                              "value": "81385290T29"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:25.000Z",
+                      "updatedAt": "2026-06-05T15:05:25.000Z",
+                      "uid": "35240-f4f6a801-b03d-4dd4-91af-4948186b7bf7"
+                    },
+                    {
+                      "id": "1ec58f46-71ae-4eaf-9e17-e22880ecb76c",
+                      "name": "Unauthorized - invalid or missing credentials",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/export?start=81385290T29&end=81385290T29",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "export"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted.",
+                              "key": "start",
+                              "value": "81385290T29"
+                            },
+                            {
+                              "description": "(Required) The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted.",
+                              "key": "end",
+                              "value": "81385290T29"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:25.000Z",
+                      "updatedAt": "2026-06-05T15:05:25.000Z",
+                      "uid": "35240-1ec58f46-71ae-4eaf-9e17-e22880ecb76c"
+                    },
+                    {
+                      "id": "6f365300-9c91-40ed-81ab-f88343f8c0cc",
+                      "name": "No data found for the requested date range",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/2/export?start=81385290T29&end=81385290T29",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "2",
+                            "export"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted.",
+                              "key": "start",
+                              "value": "81385290T29"
+                            },
+                            {
+                              "description": "(Required) The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted.",
+                              "key": "end",
+                              "value": "81385290T29"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:05:25.000Z",
+                      "updatedAt": "2026-06-05T15:05:25.000Z",
+                      "uid": "35240-6f365300-9c91-40ed-81ab-f88343f8c0cc"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:05:25.000Z",
+                  "updatedAt": "2026-06-05T15:05:25.000Z",
+                  "uid": "35240-7b1515c8-c6eb-47f5-a0a3-73985ea76a09"
+                }
+              ],
+              "id": "e1f0ace2-1633-44fb-ad21-d50d9227f9da",
+              "createdAt": "2026-06-05T15:05:25.000Z",
+              "updatedAt": "2026-06-05T15:05:25.000Z",
+              "uid": "35240-e1f0ace2-1633-44fb-ad21-d50d9227f9da"
+            }
+          ],
+          "id": "39cc1b3c-3839-428b-ba17-82dcbab00369",
+          "createdAt": "2026-06-05T15:05:25.000Z",
+          "updatedAt": "2026-06-05T15:05:25.000Z",
+          "uid": "35240-39cc1b3c-3839-428b-ba17-82dcbab00369"
+        }
+      ],
+      "id": "8e5b1c63-3f94-463b-a035-1cc7e06f43d4",
+      "createdAt": "2026-06-05T15:05:25.000Z",
+      "updatedAt": "2026-06-05T15:05:25.000Z",
+      "uid": "35240-8e5b1c63-3f94-463b-a035-1cc7e06f43d4"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://amplitude.com"
+    }
+  ]
+}

@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Experiment Management API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://experiment.amplitude.com/api/1/flags",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of flags to return."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for pagination returned from a previous request."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all feature flags in the project. Returns flag metadata including status, variants, and deployment information."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create a Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://experiment.amplitude.com/api/1/flags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new feature flag with the specified key, variants, and targeting configuration."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get a Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://experiment.amplitude.com/api/1/flags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the feature flag."
+              }
+            ]
+          },
+          "docs": "Retrieve a single feature flag by its ID including full configuration details such as deployments, variants, and targeting segments."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update a Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://experiment.amplitude.com/api/1/flags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the feature flag."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing feature flag's configuration. Only the fields included in the request body are updated."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Experiments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Experiments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://experiment.amplitude.com/api/1/experiments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of experiments to return."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for pagination."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all experiments in the project. Returns experiment metadata including status, variants, and deployment information."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create an Experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://experiment.amplitude.com/api/1/experiments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new A/B test experiment with the specified key, variants, and targeting configuration."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get an Experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://experiment.amplitude.com/api/1/experiments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the experiment."
+              }
+            ]
+          },
+          "docs": "Retrieve a single experiment by its ID including full configuration details."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update an Experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://experiment.amplitude.com/api/1/experiments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the experiment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing experiment's configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://experiment.amplitude.com/api/1/deployments"
+          },
+          "docs": "Retrieve a list of all deployments that experiments and flags can be assigned to. Deployments represent environments or platforms where flags are evaluated."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get a Deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://experiment.amplitude.com/api/1/deployments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the deployment."
+              }
+            ]
+          },
+          "docs": "Retrieve a single deployment by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List Flag and Experiment Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://experiment.amplitude.com/api/1/versions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of versions to return."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for pagination."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date for filtering versions."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date for filtering versions."
+              }
+            ]
+          },
+          "docs": "Retrieve the version history for flags and experiments. Returns a paginated list of version records with change details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

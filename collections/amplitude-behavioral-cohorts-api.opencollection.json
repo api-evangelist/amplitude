@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Behavioral Cohorts API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cohorts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Cohorts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/3/cohorts"
+          },
+          "docs": "Retrieve a list of all cohorts in the project including their metadata such as name, description, size, and last computed date."
+        },
+        {
+          "info": {
+            "name": "Amplitude Request a Cohort Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/5/cohorts/request/:cohort_id",
+            "params": [
+              {
+                "name": "cohort_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the cohort to export."
+              },
+              {
+                "name": "props",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to include user properties in the export."
+              }
+            ]
+          },
+          "docs": "Request an asynchronous export of a specific cohort. This is the first step in a three-step process to download cohort membership data. After requesting, poll the status endpoint, then download the file when ready."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get Cohort Export Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/5/cohorts/request/:cohort_id/status",
+            "params": [
+              {
+                "name": "cohort_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the cohort whose export status to check."
+              }
+            ]
+          },
+          "docs": "Poll the status of a previously requested cohort export. Returns the current state of the export job. Continue polling until the status indicates the export is complete."
+        },
+        {
+          "info": {
+            "name": "Amplitude Download Cohort Export File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://amplitude.com/api/5/cohorts/request/:cohort_id/file",
+            "params": [
+              {
+                "name": "cohort_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the cohort to download."
+              }
+            ]
+          },
+          "docs": "Download the exported cohort membership data file. This endpoint should only be called after the export status indicates completion."
+        },
+        {
+          "info": {
+            "name": "Amplitude Upload a Cohort",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://amplitude.com/api/3/cohorts/upload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a cohort by uploading a list of user IDs or Amplitude IDs. This allows importing audience segments from external systems into Amplitude for analysis and targeting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
