@@ -7,7 +7,7 @@ description: Amplitude is a digital analytics platform that helps product teams 
   event ingestion, user management, cohort syncing, taxonomy governance, A/B testing,
   and data export. Amplitude is widely used by product, data, and engineering teams
   to build better digital experiences through data-driven insights.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - A/B Testing
 - Analytics
@@ -23,7 +23,7 @@ apis:
   - Events
   - Ingestion
   - Tracking
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api2.amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/http-v2
   properties:
@@ -46,7 +46,7 @@ apis:
   - Batch
   - Events
   - Ingestion
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api2.amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/batch-event-upload
   properties:
@@ -64,7 +64,7 @@ apis:
   - Identity
   - Properties
   - Users
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api2.amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/identify
   properties:
@@ -84,7 +84,7 @@ apis:
   - Groups
   - Identity
   - Properties
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api2.amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/group-identify
   properties:
@@ -102,7 +102,7 @@ apis:
   - Dashboards
   - Metrics
   - Reporting
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/dashboard-rest
   properties:
@@ -123,7 +123,7 @@ apis:
   - Data
   - Events
   - Export
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/export
   properties:
@@ -144,7 +144,7 @@ apis:
   - Cohorts
   - Segmentation
   - Users
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
   properties:
@@ -165,7 +165,7 @@ apis:
   - Data Governance
   - Events
   - Taxonomy
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/taxonomy
   properties:
@@ -186,7 +186,7 @@ apis:
   - Attribution
   - Campaigns
   - Marketing
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api2.amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/attribution
   properties:
@@ -207,7 +207,7 @@ apis:
   - Annotations
   - Charts
   - Reporting
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/chart-annotations
   properties:
@@ -228,7 +228,7 @@ apis:
   - Deployments
   - Releases
   - Tracking
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/releases
   properties:
@@ -245,7 +245,7 @@ apis:
   - Replay
   - Sessions
   - User Experience
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/session-replay
   properties:
@@ -263,7 +263,7 @@ apis:
   - Profiles
   - Recommendations
   - Users
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://profile-api.amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/user-profile
   properties:
@@ -284,7 +284,7 @@ apis:
   - Analytics
   - Identity
   - Users
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api2.amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/user-mapping
   properties:
@@ -305,7 +305,7 @@ apis:
   - GDPR
   - Privacy
   - Users
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/user-privacy
   properties:
@@ -323,7 +323,7 @@ apis:
   - Identity
   - Provisioning
   - Users
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://analytics.amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/scim
   properties:
@@ -344,7 +344,7 @@ apis:
   - Compliance
   - GDPR
   - Privacy
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
   humanURL: https://amplitude.com/docs/apis/analytics/ccpa-dsar
   properties:
@@ -365,7 +365,7 @@ apis:
   - Experimentation
   - Feature Flags
   - Variants
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api.lab.amplitude.com
   humanURL: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
   properties:
@@ -386,7 +386,7 @@ apis:
   - Experimentation
   - Feature Flags
   - Management
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://experiment.amplitude.com
   humanURL: https://amplitude.com/docs/apis/experiment/experiment-management-api
   properties:
@@ -408,7 +408,7 @@ apis:
   - Events
   - Streaming
   - Webhooks
-  image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://amplitude.com/docs/data/destination-catalog/webhooks
   properties:
   - url: https://amplitude.com/docs/data/destination-catalog/webhooks
