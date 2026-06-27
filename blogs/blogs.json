@@ -3,10 +3,9 @@
   "feeds": [
     {
       "source": "https://amplitude.com/blog",
-      "feed_url": "https://amplitude.com/blog",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "feed_url": "",
+      "saved": 5,
+      "method": "agent-scrape"
     },
     {
       "source": "https://github.com/amplitude",
@@ -16,6 +15,7 @@
       "method": "none"
     }
   ],
-  "post_count": 60,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 67,
+  "fetched": "2026-06-27T12:23:20Z",
+  "agent_pulled": "2026-06-27"
 }
