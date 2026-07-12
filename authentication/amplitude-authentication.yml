@@ -1,0 +1,44 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/amplitude-behavioral-cohorts-api-openapi.yml, openapi/amplitude-chart-annotations-api-openapi.yml,
+  openapi/amplitude-dashboard-rest-api-openapi.yml, openapi/amplitude-dsar-api-openapi.yml,
+  openapi/amplitude-experiment-evaluation-api-openapi.yml, openapi/amplitude-experiment-management-api-openapi.yml,
+  openapi/amplitude-export-api-openapi.yml, openapi/amplitude-scim-api-openapi.yml, openapi/amplitude-taxonomy-api-openapi.yml,
+  openapi/amplitude-user-mapping-api-openapi.yml, openapi/amplitude-user-profile-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: Use your Amplitude API key as the username and your secret key as the password.
+    Encode them as base64 in the format api_key:secret_key.
+  sources:
+  - openapi/amplitude-behavioral-cohorts-api-openapi.yml
+  - openapi/amplitude-chart-annotations-api-openapi.yml
+  - openapi/amplitude-dashboard-rest-api-openapi.yml
+  - openapi/amplitude-dsar-api-openapi.yml
+  - openapi/amplitude-export-api-openapi.yml
+  - openapi/amplitude-taxonomy-api-openapi.yml
+  - openapi/amplitude-user-mapping-api-openapi.yml
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Pass your deployment key in the Authorization header with the prefix Api-Key,
+    for example Api-Key YOUR_DEPLOYMENT_KEY.
+  sources:
+  - openapi/amplitude-experiment-evaluation-api-openapi.yml
+  - openapi/amplitude-user-profile-api-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Use a Management API key generated in the Experiment sidebar of the Amplitude
+    UI. Pass it in the Authorization header as Bearer YOUR_MANAGEMENT_API_KEY.
+  sources:
+  - openapi/amplitude-experiment-management-api-openapi.yml
+  - openapi/amplitude-scim-api-openapi.yml

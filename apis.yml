@@ -429,6 +429,14 @@ apis:
     membership change shape; vendor-specific cohort sync destinations conform to each
     downstream tool's own API contract.
 common:
+- type: TrustCenter
+  url: security/amplitude-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/amplitude-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/amplitude-domain-security.yml
+- type: Authentication
+  url: authentication/amplitude-authentication.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amplitude/overview
 - type: Arazzo
