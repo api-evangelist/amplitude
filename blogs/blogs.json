@@ -2,12 +2,6 @@
   "repo": "amplitude",
   "feeds": [
     {
-      "source": "https://amplitude.com/blog",
-      "feed_url": "",
-      "saved": 5,
-      "method": "agent-scrape"
-    },
-    {
       "source": "https://github.com/amplitude",
       "feed_url": "https://github.com/amplitude",
       "title": "",
@@ -15,7 +9,7 @@
       "method": "none"
     }
   ],
-  "post_count": 67,
-  "fetched": "2026-06-27T12:23:20Z",
-  "agent_pulled": "2026-06-27"
+  "post_count": 68,
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
