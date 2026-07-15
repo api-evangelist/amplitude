@@ -429,6 +429,8 @@ apis:
     membership change shape; vendor-specific cohort sync destinations conform to each
     downstream tool's own API contract.
 common:
+- type: AgenticAccess
+  url: agentic-access/amplitude-agentic-access.yml
 - type: TrustCenter
   url: security/amplitude-trust-center.yml
 - type: VulnerabilityDisclosure
