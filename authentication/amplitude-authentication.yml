@@ -38,7 +38,7 @@ schemes:
   type: http
   scheme: bearer
   description: Use a Management API key generated in the Experiment sidebar of the Amplitude
-    UI. Pass it in the Authorization header as Bearer YOUR_MANAGEMENT_API_KEY.
+    UI. Pass it in the Authorization header as Bearer [example key]
   sources:
   - openapi/amplitude-experiment-management-api-openapi.yml
   - openapi/amplitude-scim-api-openapi.yml
