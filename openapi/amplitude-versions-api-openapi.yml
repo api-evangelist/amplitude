@@ -1,0 +1,106 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Versions API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Versions
+  description: Flag and experiment version history operations
+paths:
+  /api/1/versions:
+    get:
+      operationId: listVersions
+      summary: Amplitude List Flag and Experiment Versions
+      description: Retrieve the version history for flags and experiments. Returns a paginated list of version records with change details.
+      tags:
+      - Versions
+      parameters:
+      - name: limit
+        in: query
+        description: The maximum number of versions to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: A cursor for pagination.
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: The start date for filtering versions.
+        schema:
+          type: string
+          format: date
+      - name: end
+        in: query
+        description: The end date for filtering versions.
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionListResponse'
+              examples:
+                listVersions200Example:
+                  summary: Default listVersions 200 response
+                  x-microcks-default: true
+                  value:
+                    versions:
+                    - id: {}
+                      flagId: {}
+                      version: {}
+                      createdAt: {}
+                      createdBy: {}
+                    nextCursor: example_value
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    VersionListResponse:
+      type: object
+      properties:
+        versions:
+          type: array
+          description: Array of version records.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The version record ID.
+              flagId:
+                type: string
+                description: The flag or experiment ID.
+              version:
+                type: integer
+                description: The version number.
+              createdAt:
+                type: string
+                format: date-time
+                description: The date and time the version was created.
+              createdBy:
+                type: string
+                description: The user who created this version.
+        nextCursor:
+          type: string
+          description: A cursor for fetching the next page.
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

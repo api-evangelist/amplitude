@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Revenue Analysis API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Revenue Analysis
+  description: Revenue analysis operations
+paths:
+  /api/2/revenue/day:
+    get:
+      operationId: getRevenueLTV
+      summary: Amplitude Get Revenue LTV Data
+      description: Get revenue lifetime value (LTV) data for new users acquired during the specified date range.
+      tags:
+      - Revenue Analysis
+      parameters:
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - name: m
+        in: query
+        description: The revenue metric to compute.
+        schema:
+          type: string
+      - name: s
+        in: query
+        description: Segment definitions as a JSON-encoded array.
+        schema:
+          type: string
+      - name: g
+        in: query
+        description: The property to group results by.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Revenue LTV data organized by cohort date.
+              examples:
+                getRevenueLTV200Example:
+                  summary: Default getRevenueLTV 200 response
+                  x-microcks-default: true
+                  value:
+                    data: {}
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    endDate:
+      name: end
+      in: query
+      required: true
+      description: The end date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
+    startDate:
+      name: start
+      in: query
+      required: true
+      description: The start date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

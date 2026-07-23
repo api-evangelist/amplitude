@@ -1,0 +1,294 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Event Properties API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Event Properties
+  description: Operations for managing event properties
+paths:
+  /api/2/taxonomy/event-property:
+    get:
+      operationId: listEventProperties
+      summary: Amplitude List All Event Properties
+      description: Retrieve all event properties for a given event type in the project.
+      tags:
+      - Event Properties
+      parameters:
+      - name: event_type
+        in: query
+        required: true
+        description: The event type to list properties for.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventPropertyListResponse'
+              examples:
+                listEventProperties200Example:
+                  summary: Default listEventProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - example_value
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createEventProperty
+      summary: Amplitude Create an Event Property
+      description: Create a new event property in the tracking plan for a specific event type.
+      tags:
+      - Event Properties
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - event_type
+              - event_property
+              properties:
+                event_type:
+                  type: string
+                  description: The event type this property belongs to.
+                event_property:
+                  type: string
+                  description: The name of the event property.
+                description:
+                  type: string
+                  description: A description of the event property.
+                type:
+                  type: string
+                  description: The data type of the property.
+                  enum:
+                  - string
+                  - number
+                  - boolean
+                  - enum
+                  - any
+                is_required:
+                  type: boolean
+                  description: Whether the property is required.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                createEventProperty200Example:
+                  summary: Default createEventProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '409':
+          description: Event property already exists
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/2/taxonomy/event-property/{event_property}:
+    get:
+      operationId: getEventProperty
+      summary: Amplitude Get an Event Property
+      description: Retrieve a single event property by its name for a given event type.
+      tags:
+      - Event Properties
+      parameters:
+      - name: event_property
+        in: path
+        required: true
+        description: The name of the event property.
+        schema:
+          type: string
+      - name: event_type
+        in: query
+        required: true
+        description: The event type the property belongs to.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventProperty'
+              examples:
+                getEventProperty200Example:
+                  summary: Default getEventProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    event_property: example_value
+                    event_type: standard
+                    description: Example description text
+                    type: standard
+                    is_required: true
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event property not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateEventProperty
+      summary: Amplitude Update an Event Property
+      description: Update an existing event property's metadata.
+      tags:
+      - Event Properties
+      parameters:
+      - name: event_property
+        in: path
+        required: true
+        description: The name of the event property to update.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - event_type
+              properties:
+                event_type:
+                  type: string
+                  description: The event type this property belongs to.
+                description:
+                  type: string
+                  description: An updated description of the event property.
+                new_event_property:
+                  type: string
+                  description: A new name for the event property.
+                type:
+                  type: string
+                  description: The data type of the property.
+                  enum:
+                  - string
+                  - number
+                  - boolean
+                  - enum
+                  - any
+                is_required:
+                  type: boolean
+                  description: Whether the property is required.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                updateEventProperty200Example:
+                  summary: Default updateEventProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event property not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteEventProperty
+      summary: Amplitude Delete an Event Property
+      description: Delete a planned event property. This is intended for properties that have not yet received data.
+      tags:
+      - Event Properties
+      parameters:
+      - name: event_property
+        in: path
+        required: true
+        description: The name of the event property to delete.
+        schema:
+          type: string
+      - name: event_type
+        in: query
+        required: true
+        description: The event type the property belongs to.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                deleteEventProperty200Example:
+                  summary: Default deleteEventProperty 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+        '401':
+          description: Unauthorized
+        '404':
+          description: Event property not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+    EventPropertyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of event properties.
+          items:
+            $ref: '#/components/schemas/EventProperty'
+    EventProperty:
+      type: object
+      properties:
+        event_property:
+          type: string
+          description: The name of the event property.
+        event_type:
+          type: string
+          description: The event type this property belongs to.
+        description:
+          type: string
+          description: A description of the event property.
+        type:
+          type: string
+          description: The data type of the property.
+        is_required:
+          type: boolean
+          description: Whether the property is required.
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

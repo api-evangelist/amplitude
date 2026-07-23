@@ -1,38 +1,27 @@
 openapi: 3.1.0
 info:
-  title: Amplitude Chart Annotations API
-  description: >-
-    The Amplitude Chart Annotations API enables developers to programmatically
-    create, retrieve, update, and delete annotations on Amplitude charts.
-    Annotations mark significant events such as product releases, marketing
-    campaigns, or incidents on timeline-based charts. This API allows teams
-    to automate annotation management as part of their deployment or release
-    pipelines, ensuring that important context is always visible alongside
-    analytics data.
-  version: '3'
+  title: Amplitude Attribution Annotations API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
   contact:
     name: Amplitude Support
     url: https://amplitude.com/contact
   termsOfService: https://amplitude.com/terms
-externalDocs:
-  description: Amplitude Chart Annotations API Documentation
-  url: https://amplitude.com/docs/apis/analytics/chart-annotations
 servers:
-- url: https://amplitude.com
-  description: Amplitude Production Server
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
 tags:
 - name: Annotations
   description: Chart annotation management operations
-security:
-- basicAuth: []
 paths:
   /api/3/annotations:
     get:
       operationId: listAnnotations
       summary: Amplitude List All Annotations
-      description: >-
-        Retrieve all chart annotations in the project. Supports filtering by
-        category, chart, and date range.
+      description: Retrieve all chart annotations in the project. Supports filtering by category, chart, and date range.
       tags:
       - Annotations
       responses:
@@ -57,10 +46,7 @@ paths:
     post:
       operationId: createAnnotation
       summary: Amplitude Create an Annotation
-      description: >-
-        Create a new chart annotation with a label, date or date range,
-        optional category, and optional chart association. Annotations appear
-        on timeline-based charts to provide context for significant events.
+      description: Create a new chart annotation with a label, date or date range, optional category, and optional chart association. Annotations appear on timeline-based charts to provide context for significant events.
       tags:
       - Annotations
       requestBody:
@@ -101,8 +87,7 @@ paths:
     get:
       operationId: getAnnotation
       summary: Amplitude Get an Annotation
-      description: >-
-        Retrieve a single chart annotation by its ID.
+      description: Retrieve a single chart annotation by its ID.
       tags:
       - Annotations
       parameters:
@@ -138,9 +123,7 @@ paths:
     put:
       operationId: updateAnnotation
       summary: Amplitude Update an Annotation
-      description: >-
-        Update an existing annotation. Only the fields included in the
-        request body are updated; other fields remain unchanged.
+      description: Update an existing annotation. Only the fields included in the request body are updated; other fields remain unchanged.
       tags:
       - Annotations
       parameters:
@@ -184,8 +167,7 @@ paths:
     delete:
       operationId: deleteAnnotation
       summary: Amplitude Delete an Annotation
-      description: >-
-        Delete a chart annotation by its ID.
+      description: Delete a chart annotation by its ID.
       tags:
       - Annotations
       parameters:
@@ -201,77 +183,31 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: >-
-        Use your Amplitude API key as the username and your secret key as the
-        password. Encode them as base64 in the format api_key:secret_key.
-  parameters:
-    annotationId:
-      name: annotation_id
-      in: path
-      required: true
-      description: >-
-        The unique identifier of the annotation.
-      schema:
-        type: integer
   schemas:
-    AnnotationListResponse:
+    UpdateAnnotationRequest:
       type: object
       properties:
-        data:
-          type: array
-          description: >-
-            Array of annotation objects.
-          items:
-            $ref: '#/components/schemas/Annotation'
-    Annotation:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: >-
-            The unique identifier of the annotation.
         label:
           type: string
-          description: >-
-            The display label for the annotation.
+          description: The updated display label for the annotation.
+          maxLength: 255
         date:
           type: string
           format: date
-          description: >-
-            The start date of the annotation in YYYY-MM-DD format.
+          description: The updated date in YYYY-MM-DD format.
         end_date:
           type: string
           format: date
-          description: >-
-            The end date of the annotation for date ranges. Null for
-            point-in-time annotations.
+          description: The updated end date in YYYY-MM-DD format.
         details:
           type: string
-          description: >-
-            Additional details or notes for the annotation.
+          description: Updated additional details or notes.
         category:
           type: string
-          description: >-
-            The category of the annotation for organization purposes.
+          description: The updated category.
         chart_id:
           type: integer
-          description: >-
-            The ID of the chart the annotation is associated with. Null for
-            project-wide annotations.
-        created_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the annotation was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the annotation was last updated.
+          description: The updated chart ID.
     CreateAnnotationRequest:
       type: object
       required:
@@ -280,59 +216,75 @@ components:
       properties:
         label:
           type: string
-          description: >-
-            The display label for the annotation.
+          description: The display label for the annotation.
           maxLength: 255
         date:
           type: string
           format: date
-          description: >-
-            The date of the annotation in YYYY-MM-DD format.
+          description: The date of the annotation in YYYY-MM-DD format.
         end_date:
           type: string
           format: date
-          description: >-
-            The end date for date-range annotations in YYYY-MM-DD format.
+          description: The end date for date-range annotations in YYYY-MM-DD format.
         details:
           type: string
-          description: >-
-            Additional details or notes for the annotation.
+          description: Additional details or notes for the annotation.
         category:
           type: string
-          description: >-
-            The category to assign to the annotation.
+          description: The category to assign to the annotation.
         chart_id:
           type: integer
-          description: >-
-            The ID of the chart to associate the annotation with. Omit for
-            project-wide annotations.
-    UpdateAnnotationRequest:
+          description: The ID of the chart to associate the annotation with. Omit for project-wide annotations.
+    Annotation:
       type: object
       properties:
+        id:
+          type: integer
+          description: The unique identifier of the annotation.
         label:
           type: string
-          description: >-
-            The updated display label for the annotation.
-          maxLength: 255
+          description: The display label for the annotation.
         date:
           type: string
           format: date
-          description: >-
-            The updated date in YYYY-MM-DD format.
+          description: The start date of the annotation in YYYY-MM-DD format.
         end_date:
           type: string
           format: date
-          description: >-
-            The updated end date in YYYY-MM-DD format.
+          description: The end date of the annotation for date ranges. Null for point-in-time annotations.
         details:
           type: string
-          description: >-
-            Updated additional details or notes.
+          description: Additional details or notes for the annotation.
         category:
           type: string
-          description: >-
-            The updated category.
+          description: The category of the annotation for organization purposes.
         chart_id:
           type: integer
-          description: >-
-            The updated chart ID.
+          description: The ID of the chart the annotation is associated with. Null for project-wide annotations.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the annotation was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the annotation was last updated.
+    AnnotationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of annotation objects.
+          items:
+            $ref: '#/components/schemas/Annotation'
+  parameters:
+    annotationId:
+      name: annotation_id
+      in: path
+      required: true
+      description: The unique identifier of the annotation.
+      schema:
+        type: integer
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

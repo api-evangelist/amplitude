@@ -1,0 +1,136 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations User Activity API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: User Activity
+  description: User activity lookup operations
+paths:
+  /api/2/useractivity:
+    get:
+      operationId: getUserActivity
+      summary: Amplitude Get User Activity
+      description: Get a user's most recent events, with optional filters on event types. Returns up to 1000 of the most recent events for a given user.
+      tags:
+      - User Activity
+      parameters:
+      - name: user
+        in: query
+        required: true
+        description: The user_id to look up activity for.
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The offset for pagination. Default is 0.
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: The number of events to return. Default is 1000.
+        schema:
+          type: integer
+          default: 1000
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserActivityResult'
+              examples:
+                getUserActivity200Example:
+                  summary: Default getUserActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    userData: {}
+                    events:
+                    - {}
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/2/usersearch:
+    get:
+      operationId: searchUsers
+      summary: Amplitude Search Users
+      description: Search for a user by user_id, device_id, or Amplitude ID. Returns matching user identifiers and their most recent event details.
+      tags:
+      - User Activity
+      parameters:
+      - name: user
+        in: query
+        required: true
+        description: The user_id, device_id, or Amplitude ID to search for.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSearchResult'
+              examples:
+                searchUsers200Example:
+                  summary: Default searchUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    matches:
+                    - user_id: {}
+                      amplitude_id: {}
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    UserSearchResult:
+      type: object
+      properties:
+        matches:
+          type: array
+          description: Array of matching users with their identifiers.
+          items:
+            type: object
+            properties:
+              user_id:
+                type: string
+                description: The user's user_id.
+              amplitude_id:
+                type: integer
+                format: int64
+                description: The user's Amplitude internal ID.
+    UserActivityResult:
+      type: object
+      properties:
+        userData:
+          type: object
+          description: User metadata including user_id and Amplitude ID.
+        events:
+          type: array
+          description: Array of recent events for the user.
+          items:
+            type: object
+            additionalProperties: true
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

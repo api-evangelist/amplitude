@@ -1,63 +1,44 @@
 openapi: 3.1.0
 info:
-  title: Amplitude Export API
-  description: >-
-    The Amplitude Export API enables bulk export of raw event data for a
-    given project within a specified date range. Results are returned as
-    zipped archives of JSON files containing complete event records with
-    timestamps, user properties, device information, and attribution data.
-    This API is commonly used for data warehousing, offline analysis, and
-    feeding event data into external processing pipelines.
+  title: Amplitude Attribution Annotations Export API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
   version: '2'
   contact:
     name: Amplitude Support
     url: https://amplitude.com/contact
   termsOfService: https://amplitude.com/terms
-externalDocs:
-  description: Amplitude Export API Documentation
-  url: https://amplitude.com/docs/apis/analytics/export
 servers:
-- url: https://amplitude.com
-  description: Amplitude Production Server
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
 tags:
 - name: Export
   description: Raw event data export operations
-security:
-- basicAuth: []
 paths:
   /api/2/export:
     get:
       operationId: exportEvents
       summary: Amplitude Export Raw Event Data
-      description: >-
-        Export raw event data for the specified date range as a zipped archive
-        of JSON files. The maximum queryable period is 365 days and the
-        maximum response size is 4 GB. Data is available for export at a
-        minimum within 2 hours of server ingestion. Dates older than 30 days
-        before the current date may not be available.
+      description: Export raw event data for the specified date range as a zipped archive of JSON files. The maximum queryable period is 365 days and the maximum response size is 4 GB. Data is available for export at a minimum within 2 hours of server ingestion. Dates older than 30 days before the current date may not be available.
       tags:
       - Export
       parameters:
       - name: start
         in: query
         required: true
-        description: >-
-          The start date and hour in YYYYMMDDTHH format, for example
-          20220101T00. For multi-day exports, the format YYYYMMDD is also
-          accepted.
+        description: The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted.
         schema:
           type: string
-          pattern: '^\d{8}(T\d{2})?$'
+          pattern: ^\d{8}(T\d{2})?$
       - name: end
         in: query
         required: true
-        description: >-
-          The end date and hour in YYYYMMDDTHH format, for example
-          20220101T23. For multi-day exports, the format YYYYMMDD is also
-          accepted.
+        description: The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted.
         schema:
           type: string
-          pattern: '^\d{8}(T\d{2})?$'
+          pattern: ^\d{8}(T\d{2})?$
       responses:
         '200':
           description: Success - returns a zipped archive of JSON event files
@@ -67,21 +48,14 @@ paths:
                 type: string
                 format: binary
         '400':
-          description: >-
-            Bad request - the exported data exceeds the 4 GB size limit
+          description: Bad request - the exported data exceeds the 4 GB size limit
         '401':
           description: Unauthorized - invalid or missing credentials
         '404':
-          description: >-
-            No data found for the requested date range
+          description: No data found for the requested date range
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: >-
-        Use your Amplitude API key as the username and your secret key as the
-        password. Encode them as base64 in the format api_key:secret_key.
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

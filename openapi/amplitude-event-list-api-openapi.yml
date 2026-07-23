@@ -1,0 +1,66 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Event List API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Event List
+  description: Event listing operations
+paths:
+  /api/2/events/list:
+    get:
+      operationId: listEventTypes
+      summary: Amplitude List Event Types
+      description: Get the list of event types in the project along with their volume over the last 30 days.
+      tags:
+      - Event List
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventListResult'
+              examples:
+                listEventTypes200Example:
+                  summary: Default listEventTypes 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - name: {}
+                      totals: {}
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    EventListResult:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of event type objects with names and volumes.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the event type.
+              totals:
+                type: integer
+                description: The total number of times this event was fired in the last 30 days.
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

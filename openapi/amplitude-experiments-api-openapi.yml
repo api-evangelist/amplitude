@@ -1,0 +1,398 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Experiments API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Experiments
+  description: Experiment management operations
+paths:
+  /api/1/experiments:
+    get:
+      operationId: listExperiments
+      summary: Amplitude List All Experiments
+      description: Retrieve a list of all experiments in the project. Returns experiment metadata including status, variants, and deployment information.
+      tags:
+      - Experiments
+      parameters:
+      - name: limit
+        in: query
+        description: The maximum number of experiments to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: A cursor for pagination.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExperimentListResponse'
+              examples:
+                listExperiments200Example:
+                  summary: Default listExperiments 200 response
+                  x-microcks-default: true
+                  value:
+                    experiments:
+                    - example_value
+                    nextCursor: example_value
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createExperiment
+      summary: Amplitude Create an Experiment
+      description: Create a new A/B test experiment with the specified key, variants, and targeting configuration.
+      tags:
+      - Experiments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExperimentRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experiment'
+              examples:
+                createExperiment200Example:
+                  summary: Default createExperiment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+                    rolledOutVariant: example_value
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '409':
+          description: Experiment key already exists
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/1/experiments/{id}:
+    get:
+      operationId: getExperiment
+      summary: Amplitude Get an Experiment
+      description: Retrieve a single experiment by its ID including full configuration details.
+      tags:
+      - Experiments
+      parameters:
+      - $ref: '#/components/parameters/experimentId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experiment'
+              examples:
+                getExperiment200Example:
+                  summary: Default getExperiment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+                    rolledOutVariant: example_value
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Experiment not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateExperiment
+      summary: Amplitude Update an Experiment
+      description: Update an existing experiment's configuration.
+      tags:
+      - Experiments
+      parameters:
+      - $ref: '#/components/parameters/experimentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExperimentRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experiment'
+              examples:
+                updateExperiment200Example:
+                  summary: Default updateExperiment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+                    rolledOutVariant: example_value
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Experiment not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Segment:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The display name of the segment.
+        conditions:
+          type: array
+          description: Array of targeting conditions that define this segment.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: The condition type.
+              prop:
+                type: string
+                description: The property to evaluate.
+              op:
+                type: string
+                description: The comparison operator.
+              values:
+                type: array
+                description: The values to compare against.
+                items:
+                  type: string
+        variant:
+          type: string
+          description: The variant key to assign when this segment matches.
+        percentage:
+          type: integer
+          description: The percentage of matching users to include (0-100).
+          minimum: 0
+          maximum: 100
+    VariantConfig:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The unique key for the variant.
+        name:
+          type: string
+          description: The display name of the variant.
+        payload:
+          description: An optional JSON payload associated with the variant.
+        description:
+          type: string
+          description: A description of what this variant does.
+        rolloutWeight:
+          type: integer
+          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
+          minimum: 0
+          maximum: 100
+    CreateExperimentRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: The unique key for the experiment.
+        name:
+          type: string
+          description: The display name of the experiment.
+        description:
+          type: string
+          description: A description of the experiment.
+        variants:
+          type: array
+          description: Array of variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        bucketingKey:
+          type: string
+          description: The property used for bucketing.
+    ExperimentListResponse:
+      type: object
+      properties:
+        experiments:
+          type: array
+          description: Array of experiment objects.
+          items:
+            $ref: '#/components/schemas/Experiment'
+        nextCursor:
+          type: string
+          description: A cursor for fetching the next page.
+    UpdateExperimentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The updated display name.
+        description:
+          type: string
+          description: The updated description.
+        enabled:
+          type: boolean
+          description: Whether the experiment should be enabled.
+        variants:
+          type: array
+          description: Updated variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        segments:
+          type: array
+          description: Updated targeting segments.
+          items:
+            $ref: '#/components/schemas/Segment'
+    Experiment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the experiment.
+        projectId:
+          type: string
+          description: The project ID the experiment belongs to.
+        key:
+          type: string
+          description: The unique key used to reference the experiment in code.
+        name:
+          type: string
+          description: The display name of the experiment.
+        description:
+          type: string
+          description: A description of the experiment's purpose.
+        enabled:
+          type: boolean
+          description: Whether the experiment is enabled.
+        evaluationMode:
+          type: string
+          description: The evaluation mode, either local or remote.
+          enum:
+          - local
+          - remote
+        bucketingKey:
+          type: string
+          description: The property used for bucketing.
+        bucketingSalt:
+          type: string
+          description: The salt used for hashing.
+        variants:
+          type: array
+          description: Array of variant configurations including control and treatment groups.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        deployments:
+          type: array
+          description: Array of deployment IDs.
+          items:
+            type: string
+        segments:
+          type: array
+          description: Array of targeting segments.
+          items:
+            $ref: '#/components/schemas/Segment'
+        state:
+          type: string
+          description: The current state of the experiment.
+          enum:
+          - draft
+          - running
+          - stopped
+          - archived
+        rolledOutVariant:
+          type: string
+          description: The variant key that was rolled out, if the experiment has concluded.
+        startDate:
+          type: string
+          format: date-time
+          description: The date and time the experiment started running.
+        endDate:
+          type: string
+          format: date-time
+          description: The date and time the experiment stopped running.
+  parameters:
+    experimentId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the experiment.
+      schema:
+        type: string
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

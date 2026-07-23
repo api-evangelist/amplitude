@@ -1,0 +1,102 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Retention Analysis API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Retention Analysis
+  description: Retention analysis operations
+paths:
+  /api/2/retention:
+    get:
+      operationId: getRetentionAnalysis
+      summary: Amplitude Get Retention Analysis
+      description: Get user retention for specific starting and returning actions. Returns retention data broken down by cohort date showing the percentage of users who returned on each subsequent day.
+      tags:
+      - Retention Analysis
+      parameters:
+      - name: se
+        in: query
+        required: true
+        description: The starting event as a JSON-encoded object with event_type field.
+        schema:
+          type: string
+      - name: re
+        in: query
+        required: true
+        description: The returning event as a JSON-encoded object with event_type field.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/startDate'
+      - $ref: '#/components/parameters/endDate'
+      - name: rm
+        in: query
+        description: Retention mode. Use bracket for N-day retention or rolling for unbounded retention.
+        schema:
+          type: string
+          enum:
+          - bracket
+          - rolling
+      - name: s
+        in: query
+        description: Segment definitions as a JSON-encoded array.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionResult'
+              examples:
+                getRetentionAnalysis200Example:
+                  summary: Default getRetentionAnalysis 200 response
+                  x-microcks-default: true
+                  value:
+                    data: {}
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    RetentionResult:
+      type: object
+      properties:
+        data:
+          type: object
+          description: Retention data organized by cohort date with day-by-day return percentages.
+  parameters:
+    endDate:
+      name: end
+      in: query
+      required: true
+      description: The end date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
+    startDate:
+      name: start
+      in: query
+      required: true
+      description: The start date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Profiles API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Profiles
+  description: User profile retrieval operations
+paths:
+  /v1/userprofile:
+    get:
+      operationId: getUserProfile
+      summary: Amplitude Get a User Profile
+      description: Retrieve the profile for a specific user including user properties, computed properties, cohort memberships, and personalized recommendations. The response includes all enriched data Amplitude has computed for the user.
+      tags:
+      - Profiles
+      parameters:
+      - name: user_id
+        in: query
+        required: true
+        description: The user_id of the user whose profile to retrieve.
+        schema:
+          type: string
+      - name: comp_id
+        in: query
+        description: The computed property ID or recommendation ID to retrieve specific computed results for the user.
+        schema:
+          type: integer
+      - name: get_recs
+        in: query
+        description: When true, include personalized recommendations in the response.
+        schema:
+          type: boolean
+          default: false
+      - name: rec_id
+        in: query
+        description: The recommendation model ID to retrieve specific recommendation results.
+        schema:
+          type: string
+      - name: rec_type
+        in: query
+        description: The type of recommendation to retrieve.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of recommendation results to return.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileResponse'
+              examples:
+                getUserProfile200Example:
+                  summary: Default getUserProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    userData:
+                      user_id: {}
+                      user_properties: {}
+                      computed_properties: {}
+                      cohort_ids: {}
+                      recommendations: {}
+                      amplitude_id: {}
+        '400':
+          description: Bad request - missing user_id
+        '401':
+          description: Unauthorized - invalid or missing API key
+        '404':
+          description: User not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    UserProfileResponse:
+      type: object
+      properties:
+        userData:
+          $ref: '#/components/schemas/UserData'
+    UserData:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: The user's user_id.
+        user_properties:
+          type: object
+          description: A dictionary of the user's properties as set via the Identify API or SDK.
+          additionalProperties: true
+        computed_properties:
+          type: object
+          description: A dictionary of computed properties calculated by Amplitude for the user.
+          additionalProperties: true
+        cohort_ids:
+          type: array
+          description: Array of cohort IDs the user is a member of.
+          items:
+            type: string
+        recommendations:
+          type: array
+          description: Array of personalized recommendation results for the user. Only included when get_recs is true.
+          items:
+            $ref: '#/components/schemas/Recommendation'
+        amplitude_id:
+          type: integer
+          format: int64
+          description: The Amplitude internal ID for the user.
+    Recommendation:
+      type: object
+      properties:
+        rec_id:
+          type: string
+          description: The recommendation model ID.
+        child_ids:
+          type: array
+          description: Array of recommended item IDs.
+          items:
+            type: string
+        is_control:
+          type: boolean
+          description: Whether the user is in the control group for this recommendation model.
+        recommendation_type:
+          type: string
+          description: The type of recommendation model.
+        title:
+          type: string
+          description: The title of the recommendation.
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

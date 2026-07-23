@@ -1,0 +1,453 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Flags API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Flags
+  description: Flag configuration retrieval for local evaluation
+paths:
+  /v1/flags:
+    get:
+      operationId: getFlags
+      summary: Amplitude Get Flag Configurations
+      description: Download all flag configurations for local evaluation. This endpoint returns the full flag configuration including targeting rules, variants, and segment definitions. Useful for bootstrapping client-side local evaluation SDKs with initialFlags or running evaluation in edge environments.
+      tags:
+      - Flags
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Array of flag configuration objects.
+                items:
+                  $ref: '#/components/schemas/FlagConfiguration'
+              examples:
+                getFlags200Example:
+                  summary: Default getFlags 200 response
+                  x-microcks-default: true
+                  value:
+                  - example_value
+        '401':
+          description: Unauthorized - invalid deployment key
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/1/flags:
+    get:
+      operationId: listFlags
+      summary: Amplitude List All Flags
+      description: Retrieve a list of all feature flags in the project. Returns flag metadata including status, variants, and deployment information.
+      tags:
+      - Flags
+      parameters:
+      - name: limit
+        in: query
+        description: The maximum number of flags to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: A cursor for pagination returned from a previous request.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlagListResponse'
+              examples:
+                listFlags200Example:
+                  summary: Default listFlags 200 response
+                  x-microcks-default: true
+                  value:
+                    flags:
+                    - example_value
+                    nextCursor: example_value
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createFlag
+      summary: Amplitude Create a Flag
+      description: Create a new feature flag with the specified key, variants, and targeting configuration.
+      tags:
+      - Flags
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFlagRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flag'
+              examples:
+                createFlag200Example:
+                  summary: Default createFlag 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+        '400':
+          description: Bad request - invalid flag configuration
+        '401':
+          description: Unauthorized
+        '409':
+          description: Flag key already exists
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/1/flags/{id}:
+    get:
+      operationId: getFlag
+      summary: Amplitude Get a Flag
+      description: Retrieve a single feature flag by its ID including full configuration details such as deployments, variants, and targeting segments.
+      tags:
+      - Flags
+      parameters:
+      - $ref: '#/components/parameters/flagId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flag'
+              examples:
+                getFlag200Example:
+                  summary: Default getFlag 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+        '401':
+          description: Unauthorized
+        '404':
+          description: Flag not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateFlag
+      summary: Amplitude Update a Flag
+      description: Update an existing feature flag's configuration. Only the fields included in the request body are updated.
+      tags:
+      - Flags
+      parameters:
+      - $ref: '#/components/parameters/flagId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFlagRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Flag'
+              examples:
+                updateFlag200Example:
+                  summary: Default updateFlag 200 response
+                  x-microcks-default: true
+                  value:
+                    id: '500123'
+                    projectId: '500123'
+                    key: example_value
+                    name: Example Name
+                    description: Example description text
+                    enabled: true
+                    evaluationMode: local
+                    bucketingKey: example_value
+                    bucketingSalt: example_value
+                    variants:
+                    - example_value
+                    deployments:
+                    - example_value
+                    segments:
+                    - example_value
+                    state: draft
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Flag not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    FlagConfiguration:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The unique key identifying the flag.
+        metadata:
+          type: object
+          description: Metadata about the flag configuration.
+          properties:
+            deployed:
+              type: boolean
+              description: Whether the flag is currently deployed.
+            evaluationMode:
+              type: string
+              description: The evaluation mode, either local or remote.
+            flagType:
+              type: string
+              description: The type of flag, such as experiment or release.
+            flagVersion:
+              type: integer
+              description: The version of the flag configuration.
+        segments:
+          type: array
+          description: Array of targeting segments for this flag.
+          items:
+            type: object
+            properties:
+              conditions:
+                type: array
+                description: Array of targeting conditions.
+                items:
+                  type: object
+                  additionalProperties: true
+              variant:
+                type: string
+                description: The variant key to assign when conditions are met.
+        variants:
+          type: object
+          description: Map of variant keys to variant configuration objects.
+          additionalProperties:
+            type: object
+            properties:
+              key:
+                type: string
+                description: The variant key.
+              payload:
+                description: Optional payload for the variant.
+    Segment:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The display name of the segment.
+        conditions:
+          type: array
+          description: Array of targeting conditions that define this segment.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: The condition type.
+              prop:
+                type: string
+                description: The property to evaluate.
+              op:
+                type: string
+                description: The comparison operator.
+              values:
+                type: array
+                description: The values to compare against.
+                items:
+                  type: string
+        variant:
+          type: string
+          description: The variant key to assign when this segment matches.
+        percentage:
+          type: integer
+          description: The percentage of matching users to include (0-100).
+          minimum: 0
+          maximum: 100
+    CreateFlagRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: The unique key for the flag.
+        name:
+          type: string
+          description: The display name of the flag.
+        description:
+          type: string
+          description: A description of the flag's purpose.
+        variants:
+          type: array
+          description: Array of variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        bucketingKey:
+          type: string
+          description: The property used for bucketing.
+    VariantConfig:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The unique key for the variant.
+        name:
+          type: string
+          description: The display name of the variant.
+        payload:
+          description: An optional JSON payload associated with the variant.
+        description:
+          type: string
+          description: A description of what this variant does.
+        rolloutWeight:
+          type: integer
+          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
+          minimum: 0
+          maximum: 100
+    UpdateFlagRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The updated display name.
+        description:
+          type: string
+          description: The updated description.
+        enabled:
+          type: boolean
+          description: Whether the flag should be enabled.
+        variants:
+          type: array
+          description: Updated variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        segments:
+          type: array
+          description: Updated targeting segment configurations.
+          items:
+            $ref: '#/components/schemas/Segment'
+    Flag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the flag.
+        projectId:
+          type: string
+          description: The project ID the flag belongs to.
+        key:
+          type: string
+          description: The unique key used to reference the flag in code.
+        name:
+          type: string
+          description: The display name of the flag.
+        description:
+          type: string
+          description: A description of the flag's purpose.
+        enabled:
+          type: boolean
+          description: Whether the flag is enabled.
+        evaluationMode:
+          type: string
+          description: The evaluation mode, either local or remote.
+          enum:
+          - local
+          - remote
+        bucketingKey:
+          type: string
+          description: The property used for bucketing users into variants.
+        bucketingSalt:
+          type: string
+          description: The salt used for hashing during bucketing.
+        variants:
+          type: array
+          description: Array of variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        deployments:
+          type: array
+          description: Array of deployment IDs the flag is deployed to.
+          items:
+            type: string
+        segments:
+          type: array
+          description: Array of targeting segment configurations.
+          items:
+            $ref: '#/components/schemas/Segment'
+        state:
+          type: string
+          description: The current state of the flag.
+          enum:
+          - draft
+          - active
+          - archived
+    FlagListResponse:
+      type: object
+      properties:
+        flags:
+          type: array
+          description: Array of feature flag objects.
+          items:
+            $ref: '#/components/schemas/Flag'
+        nextCursor:
+          type: string
+          description: A cursor for fetching the next page of results.
+  parameters:
+    flagId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the feature flag.
+      schema:
+        type: string
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

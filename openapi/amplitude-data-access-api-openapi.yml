@@ -1,0 +1,133 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Data Access API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Data Access
+  description: Data subject access request operations
+paths:
+  /api/2/dsar/requests:
+    post:
+      operationId: createDsarRequest
+      summary: Amplitude Create a Data Subject Access Request
+      description: Submit a data subject access request (DSAR) to retrieve all data Amplitude has collected for a specific user. The request is processed asynchronously and results are made available for download when complete. This endpoint supports CCPA and GDPR compliance workflows.
+      tags:
+      - Data Access
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DsarRequest'
+      responses:
+        '200':
+          description: Success - DSAR request submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DsarResponse'
+              examples:
+                createDsarRequest200Example:
+                  summary: Default createDsarRequest 200 response
+                  x-microcks-default: true
+                  value:
+                    request_id: '500123'
+                    status: active
+        '400':
+          description: Bad request - invalid user identifier
+        '401':
+          description: Unauthorized
+        '429':
+          description: Too many requests
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/2/dsar/requests/{request_id}:
+    get:
+      operationId: getDsarRequestStatus
+      summary: Amplitude Get DSAR Request Status
+      description: Check the status of a previously submitted data subject access request. Returns the processing status and download URL when complete.
+      tags:
+      - Data Access
+      parameters:
+      - name: request_id
+        in: path
+        required: true
+        description: The ID of the DSAR request to check.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DsarStatusResponse'
+              examples:
+                getDsarRequestStatus200Example:
+                  summary: Default getDsarRequestStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    request_id: '500123'
+                    status: pending
+                    download_url: https://example.com/path
+        '401':
+          description: Unauthorized
+        '404':
+          description: DSAR request not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DsarRequest:
+      type: object
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          description: Array of user IDs to retrieve data for.
+          items:
+            type: string
+    DsarStatusResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: The unique identifier for the DSAR request.
+        status:
+          type: string
+          description: The processing status of the request.
+          enum:
+          - pending
+          - processing
+          - complete
+          - failed
+        download_url:
+          type: string
+          format: uri
+          description: The URL to download the requested data. Only present when status is complete.
+    DsarResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: The unique identifier for the DSAR request.
+        status:
+          type: string
+          description: The status of the request.
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

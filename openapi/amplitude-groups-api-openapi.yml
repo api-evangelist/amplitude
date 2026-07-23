@@ -1,0 +1,263 @@
+openapi: 3.1.0
+info:
+  title: Amplitude Attribution Annotations Groups API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
+tags:
+- name: Groups
+  description: SCIM group management operations
+paths:
+  /scim/1/Groups:
+    get:
+      operationId: listScimGroups
+      summary: Amplitude List SCIM Groups
+      description: Retrieve a list of groups provisioned in Amplitude.
+      tags:
+      - Groups
+      parameters:
+      - name: filter
+        in: query
+        description: A SCIM filter expression to narrow results.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimGroupListResponse'
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createScimGroup
+      summary: Amplitude Create a SCIM Group
+      description: Create a new group in Amplitude via SCIM.
+      tags:
+      - Groups
+      requestBody:
+        required: true
+        content:
+          application/scim+json:
+            schema:
+              $ref: '#/components/schemas/ScimGroupRequest'
+      responses:
+        '201':
+          description: Group created
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /scim/1/Groups/{group_id}:
+    get:
+      operationId: getScimGroup
+      summary: Amplitude Get a SCIM Group
+      description: Retrieve a single group by its SCIM group ID.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/scimGroupId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateScimGroup
+      summary: Amplitude Update a SCIM Group
+      description: Partially update a group's attributes or membership.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/scimGroupId'
+      requestBody:
+        required: true
+        content:
+          application/scim+json:
+            schema:
+              $ref: '#/components/schemas/ScimPatchRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/ScimGroup'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteScimGroup
+      summary: Amplitude Delete a SCIM Group
+      description: Delete a group from Amplitude.
+      tags:
+      - Groups
+      parameters:
+      - $ref: '#/components/parameters/scimGroupId'
+      responses:
+        '204':
+          description: Group deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Group not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ScimGroup:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM schema URIs for this resource.
+        id:
+          type: string
+          description: The SCIM unique identifier for the group.
+        displayName:
+          type: string
+          description: The display name of the group.
+        members:
+          type: array
+          description: Array of group members.
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: The member user ID.
+              display:
+                type: string
+                description: The member display name.
+        meta:
+          type: object
+          description: SCIM metadata for the resource.
+          properties:
+            resourceType:
+              type: string
+              description: The type of SCIM resource.
+            created:
+              type: string
+              format: date-time
+              description: The date and time the resource was created.
+            lastModified:
+              type: string
+              format: date-time
+              description: The date and time the resource was last modified.
+    ScimGroupRequest:
+      type: object
+      required:
+      - schemas
+      - displayName
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM schema URIs.
+        displayName:
+          type: string
+          description: The display name of the group.
+        members:
+          type: array
+          description: Array of initial group members.
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: The member user ID.
+    ScimPatchRequest:
+      type: object
+      required:
+      - schemas
+      - Operations
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM patch operation schema URI, typically urn:ietf:params:scim:api:messages:2.0:PatchOp.
+        Operations:
+          type: array
+          description: Array of patch operations to apply.
+          items:
+            type: object
+            properties:
+              op:
+                type: string
+                description: The operation to perform.
+                enum:
+                - add
+                - remove
+                - replace
+              path:
+                type: string
+                description: The attribute path to apply the operation to.
+              value:
+                description: The value to use for the operation.
+    ScimGroupListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM schema URIs for this response.
+        totalResults:
+          type: integer
+          description: The total number of matching groups.
+        Resources:
+          type: array
+          description: Array of SCIM group resources.
+          items:
+            $ref: '#/components/schemas/ScimGroup'
+  parameters:
+    scimGroupId:
+      name: group_id
+      in: path
+      required: true
+      description: The SCIM group ID.
+      schema:
+        type: string
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution

@@ -1,37 +1,27 @@
 openapi: 3.1.0
 info:
-  title: Amplitude Behavioral Cohorts API
-  description: >-
-    The Amplitude Behavioral Cohorts API allows developers to list, export,
-    and upload cohorts in Amplitude. Cohorts are groups of users defined by
-    shared behavioral patterns or properties. This API supports downloading
-    cohort membership lists, creating new cohorts from external data, and
-    retrieving cohort metadata. It is commonly used for syncing audience
-    segments with marketing platforms, CRMs, and other downstream tools.
-  version: '3'
+  title: Amplitude Attribution Annotations Cohorts API
+  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  version: '2'
   contact:
     name: Amplitude Support
     url: https://amplitude.com/contact
   termsOfService: https://amplitude.com/terms
-externalDocs:
-  description: Amplitude Behavioral Cohorts API Documentation
-  url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
 servers:
-- url: https://amplitude.com
-  description: Amplitude Production Server
+- url: https://api2.amplitude.com
+  description: Amplitude US Production Server
+- url: https://api.eu.amplitude.com
+  description: Amplitude EU Production Server
+security: []
 tags:
 - name: Cohorts
   description: Cohort management and export operations
-security:
-- basicAuth: []
 paths:
   /api/3/cohorts:
     get:
       operationId: listCohorts
       summary: Amplitude List All Cohorts
-      description: >-
-        Retrieve a list of all cohorts in the project including their
-        metadata such as name, description, size, and last computed date.
+      description: Retrieve a list of all cohorts in the project including their metadata such as name, description, size, and last computed date.
       tags:
       - Cohorts
       responses:
@@ -57,24 +47,19 @@ paths:
     get:
       operationId: requestCohortExport
       summary: Amplitude Request a Cohort Export
-      description: >-
-        Request an asynchronous export of a specific cohort. This is the first
-        step in a three-step process to download cohort membership data. After
-        requesting, poll the status endpoint, then download the file when ready.
+      description: Request an asynchronous export of a specific cohort. This is the first step in a three-step process to download cohort membership data. After requesting, poll the status endpoint, then download the file when ready.
       tags:
       - Cohorts
       parameters:
       - name: cohort_id
         in: path
         required: true
-        description: >-
-          The ID of the cohort to export.
+        description: The ID of the cohort to export.
         schema:
           type: string
       - name: props
         in: query
-        description: >-
-          Set to 1 to include user properties in the export.
+        description: Set to 1 to include user properties in the export.
         schema:
           type: integer
           enum:
@@ -107,18 +92,14 @@ paths:
     get:
       operationId: getCohortExportStatus
       summary: Amplitude Get Cohort Export Status
-      description: >-
-        Poll the status of a previously requested cohort export. Returns the
-        current state of the export job. Continue polling until the status
-        indicates the export is complete.
+      description: Poll the status of a previously requested cohort export. Returns the current state of the export job. Continue polling until the status indicates the export is complete.
       tags:
       - Cohorts
       parameters:
       - name: cohort_id
         in: path
         required: true
-        description: >-
-          The ID of the cohort whose export status to check.
+        description: The ID of the cohort whose export status to check.
         schema:
           type: string
       responses:
@@ -146,17 +127,14 @@ paths:
     get:
       operationId: downloadCohortExport
       summary: Amplitude Download Cohort Export File
-      description: >-
-        Download the exported cohort membership data file. This endpoint should
-        only be called after the export status indicates completion.
+      description: Download the exported cohort membership data file. This endpoint should only be called after the export status indicates completion.
       tags:
       - Cohorts
       parameters:
       - name: cohort_id
         in: path
         required: true
-        description: >-
-          The ID of the cohort to download.
+        description: The ID of the cohort to download.
         schema:
           type: string
       responses:
@@ -166,9 +144,7 @@ paths:
             application/json:
               schema:
                 type: object
-                description: >-
-                  Cohort membership data including user IDs and optional
-                  properties.
+                description: Cohort membership data including user IDs and optional properties.
               examples:
                 downloadCohortExport200Example:
                   summary: Default downloadCohortExport 200 response
@@ -185,10 +161,7 @@ paths:
     post:
       operationId: uploadCohort
       summary: Amplitude Upload a Cohort
-      description: >-
-        Create or update a cohort by uploading a list of user IDs or Amplitude
-        IDs. This allows importing audience segments from external systems
-        into Amplitude for analysis and targeting.
+      description: Create or update a cohort by uploading a list of user IDs or Amplitude IDs. This allows importing audience segments from external systems into Amplitude for analysis and targeting.
       tags:
       - Cohorts
       requestBody:
@@ -218,86 +191,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: >-
-        Use your Amplitude API key as the username and your secret key as the
-        password. Encode them as base64 in the format api_key:secret_key.
   schemas:
-    CohortListResponse:
-      type: object
-      properties:
-        cohorts:
-          type: array
-          description: >-
-            Array of cohort metadata objects.
-          items:
-            $ref: '#/components/schemas/Cohort'
-    Cohort:
-      type: object
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier for the cohort.
-        name:
-          type: string
-          description: >-
-            The name of the cohort.
-        description:
-          type: string
-          description: >-
-            A description of the cohort.
-        size:
-          type: integer
-          description: >-
-            The number of users in the cohort.
-        lastComputed:
-          type: string
-          format: date-time
-          description: >-
-            The date and time the cohort was last computed.
-        archived:
-          type: boolean
-          description: >-
-            Whether the cohort is archived.
-        owner:
-          type: string
-          description: >-
-            The email of the cohort owner.
-        appId:
-          type: integer
-          description: >-
-            The Amplitude project ID the cohort belongs to.
-    CohortRequestResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: >-
-            The ID of the export request for polling status.
-        cohort_id:
-          type: string
-          description: >-
-            The ID of the cohort being exported.
-    CohortStatusResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: >-
-            The ID of the export request.
-        status:
-          type: string
-          description: >-
-            The status of the export job.
-          enum:
-          - queued
-          - computing
-          - complete
-          - failed
     CohortUploadRequest:
       type: object
       required:
@@ -306,27 +200,83 @@ components:
       properties:
         name:
           type: string
-          description: >-
-            The name of the cohort to create or update.
+          description: The name of the cohort to create or update.
         ids:
           type: array
-          description: >-
-            Array of user_id or amplitude_id values to include in the cohort.
+          description: Array of user_id or amplitude_id values to include in the cohort.
           items:
             type: string
         owner:
           type: string
-          description: >-
-            The email address of the cohort owner.
+          description: The email address of the cohort owner.
         existing_cohort_id:
           type: string
-          description: >-
-            If provided, updates the existing cohort with this ID instead of
-            creating a new one.
+          description: If provided, updates the existing cohort with this ID instead of creating a new one.
+    CohortRequestResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: The ID of the export request for polling status.
+        cohort_id:
+          type: string
+          description: The ID of the cohort being exported.
+    Cohort:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the cohort.
+        name:
+          type: string
+          description: The name of the cohort.
+        description:
+          type: string
+          description: A description of the cohort.
+        size:
+          type: integer
+          description: The number of users in the cohort.
+        lastComputed:
+          type: string
+          format: date-time
+          description: The date and time the cohort was last computed.
+        archived:
+          type: boolean
+          description: Whether the cohort is archived.
+        owner:
+          type: string
+          description: The email of the cohort owner.
+        appId:
+          type: integer
+          description: The Amplitude project ID the cohort belongs to.
     CohortUploadResponse:
       type: object
       properties:
         cohort_id:
           type: string
-          description: >-
-            The ID of the created or updated cohort.
+          description: The ID of the created or updated cohort.
+    CohortStatusResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: The ID of the export request.
+        status:
+          type: string
+          description: The status of the export job.
+          enum:
+          - queued
+          - computing
+          - complete
+          - failed
+    CohortListResponse:
+      type: object
+      properties:
+        cohorts:
+          type: array
+          description: Array of cohort metadata objects.
+          items:
+            $ref: '#/components/schemas/Cohort'
+externalDocs:
+  description: Amplitude Attribution API Documentation
+  url: https://amplitude.com/docs/apis/analytics/attribution
