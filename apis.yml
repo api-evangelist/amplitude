@@ -1,5 +1,18 @@
 aid: amplitude
 url: https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/apis.yml
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 modified: '2026-05-30'
 name: Amplitude
 description: Amplitude is a digital analytics platform that helps product teams understand
@@ -7,7 +20,7 @@ description: Amplitude is a digital analytics platform that helps product teams 
   event ingestion, user management, cohort syncing, taxonomy governance, A/B testing,
   and data export. Amplitude is widely used by product, data, and engineering teams
   to build better digital experiences through data-driven insights.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amplitude.png
 tags:
 - A/B Testing
 - Analytics
@@ -16,29 +29,6 @@ tags:
 - Product Analytics
 - User Behavior
 apis:
-- aid: amplitude:http-v2-api
-  name: Amplitude HTTP V2 API
-  tags:
-  - Analytics
-  - Events
-  - Ingestion
-  - Tracking
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api2.amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/http-v2
-    type: Documentation
-  - url: openapi/amplitude-http-v2-api-openapi.yml
-    type: OpenAPI
-  - url: graphql/amplitude-graphql.md
-    type: GraphQL
-  description: The Amplitude HTTP V2 API enables developers to send event data directly
-    from servers or clients to Amplitude's analytics platform. It supports uploading
-    individual or batched events along with user properties, event properties, and
-    group properties. This API is the primary method for server-side event ingestion
-    and is designed for high-throughput data collection with built-in validation and
-    error reporting.
 - aid: amplitude:batch-event-upload-api
   name: Amplitude Batch Event Upload API
   tags:
@@ -52,11 +42,11 @@ apis:
   properties:
   - url: https://amplitude.com/docs/apis/analytics/batch-event-upload
     type: Documentation
-  description: The Amplitude Batch Event Upload API is optimized for high-volume server-side
-    event ingestion. It accepts batches of events up to 20MB per request and is designed
-    for use cases where data volume may exceed the limits of the standard HTTP V2
-    API. The API uses the same event structure as the HTTP V2 API and is recommended
-    for data pipelines processing millions of events.
+  description: >-
+    The Amplitude Batch Event Upload API is optimized for high-volume server-side event ingestion. It
+    accepts batches of events up to 20MB per request and is designed for use cases where data volume may
+    exceed the limits of the standard HTTP V2 API. The API uses the same event structure as the HTTP V2
+    API and is recommended for data pipelines processing millions of events.
 - aid: amplitude:identify-api
   name: Amplitude Identify API
   tags:
@@ -72,11 +62,11 @@ apis:
     type: Documentation
   - url: openapi/amplitude-identify-api-openapi.yml
     type: OpenAPI
-  description: The Amplitude Identify API allows developers to update user properties
-    for a specific user without needing to send an accompanying event. This is useful
-    for setting or modifying user attributes such as demographics, subscription status,
-    or preferences outside of the normal event tracking flow. The API supports operations
-    like set, unset, append, and prepend on user properties.
+  description: >-
+    The Amplitude Identify API allows developers to update user properties for a specific user without
+    needing to send an accompanying event. This is useful for setting or modifying user attributes such
+    as demographics, subscription status, or preferences outside of the normal event tracking flow. The
+    API supports operations like set, unset, append, and prepend on user properties.
 - aid: amplitude:group-identify-api
   name: Amplitude Group Identify API
   tags:
@@ -90,32 +80,11 @@ apis:
   properties:
   - url: https://amplitude.com/docs/apis/analytics/group-identify
     type: Documentation
-  description: The Amplitude Group Identify API allows developers to set or update
-    properties on groups within Amplitude. Groups are entities such as companies,
-    teams, or accounts that users belong to. This API enables B2B analytics use cases
-    by attaching account-level properties to groups for segmentation and reporting
+  description: >-
+    The Amplitude Group Identify API allows developers to set or update properties on groups within Amplitude.
+    Groups are entities such as companies, teams, or accounts that users belong to. This API enables B2B
+    analytics use cases by attaching account-level properties to groups for segmentation and reporting
     purposes.
-- aid: amplitude:dashboard-rest-api
-  name: Amplitude Dashboard REST API
-  tags:
-  - Analytics
-  - Dashboards
-  - Metrics
-  - Reporting
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/dashboard-rest
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/dashboard-rest
-    type: Documentation
-  - url: openapi/amplitude-dashboard-rest-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude Dashboard REST API provides programmatic access to the
-    same data displayed in Amplitude's dashboard charts and graphs. It returns results
-    in JSON format and supports queries filtered by event types, user segments, cohorts,
-    and date ranges. Developers can use this API to build custom reporting tools,
-    export chart data, or integrate Amplitude analytics into external dashboards and
-    business intelligence systems.
 - aid: amplitude:export-api
   name: Amplitude Export API
   tags:
@@ -131,54 +100,11 @@ apis:
     type: Documentation
   - url: openapi/amplitude-export-api-openapi.yml
     type: OpenAPI
-  description: The Amplitude Export API enables bulk export of raw event data for
-    a given project within a specified date range. Results are returned as zipped
-    archives of JSON files containing complete event records with timestamps, user
-    properties, device information, and attribution data. This API is commonly used
-    for data warehousing, offline analysis, and feeding event data into external processing
-    pipelines.
-- aid: amplitude:behavioral-cohorts-api
-  name: Amplitude Behavioral Cohorts API
-  tags:
-  - Analytics
-  - Cohorts
-  - Segmentation
-  - Users
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
-    type: Documentation
-  - url: openapi/amplitude-behavioral-cohorts-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude Behavioral Cohorts API allows developers to list, export,
-    and upload cohorts in Amplitude. Cohorts are groups of users defined by shared
-    behavioral patterns or properties. This API supports downloading cohort membership
-    lists, creating new cohorts from external data, and retrieving cohort metadata.
-    It is commonly used for syncing audience segments with marketing platforms, CRMs,
-    and other downstream tools.
-- aid: amplitude:taxonomy-api
-  name: Amplitude Taxonomy API
-  tags:
-  - Analytics
-  - Data Governance
-  - Events
-  - Taxonomy
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/taxonomy
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/taxonomy
-    type: Documentation
-  - url: openapi/amplitude-taxonomy-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude Taxonomy API provides programmatic management of your
-    analytics tracking plan. It supports creating, reading, updating, and deleting
-    event categories, event types, event properties, and user properties. This API
-    is essential for data governance workflows, enabling teams to maintain a consistent
-    and well-organized event taxonomy across their instrumentation without needing
-    to use the Amplitude UI directly.
+  description: >-
+    The Amplitude Export API enables bulk export of raw event data for a given project within a specified
+    date range. Results are returned as zipped archives of JSON files containing complete event records
+    with timestamps, user properties, device information, and attribution data. This API is commonly used
+    for data warehousing, offline analysis, and feeding event data into external processing pipelines.
 - aid: amplitude:attribution-api
   name: Amplitude Attribution API
   tags:
@@ -194,33 +120,12 @@ apis:
     type: Documentation
   - url: openapi/amplitude-attribution-api-openapi.yml
     type: OpenAPI
-  description: The Amplitude Attribution API allows developers to send attribution
-    campaign events to Amplitude from ad networks, attribution providers, or custom
-    marketing tools. It associates users with the campaigns, channels, and creatives
-    that drove their acquisition or re-engagement. This API is used to enrich Amplitude
-    user profiles with marketing attribution data for campaign performance analysis
-    and ROI measurement.
-- aid: amplitude:chart-annotations-api
-  name: Amplitude Chart Annotations API
-  tags:
-  - Analytics
-  - Annotations
-  - Charts
-  - Reporting
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/chart-annotations
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/chart-annotations
-    type: Documentation
-  - url: openapi/amplitude-chart-annotations-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude Chart Annotations API enables developers to programmatically
-    create, retrieve, update, and delete annotations on Amplitude charts. Annotations
-    mark significant events such as product releases, marketing campaigns, or incidents
-    on timeline-based charts. This API allows teams to automate annotation management
-    as part of their deployment or release pipelines, ensuring that important context
-    is always visible alongside analytics data.
+  description: >-
+    The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from
+    ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns,
+    channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich
+    Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI
+    measurement.
 - aid: amplitude:releases-api
   name: Amplitude Releases API
   tags:
@@ -234,10 +139,10 @@ apis:
   properties:
   - url: https://amplitude.com/docs/apis/analytics/releases
     type: Documentation
-  description: The Amplitude Releases API allows developers to programmatically track
-    software releases and deployments in Amplitude. By recording release events, teams
-    can correlate product changes with analytics metrics to understand the impact
-    of each deployment on user behavior, retention, and engagement.
+  description: >-
+    The Amplitude Releases API allows developers to programmatically track software releases and deployments
+    in Amplitude. By recording release events, teams can correlate product changes with analytics metrics
+    to understand the impact of each deployment on user behavior, retention, and engagement.
 - aid: amplitude:session-replay-api
   name: Amplitude Session Replay API
   tags:
@@ -251,32 +156,11 @@ apis:
   properties:
   - url: https://amplitude.com/docs/apis/analytics/session-replay
     type: Documentation
-  description: The Amplitude Session Replay API enables developers to upload and manage
-    session replay data for playback within Amplitude. Session replays provide qualitative
-    insights by recording user interactions and pairing them with quantitative analytics
-    data. This API is used for server-side ingestion of session replay events and
-    metadata.
-- aid: amplitude:user-profile-api
-  name: Amplitude User Profile API
-  tags:
-  - Analytics
-  - Profiles
-  - Recommendations
-  - Users
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://profile-api.amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/user-profile
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/user-profile
-    type: Documentation
-  - url: openapi/amplitude-user-profile-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude User Profile API serves user profiles that include user
-    properties, computed user properties, a list of cohort IDs the user belongs to,
-    and personalized recommendations. It enables real-time access to enriched user
-    data for powering personalization engines, in-app experiences, and targeted content
-    delivery. This API is particularly useful for retrieving recommendation results
-    generated by Amplitude's machine learning models.
+  description: >-
+    The Amplitude Session Replay API enables developers to upload and manage session replay data for playback
+    within Amplitude. Session replays provide qualitative insights by recording user interactions and
+    pairing them with quantitative analytics data. This API is used for server-side ingestion of session
+    replay events and metadata.
 - aid: amplitude:user-mapping-api
   name: Amplitude User Mapping API
   tags:
@@ -292,12 +176,12 @@ apis:
     type: Documentation
   - url: openapi/amplitude-user-mapping-api-openapi.yml
     type: OpenAPI
-  description: The Amplitude User Mapping (Aliasing) API allows developers to merge
-    users with different user IDs together in Amplitude. This is useful when a user
-    initially interacts with a product anonymously and later creates an account, or
-    when users have multiple identifiers across different systems. The API maps these
-    distinct identities into a single unified user profile to ensure accurate analytics
-    and attribution.
+  description: >-
+    The Amplitude User Mapping (Aliasing) API allows developers to merge users with different user IDs
+    together in Amplitude. This is useful when a user initially interacts with a product anonymously and
+    later creates an account, or when users have multiple identifiers across different systems. The API
+    maps these distinct identities into a single unified user profile to ensure accurate analytics and
+    attribution.
 - aid: amplitude:user-privacy-api
   name: Amplitude User Privacy API
   tags:
@@ -311,95 +195,11 @@ apis:
   properties:
   - url: https://amplitude.com/docs/apis/analytics/user-privacy
     type: Documentation
-  description: The Amplitude User Privacy API provides endpoints for managing user
-    data in compliance with privacy regulations such as GDPR and CCPA. It supports
-    requesting the deletion or suppression of user data by user ID or device ID, enabling
-    organizations to fulfill data subject rights requests and maintain regulatory
-    compliance.
-- aid: amplitude:scim-api
-  name: Amplitude SCIM API
-  tags:
-  - Access Management
-  - Identity
-  - Provisioning
-  - Users
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://analytics.amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/scim
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/scim
-    type: Documentation
-  - url: openapi/amplitude-scim-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude SCIM API implements the System for Cross-domain Identity
-    Management (SCIM) 2.0 standard for automated user provisioning and deprovisioning.
-    It allows identity providers such as Okta, Azure AD, and OneLogin to automatically
-    create, update, and deactivate user accounts in Amplitude. This API is essential
-    for enterprise organizations that need centralized user lifecycle management and
-    compliance with security policies.
-- aid: amplitude:dsar-api
-  name: Amplitude Data Subject Access Request API
-  tags:
-  - CCPA
-  - Compliance
-  - GDPR
-  - Privacy
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/ccpa-dsar
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
-    type: Documentation
-  - url: openapi/amplitude-dsar-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude Data Subject Access Request (DSAR) API enables organizations
-    to programmatically handle privacy requests in compliance with GDPR, CCPA, and
-    other data protection regulations. It supports submitting deletion requests for
-    user data based on user IDs or device IDs. This API allows companies to automate
-    their privacy compliance workflows and ensure timely processing of data subject
-    requests at scale.
-- aid: amplitude:experiment-evaluation-api
-  name: Amplitude Experiment Evaluation API
-  tags:
-  - A/B Testing
-  - Experimentation
-  - Feature Flags
-  - Variants
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api.lab.amplitude.com
-  humanURL: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
-  properties:
-  - url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
-    type: Documentation
-  - url: openapi/amplitude-experiment-evaluation-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude Experiment Evaluation API retrieves variant assignment
-    data for users through remote evaluation. When called, it evaluates targeting
-    rules and returns the assigned variant for each active experiment or feature flag.
-    The API also tracks assignment events automatically in Amplitude Analytics. It
-    is used by server-side applications that need to determine which experiment variant
-    or feature flag value to serve to a given user in real time.
-- aid: amplitude:experiment-management-api
-  name: Amplitude Experiment Management API
-  tags:
-  - A/B Testing
-  - Experimentation
-  - Feature Flags
-  - Management
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://experiment.amplitude.com
-  humanURL: https://amplitude.com/docs/apis/experiment/experiment-management-api
-  properties:
-  - url: https://amplitude.com/docs/apis/experiment/experiment-management-api
-    type: Documentation
-  - url: openapi/amplitude-experiment-management-api-openapi.yml
-    type: OpenAPI
-  description: The Amplitude Experiment Management API provides programmatic control
-    over feature flags and experiments. It supports creating, updating, activating,
-    and archiving experiments and flags, as well as managing deployments, variants,
-    holdout groups, and mutual exclusion groups. This API enables teams to integrate
-    experiment lifecycle management into their CI/CD pipelines, automate flag rollouts,
-    and manage experimentation workflows without using the Amplitude UI.
+  description: >-
+    The Amplitude User Privacy API provides endpoints for managing user data in compliance with privacy
+    regulations such as GDPR and CCPA. It supports requesting the deletion or suppression of user data
+    by user ID or device ID, enabling organizations to fulfill data subject rights requests and maintain
+    regulatory compliance.
 - aid: amplitude:webhooks-cohort-sync
   name: Amplitude Webhooks and Cohort Sync
   tags:
@@ -419,15 +219,750 @@ apis:
     type: Documentation
   - url: asyncapi/amplitude-webhooks-cohort-sync-asyncapi.yml
     type: AsyncAPI
-  description: The Webhooks Streaming destination forwards Amplitude event and user
-    payloads to a customer-configured HTTPS endpoint, and the Cohort Sync family of
-    destinations pushes cohort membership changes to downstream tools such as Iterable,
-    Braze, MoEngage, Customer.io, Intercom, HubSpot, Google Ads, Bing Ads, Google
-    Pub/Sub, Amazon Kinesis, and Amazon S3. Sync types include on-demand, automated
-    (hourly or daily), and real-time (per-minute) modes. This AsyncAPI document models
-    the subscriber-side HTTP contract for Webhooks Streaming and the generic cohort
-    membership change shape; vendor-specific cohort sync destinations conform to each
-    downstream tool's own API contract.
+  description: >-
+    The Webhooks Streaming destination forwards Amplitude event and user payloads to a customer-configured
+    HTTPS endpoint, and the Cohort Sync family of destinations pushes cohort membership changes to downstream
+    tools such as Iterable, Braze, MoEngage, Customer.io, Intercom, HubSpot, Google Ads, Bing Ads, Google
+    Pub/Sub, Amazon Kinesis, and Amazon S3. Sync types include on-demand, automated (hourly or daily),
+    and real-time (per-minute) modes. This AsyncAPI document models the subscriber-side HTTP contract
+    for Webhooks Streaming and the generic cohort membership change shape; vendor-specific cohort sync
+    destinations conform to each downstream tool's own API contract.
+- aid: amplitude:amplitude-annotations-api
+  name: Amplitude Annotations API
+  description: Chart annotation management operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Annotations
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-annotations-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-cohorts-api
+  name: Amplitude Cohorts API
+  description: Cohort management and export operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Cohorts
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-cohorts-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-data-access-api
+  name: Amplitude Data Access API
+  description: Data subject access request operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Data Access
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-data-access-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-data-deletion-api
+  name: Amplitude Data Deletion API
+  description: User data deletion request operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Data Deletion
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-data-deletion-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-deployments-api
+  name: Amplitude Deployments API
+  description: Deployment management operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-deployments-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-evaluation-api
+  name: Amplitude Evaluation API
+  description: Remote flag and experiment evaluation operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Evaluation
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-evaluation-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-event-categories-api
+  name: Amplitude Event Categories API
+  description: Operations for managing event categories
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Event Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-event-categories-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-event-list-api
+  name: Amplitude Event List API
+  description: Event listing operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Event List
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-event-list-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-event-properties-api
+  name: Amplitude Event Properties API
+  description: Operations for managing event properties
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Event Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-event-properties-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-event-segmentation-api
+  name: Amplitude Event Segmentation API
+  description: Event segmentation analysis operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Event Segmentation
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-event-segmentation-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-event-types-api
+  name: Amplitude Event Types API
+  description: Operations for managing event types
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Event Types
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-event-types-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-events-api
+  name: Amplitude Events API
+  description: Event ingestion operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-events-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-experiments-api
+  name: Amplitude Experiments API
+  description: Experiment management operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Experiments
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-experiments-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-flags-api
+  name: Amplitude Flags API
+  description: Flag configuration retrieval for local evaluation
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Flags
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-flags-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-funnel-analysis-api
+  name: Amplitude Funnel Analysis API
+  description: Funnel analysis operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Funnel Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-funnel-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-groups-api
+  name: Amplitude Groups API
+  description: SCIM group management operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-groups-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-profiles-api
+  name: Amplitude Profiles API
+  description: User profile retrieval operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-retention-analysis-api
+  name: Amplitude Retention Analysis API
+  description: Retention analysis operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Retention Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-retention-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-revenue-analysis-api
+  name: Amplitude Revenue Analysis API
+  description: Revenue analysis operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Revenue Analysis
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-revenue-analysis-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-user-activity-api
+  name: Amplitude User Activity API
+  description: User activity lookup operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - User Activity
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-user-activity-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-user-properties-api
+  name: Amplitude User Properties API
+  description: Operations for managing user properties
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - User Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-user-properties-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-users-api
+  name: Amplitude Users API
+  description: SCIM user provisioning operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-users-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
+- aid: amplitude:amplitude-versions-api
+  name: Amplitude Versions API
+  description: Flag and experiment version history operations
+  humanURL: https://amplitude.com/docs/apis/analytics/http-v2
+  baseURL: https://api2.amplitude.com
+  tags:
+  - Versions
+  properties:
+  - type: OpenAPI
+    url: openapi/amplitude-versions-api-openapi.yml
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/http-v2
+  - type: GraphQL
+    url: graphql/amplitude-graphql.md
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/taxonomy
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/chart-annotations
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/user-profile
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/scim
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/analytics/ccpa-dsar
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-evaluation-api
+  - type: Documentation
+    url: https://amplitude.com/docs/apis/experiment/experiment-management-api
 common:
 - type: AgenticAccess
   url: agentic-access/amplitude-agentic-access.yml
