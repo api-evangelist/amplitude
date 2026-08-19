@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations User Activity API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Activity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get User Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/useractivity",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The user_id to look up activity for."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The offset for pagination. Default is 0."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of events to return. Default is 1000."
+              }
+            ]
+          },
+          "docs": "Get a user's most recent events, with optional filters on event types. Returns up to 1000 of the most recent events for a given user."
+        },
+        {
+          "info": {
+            "name": "Amplitude Search Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/usersearch",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The user_id, device_id, or Amplitude ID to search for."
+              }
+            ]
+          },
+          "docs": "Search for a user by user_id, device_id, or Amplitude ID. Returns matching user identifiers and their most recent event details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

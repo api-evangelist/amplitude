@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Revenue Analysis API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Revenue Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get Revenue LTV Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/revenue/day",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date in YYYYMMDD format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date in YYYYMMDD format."
+              },
+              {
+                "name": "m",
+                "value": "",
+                "type": "query",
+                "description": "The revenue metric to compute."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Segment definitions as a JSON-encoded array."
+              },
+              {
+                "name": "g",
+                "value": "",
+                "type": "query",
+                "description": "The property to group results by."
+              }
+            ]
+          },
+          "docs": "Get revenue lifetime value (LTV) data for new users acquired during the specified date range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

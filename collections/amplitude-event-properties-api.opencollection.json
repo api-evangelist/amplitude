@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Event Properties API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Event Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event-property",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The event type to list properties for."
+              }
+            ]
+          },
+          "docs": "Retrieve all event properties for a given event type in the project."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create an Event Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event-property",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "event_type",
+                  "value": ""
+                },
+                {
+                  "name": "event_property",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                },
+                {
+                  "name": "is_required",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new event property in the tracking plan for a specific event type."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get an Event Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event-property/:event_property",
+            "params": [
+              {
+                "name": "event_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event property."
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The event type the property belongs to."
+              }
+            ]
+          },
+          "docs": "Retrieve a single event property by its name for a given event type."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update an Event Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event-property/:event_property",
+            "params": [
+              {
+                "name": "event_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event property to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "event_type",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "new_event_property",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                },
+                {
+                  "name": "is_required",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an existing event property's metadata."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete an Event Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event-property/:event_property",
+            "params": [
+              {
+                "name": "event_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event property to delete."
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The event type the property belongs to."
+              }
+            ]
+          },
+          "docs": "Delete a planned event property. This is intended for properties that have not yet received data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

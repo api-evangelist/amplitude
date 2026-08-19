@@ -1,0 +1,331 @@
+{
+  "item": [
+    {
+      "id": "d6019af0-b95a-4a6d-956f-176a8782f74f",
+      "name": "Profiles",
+      "description": {
+        "content": "User profile retrieval operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e91bbb55-680f-4821-bcf8-c71ed46900ef",
+          "name": "Amplitude Get a User Profile",
+          "request": {
+            "name": "Amplitude Get a User Profile",
+            "description": {
+              "content": "Retrieve the profile for a specific user including user properties, computed properties, cohort memberships, and personalized recommendations. The response includes all enriched data Amplitude has computed for the user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "userprofile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user_id of the user whose profile to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "comp_id",
+                  "value": "<integer>",
+                  "description": "The computed property ID or recommendation ID to retrieve specific computed results for the user."
+                },
+                {
+                  "disabled": false,
+                  "key": "get_recs",
+                  "value": "false",
+                  "description": "When true, include personalized recommendations in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "rec_id",
+                  "value": "<string>",
+                  "description": "The recommendation model ID to retrieve specific recommendation results."
+                },
+                {
+                  "disabled": false,
+                  "key": "rec_type",
+                  "value": "<string>",
+                  "description": "The type of recommendation to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of recommendation results to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6532f3f9-9210-436e-a02d-d3f323b31319",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "userprofile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comp_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "get_recs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "rec_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rec_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userData\": {\n    \"user_id\": {},\n    \"user_properties\": {},\n    \"computed_properties\": {},\n    \"cohort_ids\": {},\n    \"recommendations\": {},\n    \"amplitude_id\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8cd390c-2ab1-4064-98c5-0fa1dd3e9972",
+              "name": "Bad request - missing user_id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "userprofile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comp_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "get_recs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "rec_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rec_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc8caade-ce32-4b77-ac2e-010a3b05e097",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "userprofile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comp_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "get_recs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "rec_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rec_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7351db6-4241-450e-89d9-46c1783efa46",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "userprofile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comp_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "get_recs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "rec_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rec_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api2.amplitude.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "46ba6bb2-f48b-4454-a3bf-e137c9cc16a8",
+    "name": "Amplitude Attribution Annotations Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",
+      "type": "text/plain"
+    }
+  }
+}

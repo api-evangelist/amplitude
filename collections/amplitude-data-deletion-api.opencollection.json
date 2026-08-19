@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Data Deletion API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Deletion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List Deletion Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/deletions/users",
+            "params": [
+              {
+                "name": "start_day",
+                "value": "",
+                "type": "query",
+                "description": "The start date to filter deletion requests in YYYY-MM-DD format."
+              },
+              {
+                "name": "end_day",
+                "value": "",
+                "type": "query",
+                "description": "The end date to filter deletion requests in YYYY-MM-DD format."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of previously submitted deletion requests and their processing status."
+        },
+        {
+          "info": {
+            "name": "Amplitude Request User Data Deletion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/api/2/deletions/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a request to delete all event data and user properties for one or more users identified by Amplitude IDs or user IDs. Each HTTP request can contain up to 100 amplitude_ids or user_ids. Rate limited to 1 request per second. Amplitude emails all account admins with deletion details when a request is submitted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

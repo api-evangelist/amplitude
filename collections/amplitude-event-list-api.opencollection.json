@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Event List API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event List",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/events/list"
+          },
+          "docs": "Get the list of event types in the project along with their volume over the last 30 days."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

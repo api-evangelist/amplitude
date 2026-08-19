@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Event Types API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event",
+            "params": [
+              {
+                "name": "showDeleted",
+                "value": "",
+                "type": "query",
+                "description": "When true, include deleted event types in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve all event types in the project. Optionally include deleted event types using the showDeleted parameter."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "event_type",
+                  "value": ""
+                },
+                {
+                  "name": "category",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new event type in the tracking plan. This is for planning purposes and does not affect event ingestion."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event/:event_type",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event type."
+              }
+            ]
+          },
+          "docs": "Retrieve a single event type by its name."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event/:event_type",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event type."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "new_event_type",
+                  "value": ""
+                },
+                {
+                  "name": "category",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an existing event type's metadata such as description or category assignment."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/event/:event_type",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "path",
+                "description": "The name of the event type."
+              }
+            ]
+          },
+          "docs": "Delete a planned event type. This is intended for removing event types that have not yet received data. Deleting an event type that has received data does not remove the data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

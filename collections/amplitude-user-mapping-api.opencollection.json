@@ -1,15 +1,8 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Amplitude User Mapping API",
+    "name": "Amplitude Attribution Annotations User Mapping API",
     "version": "2"
-  },
-  "request": {
-    "auth": {
-      "type": "basic",
-      "username": "{{username}}",
-      "password": "{{password}}"
-    }
   },
   "items": [
     {
@@ -25,7 +18,7 @@
           },
           "http": {
             "method": "POST",
-            "url": "https://amplitude.com/api/2/usermap",
+            "url": "https://api2.amplitude.com/api/2/usermap",
             "body": {
               "type": "json",
               "data": "{}"
@@ -40,7 +33,7 @@
           },
           "http": {
             "method": "POST",
-            "url": "https://amplitude.com/api/2/userunmap",
+            "url": "https://api2.amplitude.com/api/2/userunmap",
             "body": {
               "type": "json",
               "data": "{}"

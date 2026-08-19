@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Funnel Analysis API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Funnel Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get Funnel Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/funnels",
+            "params": [
+              {
+                "name": "e",
+                "value": "",
+                "type": "query",
+                "description": "A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date in YYYYMMDD format."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date in YYYYMMDD format."
+              },
+              {
+                "name": "n",
+                "value": "",
+                "type": "query",
+                "description": "The conversion window in days. Default varies by project settings."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "Segment definitions as a JSON-encoded array."
+              },
+              {
+                "name": "g",
+                "value": "",
+                "type": "query",
+                "description": "The property to group results by."
+              }
+            ]
+          },
+          "docs": "Get funnel drop-off and conversion rates for a sequence of events. Each event parameter in the query string defines a step in the funnel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

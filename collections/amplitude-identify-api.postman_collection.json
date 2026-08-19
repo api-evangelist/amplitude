@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "8f66e916-9f07-43bd-99cb-a7ab7097612d",
+      "id": "20a8e75e-7b45-4680-8ec7-9f4ee9a5a9c9",
       "name": "Identify",
       "description": {
         "content": "User identification and property update operations",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "7c9ced52-de9a-4805-8ffc-856a62e33ac3",
+          "id": "7dbf41ec-a3ad-45bb-8332-534ec4e9fa99",
           "name": "Amplitude Identify a User",
           "request": {
             "name": "Amplitude Identify a User",
@@ -59,7 +59,7 @@
           },
           "response": [
             {
-              "id": "09a18959-6423-499d-9500-7e996f18a6ea",
+              "id": "26ae6610-efb6-4317-a560-73c1df455022",
               "name": "Success",
               "originalRequest": {
                 "url": {
@@ -116,7 +116,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "cb3879c5-5cea-483d-84dc-e8ea0886fdd0",
+              "id": "c7e6f2f2-06c9-4984-9f70-226ead81805e",
               "name": "Bad request - missing required fields or invalid data",
               "originalRequest": {
                 "url": {
@@ -167,7 +167,7 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "3955f3b8-d543-49b8-95d6-a226a48ab7b4",
+              "id": "dde517c3-2fc0-4fbd-a209-5071592f1bc5",
               "name": "Too many requests - rate limit exceeded",
               "originalRequest": {
                 "url": {
@@ -236,11 +236,11 @@
     }
   ],
   "info": {
-    "_postman_id": "48966d30-e658-4816-aeda-505254f95e42",
-    "name": "Amplitude Identify API",
+    "_postman_id": "3a59e7ed-ff62-4131-9428-f2623de0ab88",
+    "name": "Amplitude Attribution Annotations Identify API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "The Amplitude Identify API allows developers to update user properties for a specific user without needing to send an accompanying event. This is useful for setting or modifying user attributes such as demographics, subscription status, or preferences outside of the normal event tracking flow. The API supports operations like set, unset, append, and prepend on user properties.\n\nContact Support:\n Name: Amplitude Support",
+      "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",
       "type": "text/plain"
     }
   }

@@ -1,0 +1,1240 @@
+{
+  "item": [
+    {
+      "id": "c6719a4e-ce7e-44c6-8f93-a8417a3f57f9",
+      "name": "Users",
+      "description": {
+        "content": "SCIM user provisioning operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5723a13c-251b-4735-80a8-76bb8cb05b82",
+          "name": "Amplitude List SCIM Users",
+          "request": {
+            "name": "Amplitude List SCIM Users",
+            "description": {
+              "content": "Retrieve a paginated list of users provisioned in Amplitude. Supports SCIM filtering to search for specific users by attributes such as email or display name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scim",
+                "1",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "A SCIM filter expression to narrow the results. For example, userName eq \"user@example.com\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "1",
+                  "description": "The 1-based index of the first result in the current set of results. Default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "The number of results per page. Default varies by implementation."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/scim+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9965176-5673-4597-bddd-0d84ab6e378e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/scim+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/scim+json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"totalResults\": 5514,\n  \"startIndex\": 7978,\n  \"itemsPerPage\": 9853,\n  \"Resources\": [\n    {\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"userName\": \"c5bHJM@VLUqZAPjzExnwJ.wb\",\n      \"name\": {\n        \"givenName\": \"string\",\n        \"familyName\": \"string\"\n      },\n      \"emails\": [\n        {\n          \"value\": \"mevMPw9@QeyWEMFUtZdHIxFionaJZyKCjmmeNNP.snpp\",\n          \"primary\": false,\n          \"type\": \"string\"\n        },\n        {\n          \"value\": \"3MR8Oh3s@yloWXhlWHEhVVSL.hvqk\",\n          \"primary\": true,\n          \"type\": \"string\"\n        }\n      ],\n      \"active\": false,\n      \"groups\": [\n        {\n          \"value\": \"string\",\n          \"display\": \"string\"\n        },\n        {\n          \"value\": \"string\",\n          \"display\": \"string\"\n        }\n      ],\n      \"meta\": {\n        \"resourceType\": \"string\",\n        \"created\": \"1971-06-30T22:31:03.545Z\",\n        \"lastModified\": \"2016-11-07T07:19:28.181Z\"\n      }\n    },\n    {\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"userName\": \"cxhryfnA@PkHqRUVEJDouDkDhIwSYPPIiUfp.vej\",\n      \"name\": {\n        \"givenName\": \"string\",\n        \"familyName\": \"string\"\n      },\n      \"emails\": [\n        {\n          \"value\": \"a6YEL3oQ3@ClogCwRJdvqreEzlLdwv.jf\",\n          \"primary\": false,\n          \"type\": \"string\"\n        },\n        {\n          \"value\": \"1srArz@JuuQTXFviiMxmPrlcFsShNJKdtyHJFBM.ghp\",\n          \"primary\": false,\n          \"type\": \"string\"\n        }\n      ],\n      \"active\": false,\n      \"groups\": [\n        {\n          \"value\": \"string\",\n          \"display\": \"string\"\n        },\n        {\n          \"value\": \"string\",\n          \"display\": \"string\"\n        }\n      ],\n      \"meta\": {\n        \"resourceType\": \"string\",\n        \"created\": \"1968-07-31T08:59:47.256Z\",\n        \"lastModified\": \"1952-12-24T11:56:12.574Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0b2b264-28e4-40da-af75-5e971a9d1877",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d4ad191-e312-4ca6-90d3-ef8c7783d6a1",
+          "name": "Amplitude Create a SCIM User",
+          "request": {
+            "name": "Amplitude Create a SCIM User",
+            "description": {
+              "content": "Provision a new user in Amplitude via SCIM. The user is created with the specified attributes and can be assigned to groups. Typically called by identity providers during automated provisioning.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scim",
+                "1",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/scim+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/scim+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aec37678-1b0c-4367-bace-f22afce5afa3",
+              "name": "User created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/scim+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/scim+json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"userName\": \"hyOa@WkVZy.qk\",\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"znD7rfgsJoVnP0c@zPRPabUdMy.wx\",\n      \"primary\": true,\n      \"type\": \"string\"\n    },\n    {\n      \"value\": \"vVuz6@rykOcFcDnlRzddfmRTqllheADKGV.tfa\",\n      \"primary\": true,\n      \"type\": \"string\"\n    }\n  ],\n  \"active\": true,\n  \"groups\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1977-07-01T07:08:11.225Z\",\n    \"lastModified\": \"2018-07-12T18:32:34.980Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea53d881-37bf-4472-8158-2e8ec283c4eb",
+              "name": "Bad request - invalid user data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61db5e56-e93f-4b0f-8a0c-3d2a006573ff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "171a6ba9-c112-4820-a475-f0b2ec29756e",
+              "name": "User already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ac20f6a-b438-4fea-856e-e24ca5707fed",
+          "name": "Amplitude Get a SCIM User",
+          "request": {
+            "name": "Amplitude Get a SCIM User",
+            "description": {
+              "content": "Retrieve a single user by their SCIM user ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scim",
+                "1",
+                "Users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) The SCIM user ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/scim+json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca914b5f-891d-4ed0-9ee3-fe382bde2081",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/scim+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/scim+json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"userName\": \"hyOa@WkVZy.qk\",\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"znD7rfgsJoVnP0c@zPRPabUdMy.wx\",\n      \"primary\": true,\n      \"type\": \"string\"\n    },\n    {\n      \"value\": \"vVuz6@rykOcFcDnlRzddfmRTqllheADKGV.tfa\",\n      \"primary\": true,\n      \"type\": \"string\"\n    }\n  ],\n  \"active\": true,\n  \"groups\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1977-07-01T07:08:11.225Z\",\n    \"lastModified\": \"2018-07-12T18:32:34.980Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13669a44-eec0-47dc-8825-39f7e696c3e8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e7795e3-9c62-4588-9df0-ffd88fb4dc26",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69767e5d-270f-4174-9c28-f96e6bca30f9",
+          "name": "Amplitude Replace a SCIM User",
+          "request": {
+            "name": "Amplitude Replace a SCIM User",
+            "description": {
+              "content": "Replace all attributes of an existing user with the provided values. Any attributes not included in the request body are reset to their default values.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scim",
+                "1",
+                "Users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) The SCIM user ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/scim+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/scim+json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "528f0384-07f2-4c00-8107-9d7ceea61b50",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/scim+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/scim+json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"userName\": \"hyOa@WkVZy.qk\",\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"znD7rfgsJoVnP0c@zPRPabUdMy.wx\",\n      \"primary\": true,\n      \"type\": \"string\"\n    },\n    {\n      \"value\": \"vVuz6@rykOcFcDnlRzddfmRTqllheADKGV.tfa\",\n      \"primary\": true,\n      \"type\": \"string\"\n    }\n  ],\n  \"active\": true,\n  \"groups\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1977-07-01T07:08:11.225Z\",\n    \"lastModified\": \"2018-07-12T18:32:34.980Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85c5ab09-009c-4c27-b8d8-fd84c98bc7e2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "280144fa-7f70-43d3-b099-ce695cb486ae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61231d8f-aeee-49c6-b293-a8713645bc8f",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"name\": {\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"value\": \"<email>\",\n      \"primary\": \"<boolean>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63015c50-78c6-4f23-b29a-99bf48b464b0",
+          "name": "Amplitude Update a SCIM User",
+          "request": {
+            "name": "Amplitude Update a SCIM User",
+            "description": {
+              "content": "Partially update a user's attributes. Only the specified attributes are modified. Commonly used for activating or deactivating users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scim",
+                "1",
+                "Users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) The SCIM user ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/scim+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/scim+json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34572d24-ef88-4301-8642-3e4f5cfdce63",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/scim+json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/scim+json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"userName\": \"hyOa@WkVZy.qk\",\n  \"name\": {\n    \"givenName\": \"string\",\n    \"familyName\": \"string\"\n  },\n  \"emails\": [\n    {\n      \"value\": \"znD7rfgsJoVnP0c@zPRPabUdMy.wx\",\n      \"primary\": true,\n      \"type\": \"string\"\n    },\n    {\n      \"value\": \"vVuz6@rykOcFcDnlRzddfmRTqllheADKGV.tfa\",\n      \"primary\": true,\n      \"type\": \"string\"\n    }\n  ],\n  \"active\": true,\n  \"groups\": [\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    },\n    {\n      \"value\": \"string\",\n      \"display\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1977-07-01T07:08:11.225Z\",\n    \"lastModified\": \"2018-07-12T18:32:34.980Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c9ada80-fad9-4a23-9d65-834e16f824ca",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5b38da2-6a03-4445-90cc-9b8304bc2f48",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b660a3b4-10e1-49e5-8324-e2e337903579",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"op\": \"<string>\",\n      \"path\": \"<string>\",\n      \"value\": {}\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af30977c-e207-4026-9dc9-1b14c559fc15",
+          "name": "Amplitude Delete a SCIM User",
+          "request": {
+            "name": "Amplitude Delete a SCIM User",
+            "description": {
+              "content": "Deactivate and remove a user from Amplitude. This is typically called by identity providers when a user is offboarded.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scim",
+                "1",
+                "Users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) The SCIM user ID."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d48e6c82-547d-4979-bf2d-a2434a93e7a5",
+              "name": "User deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "abd4c90d-f73e-4e70-b6ff-97b07fec3c04",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "80849547-dcd0-4b45-bae5-4c59491ada26",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scim",
+                    "1",
+                    "Users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The SCIM user ID."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api2.amplitude.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "14b009d6-077a-46cd-9dd7-c8c3cfde9889",
+    "name": "Amplitude Attribution Annotations Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",
+      "type": "text/plain"
+    }
+  }
+}

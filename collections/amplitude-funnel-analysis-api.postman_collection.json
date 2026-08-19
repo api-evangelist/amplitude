@@ -1,27 +1,27 @@
 {
   "item": [
     {
-      "id": "530c6eff-b31a-45eb-89cf-c3b0f1bc59a7",
-      "name": "Export",
+      "id": "3e68e1d0-2d55-4ae9-8fa5-d87b62d04978",
+      "name": "Funnel Analysis",
       "description": {
-        "content": "Raw event data export operations",
+        "content": "Funnel analysis operations",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "78ed4dc6-c352-4084-a4d9-bf2b2f0ec7a4",
-          "name": "Amplitude Export Raw Event Data",
+          "id": "e94ce7a6-6054-4bf7-b4e4-7071d43ed0f5",
+          "name": "Amplitude Get Funnel Analysis",
           "request": {
-            "name": "Amplitude Export Raw Event Data",
+            "name": "Amplitude Get Funnel Analysis",
             "description": {
-              "content": "Export raw event data for the specified date range as a zipped archive of JSON files. The maximum queryable period is 365 days and the maximum response size is 4 GB. Data is available for export at a minimum within 2 hours of server ingestion. Dates older than 30 days before the current date may not be available.",
+              "content": "Get funnel drop-off and conversion rates for a sequence of events. Each event parameter in the query string defines a step in the funnel.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "2",
-                "export"
+                "funnels"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -29,15 +29,39 @@
               "query": [
                 {
                   "disabled": false,
+                  "key": "e",
+                  "value": "<string>",
+                  "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step."
+                },
+                {
+                  "disabled": false,
                   "key": "start",
                   "value": "<string>",
-                  "description": "(Required) The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted."
+                  "description": "(Required) The start date in YYYYMMDD format."
                 },
                 {
                   "disabled": false,
                   "key": "end",
                   "value": "<string>",
-                  "description": "(Required) The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted."
+                  "description": "(Required) The end date in YYYYMMDD format."
+                },
+                {
+                  "disabled": false,
+                  "key": "n",
+                  "value": "<integer>",
+                  "description": "The conversion window in days. Default varies by project settings."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "Segment definitions as a JSON-encoded array."
+                },
+                {
+                  "disabled": false,
+                  "key": "g",
+                  "value": "<string>",
+                  "description": "The property to group results by."
                 }
               ],
               "variable": []
@@ -45,7 +69,7 @@
             "header": [
               {
                 "key": "Accept",
-                "value": "application/zip"
+                "value": "application/json"
               }
             ],
             "method": "GET",
@@ -53,25 +77,41 @@
           },
           "response": [
             {
-              "id": "98b12a48-fab3-4bc3-ac55-1b5bb69db3c8",
-              "name": "Success - returns a zipped archive of JSON event files",
+              "id": "2098af17-2c79-4861-bcb1-8875f9cc9b1d",
+              "name": "Success",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "funnels"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
+                      "key": "e",
+                      "value": "<string>"
+                    },
+                    {
                       "key": "start",
                       "value": "<string>"
                     },
                     {
                       "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "n",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
                       "value": "<string>"
                     }
                   ],
@@ -80,7 +120,7 @@
                 "header": [
                   {
                     "key": "Accept",
-                    "value": "application/zip"
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -91,33 +131,49 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "application/zip"
+                  "value": "application/json"
                 }
               ],
-              "body": "string",
+              "body": "{\n  \"data\": {}\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "5385ab00-9e6d-46fd-bd86-dd0cce8beb1e",
-              "name": "Bad request - the exported data exceeds the 4 GB size limit",
+              "id": "54f7d8c8-e9f4-46dc-91a6-50bdc65cf603",
+              "name": "Bad request",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "funnels"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
+                      "key": "e",
+                      "value": "<string>"
+                    },
+                    {
                       "key": "start",
                       "value": "<string>"
                     },
                     {
                       "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "n",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
                       "value": "<string>"
                     }
                   ],
@@ -139,25 +195,41 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "3e985e2c-20b1-4df5-85b1-956c2df6efd6",
-              "name": "Unauthorized - invalid or missing credentials",
+              "id": "557363c7-1fec-46b7-8369-573ada8f2f18",
+              "name": "Unauthorized",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "funnels"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
+                      "key": "e",
+                      "value": "<string>"
+                    },
+                    {
                       "key": "start",
                       "value": "<string>"
                     },
                     {
                       "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "n",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
                       "value": "<string>"
                     }
                   ],
@@ -168,46 +240,6 @@
               },
               "status": "Unauthorized",
               "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "7a1f9539-3b53-4f54-b425-d0862920b778",
-              "name": "No data found for the requested date range",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "2",
-                    "export"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "start",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
               "header": [
                 {
                   "key": "Content-Type",
@@ -237,8 +269,8 @@
     }
   ],
   "info": {
-    "_postman_id": "4ffad98a-511e-45ec-895f-eafba59c1e6b",
-    "name": "Amplitude Attribution Annotations Export API",
+    "_postman_id": "2cfd97b6-6463-4a0d-be96-cf80bba4e821",
+    "name": "Amplitude Attribution Annotations Funnel Analysis API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",

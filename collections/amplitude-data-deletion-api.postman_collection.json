@@ -1,27 +1,28 @@
 {
   "item": [
     {
-      "id": "c62fe33c-8ce6-44a0-9fd3-a287959a61b3",
-      "name": "User Mapping",
+      "id": "7cd90e1e-48d6-48be-ae31-c0c3e01e7f45",
+      "name": "Data Deletion",
       "description": {
-        "content": "User identity mapping and aliasing operations",
+        "content": "User data deletion request operations",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "88fbfbed-d583-4f24-be0f-2a1dec3ffd06",
-          "name": "Amplitude Map User Identities",
+          "id": "670e3ee2-d318-43b8-8ff3-b7b81dea8035",
+          "name": "Amplitude Request User Data Deletion",
           "request": {
-            "name": "Amplitude Map User Identities",
+            "name": "Amplitude Request User Data Deletion",
             "description": {
-              "content": "Merge two user identities together by mapping one user_id to another. After mapping, all events and user properties from both identities are consolidated into a single user profile. This is typically used when an anonymous user creates an account.",
+              "content": "Submit a request to delete all event data and user properties for one or more users identified by Amplitude IDs or user IDs. Each HTTP request can contain up to 100 amplitude_ids or user_ids. Rate limited to 1 request per second. Amplitude emails all account admins with deletion details when a request is submitted.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "2",
-                "usermap"
+                "deletions",
+                "users"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -43,7 +44,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+              "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -53,14 +54,15 @@
           },
           "response": [
             {
-              "id": "9bbe6670-4adf-4064-926c-77530b322846",
-              "name": "Success",
+              "id": "5e18610d-cb3f-46cb-8a05-96edf077004d",
+              "name": "Success - deletion request accepted",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "usermap"
+                    "deletions",
+                    "users"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -77,7 +79,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -93,19 +95,20 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 100,\n  \"success\": true\n}",
+              "body": "{\n  \"day\": \"2025-03-15\",\n  \"status\": \"active\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "65873dd6-7092-4974-ba64-07ced6be4b7c",
-              "name": "Bad request - invalid mapping data",
+              "id": "76c83d48-263d-4a3c-95a3-2b0121e663c9",
+              "name": "Bad request - invalid identifiers or exceeds 100 IDs",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "usermap"
+                    "deletions",
+                    "users"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -116,7 +119,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -137,14 +140,15 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "bdae364d-5619-4226-9fd6-c1322e11a9c1",
+              "id": "89ce7c44-ca9b-426e-b2b9-9c6fc86bf64d",
               "name": "Unauthorized",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "usermap"
+                    "deletions",
+                    "users"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -155,7 +159,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -174,111 +178,17 @@
               "body": "",
               "cookie": [],
               "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e03d25bf-f183-4f92-ae4c-811c21fbf842",
-          "name": "Amplitude Unmap User Identities",
-          "request": {
-            "name": "Amplitude Unmap User Identities",
-            "description": {
-              "content": "Reverse a previously created user identity mapping. After unmapping, the two identities are treated as separate users again. This does not retroactively separate events that were already merged.",
-              "type": "text/plain"
             },
-            "url": {
-              "path": [
-                "api",
-                "2",
-                "userunmap"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
             {
-              "id": "5a8a95fb-0b3f-495e-97e0-56af6d7780c3",
-              "name": "Success",
+              "id": "2e7bd4b8-c7d4-4f5c-ba5b-0dfdd53866bc",
+              "name": "Too many requests - rate limit of 1 per second exceeded",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "userunmap"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": 100,\n  \"success\": true\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d86f19ad-0300-4754-b73a-fd049d7fd645",
-              "name": "Bad request - invalid unmap data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "2",
-                    "userunmap"
+                    "deletions",
+                    "users"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -289,7 +199,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"amplitude_ids\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"requester\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -297,8 +207,8 @@
                   }
                 }
               },
-              "status": "Bad Request",
-              "code": 400,
+              "status": "Too Many Requests",
+              "code": 429,
               "header": [
                 {
                   "key": "Content-Type",
@@ -308,33 +218,133 @@
               "body": "",
               "cookie": [],
               "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3d15732-dc05-45ab-aad7-9dfc5a1fd2d3",
+          "name": "Amplitude List Deletion Requests",
+          "request": {
+            "name": "Amplitude List Deletion Requests",
+            "description": {
+              "content": "Retrieve a list of previously submitted deletion requests and their processing status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2",
+                "deletions",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_day",
+                  "value": "<date>",
+                  "description": "The start date to filter deletion requests in YYYY-MM-DD format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_day",
+                  "value": "<date>",
+                  "description": "The end date to filter deletion requests in YYYY-MM-DD format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6842a99-e8e0-468d-86f2-c31c26e3effc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2",
+                    "deletions",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_day",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_day",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"deletions\": [\n    {\n      \"day\": {},\n      \"status\": {},\n      \"amplitude_ids\": {},\n      \"user_ids\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "0a71ba51-5e14-488a-b41a-002dde70e19a",
+              "id": "e89b1e5f-c412-438b-8145-39d644813f91",
               "name": "Unauthorized",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "userunmap"
+                    "deletions",
+                    "users"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "start_day",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_day",
+                      "value": "<date>"
+                    }
+                  ],
                   "variable": []
                 },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "method": "GET",
+                "body": {}
               },
               "status": "Unauthorized",
               "code": 401,
@@ -367,8 +377,8 @@
     }
   ],
   "info": {
-    "_postman_id": "9ade75d7-9b27-4cc6-b38e-91b901cab777",
-    "name": "Amplitude Attribution Annotations User Mapping API",
+    "_postman_id": "fccfd76b-971a-449f-a755-7f6a0a0249c9",
+    "name": "Amplitude Attribution Annotations Data Deletion API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",

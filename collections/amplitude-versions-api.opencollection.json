@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Versions API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List Flag and Experiment Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/1/versions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of versions to return."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for pagination."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "The start date for filtering versions."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "The end date for filtering versions."
+              }
+            ]
+          },
+          "docs": "Retrieve the version history for flags and experiments. Returns a paginated list of version records with change details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

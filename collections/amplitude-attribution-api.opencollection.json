@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Amplitude Attribution API",
+    "name": "Amplitude Annotations Attribution API",
     "version": "2"
   },
   "items": [

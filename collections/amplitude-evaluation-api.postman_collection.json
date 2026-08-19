@@ -1,27 +1,26 @@
 {
   "item": [
     {
-      "id": "c62fe33c-8ce6-44a0-9fd3-a287959a61b3",
-      "name": "User Mapping",
+      "id": "11299991-fd19-4f22-8f96-532f551fcde5",
+      "name": "Evaluation",
       "description": {
-        "content": "User identity mapping and aliasing operations",
+        "content": "Remote flag and experiment evaluation operations",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "88fbfbed-d583-4f24-be0f-2a1dec3ffd06",
-          "name": "Amplitude Map User Identities",
+          "id": "e36d7cb5-70c9-4643-a35c-2d6d761f02b2",
+          "name": "Amplitude Evaluate Variants for a User",
           "request": {
-            "name": "Amplitude Map User Identities",
+            "name": "Amplitude Evaluate Variants for a User",
             "description": {
-              "content": "Merge two user identities together by mapping one user_id to another. After mapping, all events and user properties from both identities are consolidated into a single user profile. This is typically used when an anonymous user creates an account.",
+              "content": "Remotely evaluate all active experiments and feature flags for a specific user. Returns the variant assignments based on the user's properties and targeting rules. Amplitude automatically tracks an Experiment Assignment event for each evaluation.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "api",
-                "2",
-                "usermap"
+                "v1",
+                "vardata"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -43,7 +42,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+              "raw": "{\n  \"user_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_properties\": {\n    \"key_0\": 5860\n  },\n  \"groups\": {\n    \"key_0\": \"string\"\n  },\n  \"group_properties\": {\n    \"key_0\": 6534.446459274147\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -53,14 +52,13 @@
           },
           "response": [
             {
-              "id": "9bbe6670-4adf-4064-926c-77530b322846",
+              "id": "1cbfe568-0b96-4216-b8a0-b68513386406",
               "name": "Success",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "api",
-                    "2",
-                    "usermap"
+                    "v1",
+                    "vardata"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -77,7 +75,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"user_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_properties\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  },\n  \"groups\": {\n    \"key_0\": 8661.10451766748\n  },\n  \"group_properties\": {\n    \"key_0\": 969.7622159115759\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -93,19 +91,18 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 100,\n  \"success\": true\n}",
+              "body": "{}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "65873dd6-7092-4974-ba64-07ced6be4b7c",
-              "name": "Bad request - invalid mapping data",
+              "id": "47b7da99-e74d-4439-8f48-ff3bd7281bac",
+              "name": "Bad request - missing user context",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "api",
-                    "2",
-                    "usermap"
+                    "v1",
+                    "vardata"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -116,7 +113,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"user_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_properties\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  },\n  \"groups\": {\n    \"key_0\": 8661.10451766748\n  },\n  \"group_properties\": {\n    \"key_0\": 969.7622159115759\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -137,14 +134,13 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "bdae364d-5619-4226-9fd6-c1322e11a9c1",
-              "name": "Unauthorized",
+              "id": "732130ae-452b-475f-a7ef-383fbd351d3d",
+              "name": "Unauthorized - invalid deployment key",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "api",
-                    "2",
-                    "usermap"
+                    "v1",
+                    "vardata"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -155,7 +151,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"user_id\": \"<string>\",\n  \"device_id\": \"<string>\",\n  \"user_properties\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  },\n  \"groups\": {\n    \"key_0\": 8661.10451766748\n  },\n  \"group_properties\": {\n    \"key_0\": 969.7622159115759\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -182,63 +178,70 @@
           }
         },
         {
-          "id": "e03d25bf-f183-4f92-ae4c-811c21fbf842",
-          "name": "Amplitude Unmap User Identities",
+          "id": "72b611af-5e06-4a4e-ab2e-3e803607f15e",
+          "name": "Amplitude Evaluate Variants for a User via GET",
           "request": {
-            "name": "Amplitude Unmap User Identities",
+            "name": "Amplitude Evaluate Variants for a User via GET",
             "description": {
-              "content": "Reverse a previously created user identity mapping. After unmapping, the two identities are treated as separate users again. This does not retroactively separate events that were already merged.",
+              "content": "Remotely evaluate all active experiments and feature flags for a user identified by query parameters. Returns variant assignments based on targeting rules.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "api",
-                "2",
-                "userunmap"
+                "v1",
+                "vardata"
               ],
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The user ID to evaluate variants for."
+                },
+                {
+                  "disabled": false,
+                  "key": "device_id",
+                  "value": "<string>",
+                  "description": "The device ID to evaluate variants for."
+                }
+              ],
               "variable": []
             },
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
+            "method": "GET",
+            "auth": null
           },
           "response": [
             {
-              "id": "5a8a95fb-0b3f-495e-97e0-56af6d7780c3",
+              "id": "a2df6268-7c34-48ed-8005-32eccf17fc97",
               "name": "Success",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "api",
-                    "2",
-                    "userunmap"
+                    "v1",
+                    "vardata"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "device_id",
+                      "value": "<string>"
+                    }
+                  ],
                   "variable": []
                 },
                 "header": [
@@ -247,16 +250,8 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "method": "GET",
+                "body": {}
               },
               "status": "OK",
               "code": 200,
@@ -266,75 +261,36 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 100,\n  \"success\": true\n}",
+              "body": "{}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "d86f19ad-0300-4754-b73a-fd049d7fd645",
-              "name": "Bad request - invalid unmap data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "2",
-                    "userunmap"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0a71ba51-5e14-488a-b41a-002dde70e19a",
+              "id": "877f4be0-5c83-4986-be85-8afc9c6f48f9",
               "name": "Unauthorized",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "api",
-                    "2",
-                    "userunmap"
+                    "v1",
+                    "vardata"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "device_id",
+                      "value": "<string>"
+                    }
+                  ],
                   "variable": []
                 },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "method": "GET",
+                "body": {}
               },
               "status": "Unauthorized",
               "code": 401,
@@ -367,8 +323,8 @@
     }
   ],
   "info": {
-    "_postman_id": "9ade75d7-9b27-4cc6-b38e-91b901cab777",
-    "name": "Amplitude Attribution Annotations User Mapping API",
+    "_postman_id": "31192bc8-8d0d-45fb-bf1d-07c82d81d2bc",
+    "name": "Amplitude Attribution Annotations Evaluation API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",

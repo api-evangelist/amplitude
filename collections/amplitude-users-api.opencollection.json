@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Users API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List SCIM Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/scim/1/Users",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "A SCIM filter expression to narrow the results. For example, userName eq \"user@example.com\"."
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "The 1-based index of the first result in the current set of results. Default is 1."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page. Default varies by implementation."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of users provisioned in Amplitude. Supports SCIM filtering to search for specific users by attributes such as email or display name."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create a SCIM User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/scim/1/Users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provision a new user in Amplitude via SCIM. The user is created with the specified attributes and can be assigned to groups. Typically called by identity providers during automated provisioning."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get a SCIM User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/scim/1/Users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The SCIM user ID."
+              }
+            ]
+          },
+          "docs": "Retrieve a single user by their SCIM user ID."
+        },
+        {
+          "info": {
+            "name": "Amplitude Replace a SCIM User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api2.amplitude.com/scim/1/Users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The SCIM user ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace all attributes of an existing user with the provided values. Any attributes not included in the request body are reset to their default values."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update a SCIM User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api2.amplitude.com/scim/1/Users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The SCIM user ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update a user's attributes. Only the specified attributes are modified. Commonly used for activating or deactivating users."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete a SCIM User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api2.amplitude.com/scim/1/Users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The SCIM user ID."
+              }
+            ]
+          },
+          "docs": "Deactivate and remove a user from Amplitude. This is typically called by identity providers when a user is offboarded."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

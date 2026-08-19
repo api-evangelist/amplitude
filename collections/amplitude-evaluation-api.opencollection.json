@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Evaluation API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Evaluation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Evaluate Variants for a User via GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/v1/vardata",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID to evaluate variants for."
+              },
+              {
+                "name": "device_id",
+                "value": "",
+                "type": "query",
+                "description": "The device ID to evaluate variants for."
+              }
+            ]
+          },
+          "docs": "Remotely evaluate all active experiments and feature flags for a user identified by query parameters. Returns variant assignments based on targeting rules."
+        },
+        {
+          "info": {
+            "name": "Amplitude Evaluate Variants for a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/v1/vardata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remotely evaluate all active experiments and feature flags for a specific user. Returns the variant assignments based on the user's properties and targeting rules. Amplitude automatically tracks an Experiment Assignment event for each evaluation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

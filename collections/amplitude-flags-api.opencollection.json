@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Flags API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Flags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Get Flag Configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/v1/flags"
+          },
+          "docs": "Download all flag configurations for local evaluation. This endpoint returns the full flag configuration including targeting rules, variants, and segment definitions. Useful for bootstrapping client-side local evaluation SDKs with initialFlags or running evaluation in edge environments."
+        },
+        {
+          "info": {
+            "name": "Amplitude List All Flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/1/flags",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of flags to return."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for pagination returned from a previous request."
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all feature flags in the project. Returns flag metadata including status, variants, and deployment information."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create a Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/api/1/flags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new feature flag with the specified key, variants, and targeting configuration."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get a Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/1/flags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the feature flag."
+              }
+            ]
+          },
+          "docs": "Retrieve a single feature flag by its ID including full configuration details such as deployments, variants, and targeting segments."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update a Flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api2.amplitude.com/api/1/flags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the feature flag."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing feature flag's configuration. Only the fields included in the request body are updated."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,27 +1,28 @@
 {
   "item": [
     {
-      "id": "c62fe33c-8ce6-44a0-9fd3-a287959a61b3",
-      "name": "User Mapping",
+      "id": "5450f3ee-d284-4289-b1c8-ca14d2698207",
+      "name": "Data Access",
       "description": {
-        "content": "User identity mapping and aliasing operations",
+        "content": "Data subject access request operations",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "88fbfbed-d583-4f24-be0f-2a1dec3ffd06",
-          "name": "Amplitude Map User Identities",
+          "id": "545ce80c-ec92-4e1a-9d10-6272bc500457",
+          "name": "Amplitude Create a Data Subject Access Request",
           "request": {
-            "name": "Amplitude Map User Identities",
+            "name": "Amplitude Create a Data Subject Access Request",
             "description": {
-              "content": "Merge two user identities together by mapping one user_id to another. After mapping, all events and user properties from both identities are consolidated into a single user profile. This is typically used when an anonymous user creates an account.",
+              "content": "Submit a data subject access request (DSAR) to retrieve all data Amplitude has collected for a specific user. The request is processed asynchronously and results are made available for download when complete. This endpoint supports CCPA and GDPR compliance workflows.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "2",
-                "usermap"
+                "dsar",
+                "requests"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -43,7 +44,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
+              "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -53,14 +54,15 @@
           },
           "response": [
             {
-              "id": "9bbe6670-4adf-4064-926c-77530b322846",
-              "name": "Success",
+              "id": "45d1eb40-e015-47b1-8da2-33a7d7d5b0f9",
+              "name": "Success - DSAR request submitted",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "usermap"
+                    "dsar",
+                    "requests"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -77,7 +79,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -93,19 +95,20 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 100,\n  \"success\": true\n}",
+              "body": "{\n  \"request_id\": \"500123\",\n  \"status\": \"active\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "65873dd6-7092-4974-ba64-07ced6be4b7c",
-              "name": "Bad request - invalid mapping data",
+              "id": "711e88b6-340a-472d-bde1-d6d38f6c1215",
+              "name": "Bad request - invalid user identifier",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "usermap"
+                    "dsar",
+                    "requests"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -116,7 +119,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -137,14 +140,15 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "bdae364d-5619-4226-9fd6-c1322e11a9c1",
+              "id": "52b87027-0917-4477-8190-246a80c770e4",
               "name": "Unauthorized",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "usermap"
+                    "dsar",
+                    "requests"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -155,7 +159,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -165,6 +169,46 @@
               },
               "status": "Unauthorized",
               "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23cb166f-0e5e-4fe5-9699-4dd73d7965ef",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2",
+                    "dsar",
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
               "header": [
                 {
                   "key": "Content-Type",
@@ -182,64 +226,71 @@
           }
         },
         {
-          "id": "e03d25bf-f183-4f92-ae4c-811c21fbf842",
-          "name": "Amplitude Unmap User Identities",
+          "id": "567fb619-ae7e-4668-9c73-d0672937436a",
+          "name": "Amplitude Get DSAR Request Status",
           "request": {
-            "name": "Amplitude Unmap User Identities",
+            "name": "Amplitude Get DSAR Request Status",
             "description": {
-              "content": "Reverse a previously created user identity mapping. After unmapping, the two identities are treated as separate users again. This does not retroactively separate events that were already merged.",
+              "content": "Check the status of a previously submitted data subject access request. Returns the processing status and download URL when complete.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "2",
-                "userunmap"
+                "dsar",
+                "requests",
+                ":request_id"
               ],
               "host": [
                 "{{baseUrl}}"
               ],
               "query": [],
-              "variable": []
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) The ID of the DSAR request to check."
+                }
+              ]
             },
             "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    },\n    {\n      \"global_user_id\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"unmap\": \"<boolean>\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
+            "method": "GET",
+            "auth": null
           },
           "response": [
             {
-              "id": "5a8a95fb-0b3f-495e-97e0-56af6d7780c3",
+              "id": "7ff43306-38df-486b-9ab5-e3247acdf69b",
               "name": "Success",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "userunmap"
+                    "dsar",
+                    "requests",
+                    ":request_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [],
-                  "variable": []
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) The ID of the DSAR request to check."
+                    }
+                  ]
                 },
                 "header": [
                   {
@@ -247,16 +298,8 @@
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "method": "GET",
+                "body": {}
               },
               "status": "OK",
               "code": 200,
@@ -266,39 +309,41 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"code\": 100,\n  \"success\": true\n}",
+              "body": "{\n  \"request_id\": \"500123\",\n  \"status\": \"pending\",\n  \"download_url\": \"https://example.com/path\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "d86f19ad-0300-4754-b73a-fd049d7fd645",
-              "name": "Bad request - invalid unmap data",
+              "id": "1d68b70d-55ea-43e3-a914-81f19d153e65",
+              "name": "Unauthorized",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "userunmap"
+                    "dsar",
+                    "requests",
+                    ":request_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) The ID of the DSAR request to check."
                     }
-                  }
-                }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
               },
-              "status": "Bad Request",
-              "code": 400,
+              "status": "Unauthorized",
+              "code": 401,
               "header": [
                 {
                   "key": "Content-Type",
@@ -310,34 +355,36 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "0a71ba51-5e14-488a-b41a-002dde70e19a",
-              "name": "Unauthorized",
+              "id": "48c5e4a7-1f7f-4146-8112-aee54b00a037",
+              "name": "DSAR request not found",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "userunmap"
+                    "dsar",
+                    "requests",
+                    ":request_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"mapping\": [\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    },\n    {\n      \"global_user_id\": \"string\",\n      \"user_id\": \"string\",\n      \"unmap\": false\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) The ID of the DSAR request to check."
                     }
-                  }
-                }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
               },
-              "status": "Unauthorized",
-              "code": 401,
+              "status": "Not Found",
+              "code": 404,
               "header": [
                 {
                   "key": "Content-Type",
@@ -367,8 +414,8 @@
     }
   ],
   "info": {
-    "_postman_id": "9ade75d7-9b27-4cc6-b38e-91b901cab777",
-    "name": "Amplitude Attribution Annotations User Mapping API",
+    "_postman_id": "2ee60333-031b-477c-85dc-ce1a4a2936e9",
+    "name": "Amplitude Attribution Annotations Data Access API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",

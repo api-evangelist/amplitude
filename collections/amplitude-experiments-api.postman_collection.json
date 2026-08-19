@@ -1,0 +1,809 @@
+{
+  "item": [
+    {
+      "id": "e51bc43c-3763-4889-bff4-b1b2fb02679b",
+      "name": "Experiments",
+      "description": {
+        "content": "Experiment management operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f398e79a-247d-46ad-a247-e2fc64e5e826",
+          "name": "Amplitude List All Experiments",
+          "request": {
+            "name": "Amplitude List All Experiments",
+            "description": {
+              "content": "Retrieve a list of all experiments in the project. Returns experiment metadata including status, variants, and deployment information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "experiments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of experiments to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A cursor for pagination."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4393f340-9204-47b6-af1c-9bcbf683ec66",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"experiments\": [\n    \"example_value\"\n  ],\n  \"nextCursor\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fbc6f68-da26-4805-b196-ca7ec6abd0f6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b9ccc68-ac0b-4d48-92c7-e9ed95a3cafb",
+          "name": "Amplitude Create an Experiment",
+          "request": {
+            "name": "Amplitude Create an Experiment",
+            "description": {
+              "content": "Create a new A/B test experiment with the specified key, variants, and targeting configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "experiments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {},\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {},\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ce2d2c3-4419-46b6-b344-8d5967777a7f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 23\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 40\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"projectId\": \"500123\",\n  \"key\": \"example_value\",\n  \"name\": \"Example Name\",\n  \"description\": \"Example description text\",\n  \"enabled\": true,\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"example_value\",\n  \"bucketingSalt\": \"example_value\",\n  \"variants\": [\n    \"example_value\"\n  ],\n  \"deployments\": [\n    \"example_value\"\n  ],\n  \"segments\": [\n    \"example_value\"\n  ],\n  \"state\": \"draft\",\n  \"rolledOutVariant\": \"example_value\",\n  \"startDate\": \"2025-03-15T14:30:00Z\",\n  \"endDate\": \"2025-03-15T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b2cad6f-ca6d-4518-b7d6-384379c1aae8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 23\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 40\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0b47c47e-4220-420d-a941-764ade722234",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 23\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 40\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47382cbb-9118-4667-acf7-d367be60bdfe",
+              "name": "Experiment key already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 23\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 40\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59bc5311-1996-4fbb-9df6-2ba14449141a",
+          "name": "Amplitude Get an Experiment",
+          "request": {
+            "name": "Amplitude Get an Experiment",
+            "description": {
+              "content": "Retrieve a single experiment by its ID including full configuration details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "experiments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fa69188-f5dd-425f-b54f-45391eabe757",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"projectId\": \"500123\",\n  \"key\": \"example_value\",\n  \"name\": \"Example Name\",\n  \"description\": \"Example description text\",\n  \"enabled\": true,\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"example_value\",\n  \"bucketingSalt\": \"example_value\",\n  \"variants\": [\n    \"example_value\"\n  ],\n  \"deployments\": [\n    \"example_value\"\n  ],\n  \"segments\": [\n    \"example_value\"\n  ],\n  \"state\": \"draft\",\n  \"rolledOutVariant\": \"example_value\",\n  \"startDate\": \"2025-03-15T14:30:00Z\",\n  \"endDate\": \"2025-03-15T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3995ecb0-14d0-41b7-9fdd-2b2fcf26d2b3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0c14520-2ce5-464f-b1da-72addec999cd",
+              "name": "Experiment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ff37de4-4225-4d8b-9146-3f6633de8192",
+          "name": "Amplitude Update an Experiment",
+          "request": {
+            "name": "Amplitude Update an Experiment",
+            "description": {
+              "content": "Update an existing experiment's configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "experiments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {},\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {},\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b4824995-a9c7-4297-8059-f800b566033a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 91\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 35\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 49\n    },\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"projectId\": \"500123\",\n  \"key\": \"example_value\",\n  \"name\": \"Example Name\",\n  \"description\": \"Example description text\",\n  \"enabled\": true,\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"example_value\",\n  \"bucketingSalt\": \"example_value\",\n  \"variants\": [\n    \"example_value\"\n  ],\n  \"deployments\": [\n    \"example_value\"\n  ],\n  \"segments\": [\n    \"example_value\"\n  ],\n  \"state\": \"draft\",\n  \"rolledOutVariant\": \"example_value\",\n  \"startDate\": \"2025-03-15T14:30:00Z\",\n  \"endDate\": \"2025-03-15T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03e5f32e-4aa2-4ec5-aa01-17e776bd4e71",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 91\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 35\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 49\n    },\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0eab62b-b498-42cc-a971-2a4832156635",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 91\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 35\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 49\n    },\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "326a7700-037c-441f-a4cd-69abf3cfd560",
+              "name": "Experiment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "experiments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 91\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 35\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 49\n    },\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 0\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api2.amplitude.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6f1eeb40-fdd5-4ad0-aec8-2ad5c1dd8a26",
+    "name": "Amplitude Attribution Annotations Experiments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",
+      "type": "text/plain"
+    }
+  }
+}

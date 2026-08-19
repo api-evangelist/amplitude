@@ -1,0 +1,320 @@
+{
+  "item": [
+    {
+      "id": "8f136867-2931-40d0-9053-e6cd29b304f2",
+      "name": "Event Segmentation",
+      "description": {
+        "content": "Event segmentation analysis operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "494efb63-2b0b-489d-b89c-347a876a724b",
+          "name": "Amplitude Get Event Segmentation",
+          "request": {
+            "name": "Amplitude Get Event Segmentation",
+            "description": {
+              "content": "Get metrics for an event with segmentation. Returns event totals, unique users, or other metrics broken down by time intervals and optional segment or group-by properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "2",
+                "events",
+                "segmentation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "e",
+                  "value": "<string>",
+                  "description": "(Required) A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>",
+                  "description": "(Required) The start date in YYYYMMDD format."
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>",
+                  "description": "(Required) The end date in YYYYMMDD format."
+                },
+                {
+                  "disabled": false,
+                  "key": "m",
+                  "value": "<string>",
+                  "description": "The metric to compute. Options include uniques, totals, pct_dau, average, histogram, sums, value_avg, or formula."
+                },
+                {
+                  "disabled": false,
+                  "key": "i",
+                  "value": "<integer>",
+                  "description": "Time interval granularity. Use -300000 for real-time, 1 for daily, 7 for weekly, or 30 for monthly."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "Segment definitions as a JSON-encoded array of segment objects for filtering results."
+                },
+                {
+                  "disabled": false,
+                  "key": "g",
+                  "value": "<string>",
+                  "description": "The property to group results by, such as a user property or event property name."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "The number of group-by values to return. Default is 100, max is 1000."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3985b78f-ad91-4461-b6b6-a4d1c94d8a7d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2",
+                    "events",
+                    "segmentation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"series\": [\n      {}\n    ],\n    \"seriesLabels\": [\n      {}\n    ],\n    \"xValues\": [\n      {}\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe63536f-3374-4b20-8991-bfa6e40abdd0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2",
+                    "events",
+                    "segmentation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "183a33aa-7417-4e12-bdb6-d9c32e686354",
+              "name": "Unauthorized - invalid or missing credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "2",
+                    "events",
+                    "segmentation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "e",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "i",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api2.amplitude.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bd3419b1-853e-4c8c-85fa-3c4689d69103",
+    "name": "Amplitude Attribution Annotations Event Segmentation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",
+      "type": "text/plain"
+    }
+  }
+}

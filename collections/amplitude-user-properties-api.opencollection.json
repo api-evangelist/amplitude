@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations User Properties API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All User Properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/user-property",
+            "params": [
+              {
+                "name": "showDeleted",
+                "value": "",
+                "type": "query",
+                "description": "When true, include deleted user properties in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve all user properties in the project. Optionally include deleted user properties."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create a User Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/user-property",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "user_property",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new user property in the tracking plan."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get a User Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/user-property/:user_property",
+            "params": [
+              {
+                "name": "user_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user property."
+              }
+            ]
+          },
+          "docs": "Retrieve a single user property by its name."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update a User Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/user-property/:user_property",
+            "params": [
+              {
+                "name": "user_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user property to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "description",
+                  "value": ""
+                },
+                {
+                  "name": "new_user_property",
+                  "value": ""
+                },
+                {
+                  "name": "type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an existing user property's metadata."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete a User Property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/user-property/:user_property",
+            "params": [
+              {
+                "name": "user_property",
+                "value": "",
+                "type": "path",
+                "description": "The name of the user property to delete."
+              }
+            ]
+          },
+          "docs": "Delete a planned user property. This is intended for properties that have not yet received data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

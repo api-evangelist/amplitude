@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "aa0ec538-d2b9-4501-a1db-1be6b4e00929",
+      "id": "adb08f18-b542-4540-8b65-01d686534c0c",
       "name": "Attribution",
       "description": {
         "content": "Campaign attribution event operations",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "2c18350c-329b-4399-8db1-57133df25215",
+          "id": "7cc715bf-9774-4aac-864b-1da60e55b149",
           "name": "Amplitude Send Attribution Data",
           "request": {
             "name": "Amplitude Send Attribution Data",
@@ -41,7 +41,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"device_id\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"os_name\": \"<string>\",\n    \"os_version\": \"<string>\",\n    \"device_brand\": \"<string>\",\n    \"device_manufacturer\": \"<string>\",\n    \"device_model\": \"<string>\",\n    \"carrier\": \"<string>\",\n    \"country\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"language\": \"<string>\",\n    \"adid\": \"<string>\",\n    \"idfa\": \"<string>\",\n    \"idfv\": \"<string>\",\n    \"user_properties\": {\n      \"key_0\": 3942.6103349056884,\n      \"key_1\": \"string\"\n    },\n    \"event_properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": true\n    },\n    \"time\": \"<long>\"\n  }\n}",
+              "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"<string>\",\n    \"user_id\": \"<string>\",\n    \"device_id\": \"<string>\",\n    \"platform\": \"<string>\",\n    \"os_name\": \"<string>\",\n    \"os_version\": \"<string>\",\n    \"device_brand\": \"<string>\",\n    \"device_manufacturer\": \"<string>\",\n    \"device_model\": \"<string>\",\n    \"carrier\": \"<string>\",\n    \"country\": \"<string>\",\n    \"region\": \"<string>\",\n    \"city\": \"<string>\",\n    \"language\": \"<string>\",\n    \"adid\": \"<string>\",\n    \"idfa\": \"<string>\",\n    \"idfv\": \"<string>\",\n    \"user_properties\": {\n      \"key_0\": true\n    },\n    \"event_properties\": {\n      \"key_0\": 2682\n    },\n    \"time\": \"<long>\"\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -51,7 +51,7 @@
           },
           "response": [
             {
-              "id": "1162c5ed-e5c0-4804-9c55-e1a262b43943",
+              "id": "a8ee01e6-1c60-42a4-975c-bd8a4445b1ee",
               "name": "Success",
               "originalRequest": {
                 "url": {
@@ -73,7 +73,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"string\",\n    \"user_id\": \"string\",\n    \"device_id\": \"string\",\n    \"platform\": \"string\",\n    \"os_name\": \"string\",\n    \"os_version\": \"string\",\n    \"device_brand\": \"string\",\n    \"device_manufacturer\": \"string\",\n    \"device_model\": \"string\",\n    \"carrier\": \"string\",\n    \"country\": \"string\",\n    \"region\": \"string\",\n    \"city\": \"string\",\n    \"language\": \"string\",\n    \"adid\": \"string\",\n    \"idfa\": \"string\",\n    \"idfv\": \"string\",\n    \"user_properties\": {\n      \"key_0\": \"string\"\n    },\n    \"event_properties\": {\n      \"key_0\": false\n    },\n    \"time\": 3894\n  }\n}",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"string\",\n    \"user_id\": \"string\",\n    \"device_id\": \"string\",\n    \"platform\": \"string\",\n    \"os_name\": \"string\",\n    \"os_version\": \"string\",\n    \"device_brand\": \"string\",\n    \"device_manufacturer\": \"string\",\n    \"device_model\": \"string\",\n    \"carrier\": \"string\",\n    \"country\": \"string\",\n    \"region\": \"string\",\n    \"city\": \"string\",\n    \"language\": \"string\",\n    \"adid\": \"string\",\n    \"idfa\": \"string\",\n    \"idfv\": \"string\",\n    \"user_properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": 2773.957715656629\n    },\n    \"event_properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5957.887612258701\n    },\n    \"time\": 9687\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -94,7 +94,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "985e789a-df24-4ccf-b970-6b8fd181bc89",
+              "id": "9544b8f4-f700-4a84-b058-0558546d2625",
               "name": "Bad request - missing required fields",
               "originalRequest": {
                 "url": {
@@ -110,7 +110,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"string\",\n    \"user_id\": \"string\",\n    \"device_id\": \"string\",\n    \"platform\": \"string\",\n    \"os_name\": \"string\",\n    \"os_version\": \"string\",\n    \"device_brand\": \"string\",\n    \"device_manufacturer\": \"string\",\n    \"device_model\": \"string\",\n    \"carrier\": \"string\",\n    \"country\": \"string\",\n    \"region\": \"string\",\n    \"city\": \"string\",\n    \"language\": \"string\",\n    \"adid\": \"string\",\n    \"idfa\": \"string\",\n    \"idfv\": \"string\",\n    \"user_properties\": {\n      \"key_0\": \"string\"\n    },\n    \"event_properties\": {\n      \"key_0\": false\n    },\n    \"time\": 3894\n  }\n}",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"string\",\n    \"user_id\": \"string\",\n    \"device_id\": \"string\",\n    \"platform\": \"string\",\n    \"os_name\": \"string\",\n    \"os_version\": \"string\",\n    \"device_brand\": \"string\",\n    \"device_manufacturer\": \"string\",\n    \"device_model\": \"string\",\n    \"carrier\": \"string\",\n    \"country\": \"string\",\n    \"region\": \"string\",\n    \"city\": \"string\",\n    \"language\": \"string\",\n    \"adid\": \"string\",\n    \"idfa\": \"string\",\n    \"idfv\": \"string\",\n    \"user_properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": 2773.957715656629\n    },\n    \"event_properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5957.887612258701\n    },\n    \"time\": 9687\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -131,7 +131,7 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "472f8cbc-0033-44eb-90a5-4c69568cb5d7",
+              "id": "8804e471-aba7-4ca8-a1d0-42ecd0aff6e7",
               "name": "Too many requests - rate limit exceeded",
               "originalRequest": {
                 "url": {
@@ -147,7 +147,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"string\",\n    \"user_id\": \"string\",\n    \"device_id\": \"string\",\n    \"platform\": \"string\",\n    \"os_name\": \"string\",\n    \"os_version\": \"string\",\n    \"device_brand\": \"string\",\n    \"device_manufacturer\": \"string\",\n    \"device_model\": \"string\",\n    \"carrier\": \"string\",\n    \"country\": \"string\",\n    \"region\": \"string\",\n    \"city\": \"string\",\n    \"language\": \"string\",\n    \"adid\": \"string\",\n    \"idfa\": \"string\",\n    \"idfv\": \"string\",\n    \"user_properties\": {\n      \"key_0\": \"string\"\n    },\n    \"event_properties\": {\n      \"key_0\": false\n    },\n    \"time\": 3894\n  }\n}",
+                  "raw": "{\n  \"api_key\": \"<string>\",\n  \"event\": {\n    \"event_type\": \"string\",\n    \"user_id\": \"string\",\n    \"device_id\": \"string\",\n    \"platform\": \"string\",\n    \"os_name\": \"string\",\n    \"os_version\": \"string\",\n    \"device_brand\": \"string\",\n    \"device_manufacturer\": \"string\",\n    \"device_model\": \"string\",\n    \"carrier\": \"string\",\n    \"country\": \"string\",\n    \"region\": \"string\",\n    \"city\": \"string\",\n    \"language\": \"string\",\n    \"adid\": \"string\",\n    \"idfa\": \"string\",\n    \"idfv\": \"string\",\n    \"user_properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": 2773.957715656629\n    },\n    \"event_properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": 5957.887612258701\n    },\n    \"time\": 9687\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -186,8 +186,8 @@
     }
   ],
   "info": {
-    "_postman_id": "c13ae085-f89e-4b26-9e99-ae6ccba4fc42",
-    "name": "Amplitude Attribution API",
+    "_postman_id": "a59ee3df-6911-403d-95ad-c1d42479c890",
+    "name": "Amplitude Annotations Attribution API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",

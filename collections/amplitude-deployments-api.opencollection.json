@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Deployments API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/1/deployments"
+          },
+          "docs": "Retrieve a list of all deployments that experiments and flags can be assigned to. Deployments represent environments or platforms where flags are evaluated."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get a Deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/1/deployments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the deployment."
+              }
+            ]
+          },
+          "docs": "Retrieve a single deployment by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,911 @@
+{
+  "item": [
+    {
+      "id": "6dc40648-df92-489d-bff8-af77a4e252e5",
+      "name": "Flags",
+      "description": {
+        "content": "Flag configuration retrieval for local evaluation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79821975-8bf3-4461-83e2-92a99536bb92",
+          "name": "Amplitude Get Flag Configurations",
+          "request": {
+            "name": "Amplitude Get Flag Configurations",
+            "description": {
+              "content": "Download all flag configurations for local evaluation. This endpoint returns the full flag configuration including targeting rules, variants, and segment definitions. Useful for bootstrapping client-side local evaluation SDKs with initialFlags or running evaluation in edge environments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "flags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5aa4f65-93da-4b53-839b-cf46e9f50166",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "flags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"example_value\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9285bb3c-48fb-4f17-a29e-1ea1afa2ac5c",
+              "name": "Unauthorized - invalid deployment key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "flags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f86c2e43-3db1-4cd3-98bd-96e43c5c2aa5",
+          "name": "Amplitude List All Flags",
+          "request": {
+            "name": "Amplitude List All Flags",
+            "description": {
+              "content": "Retrieve a list of all feature flags in the project. Returns flag metadata including status, variants, and deployment information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "flags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The maximum number of flags to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A cursor for pagination returned from a previous request."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67a56568-9681-4fd5-8855-18ffdc001a35",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"flags\": [\n    \"example_value\"\n  ],\n  \"nextCursor\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfce2022-14d8-47e7-8a4f-2a1cbc683e22",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef7ea7d8-1e4a-4bca-bef4-f61c79151db1",
+          "name": "Amplitude Create a Flag",
+          "request": {
+            "name": "Amplitude Create a Flag",
+            "description": {
+              "content": "Create a new feature flag with the specified key, variants, and targeting configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "flags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {},\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {},\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df92e9ed-5f47-47b5-914b-0398e9cbd3c7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 46\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 88\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"projectId\": \"500123\",\n  \"key\": \"example_value\",\n  \"name\": \"Example Name\",\n  \"description\": \"Example description text\",\n  \"enabled\": true,\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"example_value\",\n  \"bucketingSalt\": \"example_value\",\n  \"variants\": [\n    \"example_value\"\n  ],\n  \"deployments\": [\n    \"example_value\"\n  ],\n  \"segments\": [\n    \"example_value\"\n  ],\n  \"state\": \"draft\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fbdd87f-ec9d-4b2a-901c-e07926bb040b",
+              "name": "Bad request - invalid flag configuration",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 46\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 88\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd98611b-45f8-45de-95fe-4739bdea3127",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 46\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 88\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5a7707c-5962-4003-a323-5cef27eeb884",
+              "name": "Flag key already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 46\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 88\n    }\n  ],\n  \"bucketingKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02e373a7-d5eb-4ff7-ae9b-ae89c208b552",
+          "name": "Amplitude Get a Flag",
+          "request": {
+            "name": "Amplitude Get a Flag",
+            "description": {
+              "content": "Retrieve a single feature flag by its ID including full configuration details such as deployments, variants, and targeting segments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "flags",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the feature flag."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8082961-629c-4c26-82cc-6c78ccd9a931",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the feature flag."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"projectId\": \"500123\",\n  \"key\": \"example_value\",\n  \"name\": \"Example Name\",\n  \"description\": \"Example description text\",\n  \"enabled\": true,\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"example_value\",\n  \"bucketingSalt\": \"example_value\",\n  \"variants\": [\n    \"example_value\"\n  ],\n  \"deployments\": [\n    \"example_value\"\n  ],\n  \"segments\": [\n    \"example_value\"\n  ],\n  \"state\": \"draft\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aed4f72a-5d9f-449f-99d4-d4624ab24731",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the feature flag."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7e84773-68dc-4b05-9937-bc59e23b0595",
+              "name": "Flag not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the feature flag."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bac5f1dd-589c-4b27-bcea-119eaf98d1da",
+          "name": "Amplitude Update a Flag",
+          "request": {
+            "name": "Amplitude Update a Flag",
+            "description": {
+              "content": "Update an existing feature flag's configuration. Only the fields included in the request body are updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "1",
+                "flags",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the feature flag."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {},\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"payload\": {},\n      \"description\": \"<string>\",\n      \"rolloutWeight\": \"<integer>\"\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"conditions\": [\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"type\": \"<string>\",\n          \"prop\": \"<string>\",\n          \"op\": \"<string>\",\n          \"values\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ],\n      \"variant\": \"<string>\",\n      \"percentage\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b180d3f7-9358-40fc-b778-060aaae75367",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the feature flag."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 0\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 65\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 89\n    },\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 50\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"500123\",\n  \"projectId\": \"500123\",\n  \"key\": \"example_value\",\n  \"name\": \"Example Name\",\n  \"description\": \"Example description text\",\n  \"enabled\": true,\n  \"evaluationMode\": \"local\",\n  \"bucketingKey\": \"example_value\",\n  \"bucketingSalt\": \"example_value\",\n  \"variants\": [\n    \"example_value\"\n  ],\n  \"deployments\": [\n    \"example_value\"\n  ],\n  \"segments\": [\n    \"example_value\"\n  ],\n  \"state\": \"draft\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34c79c54-5573-4e05-bb48-db5cfc503b81",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the feature flag."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 0\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 65\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 89\n    },\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 50\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09fb9236-1be5-4ae3-8daa-2a4fc9193f92",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the feature flag."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 0\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 65\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 89\n    },\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 50\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "471f2550-7e04-45ae-8c8a-65af5f8dc87c",
+              "name": "Flag not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "1",
+                    "flags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the feature flag."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"variants\": [\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 0\n    },\n    {\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"payload\": {},\n      \"description\": \"string\",\n      \"rolloutWeight\": 65\n    }\n  ],\n  \"segments\": [\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 89\n    },\n    {\n      \"name\": \"string\",\n      \"conditions\": [\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"prop\": \"string\",\n          \"op\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"variant\": \"string\",\n      \"percentage\": 50\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api2.amplitude.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1741e939-b6a9-4fd3-8eb1-f7ce485179fe",
+    "name": "Amplitude Attribution Annotations Flags API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",
+      "type": "text/plain"
+    }
+  }
+}

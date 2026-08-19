@@ -1,8 +1,8 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Amplitude Identify API",
-    "version": "1"
+    "name": "Amplitude Attribution Annotations Identify API",
+    "version": "2"
   },
   "items": [
     {

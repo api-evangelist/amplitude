@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Event Categories API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude List All Event Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/category"
+          },
+          "docs": "Retrieve all event categories in the project. Categories help organize event types into logical groups for easier data governance."
+        },
+        {
+          "info": {
+            "name": "Amplitude Create an Event Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/category",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "category_name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create a new event category to organize event types into logical groups."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get an Event Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/category/:category_id",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event category."
+              }
+            ]
+          },
+          "docs": "Retrieve a single event category by its ID."
+        },
+        {
+          "info": {
+            "name": "Amplitude Update an Event Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/category/:category_id",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event category."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "category_name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update the name of an existing event category."
+        },
+        {
+          "info": {
+            "name": "Amplitude Delete an Event Category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api2.amplitude.com/api/2/taxonomy/category/:category_id",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the event category."
+              }
+            ]
+          },
+          "docs": "Delete an event category. Event types previously assigned to this category will become uncategorized."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,27 +1,28 @@
 {
   "item": [
     {
-      "id": "530c6eff-b31a-45eb-89cf-c3b0f1bc59a7",
-      "name": "Export",
+      "id": "4ca45a03-df80-4036-9def-af7fc72ce64f",
+      "name": "Revenue Analysis",
       "description": {
-        "content": "Raw event data export operations",
+        "content": "Revenue analysis operations",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "78ed4dc6-c352-4084-a4d9-bf2b2f0ec7a4",
-          "name": "Amplitude Export Raw Event Data",
+          "id": "569b2c6b-07bc-4e55-9c21-4003c293de2e",
+          "name": "Amplitude Get Revenue LTV Data",
           "request": {
-            "name": "Amplitude Export Raw Event Data",
+            "name": "Amplitude Get Revenue LTV Data",
             "description": {
-              "content": "Export raw event data for the specified date range as a zipped archive of JSON files. The maximum queryable period is 365 days and the maximum response size is 4 GB. Data is available for export at a minimum within 2 hours of server ingestion. Dates older than 30 days before the current date may not be available.",
+              "content": "Get revenue lifetime value (LTV) data for new users acquired during the specified date range.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "2",
-                "export"
+                "revenue",
+                "day"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -31,13 +32,31 @@
                   "disabled": false,
                   "key": "start",
                   "value": "<string>",
-                  "description": "(Required) The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted."
+                  "description": "(Required) The start date in YYYYMMDD format."
                 },
                 {
                   "disabled": false,
                   "key": "end",
                   "value": "<string>",
-                  "description": "(Required) The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted."
+                  "description": "(Required) The end date in YYYYMMDD format."
+                },
+                {
+                  "disabled": false,
+                  "key": "m",
+                  "value": "<string>",
+                  "description": "The revenue metric to compute."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "Segment definitions as a JSON-encoded array."
+                },
+                {
+                  "disabled": false,
+                  "key": "g",
+                  "value": "<string>",
+                  "description": "The property to group results by."
                 }
               ],
               "variable": []
@@ -45,7 +64,7 @@
             "header": [
               {
                 "key": "Accept",
-                "value": "application/zip"
+                "value": "application/json"
               }
             ],
             "method": "GET",
@@ -53,14 +72,15 @@
           },
           "response": [
             {
-              "id": "98b12a48-fab3-4bc3-ac55-1b5bb69db3c8",
-              "name": "Success - returns a zipped archive of JSON event files",
+              "id": "9500d3b5-d1f6-4f75-9822-21c7c95ab0ad",
+              "name": "Success",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "revenue",
+                    "day"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -73,6 +93,18 @@
                     {
                       "key": "end",
                       "value": "<string>"
+                    },
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
+                      "value": "<string>"
                     }
                   ],
                   "variable": []
@@ -80,7 +112,7 @@
                 "header": [
                   {
                     "key": "Accept",
-                    "value": "application/zip"
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -91,22 +123,23 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "application/zip"
+                  "value": "application/json"
                 }
               ],
-              "body": "string",
+              "body": "{\n  \"data\": {}\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "5385ab00-9e6d-46fd-bd86-dd0cce8beb1e",
-              "name": "Bad request - the exported data exceeds the 4 GB size limit",
+              "id": "5b491ae1-b3c6-4350-ab85-82695a2cab6e",
+              "name": "Bad request",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "revenue",
+                    "day"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -118,6 +151,18 @@
                     },
                     {
                       "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
                       "value": "<string>"
                     }
                   ],
@@ -139,14 +184,15 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "3e985e2c-20b1-4df5-85b1-956c2df6efd6",
-              "name": "Unauthorized - invalid or missing credentials",
+              "id": "e8416946-0ed1-466a-8bd9-29b0775e6609",
+              "name": "Unauthorized",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "revenue",
+                    "day"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -158,6 +204,18 @@
                     },
                     {
                       "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "g",
                       "value": "<string>"
                     }
                   ],
@@ -168,46 +226,6 @@
               },
               "status": "Unauthorized",
               "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "7a1f9539-3b53-4f54-b425-d0862920b778",
-              "name": "No data found for the requested date range",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "2",
-                    "export"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "start",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
               "header": [
                 {
                   "key": "Content-Type",
@@ -237,8 +255,8 @@
     }
   ],
   "info": {
-    "_postman_id": "4ffad98a-511e-45ec-895f-eafba59c1e6b",
-    "name": "Amplitude Attribution Annotations Export API",
+    "_postman_id": "8133b64b-c3bd-4cc7-a2e9-9d4c2b7ec1a2",
+    "name": "Amplitude Attribution Annotations Revenue Analysis API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",

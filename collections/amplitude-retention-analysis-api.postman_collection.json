@@ -1,27 +1,27 @@
 {
   "item": [
     {
-      "id": "530c6eff-b31a-45eb-89cf-c3b0f1bc59a7",
-      "name": "Export",
+      "id": "d54e2cbf-07ec-4725-bd52-a690537e7adf",
+      "name": "Retention Analysis",
       "description": {
-        "content": "Raw event data export operations",
+        "content": "Retention analysis operations",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "78ed4dc6-c352-4084-a4d9-bf2b2f0ec7a4",
-          "name": "Amplitude Export Raw Event Data",
+          "id": "047b0d6d-34a2-4860-a1c8-8f5eb931a9f3",
+          "name": "Amplitude Get Retention Analysis",
           "request": {
-            "name": "Amplitude Export Raw Event Data",
+            "name": "Amplitude Get Retention Analysis",
             "description": {
-              "content": "Export raw event data for the specified date range as a zipped archive of JSON files. The maximum queryable period is 365 days and the maximum response size is 4 GB. Data is available for export at a minimum within 2 hours of server ingestion. Dates older than 30 days before the current date may not be available.",
+              "content": "Get user retention for specific starting and returning actions. Returns retention data broken down by cohort date showing the percentage of users who returned on each subsequent day.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "api",
                 "2",
-                "export"
+                "retention"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -29,15 +29,39 @@
               "query": [
                 {
                   "disabled": false,
+                  "key": "se",
+                  "value": "<string>",
+                  "description": "(Required) The starting event as a JSON-encoded object with event_type field."
+                },
+                {
+                  "disabled": false,
+                  "key": "re",
+                  "value": "<string>",
+                  "description": "(Required) The returning event as a JSON-encoded object with event_type field."
+                },
+                {
+                  "disabled": false,
                   "key": "start",
                   "value": "<string>",
-                  "description": "(Required) The start date and hour in YYYYMMDDTHH format, for example 20220101T00. For multi-day exports, the format YYYYMMDD is also accepted."
+                  "description": "(Required) The start date in YYYYMMDD format."
                 },
                 {
                   "disabled": false,
                   "key": "end",
                   "value": "<string>",
-                  "description": "(Required) The end date and hour in YYYYMMDDTHH format, for example 20220101T23. For multi-day exports, the format YYYYMMDD is also accepted."
+                  "description": "(Required) The end date in YYYYMMDD format."
+                },
+                {
+                  "disabled": false,
+                  "key": "rm",
+                  "value": "<string>",
+                  "description": "Retention mode. Use bracket for N-day retention or rolling for unbounded retention."
+                },
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<string>",
+                  "description": "Segment definitions as a JSON-encoded array."
                 }
               ],
               "variable": []
@@ -45,7 +69,7 @@
             "header": [
               {
                 "key": "Accept",
-                "value": "application/zip"
+                "value": "application/json"
               }
             ],
             "method": "GET",
@@ -53,25 +77,41 @@
           },
           "response": [
             {
-              "id": "98b12a48-fab3-4bc3-ac55-1b5bb69db3c8",
-              "name": "Success - returns a zipped archive of JSON event files",
+              "id": "1a2817bf-b8c8-4907-946a-f325c54cfb20",
+              "name": "Success",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "retention"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
+                      "key": "se",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "re",
+                      "value": "<string>"
+                    },
+                    {
                       "key": "start",
                       "value": "<string>"
                     },
                     {
                       "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
                       "value": "<string>"
                     }
                   ],
@@ -80,7 +120,7 @@
                 "header": [
                   {
                     "key": "Accept",
-                    "value": "application/zip"
+                    "value": "application/json"
                   }
                 ],
                 "method": "GET",
@@ -91,33 +131,49 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "application/zip"
+                  "value": "application/json"
                 }
               ],
-              "body": "string",
+              "body": "{\n  \"data\": {}\n}",
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "_postman_previewlanguage": "json"
             },
             {
-              "id": "5385ab00-9e6d-46fd-bd86-dd0cce8beb1e",
-              "name": "Bad request - the exported data exceeds the 4 GB size limit",
+              "id": "092ee2ab-f1d0-4e9f-a11b-2b871d1238c3",
+              "name": "Bad request",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "retention"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
+                      "key": "se",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "re",
+                      "value": "<string>"
+                    },
+                    {
                       "key": "start",
                       "value": "<string>"
                     },
                     {
                       "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
                       "value": "<string>"
                     }
                   ],
@@ -139,25 +195,41 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "3e985e2c-20b1-4df5-85b1-956c2df6efd6",
-              "name": "Unauthorized - invalid or missing credentials",
+              "id": "8076477f-8ab9-4f0f-8294-a3f1ce182901",
+              "name": "Unauthorized",
               "originalRequest": {
                 "url": {
                   "path": [
                     "api",
                     "2",
-                    "export"
+                    "retention"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [
                     {
+                      "key": "se",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "re",
+                      "value": "<string>"
+                    },
+                    {
                       "key": "start",
                       "value": "<string>"
                     },
                     {
                       "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rm",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "s",
                       "value": "<string>"
                     }
                   ],
@@ -168,46 +240,6 @@
               },
               "status": "Unauthorized",
               "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "7a1f9539-3b53-4f54-b425-d0862920b778",
-              "name": "No data found for the requested date range",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "2",
-                    "export"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "start",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "end",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
               "header": [
                 {
                   "key": "Content-Type",
@@ -237,8 +269,8 @@
     }
   ],
   "info": {
-    "_postman_id": "4ffad98a-511e-45ec-895f-eafba59c1e6b",
-    "name": "Amplitude Attribution Annotations Export API",
+    "_postman_id": "65efe80b-1f56-4890-8dbc-37a66f060290",
+    "name": "Amplitude Attribution Annotations Retention Analysis API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.\n\nContact Support:\n Name: Amplitude Support",

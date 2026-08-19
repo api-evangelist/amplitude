@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amplitude Attribution Annotations Data Access API",
+    "version": "2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Access",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amplitude Create a Data Subject Access Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api2.amplitude.com/api/2/dsar/requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a data subject access request (DSAR) to retrieve all data Amplitude has collected for a specific user. The request is processed asynchronously and results are made available for download when complete. This endpoint supports CCPA and GDPR compliance workflows."
+        },
+        {
+          "info": {
+            "name": "Amplitude Get DSAR Request Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api2.amplitude.com/api/2/dsar/requests/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the DSAR request to check."
+              }
+            ]
+          },
+          "docs": "Check the status of a previously submitted data subject access request. Returns the processing status and download URL when complete."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
