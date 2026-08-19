@@ -1,5 +1,6 @@
 aid: amplitude
 url: https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/apis.yml
+specificationVersion: '0.23'
 accessModel:
   pricing: paid
   onboarding: self-serve
