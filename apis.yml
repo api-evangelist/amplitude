@@ -35,6 +35,11 @@ apis:
   tags:
   - Analytics
   - Batch
+  - Event
+  - Ingestion
+  tags_raw:
+  - Analytics
+  - Batch
   - Events
   - Ingestion
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
@@ -51,6 +56,11 @@ apis:
 - aid: amplitude:identify-api
   name: Amplitude Identify API
   tags:
+  - Analytics
+  - Identity
+  - Properties
+  - User
+  tags_raw:
   - Analytics
   - Identity
   - Properties
@@ -72,6 +82,11 @@ apis:
   name: Amplitude Group Identify API
   tags:
   - Analytics
+  - Group
+  - Identity
+  - Properties
+  tags_raw:
+  - Analytics
   - Groups
   - Identity
   - Properties
@@ -89,6 +104,11 @@ apis:
 - aid: amplitude:export-api
   name: Amplitude Export API
   tags:
+  - Analytics
+  - Data
+  - Event
+  - Export
+  tags_raw:
   - Analytics
   - Data
   - Events
@@ -131,6 +151,11 @@ apis:
   name: Amplitude Releases API
   tags:
   - Analytics
+  - Deployment
+  - Releases
+  - Tracking
+  tags_raw:
+  - Analytics
   - Deployments
   - Releases
   - Tracking
@@ -168,6 +193,11 @@ apis:
   - Aliasing
   - Analytics
   - Identity
+  - User
+  tags_raw:
+  - Aliasing
+  - Analytics
+  - Identity
   - Users
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://api2.amplitude.com
@@ -189,6 +219,11 @@ apis:
   - Compliance
   - GDPR
   - Privacy
+  - User
+  tags_raw:
+  - Compliance
+  - GDPR
+  - Privacy
   - Users
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   baseURL: https://amplitude.com
@@ -204,6 +239,12 @@ apis:
 - aid: amplitude:webhooks-cohort-sync
   name: Amplitude Webhooks and Cohort Sync
   tags:
+  - Cohort Sync
+  - Destinations
+  - Event
+  - Streaming
+  - Webhook
+  tags_raw:
   - Cohort Sync
   - Destinations
   - Events
@@ -362,6 +403,8 @@ apis:
   humanURL: https://amplitude.com/docs/apis/analytics/http-v2
   baseURL: https://api2.amplitude.com
   tags:
+  - Deployment
+  tags_raw:
   - Deployments
   properties:
   - type: OpenAPI
@@ -586,6 +629,8 @@ apis:
   humanURL: https://amplitude.com/docs/apis/analytics/http-v2
   baseURL: https://api2.amplitude.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -714,6 +759,8 @@ apis:
   humanURL: https://amplitude.com/docs/apis/analytics/http-v2
   baseURL: https://api2.amplitude.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -906,6 +953,8 @@ apis:
   humanURL: https://amplitude.com/docs/apis/analytics/http-v2
   baseURL: https://api2.amplitude.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
