@@ -13,8 +13,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: experimentEvaluationApi
-  url: ../openapi/amplitude-experiment-evaluation-api-openapi.yml
+- name: evaluationApi
+  url: ../openapi/amplitude-evaluation-api-openapi.yml
+  type: openapi
+- name: flagsApi
+  url: ../openapi/amplitude-flags-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: evaluate-user-variants

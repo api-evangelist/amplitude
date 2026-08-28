@@ -17,11 +17,11 @@ sourceDescriptions:
 - name: identifyApi
   url: ../openapi/amplitude-identify-api-openapi.yml
   type: openapi
+- name: profilesApi
+  url: ../openapi/amplitude-profiles-api-openapi.yml
+  type: openapi
 - name: userMappingApi
   url: ../openapi/amplitude-user-mapping-api-openapi.yml
-  type: openapi
-- name: userProfileApi
-  url: ../openapi/amplitude-user-profile-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: merge-identities

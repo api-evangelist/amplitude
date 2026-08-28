@@ -13,8 +13,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: dsarApi
-  url: ../openapi/amplitude-dsar-api-openapi.yml
+- name: dataAccessApi
+  url: ../openapi/amplitude-data-access-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: submit-and-poll-dsar

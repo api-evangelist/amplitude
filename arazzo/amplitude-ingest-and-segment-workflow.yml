@@ -12,11 +12,11 @@ info:
     the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: httpV2Api
-  url: ../openapi/amplitude-http-v2-api-openapi.yml
+- name: eventSegmentationApi
+  url: ../openapi/amplitude-event-segmentation-api-openapi.yml
   type: openapi
-- name: dashboardRestApi
-  url: ../openapi/amplitude-dashboard-rest-api-openapi.yml
+- name: eventsApi
+  url: ../openapi/amplitude-events-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: ingest-and-segment

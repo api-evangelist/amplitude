@@ -12,8 +12,14 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: taxonomyApi
-  url: ../openapi/amplitude-taxonomy-api-openapi.yml
+- name: eventCategoriesApi
+  url: ../openapi/amplitude-event-categories-api-openapi.yml
+  type: openapi
+- name: eventPropertiesApi
+  url: ../openapi/amplitude-event-properties-api-openapi.yml
+  type: openapi
+- name: eventTypesApi
+  url: ../openapi/amplitude-event-types-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: govern-planned-event

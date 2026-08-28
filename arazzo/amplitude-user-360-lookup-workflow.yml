@@ -14,11 +14,11 @@ info:
     the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: dashboardRestApi
-  url: ../openapi/amplitude-dashboard-rest-api-openapi.yml
+- name: profilesApi
+  url: ../openapi/amplitude-profiles-api-openapi.yml
   type: openapi
-- name: userProfileApi
-  url: ../openapi/amplitude-user-profile-api-openapi.yml
+- name: userActivityApi
+  url: ../openapi/amplitude-user-activity-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: user-360-lookup

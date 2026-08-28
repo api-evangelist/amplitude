@@ -13,8 +13,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: scimApi
-  url: ../openapi/amplitude-scim-api-openapi.yml
+- name: usersApi
+  url: ../openapi/amplitude-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-and-deactivate-user

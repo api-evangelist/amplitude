@@ -12,8 +12,8 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: experimentManagementApi
-  url: ../openapi/amplitude-experiment-management-api-openapi.yml
+- name: experimentsApi
+  url: ../openapi/amplitude-experiments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: run-experiment-lifecycle

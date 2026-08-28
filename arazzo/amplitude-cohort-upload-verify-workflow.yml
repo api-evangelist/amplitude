@@ -12,8 +12,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: behavioralCohortsApi
-  url: ../openapi/amplitude-behavioral-cohorts-api-openapi.yml
+- name: cohortsApi
+  url: ../openapi/amplitude-cohorts-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: upload-and-verify-cohort

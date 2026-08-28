@@ -13,8 +13,8 @@ info:
     the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: experimentManagementApi
-  url: ../openapi/amplitude-experiment-management-api-openapi.yml
+- name: flagsApi
+  url: ../openapi/amplitude-flags-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: roll-out-flag
