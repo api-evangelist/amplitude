@@ -1,18 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amplitude Attribution Annotations Event Properties API
-  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  title: Amplitude Taxonomy Event Properties API
+  description: The Amplitude Taxonomy API provides programmatic management of your analytics tracking plan. It supports creating, reading, updating, and deleting event categories, event types, event properties, and user properties. This API is essential for data governance workflows, enabling teams to maintain a consistent and well-organized event taxonomy across their instrumentation without needing to use the Amplitude UI directly.
   version: '2'
   contact:
     name: Amplitude Support
     url: https://amplitude.com/contact
   termsOfService: https://amplitude.com/terms
 servers:
-- url: https://api2.amplitude.com
-  description: Amplitude US Production Server
-- url: https://api.eu.amplitude.com
-  description: Amplitude EU Production Server
-security: []
+- url: https://amplitude.com
+  description: Amplitude Production Server
+security:
+- basicAuth: []
 tags:
 - name: Event Properties
   description: Operations for managing event properties
@@ -257,20 +256,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
-    EventPropertyListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Array of event properties.
-          items:
-            $ref: '#/components/schemas/EventProperty'
     EventProperty:
       type: object
       properties:
@@ -289,6 +274,25 @@ components:
         is_required:
           type: boolean
           description: Whether the property is required.
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+    EventPropertyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of event properties.
+          items:
+            $ref: '#/components/schemas/EventProperty'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your Amplitude API key as the username and your secret key as the password. Encode them as base64 in the format api_key:secret_key.
 externalDocs:
-  description: Amplitude Attribution API Documentation
-  url: https://amplitude.com/docs/apis/analytics/attribution
+  description: Amplitude Taxonomy API Documentation
+  url: https://amplitude.com/docs/apis/analytics/taxonomy

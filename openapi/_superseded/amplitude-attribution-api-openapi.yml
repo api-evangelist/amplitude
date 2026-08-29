@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amplitude Annotations Attribution API
   description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
@@ -54,17 +54,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AttributionRequest:
-      type: object
-      required:
-      - api_key
-      - event
-      properties:
-        api_key:
-          type: string
-          description: The API key for the Amplitude project.
-        event:
-          $ref: '#/components/schemas/AttributionEvent'
     AttributionEvent:
       type: object
       required:
@@ -147,6 +136,17 @@ components:
           type: integer
           format: int64
           description: The time the server received the upload in milliseconds since epoch.
+    AttributionRequest:
+      type: object
+      required:
+      - api_key
+      - event
+      properties:
+        api_key:
+          type: string
+          description: The API key for the Amplitude project.
+        event:
+          $ref: '#/components/schemas/AttributionEvent'
 externalDocs:
   description: Amplitude Attribution API Documentation
   url: https://amplitude.com/docs/apis/analytics/attribution

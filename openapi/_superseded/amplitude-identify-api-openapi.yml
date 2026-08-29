@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amplitude Attribution Annotations Identify API
   description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
@@ -57,32 +57,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    IdentifyRequestForm:
-      type: object
-      required:
-      - api_key
-      - identification
-      properties:
-        api_key:
-          type: string
-          description: The API key for the Amplitude project.
-        identification:
-          type: string
-          description: A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties.
-    IdentifyRequestBody:
-      type: object
-      required:
-      - api_key
-      - identification
-      properties:
-        api_key:
-          type: string
-          description: The API key for the Amplitude project.
-        identification:
-          type: array
-          description: An array of identification objects containing user_id or device_id and user_properties.
-          items:
-            $ref: '#/components/schemas/Identification'
     Identification:
       type: object
       properties:
@@ -108,6 +82,32 @@ components:
         events_ingested:
           type: integer
           description: The number of identify operations successfully processed.
+    IdentifyRequestBody:
+      type: object
+      required:
+      - api_key
+      - identification
+      properties:
+        api_key:
+          type: string
+          description: The API key for the Amplitude project.
+        identification:
+          type: array
+          description: An array of identification objects containing user_id or device_id and user_properties.
+          items:
+            $ref: '#/components/schemas/Identification'
+    IdentifyRequestForm:
+      type: object
+      required:
+      - api_key
+      - identification
+      properties:
+        api_key:
+          type: string
+          description: The API key for the Amplitude project.
+        identification:
+          type: string
+          description: A JSON-encoded string or array of JSON-encoded identification objects containing user_id or device_id and user_properties.
     UserPropertyOperations:
       type: object
       description: An object containing user property operations. Each key is an operation type and the value is an object of property names to values.

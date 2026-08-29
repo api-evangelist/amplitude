@@ -1,18 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amplitude Attribution Annotations Flags API
-  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
-  version: '2'
+  title: Amplitude Flags API
+  version: '1'
   contact:
     name: Amplitude Support
     url: https://amplitude.com/contact
   termsOfService: https://amplitude.com/terms
+  description: 'Operations tagged Flags across 2 of this provider''s published API definitions: amplitude-experiment-evaluation-api-openapi.yml, amplitude-experiment-management-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api2.amplitude.com
-  description: Amplitude US Production Server
-- url: https://api.eu.amplitude.com
-  description: Amplitude EU Production Server
-security: []
+- url: https://api.lab.amplitude.com
+  description: Amplitude Experiment Evaluation Server
+- url: https://experiment.amplitude.com
+  description: Amplitude Experiment Management Server
 tags:
 - name: Flags
   description: Flag configuration retrieval for local evaluation
@@ -45,6 +44,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.lab.amplitude.com
+      description: Amplitude Experiment Evaluation Server
   /api/1/flags:
     get:
       operationId: listFlags
@@ -83,6 +87,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
     post:
       operationId: createFlag
       summary: Amplitude Create a Flag
@@ -132,6 +138,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://experiment.amplitude.com
+      description: Amplitude Experiment Management Server
   /api/1/flags/{id}:
     get:
       operationId: getFlag
@@ -176,6 +187,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
     patch:
       operationId: updateFlag
       summary: Amplitude Update a Flag
@@ -227,6 +240,11 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://experiment.amplitude.com
+      description: Amplitude Experiment Management Server
 components:
   schemas:
     FlagConfiguration:
@@ -277,6 +295,28 @@ components:
                 description: The variant key.
               payload:
                 description: Optional payload for the variant.
+    CreateFlagRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: The unique key for the flag.
+        name:
+          type: string
+          description: The display name of the flag.
+        description:
+          type: string
+          description: A description of the flag's purpose.
+        variants:
+          type: array
+          description: Array of variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        bucketingKey:
+          type: string
+          description: The property used for bucketing.
     Segment:
       type: object
       properties:
@@ -311,69 +351,6 @@ components:
           description: The percentage of matching users to include (0-100).
           minimum: 0
           maximum: 100
-    CreateFlagRequest:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-          description: The unique key for the flag.
-        name:
-          type: string
-          description: The display name of the flag.
-        description:
-          type: string
-          description: A description of the flag's purpose.
-        variants:
-          type: array
-          description: Array of variant configurations.
-          items:
-            $ref: '#/components/schemas/VariantConfig'
-        bucketingKey:
-          type: string
-          description: The property used for bucketing.
-    VariantConfig:
-      type: object
-      properties:
-        key:
-          type: string
-          description: The unique key for the variant.
-        name:
-          type: string
-          description: The display name of the variant.
-        payload:
-          description: An optional JSON payload associated with the variant.
-        description:
-          type: string
-          description: A description of what this variant does.
-        rolloutWeight:
-          type: integer
-          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
-          minimum: 0
-          maximum: 100
-    UpdateFlagRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The updated display name.
-        description:
-          type: string
-          description: The updated description.
-        enabled:
-          type: boolean
-          description: Whether the flag should be enabled.
-        variants:
-          type: array
-          description: Updated variant configurations.
-          items:
-            $ref: '#/components/schemas/VariantConfig'
-        segments:
-          type: array
-          description: Updated targeting segment configurations.
-          items:
-            $ref: '#/components/schemas/Segment'
     Flag:
       type: object
       properties:
@@ -429,6 +406,47 @@ components:
           - draft
           - active
           - archived
+    VariantConfig:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The unique key for the variant.
+        name:
+          type: string
+          description: The display name of the variant.
+        payload:
+          description: An optional JSON payload associated with the variant.
+        description:
+          type: string
+          description: A description of what this variant does.
+        rolloutWeight:
+          type: integer
+          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
+          minimum: 0
+          maximum: 100
+    UpdateFlagRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The updated display name.
+        description:
+          type: string
+          description: The updated description.
+        enabled:
+          type: boolean
+          description: Whether the flag should be enabled.
+        variants:
+          type: array
+          description: Updated variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        segments:
+          type: array
+          description: Updated targeting segment configurations.
+          items:
+            $ref: '#/components/schemas/Segment'
     FlagListResponse:
       type: object
       properties:
@@ -448,6 +466,16 @@ components:
       description: The unique identifier of the feature flag.
       schema:
         type: string
-externalDocs:
-  description: Amplitude Attribution API Documentation
-  url: https://amplitude.com/docs/apis/analytics/attribution
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Pass your deployment key in the Authorization header with the prefix Api-Key, for example Api-Key YOUR_DEPLOYMENT_KEY.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Use a Management API key generated in the Experiment sidebar of the Amplitude UI. Pass it in the Authorization header as Bearer YOUR_MANAGEMENT_API_KEY.
+x-refined-from:
+- amplitude-experiment-evaluation-api-openapi.yml
+- amplitude-experiment-management-api-openapi.yml

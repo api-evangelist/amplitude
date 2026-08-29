@@ -1,18 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Amplitude Attribution Annotations Event List API
-  description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
+  title: Amplitude Dashboard REST Event List API
+  description: The Amplitude Dashboard REST API provides programmatic access to the same data displayed in Amplitude's dashboard charts and graphs. It returns results in JSON format and supports queries filtered by event types, user segments, cohorts, and date ranges. Developers can use this API to build custom reporting tools, export chart data, or integrate Amplitude analytics into external dashboards and business intelligence systems.
   version: '2'
   contact:
     name: Amplitude Support
     url: https://amplitude.com/contact
   termsOfService: https://amplitude.com/terms
 servers:
-- url: https://api2.amplitude.com
-  description: Amplitude US Production Server
-- url: https://api.eu.amplitude.com
-  description: Amplitude EU Production Server
-security: []
+- url: https://amplitude.com
+  description: Amplitude Production Server
+security:
+- basicAuth: []
 tags:
 - name: Event List
   description: Event listing operations
@@ -61,6 +60,11 @@ components:
               totals:
                 type: integer
                 description: The total number of times this event was fired in the last 30 days.
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your Amplitude API key as the username and your secret key as the password. Encode them as base64 in the format api_key:secret_key.
 externalDocs:
-  description: Amplitude Attribution API Documentation
-  url: https://amplitude.com/docs/apis/analytics/attribution
+  description: Amplitude Dashboard REST API Documentation
+  url: https://amplitude.com/docs/apis/analytics/dashboard-rest

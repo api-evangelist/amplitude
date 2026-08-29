@@ -65,31 +65,6 @@ apis:
     accepts batches of events up to 20MB per request and is designed for use cases where data volume may
     exceed the limits of the standard HTTP V2 API. The API uses the same event structure as the HTTP V2
     API and is recommended for data pipelines processing millions of events.
-- aid: amplitude:identify-api
-  name: Amplitude Identify API
-  tags:
-  - Analytics
-  - Identity
-  - Properties
-  - User
-  tags_raw:
-  - Analytics
-  - Identity
-  - Properties
-  - Users
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api2.amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/identify
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/identify
-    type: Documentation
-  - url: openapi/amplitude-identify-api-openapi.yml
-    type: OpenAPI
-  description: >-
-    The Amplitude Identify API allows developers to update user properties for a specific user without
-    needing to send an accompanying event. This is useful for setting or modifying user attributes such
-    as demographics, subscription status, or preferences outside of the normal event tracking flow. The
-    API supports operations like set, unset, append, and prepend on user properties.
 - aid: amplitude:group-identify-api
   name: Amplitude Group Identify API
   tags:
@@ -113,52 +88,6 @@ apis:
     Groups are entities such as companies, teams, or accounts that users belong to. This API enables B2B
     analytics use cases by attaching account-level properties to groups for segmentation and reporting
     purposes.
-- aid: amplitude:export-api
-  name: Amplitude Export API
-  tags:
-  - Analytics
-  - Data
-  - Event
-  - Export
-  tags_raw:
-  - Analytics
-  - Data
-  - Events
-  - Export
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/export
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/export
-    type: Documentation
-  - url: openapi/amplitude-export-api-openapi.yml
-    type: OpenAPI
-  description: >-
-    The Amplitude Export API enables bulk export of raw event data for a given project within a specified
-    date range. Results are returned as zipped archives of JSON files containing complete event records
-    with timestamps, user properties, device information, and attribution data. This API is commonly used
-    for data warehousing, offline analysis, and feeding event data into external processing pipelines.
-- aid: amplitude:attribution-api
-  name: Amplitude Attribution API
-  tags:
-  - Analytics
-  - Attribution
-  - Campaigns
-  - Marketing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api2.amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/attribution
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/attribution
-    type: Documentation
-  - url: openapi/amplitude-attribution-api-openapi.yml
-    type: OpenAPI
-  description: >-
-    The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from
-    ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns,
-    channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich
-    Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI
-    measurement.
 - aid: amplitude:releases-api
   name: Amplitude Releases API
   tags:
@@ -199,32 +128,6 @@ apis:
     within Amplitude. Session replays provide qualitative insights by recording user interactions and
     pairing them with quantitative analytics data. This API is used for server-side ingestion of session
     replay events and metadata.
-- aid: amplitude:user-mapping-api
-  name: Amplitude User Mapping API
-  tags:
-  - Aliasing
-  - Analytics
-  - Identity
-  - User
-  tags_raw:
-  - Aliasing
-  - Analytics
-  - Identity
-  - Users
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://api2.amplitude.com
-  humanURL: https://amplitude.com/docs/apis/analytics/user-mapping
-  properties:
-  - url: https://amplitude.com/docs/apis/analytics/user-mapping
-    type: Documentation
-  - url: openapi/amplitude-user-mapping-api-openapi.yml
-    type: OpenAPI
-  description: >-
-    The Amplitude User Mapping (Aliasing) API allows developers to merge users with different user IDs
-    together in Amplitude. This is useful when a user initially interacts with a product anonymously and
-    later creates an account, or when users have multiple identifiers across different systems. The API
-    maps these distinct identities into a single unified user profile to ensure accurate analytics and
-    attribution.
 - aid: amplitude:user-privacy-api
   name: Amplitude User Privacy API
   tags:

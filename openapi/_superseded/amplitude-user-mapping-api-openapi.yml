@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amplitude Attribution Annotations User Mapping API
   description: The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
@@ -87,6 +87,26 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UserUnmapRequest:
+      type: object
+      required:
+      - mapping
+      properties:
+        mapping:
+          type: array
+          description: An array of user mapping objects to reverse.
+          items:
+            $ref: '#/components/schemas/UserMapping'
+    UserMapResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code of the response.
+          example: 200
+        success:
+          type: boolean
+          description: Whether the mapping operation was successful.
     UserMapping:
       type: object
       required:
@@ -102,26 +122,6 @@ components:
         unmap:
           type: boolean
           description: When true, removes the mapping instead of creating it.
-    UserMapResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code of the response.
-          example: 200
-        success:
-          type: boolean
-          description: Whether the mapping operation was successful.
-    UserUnmapRequest:
-      type: object
-      required:
-      - mapping
-      properties:
-        mapping:
-          type: array
-          description: An array of user mapping objects to reverse.
-          items:
-            $ref: '#/components/schemas/UserMapping'
     UserMapRequest:
       type: object
       required:
