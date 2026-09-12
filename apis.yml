@@ -930,6 +930,8 @@ apis:
   - type: Documentation
     url: https://amplitude.com/docs/apis/experiment/experiment-management-api
 common:
+- type: Website
+  url: https://www.amplitude.com/
 - type: AgenticAccess
   url: agentic-access/amplitude-agentic-access.yml
 - type: TrustCenter
