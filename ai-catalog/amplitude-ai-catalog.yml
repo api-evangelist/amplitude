@@ -38,6 +38,7 @@ conformance:
       media type. ARD permits extension types without core registration.'
     - '[Amplitude Builder Skills] Media type ''application/ai-skill'' is a valid application extension
       media type. ARD permits extension types without core registration.'
+  did_web: null
 catalog:
   host_display_name: Amplitude
   host_identifier: amplitude.com
