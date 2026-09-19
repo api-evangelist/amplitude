@@ -156,7 +156,7 @@ apis:
   name: Amplitude Webhooks and Cohort Sync
   tags:
   - Cohort Sync
-  - Destinations
+  - Destination
   - Event
   - Streaming
   - Webhook
@@ -191,6 +191,8 @@ apis:
   humanURL: https://amplitude.com/docs/apis/analytics/http-v2
   baseURL: https://api2.amplitude.com
   tags:
+  - Annotation
+  tags_raw:
   - Annotations
   properties:
   - type: OpenAPI
