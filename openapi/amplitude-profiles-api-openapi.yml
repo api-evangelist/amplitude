@@ -86,6 +86,31 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Recommendation:
+      type: object
+      properties:
+        rec_id:
+          type: string
+          description: The recommendation model ID.
+        child_ids:
+          type: array
+          description: Array of recommended item IDs.
+          items:
+            type: string
+        is_control:
+          type: boolean
+          description: Whether the user is in the control group for this recommendation model.
+        recommendation_type:
+          type: string
+          description: The type of recommendation model.
+        title:
+          type: string
+          description: The title of the recommendation.
+    UserProfileResponse:
+      type: object
+      properties:
+        userData:
+          $ref: '#/components/schemas/UserData'
     UserData:
       type: object
       properties:
@@ -114,31 +139,6 @@ components:
           type: integer
           format: int64
           description: The Amplitude internal ID for the user.
-    Recommendation:
-      type: object
-      properties:
-        rec_id:
-          type: string
-          description: The recommendation model ID.
-        child_ids:
-          type: array
-          description: Array of recommended item IDs.
-          items:
-            type: string
-        is_control:
-          type: boolean
-          description: Whether the user is in the control group for this recommendation model.
-        recommendation_type:
-          type: string
-          description: The type of recommendation model.
-        title:
-          type: string
-          description: The title of the recommendation.
-    UserProfileResponse:
-      type: object
-      properties:
-        userData:
-          $ref: '#/components/schemas/UserData'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

@@ -209,114 +209,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Segment:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The display name of the segment.
-        conditions:
-          type: array
-          description: Array of targeting conditions that define this segment.
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                description: The condition type.
-              prop:
-                type: string
-                description: The property to evaluate.
-              op:
-                type: string
-                description: The comparison operator.
-              values:
-                type: array
-                description: The values to compare against.
-                items:
-                  type: string
-        variant:
-          type: string
-          description: The variant key to assign when this segment matches.
-        percentage:
-          type: integer
-          description: The percentage of matching users to include (0-100).
-          minimum: 0
-          maximum: 100
-    CreateExperimentRequest:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-          description: The unique key for the experiment.
-        name:
-          type: string
-          description: The display name of the experiment.
-        description:
-          type: string
-          description: A description of the experiment.
-        variants:
-          type: array
-          description: Array of variant configurations.
-          items:
-            $ref: '#/components/schemas/VariantConfig'
-        bucketingKey:
-          type: string
-          description: The property used for bucketing.
-    ExperimentListResponse:
-      type: object
-      properties:
-        experiments:
-          type: array
-          description: Array of experiment objects.
-          items:
-            $ref: '#/components/schemas/Experiment'
-        nextCursor:
-          type: string
-          description: A cursor for fetching the next page.
-    VariantConfig:
-      type: object
-      properties:
-        key:
-          type: string
-          description: The unique key for the variant.
-        name:
-          type: string
-          description: The display name of the variant.
-        payload:
-          description: An optional JSON payload associated with the variant.
-        description:
-          type: string
-          description: A description of what this variant does.
-        rolloutWeight:
-          type: integer
-          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
-          minimum: 0
-          maximum: 100
-    UpdateExperimentRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The updated display name.
-        description:
-          type: string
-          description: The updated description.
-        enabled:
-          type: boolean
-          description: Whether the experiment should be enabled.
-        variants:
-          type: array
-          description: Updated variant configurations.
-          items:
-            $ref: '#/components/schemas/VariantConfig'
-        segments:
-          type: array
-          description: Updated targeting segments.
-          items:
-            $ref: '#/components/schemas/Segment'
     Experiment:
       type: object
       properties:
@@ -384,6 +276,114 @@ components:
           type: string
           format: date-time
           description: The date and time the experiment stopped running.
+    CreateExperimentRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: The unique key for the experiment.
+        name:
+          type: string
+          description: The display name of the experiment.
+        description:
+          type: string
+          description: A description of the experiment.
+        variants:
+          type: array
+          description: Array of variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        bucketingKey:
+          type: string
+          description: The property used for bucketing.
+    Segment:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The display name of the segment.
+        conditions:
+          type: array
+          description: Array of targeting conditions that define this segment.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: The condition type.
+              prop:
+                type: string
+                description: The property to evaluate.
+              op:
+                type: string
+                description: The comparison operator.
+              values:
+                type: array
+                description: The values to compare against.
+                items:
+                  type: string
+        variant:
+          type: string
+          description: The variant key to assign when this segment matches.
+        percentage:
+          type: integer
+          description: The percentage of matching users to include (0-100).
+          minimum: 0
+          maximum: 100
+    ExperimentListResponse:
+      type: object
+      properties:
+        experiments:
+          type: array
+          description: Array of experiment objects.
+          items:
+            $ref: '#/components/schemas/Experiment'
+        nextCursor:
+          type: string
+          description: A cursor for fetching the next page.
+    VariantConfig:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The unique key for the variant.
+        name:
+          type: string
+          description: The display name of the variant.
+        payload:
+          description: An optional JSON payload associated with the variant.
+        description:
+          type: string
+          description: A description of what this variant does.
+        rolloutWeight:
+          type: integer
+          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
+          minimum: 0
+          maximum: 100
+    UpdateExperimentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The updated display name.
+        description:
+          type: string
+          description: The updated description.
+        enabled:
+          type: boolean
+          description: Whether the experiment should be enabled.
+        variants:
+          type: array
+          description: Updated variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        segments:
+          type: array
+          description: Updated targeting segments.
+          items:
+            $ref: '#/components/schemas/Segment'
   parameters:
     experimentId:
       name: id

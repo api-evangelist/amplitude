@@ -80,19 +80,19 @@ components:
           type: object
           description: Retention data organized by cohort date with day-by-day return percentages.
   parameters:
-    endDate:
-      name: end
-      in: query
-      required: true
-      description: The end date in YYYYMMDD format.
-      schema:
-        type: string
-        pattern: ^\d{8}$
     startDate:
       name: start
       in: query
       required: true
       description: The start date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
+    endDate:
+      name: end
+      in: query
+      required: true
+      description: The end date in YYYYMMDD format.
       schema:
         type: string
         pattern: ^\d{8}$

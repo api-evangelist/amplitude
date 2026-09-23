@@ -102,6 +102,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UserActivityResult:
+      type: object
+      properties:
+        userData:
+          type: object
+          description: User metadata including user_id and Amplitude ID.
+        events:
+          type: array
+          description: Array of recent events for the user.
+          items:
+            type: object
+            additionalProperties: true
     UserSearchResult:
       type: object
       properties:
@@ -118,18 +130,6 @@ components:
                 type: integer
                 format: int64
                 description: The user's Amplitude internal ID.
-    UserActivityResult:
-      type: object
-      properties:
-        userData:
-          type: object
-          description: User metadata including user_id and Amplitude ID.
-        events:
-          type: array
-          description: Array of recent events for the user.
-          items:
-            type: object
-            additionalProperties: true
   securitySchemes:
     basicAuth:
       type: http

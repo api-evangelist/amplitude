@@ -71,13 +71,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UploadOptions:
-      type: object
-      properties:
-        min_id_length:
-          type: integer
-          description: Minimum length for user_id and device_id fields. Default is 5.
-          minimum: 1
     UploadRequestBody:
       type: object
       required:
@@ -95,23 +88,6 @@ components:
             $ref: '#/components/schemas/Event'
         options:
           $ref: '#/components/schemas/UploadOptions'
-    UploadResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code of the response.
-          example: 200
-        events_ingested:
-          type: integer
-          description: The number of events successfully ingested.
-        payload_size_bytes:
-          type: integer
-          description: The size of the request payload in bytes.
-        server_upload_time:
-          type: integer
-          format: int64
-          description: The time the server received the upload in milliseconds since epoch.
     ErrorResponse:
       type: object
       properties:
@@ -138,6 +114,23 @@ components:
             type: array
             items:
               type: integer
+    UploadResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code of the response.
+          example: 200
+        events_ingested:
+          type: integer
+          description: The number of events successfully ingested.
+        payload_size_bytes:
+          type: integer
+          description: The size of the request payload in bytes.
+        server_upload_time:
+          type: integer
+          format: int64
+          description: The time the server received the upload in milliseconds since epoch.
     Event:
       type: object
       required:
@@ -259,6 +252,13 @@ components:
         insert_id:
           type: string
           description: A unique identifier for the event used for deduplication. Amplitude deduplicates subsequent events sent with the same insert_id and device_id or user_id within the past 7 days.
+    UploadOptions:
+      type: object
+      properties:
+        min_id_length:
+          type: integer
+          description: Minimum length for user_id and device_id fields. Default is 5.
+          minimum: 1
 externalDocs:
   description: Amplitude HTTP V2 API Documentation
   url: https://amplitude.com/docs/apis/analytics/http-v2

@@ -15,13 +15,13 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: identifyApi
-  url: ../openapi/amplitude-identify-api-openapi.yml
+  url: ../openapi/_superseded/amplitude-identify-api-openapi.yml
   type: openapi
 - name: profilesApi
   url: ../openapi/amplitude-profiles-api-openapi.yml
   type: openapi
 - name: userMappingApi
-  url: ../openapi/amplitude-user-mapping-api-openapi.yml
+  url: ../openapi/_superseded/amplitude-user-mapping-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: merge-identities

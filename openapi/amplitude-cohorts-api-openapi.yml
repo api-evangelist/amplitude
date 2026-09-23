@@ -191,12 +191,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CohortUploadResponse:
+    CohortListResponse:
       type: object
       properties:
-        cohort_id:
+        cohorts:
+          type: array
+          description: Array of cohort metadata objects.
+          items:
+            $ref: '#/components/schemas/Cohort'
+    CohortStatusResponse:
+      type: object
+      properties:
+        request_id:
           type: string
-          description: The ID of the created or updated cohort.
+          description: The ID of the export request.
+        status:
+          type: string
+          description: The status of the export job.
+          enum:
+          - queued
+          - computing
+          - complete
+          - failed
     CohortUploadRequest:
       type: object
       required:
@@ -217,14 +233,6 @@ components:
         existing_cohort_id:
           type: string
           description: If provided, updates the existing cohort with this ID instead of creating a new one.
-    CohortListResponse:
-      type: object
-      properties:
-        cohorts:
-          type: array
-          description: Array of cohort metadata objects.
-          items:
-            $ref: '#/components/schemas/Cohort'
     CohortRequestResponse:
       type: object
       properties:
@@ -262,20 +270,12 @@ components:
         appId:
           type: integer
           description: The Amplitude project ID the cohort belongs to.
-    CohortStatusResponse:
+    CohortUploadResponse:
       type: object
       properties:
-        request_id:
+        cohort_id:
           type: string
-          description: The ID of the export request.
-        status:
-          type: string
-          description: The status of the export job.
-          enum:
-          - queued
-          - computing
-          - complete
-          - failed
+          description: The ID of the created or updated cohort.
   securitySchemes:
     basicAuth:
       type: http

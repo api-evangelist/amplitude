@@ -227,6 +227,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UserProperty:
+      type: object
+      properties:
+        user_property:
+          type: string
+          description: The name of the user property.
+        description:
+          type: string
+          description: A description of the user property.
+        type:
+          type: string
+          description: The data type of the property.
     UserPropertyListResponse:
       type: object
       properties:
@@ -241,18 +253,6 @@ components:
         success:
           type: boolean
           description: Whether the operation was successful.
-    UserProperty:
-      type: object
-      properties:
-        user_property:
-          type: string
-          description: The name of the user property.
-        description:
-          type: string
-          description: A description of the user property.
-        type:
-          type: string
-          description: The data type of the property.
   securitySchemes:
     basicAuth:
       type: http

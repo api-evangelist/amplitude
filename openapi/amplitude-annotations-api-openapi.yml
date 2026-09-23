@@ -183,33 +183,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CreateAnnotationRequest:
-      type: object
-      required:
-      - label
-      - date
-      properties:
-        label:
-          type: string
-          description: The display label for the annotation.
-          maxLength: 255
-        date:
-          type: string
-          format: date
-          description: The date of the annotation in YYYY-MM-DD format.
-        end_date:
-          type: string
-          format: date
-          description: The end date for date-range annotations in YYYY-MM-DD format.
-        details:
-          type: string
-          description: Additional details or notes for the annotation.
-        category:
-          type: string
-          description: The category to assign to the annotation.
-        chart_id:
-          type: integer
-          description: The ID of the chart to associate the annotation with. Omit for project-wide annotations.
     Annotation:
       type: object
       properties:
@@ -244,14 +217,33 @@ components:
           type: string
           format: date-time
           description: The timestamp when the annotation was last updated.
-    AnnotationListResponse:
+    CreateAnnotationRequest:
       type: object
+      required:
+      - label
+      - date
       properties:
-        data:
-          type: array
-          description: Array of annotation objects.
-          items:
-            $ref: '#/components/schemas/Annotation'
+        label:
+          type: string
+          description: The display label for the annotation.
+          maxLength: 255
+        date:
+          type: string
+          format: date
+          description: The date of the annotation in YYYY-MM-DD format.
+        end_date:
+          type: string
+          format: date
+          description: The end date for date-range annotations in YYYY-MM-DD format.
+        details:
+          type: string
+          description: Additional details or notes for the annotation.
+        category:
+          type: string
+          description: The category to assign to the annotation.
+        chart_id:
+          type: integer
+          description: The ID of the chart to associate the annotation with. Omit for project-wide annotations.
     UpdateAnnotationRequest:
       type: object
       properties:
@@ -276,6 +268,14 @@ components:
         chart_id:
           type: integer
           description: The updated chart ID.
+    AnnotationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of annotation objects.
+          items:
+            $ref: '#/components/schemas/Annotation'
   parameters:
     annotationId:
       name: annotation_id

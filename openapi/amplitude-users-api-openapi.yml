@@ -183,99 +183,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ScimPatchRequest:
-      type: object
-      required:
-      - schemas
-      - Operations
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-          description: The SCIM patch operation schema URI, typically urn:ietf:params:scim:api:messages:2.0:PatchOp.
-        Operations:
-          type: array
-          description: Array of patch operations to apply.
-          items:
-            type: object
-            properties:
-              op:
-                type: string
-                description: The operation to perform.
-                enum:
-                - add
-                - remove
-                - replace
-              path:
-                type: string
-                description: The attribute path to apply the operation to.
-              value:
-                description: The value to use for the operation.
-    ScimUserRequest:
-      type: object
-      required:
-      - schemas
-      - userName
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-          description: The SCIM schema URIs, typically urn:ietf:params:scim:schemas:core:2.0:User.
-        userName:
-          type: string
-          format: email
-          description: The user's email address.
-        name:
-          type: object
-          properties:
-            givenName:
-              type: string
-              description: The user's first name.
-            familyName:
-              type: string
-              description: The user's last name.
-        emails:
-          type: array
-          items:
-            type: object
-            properties:
-              value:
-                type: string
-                format: email
-                description: The email address.
-              primary:
-                type: boolean
-                description: Whether this is the primary email.
-              type:
-                type: string
-                description: The type of email.
-        active:
-          type: boolean
-          description: Whether the user account should be active.
-    ScimUserListResponse:
-      type: object
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-          description: The SCIM schema URIs for this response.
-        totalResults:
-          type: integer
-          description: The total number of matching users.
-        startIndex:
-          type: integer
-          description: The 1-based index of the first result.
-        itemsPerPage:
-          type: integer
-          description: The number of results returned in this page.
-        Resources:
-          type: array
-          description: Array of SCIM user resources.
-          items:
-            $ref: '#/components/schemas/ScimUser'
     ScimUser:
       type: object
       properties:
@@ -347,6 +254,99 @@ components:
               type: string
               format: date-time
               description: The date and time the resource was last modified.
+    ScimUserListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM schema URIs for this response.
+        totalResults:
+          type: integer
+          description: The total number of matching users.
+        startIndex:
+          type: integer
+          description: The 1-based index of the first result.
+        itemsPerPage:
+          type: integer
+          description: The number of results returned in this page.
+        Resources:
+          type: array
+          description: Array of SCIM user resources.
+          items:
+            $ref: '#/components/schemas/ScimUser'
+    ScimPatchRequest:
+      type: object
+      required:
+      - schemas
+      - Operations
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM patch operation schema URI, typically urn:ietf:params:scim:api:messages:2.0:PatchOp.
+        Operations:
+          type: array
+          description: Array of patch operations to apply.
+          items:
+            type: object
+            properties:
+              op:
+                type: string
+                description: The operation to perform.
+                enum:
+                - add
+                - remove
+                - replace
+              path:
+                type: string
+                description: The attribute path to apply the operation to.
+              value:
+                description: The value to use for the operation.
+    ScimUserRequest:
+      type: object
+      required:
+      - schemas
+      - userName
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM schema URIs, typically urn:ietf:params:scim:schemas:core:2.0:User.
+        userName:
+          type: string
+          format: email
+          description: The user's email address.
+        name:
+          type: object
+          properties:
+            givenName:
+              type: string
+              description: The user's first name.
+            familyName:
+              type: string
+              description: The user's last name.
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: email
+                description: The email address.
+              primary:
+                type: boolean
+                description: Whether this is the primary email.
+              type:
+                type: string
+                description: The type of email.
+        active:
+          type: boolean
+          description: Whether the user account should be active.
   parameters:
     scimUserId:
       name: user_id

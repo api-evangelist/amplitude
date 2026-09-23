@@ -52,11 +52,11 @@
     "amplitude-scim-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "amplitude-taxonomy-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "amplitude-user-profile-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Flags' spans 2 source specs (amplitude-experiment-evaluation-api-openapi.yml, amplitude-experiment-management-api-openapi.yml): per-path servers applied"
+    "tag 'Flags' spans 2 source specs (amplitude-experiment-evaluation-api-openapi.yml, amplitude-experiment-management-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "amplitude-annotations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amplitude-attribution-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-cohorts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-data-access-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-data-deletion-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -69,16 +69,13 @@
     "amplitude-event-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-experiments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amplitude-export-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-flags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-funnel-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amplitude-identify-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-profiles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-retention-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-revenue-analysis-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-user-activity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "amplitude-user-mapping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-user-properties-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "amplitude-versions-api-openapi.yml: previously refined output, superseded by openapi/_original/"

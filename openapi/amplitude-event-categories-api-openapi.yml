@@ -182,15 +182,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: The unique identifier of the category.
-        name:
-          type: string
-          description: The name of the category.
     CategoryListResponse:
       type: object
       properties:
@@ -205,6 +196,15 @@ components:
         success:
           type: boolean
           description: Whether the operation was successful.
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the category.
+        name:
+          type: string
+          description: The name of the category.
   parameters:
     categoryId:
       name: category_id

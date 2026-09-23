@@ -1,0 +1,1 @@
+{"resource":"https://mcp.amplitude.com","authorization_servers":["https://mcp.amplitude.com"],"resource_documentation":"https://docs.amplitude.com/mcp","scopes_supported":["mcp:read","mcp:write"]}
