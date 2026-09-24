@@ -199,8 +199,6 @@ apis:
     url: openapi/amplitude-annotations-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -231,8 +229,6 @@ apis:
     url: openapi/amplitude-cohorts-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -263,8 +259,6 @@ apis:
     url: openapi/amplitude-data-access-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -295,8 +289,6 @@ apis:
     url: openapi/amplitude-data-deletion-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -329,8 +321,6 @@ apis:
     url: openapi/amplitude-deployments-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -361,8 +351,6 @@ apis:
     url: openapi/amplitude-evaluation-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -393,8 +381,6 @@ apis:
     url: openapi/amplitude-event-categories-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -425,8 +411,6 @@ apis:
     url: openapi/amplitude-event-list-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -457,8 +441,6 @@ apis:
     url: openapi/amplitude-event-properties-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -489,8 +471,6 @@ apis:
     url: openapi/amplitude-event-segmentation-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -521,8 +501,6 @@ apis:
     url: openapi/amplitude-event-types-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -555,8 +533,6 @@ apis:
     url: openapi/amplitude-events-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -587,8 +563,6 @@ apis:
     url: openapi/amplitude-experiments-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -619,8 +593,6 @@ apis:
     url: openapi/amplitude-flags-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -651,8 +623,6 @@ apis:
     url: openapi/amplitude-funnel-analysis-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -685,8 +655,6 @@ apis:
     url: openapi/amplitude-groups-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -717,8 +685,6 @@ apis:
     url: openapi/amplitude-profiles-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -749,8 +715,6 @@ apis:
     url: openapi/amplitude-retention-analysis-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -781,8 +745,6 @@ apis:
     url: openapi/amplitude-revenue-analysis-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -813,8 +775,6 @@ apis:
     url: openapi/amplitude-user-activity-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -845,8 +805,6 @@ apis:
     url: openapi/amplitude-user-properties-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -879,8 +837,6 @@ apis:
     url: openapi/amplitude-users-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
@@ -911,8 +867,6 @@ apis:
     url: openapi/amplitude-versions-api-openapi.yml
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/http-v2
-  - type: GraphQL
-    url: graphql/amplitude-graphql.md
   - type: Documentation
     url: https://amplitude.com/docs/apis/analytics/dashboard-rest
   - type: Documentation
