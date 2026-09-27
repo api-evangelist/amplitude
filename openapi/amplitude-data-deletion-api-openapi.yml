@@ -95,6 +95,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DeletionResponse:
+      type: object
+      properties:
+        day:
+          type: string
+          format: date
+          description: The day the deletion job is scheduled for processing.
+        status:
+          type: string
+          description: The status of the deletion request.
     DeletionRequest:
       type: object
       properties:
@@ -114,16 +124,6 @@ components:
         requester:
           type: string
           description: The email address of the person requesting the deletion for audit purposes.
-    DeletionResponse:
-      type: object
-      properties:
-        day:
-          type: string
-          format: date
-          description: The day the deletion job is scheduled for processing.
-        status:
-          type: string
-          description: The status of the deletion request.
     DeletionListResponse:
       type: object
       properties:

@@ -227,6 +227,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UserPropertyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of user properties.
+          items:
+            $ref: '#/components/schemas/UserProperty'
     UserProperty:
       type: object
       properties:
@@ -239,14 +247,6 @@ components:
         type:
           type: string
           description: The data type of the property.
-    UserPropertyListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Array of user properties.
-          items:
-            $ref: '#/components/schemas/UserProperty'
     SuccessResponse:
       type: object
       properties:

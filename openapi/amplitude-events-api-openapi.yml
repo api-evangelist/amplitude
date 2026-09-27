@@ -71,49 +71,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UploadRequestBody:
-      type: object
-      required:
-      - api_key
-      - events
-      properties:
-        api_key:
-          type: string
-          description: The API key for the Amplitude project to which events will be sent.
-        events:
-          type: array
-          description: An array of event objects to upload. Maximum of 10 events per batch is recommended.
-          maxItems: 2000
-          items:
-            $ref: '#/components/schemas/Event'
-        options:
-          $ref: '#/components/schemas/UploadOptions'
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code of the error.
-        error:
-          type: string
-          description: A human-readable error message describing the issue.
-        missing_field:
-          type: string
-          description: The name of the required field that is missing, if applicable.
-        events_with_invalid_fields:
-          type: object
-          description: A map of field names to arrays of event indices that had invalid values for those fields.
-          additionalProperties:
-            type: array
-            items:
-              type: integer
-        events_with_missing_fields:
-          type: object
-          description: A map of field names to arrays of event indices that were missing required fields.
-          additionalProperties:
-            type: array
-            items:
-              type: integer
     UploadResponse:
       type: object
       properties:
@@ -131,6 +88,13 @@ components:
           type: integer
           format: int64
           description: The time the server received the upload in milliseconds since epoch.
+    UploadOptions:
+      type: object
+      properties:
+        min_id_length:
+          type: integer
+          description: Minimum length for user_id and device_id fields. Default is 5.
+          minimum: 1
     Event:
       type: object
       required:
@@ -252,13 +216,49 @@ components:
         insert_id:
           type: string
           description: A unique identifier for the event used for deduplication. Amplitude deduplicates subsequent events sent with the same insert_id and device_id or user_id within the past 7 days.
-    UploadOptions:
+    UploadRequestBody:
+      type: object
+      required:
+      - api_key
+      - events
+      properties:
+        api_key:
+          type: string
+          description: The API key for the Amplitude project to which events will be sent.
+        events:
+          type: array
+          description: An array of event objects to upload. Maximum of 10 events per batch is recommended.
+          maxItems: 2000
+          items:
+            $ref: '#/components/schemas/Event'
+        options:
+          $ref: '#/components/schemas/UploadOptions'
+    ErrorResponse:
       type: object
       properties:
-        min_id_length:
+        code:
           type: integer
-          description: Minimum length for user_id and device_id fields. Default is 5.
-          minimum: 1
+          description: The HTTP status code of the error.
+        error:
+          type: string
+          description: A human-readable error message describing the issue.
+        missing_field:
+          type: string
+          description: The name of the required field that is missing, if applicable.
+        events_with_invalid_fields:
+          type: object
+          description: A map of field names to arrays of event indices that had invalid values for those fields.
+          additionalProperties:
+            type: array
+            items:
+              type: integer
+        events_with_missing_fields:
+          type: object
+          description: A map of field names to arrays of event indices that were missing required fields.
+          additionalProperties:
+            type: array
+            items:
+              type: integer
 externalDocs:
   description: Amplitude HTTP V2 API Documentation
   url: https://amplitude.com/docs/apis/analytics/http-v2

@@ -183,6 +183,35 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ScimPatchRequest:
+      type: object
+      required:
+      - schemas
+      - Operations
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM patch operation schema URI, typically urn:ietf:params:scim:api:messages:2.0:PatchOp.
+        Operations:
+          type: array
+          description: Array of patch operations to apply.
+          items:
+            type: object
+            properties:
+              op:
+                type: string
+                description: The operation to perform.
+                enum:
+                - add
+                - remove
+                - replace
+              path:
+                type: string
+                description: The attribute path to apply the operation to.
+              value:
+                description: The value to use for the operation.
     ScimUser:
       type: object
       properties:
@@ -276,35 +305,6 @@ components:
           description: Array of SCIM user resources.
           items:
             $ref: '#/components/schemas/ScimUser'
-    ScimPatchRequest:
-      type: object
-      required:
-      - schemas
-      - Operations
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-          description: The SCIM patch operation schema URI, typically urn:ietf:params:scim:api:messages:2.0:PatchOp.
-        Operations:
-          type: array
-          description: Array of patch operations to apply.
-          items:
-            type: object
-            properties:
-              op:
-                type: string
-                description: The operation to perform.
-                enum:
-                - add
-                - remove
-                - replace
-              path:
-                type: string
-                description: The attribute path to apply the operation to.
-              value:
-                description: The value to use for the operation.
     ScimUserRequest:
       type: object
       required:
