@@ -191,12 +191,6 @@ components:
         name:
           type: string
           description: The name of the category.
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
     CategoryListResponse:
       type: object
       properties:
@@ -205,6 +199,12 @@ components:
           description: Array of event categories.
           items:
             $ref: '#/components/schemas/Category'
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
   parameters:
     categoryId:
       name: category_id

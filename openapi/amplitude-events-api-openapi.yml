@@ -71,30 +71,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UploadResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: The HTTP status code of the response.
-          example: 200
-        events_ingested:
-          type: integer
-          description: The number of events successfully ingested.
-        payload_size_bytes:
-          type: integer
-          description: The size of the request payload in bytes.
-        server_upload_time:
-          type: integer
-          format: int64
-          description: The time the server received the upload in milliseconds since epoch.
-    UploadOptions:
-      type: object
-      properties:
-        min_id_length:
-          type: integer
-          description: Minimum length for user_id and device_id fields. Default is 5.
-          minimum: 1
     Event:
       type: object
       required:
@@ -216,23 +192,6 @@ components:
         insert_id:
           type: string
           description: A unique identifier for the event used for deduplication. Amplitude deduplicates subsequent events sent with the same insert_id and device_id or user_id within the past 7 days.
-    UploadRequestBody:
-      type: object
-      required:
-      - api_key
-      - events
-      properties:
-        api_key:
-          type: string
-          description: The API key for the Amplitude project to which events will be sent.
-        events:
-          type: array
-          description: An array of event objects to upload. Maximum of 10 events per batch is recommended.
-          maxItems: 2000
-          items:
-            $ref: '#/components/schemas/Event'
-        options:
-          $ref: '#/components/schemas/UploadOptions'
     ErrorResponse:
       type: object
       properties:
@@ -259,6 +218,47 @@ components:
             type: array
             items:
               type: integer
+    UploadResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code of the response.
+          example: 200
+        events_ingested:
+          type: integer
+          description: The number of events successfully ingested.
+        payload_size_bytes:
+          type: integer
+          description: The size of the request payload in bytes.
+        server_upload_time:
+          type: integer
+          format: int64
+          description: The time the server received the upload in milliseconds since epoch.
+    UploadOptions:
+      type: object
+      properties:
+        min_id_length:
+          type: integer
+          description: Minimum length for user_id and device_id fields. Default is 5.
+          minimum: 1
+    UploadRequestBody:
+      type: object
+      required:
+      - api_key
+      - events
+      properties:
+        api_key:
+          type: string
+          description: The API key for the Amplitude project to which events will be sent.
+        events:
+          type: array
+          description: An array of event objects to upload. Maximum of 10 events per batch is recommended.
+          maxItems: 2000
+          items:
+            $ref: '#/components/schemas/Event'
+        options:
+          $ref: '#/components/schemas/UploadOptions'
 externalDocs:
   description: Amplitude HTTP V2 API Documentation
   url: https://amplitude.com/docs/apis/analytics/http-v2

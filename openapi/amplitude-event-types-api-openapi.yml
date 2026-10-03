@@ -202,15 +202,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Category:
+    EventTypeListResponse:
       type: object
       properties:
-        id:
-          type: integer
-          description: The unique identifier of the category.
-        name:
-          type: string
-          description: The name of the category.
+        data:
+          type: array
+          description: Array of event types.
+          items:
+            $ref: '#/components/schemas/EventType'
     EventType:
       type: object
       properties:
@@ -222,20 +221,21 @@ components:
         description:
           type: string
           description: A description of the event type.
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the category.
+        name:
+          type: string
+          description: The name of the category.
     SuccessResponse:
       type: object
       properties:
         success:
           type: boolean
           description: Whether the operation was successful.
-    EventTypeListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Array of event types.
-          items:
-            $ref: '#/components/schemas/EventType'
   parameters:
     eventType:
       name: event_type

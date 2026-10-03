@@ -191,23 +191,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CohortListResponse:
-      type: object
-      properties:
-        cohorts:
-          type: array
-          description: Array of cohort metadata objects.
-          items:
-            $ref: '#/components/schemas/Cohort'
-    CohortRequestResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: The ID of the export request for polling status.
-        cohort_id:
-          type: string
-          description: The ID of the cohort being exported.
     CohortStatusResponse:
       type: object
       properties:
@@ -222,6 +205,34 @@ components:
           - computing
           - complete
           - failed
+    CohortListResponse:
+      type: object
+      properties:
+        cohorts:
+          type: array
+          description: Array of cohort metadata objects.
+          items:
+            $ref: '#/components/schemas/Cohort'
+    CohortUploadRequest:
+      type: object
+      required:
+      - name
+      - ids
+      properties:
+        name:
+          type: string
+          description: The name of the cohort to create or update.
+        ids:
+          type: array
+          description: Array of user_id or amplitude_id values to include in the cohort.
+          items:
+            type: string
+        owner:
+          type: string
+          description: The email address of the cohort owner.
+        existing_cohort_id:
+          type: string
+          description: If provided, updates the existing cohort with this ID instead of creating a new one.
     Cohort:
       type: object
       properties:
@@ -256,26 +267,15 @@ components:
         cohort_id:
           type: string
           description: The ID of the created or updated cohort.
-    CohortUploadRequest:
+    CohortRequestResponse:
       type: object
-      required:
-      - name
-      - ids
       properties:
-        name:
+        request_id:
           type: string
-          description: The name of the cohort to create or update.
-        ids:
-          type: array
-          description: Array of user_id or amplitude_id values to include in the cohort.
-          items:
-            type: string
-        owner:
+          description: The ID of the export request for polling status.
+        cohort_id:
           type: string
-          description: The email address of the cohort owner.
-        existing_cohort_id:
-          type: string
-          description: If provided, updates the existing cohort with this ID instead of creating a new one.
+          description: The ID of the cohort being exported.
   securitySchemes:
     basicAuth:
       type: http
