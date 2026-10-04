@@ -256,6 +256,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
     EventProperty:
       type: object
       properties:
@@ -282,12 +288,6 @@ components:
           description: Array of event properties.
           items:
             $ref: '#/components/schemas/EventProperty'
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
   securitySchemes:
     basicAuth:
       type: http

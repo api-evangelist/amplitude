@@ -108,6 +108,15 @@ components:
           type: string
           format: uri
           description: The URL to download the requested data. Only present when status is complete.
+    DsarResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: The unique identifier for the DSAR request.
+        status:
+          type: string
+          description: The status of the request.
     DsarRequest:
       type: object
       required:
@@ -118,15 +127,6 @@ components:
           description: Array of user IDs to retrieve data for.
           items:
             type: string
-    DsarResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: The unique identifier for the DSAR request.
-        status:
-          type: string
-          description: The status of the request.
   securitySchemes:
     basicAuth:
       type: http

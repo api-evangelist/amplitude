@@ -182,6 +182,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
     Category:
       type: object
       properties:
@@ -199,12 +205,6 @@ components:
           description: Array of event categories.
           items:
             $ref: '#/components/schemas/Category'
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
   parameters:
     categoryId:
       name: category_id

@@ -84,11 +84,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EvaluationResponse:
-      type: object
-      description: A map of flag keys to variant objects representing the evaluated variant assignments for the user.
-      additionalProperties:
-        $ref: '#/components/schemas/Variant'
     EvaluationRequest:
       type: object
       properties:
@@ -137,6 +132,11 @@ components:
             default:
               type: boolean
               description: Whether this is the default variant.
+    EvaluationResponse:
+      type: object
+      description: A map of flag keys to variant objects representing the evaluated variant assignments for the user.
+      additionalProperties:
+        $ref: '#/components/schemas/Variant'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

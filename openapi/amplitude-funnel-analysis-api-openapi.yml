@@ -63,22 +63,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  schemas:
+    FunnelResult:
+      type: object
+      properties:
+        data:
+          type: object
+          description: Funnel conversion data including step-by-step drop-off rates.
   parameters:
-    eventParam:
-      name: e
-      in: query
-      required: true
-      description: A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.
-      schema:
-        type: string
-    startDate:
-      name: start
-      in: query
-      required: true
-      description: The start date in YYYYMMDD format.
-      schema:
-        type: string
-        pattern: ^\d{8}$
     endDate:
       name: end
       in: query
@@ -87,13 +79,21 @@ components:
       schema:
         type: string
         pattern: ^\d{8}$
-  schemas:
-    FunnelResult:
-      type: object
-      properties:
-        data:
-          type: object
-          description: Funnel conversion data including step-by-step drop-off rates.
+    startDate:
+      name: start
+      in: query
+      required: true
+      description: The start date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
+    eventParam:
+      name: e
+      in: query
+      required: true
+      description: A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http

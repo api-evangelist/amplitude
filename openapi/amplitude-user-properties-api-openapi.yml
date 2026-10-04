@@ -227,12 +227,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
     UserProperty:
       type: object
       properties:
@@ -245,6 +239,12 @@ components:
         type:
           type: string
           description: The data type of the property.
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
     UserPropertyListResponse:
       type: object
       properties:

@@ -183,14 +183,30 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AnnotationListResponse:
+    UpdateAnnotationRequest:
       type: object
       properties:
-        data:
-          type: array
-          description: Array of annotation objects.
-          items:
-            $ref: '#/components/schemas/Annotation'
+        label:
+          type: string
+          description: The updated display label for the annotation.
+          maxLength: 255
+        date:
+          type: string
+          format: date
+          description: The updated date in YYYY-MM-DD format.
+        end_date:
+          type: string
+          format: date
+          description: The updated end date in YYYY-MM-DD format.
+        details:
+          type: string
+          description: Updated additional details or notes.
+        category:
+          type: string
+          description: The updated category.
+        chart_id:
+          type: integer
+          description: The updated chart ID.
     Annotation:
       type: object
       properties:
@@ -252,30 +268,14 @@ components:
         chart_id:
           type: integer
           description: The ID of the chart to associate the annotation with. Omit for project-wide annotations.
-    UpdateAnnotationRequest:
+    AnnotationListResponse:
       type: object
       properties:
-        label:
-          type: string
-          description: The updated display label for the annotation.
-          maxLength: 255
-        date:
-          type: string
-          format: date
-          description: The updated date in YYYY-MM-DD format.
-        end_date:
-          type: string
-          format: date
-          description: The updated end date in YYYY-MM-DD format.
-        details:
-          type: string
-          description: Updated additional details or notes.
-        category:
-          type: string
-          description: The updated category.
-        chart_id:
-          type: integer
-          description: The updated chart ID.
+        data:
+          type: array
+          description: Array of annotation objects.
+          items:
+            $ref: '#/components/schemas/Annotation'
   parameters:
     annotationId:
       name: annotation_id

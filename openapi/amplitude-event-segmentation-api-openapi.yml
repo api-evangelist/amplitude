@@ -90,30 +90,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    eventParam:
-      name: e
-      in: query
-      required: true
-      description: A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.
-      schema:
-        type: string
-    startDate:
-      name: start
-      in: query
-      required: true
-      description: The start date in YYYYMMDD format.
-      schema:
-        type: string
-        pattern: ^\d{8}$
-    endDate:
-      name: end
-      in: query
-      required: true
-      description: The end date in YYYYMMDD format.
-      schema:
-        type: string
-        pattern: ^\d{8}$
   schemas:
     SegmentationResult:
       type: object
@@ -139,6 +115,30 @@ components:
               description: The x-axis values representing time periods.
               items:
                 type: string
+  parameters:
+    endDate:
+      name: end
+      in: query
+      required: true
+      description: The end date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
+    startDate:
+      name: start
+      in: query
+      required: true
+      description: The start date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
+    eventParam:
+      name: e
+      in: query
+      required: true
+      description: A JSON-encoded event object with at minimum an event_type field. For funnel analysis, multiple e parameters define each funnel step.
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http
