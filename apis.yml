@@ -883,6 +883,9 @@ apis:
   - type: Documentation
     url: https://amplitude.com/docs/apis/experiment/experiment-management-api
 common:
+- type: CapabilityMap
+  url: capabilities/amplitude-capability-edges.yml
+  name: Amplitude Business Capability Map
 - type: Website
   url: https://www.amplitude.com/
 - type: AgenticAccess

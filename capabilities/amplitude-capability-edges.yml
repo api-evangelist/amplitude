@@ -1,0 +1,156 @@
+slug: amplitude
+provider: Amplitude
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 15
+edges:
+- tag: Retention Analysis
+  spec_file: amplitude-retention-analysis-api-openapi.yml
+  capability_id: BC-4280.30
+  capability_id_l1: BC-4280
+  capability_name: Product Usage Analytics
+  confidence: 0.9
+  evidence: '"GET /api/2/retention getRetentionAnalysis"; schema "RetentionResult"'
+  reason: Retention cohort analysis of product usage is explicitly Product Usage Analytics.
+- tag: Events
+  spec_file: amplitude-events-api-openapi.yml
+  capability_id: BC-4280.10
+  capability_id_l1: BC-4280
+  capability_name: Product Telemetry Instrumentation
+  confidence: 0.85
+  evidence: '"POST /2/httpapi uploadEvents Amplitude Upload Events"; "primary method for server-side event
+    ingestion"'
+  reason: Ingestion of product usage events with user/event properties is telemetry instrumentation capture
+    against defined event schemas.
+- tag: Flags
+  spec_file: amplitude-flags-api-openapi.yml
+  capability_id: BC-4210.50
+  capability_id_l1: BC-4210
+  capability_name: Feature Flag Management
+  confidence: 0.85
+  evidence: '"GET /v1/flags getFlags Amplitude Get Flag Configurations"; "POST /api/1/flags createFlag"'
+  reason: CRUD and runtime evaluation of feature flag configurations is squarely Feature Flag Management.
+- tag: Funnel Analysis
+  spec_file: amplitude-funnel-analysis-api-openapi.yml
+  capability_id: BC-4280.30
+  capability_id_l1: BC-4280
+  capability_name: Product Usage Analytics
+  confidence: 0.85
+  evidence: '"GET /api/2/funnels getFunnelAnalysis Amplitude Get Funnel Analysis"'
+  reason: Funnel query results over product events are analytical views of product usage.
+- tag: Data Access
+  spec_file: amplitude-data-access-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.8
+  evidence: The Amplitude Data Subject Access Request (DSAR) API enables organizations to programmatically
+    handle privacy requests in compliance with GDPR, CCPA
+  reason: Operations create and track data subject access requests, which is squarely privacy and data
+    protection compliance (data subject rights); only ambiguity is whether to frame it as a SaaS service-privacy
+    commitment instead.
+- tag: Data Deletion
+  spec_file: amplitude-data-deletion-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.8
+  evidence: POST /api/2/deletions/users  createDeletionRequest  Request User Data Deletion
+  reason: Right-to-erasure request submission and tracking under GDPR/CCPA is data subject rights handling
+    within privacy and data protection management.
+- tag: Event Segmentation
+  spec_file: amplitude-event-segmentation-api-openapi.yml
+  capability_id: BC-4280.30
+  capability_id_l1: BC-4280
+  capability_name: Product Usage Analytics
+  confidence: 0.8
+  evidence: GET /api/2/events/segmentation  getEventSegmentation  Get Event Segmentation
+  reason: Querying event segmentation chart data returns analytical views of product usage, matching Product
+    Usage Analytics; slight ambiguity with general analytics/BI delivery.
+- tag: Event Types
+  spec_file: amplitude-event-types-api-openapi.yml
+  capability_id: BC-4280.20
+  capability_id_l1: BC-4280
+  capability_name: Telemetry Quality & Governance
+  confidence: 0.8
+  evidence: '"programmatic management of your analytics tracking plan... creating, reading, updating,
+    and deleting event categories, event types" — "essential for data governance workflows"'
+  reason: Managing the event taxonomy / tracking plan is schema governance of product telemetry, matching
+    Telemetry Quality & Governance rather than generic data governance of enterprise data.
+- tag: User Activity
+  spec_file: amplitude-user-activity-api-openapi.yml
+  capability_id: BC-4280.30
+  capability_id_l1: BC-4280
+  capability_name: Product Usage Analytics
+  confidence: 0.8
+  evidence: '"GET /api/2/useractivity getUserActivity"; "GET /api/2/usersearch searchUsers"'
+  reason: Retrieving an individual user's event stream and searching users within the analytics dataset
+    are product usage analytics operations.
+- tag: User Properties
+  spec_file: amplitude-user-properties-api-openapi.yml
+  capability_id: BC-4280.20
+  capability_id_l1: BC-4280
+  capability_name: Telemetry Quality & Governance
+  confidence: 0.8
+  evidence: '"GET /api/2/taxonomy/user-property listUserProperties"; "essential for data governance workflows,
+    enabling teams to maintain a consistent and well-organized event taxonomy"'
+  reason: Taxonomy management of user properties governs the telemetry schema, matching Telemetry Quality
+    & Governance.
+- tag: Event Categories
+  spec_file: amplitude-event-categories-api-openapi.yml
+  capability_id: BC-4280.20
+  capability_id_l1: BC-4280
+  capability_name: Telemetry Quality & Governance
+  confidence: 0.75
+  evidence: essential for data governance workflows, enabling teams to maintain a consistent and well-organized
+    event taxonomy across their instrumentation
+  reason: CRUD over the analytics tracking-plan taxonomy is telemetry schema governance; could alternatively
+    be read as generic data governance, hence not maximal confidence.
+- tag: Event Properties
+  spec_file: amplitude-event-properties-api-openapi.yml
+  capability_id: BC-4280.20
+  capability_id_l1: BC-4280
+  capability_name: Telemetry Quality & Governance
+  confidence: 0.75
+  evidence: POST /api/2/taxonomy/event-property  createEventProperty... essential for data governance
+    workflows
+  reason: Managing event property definitions in the tracking plan is governance of telemetry event schemas.
+- tag: Groups
+  spec_file: amplitude-groups-api-openapi.yml
+  capability_id: BC-4230.50
+  capability_id_l1: BC-4230
+  capability_name: Tenant Identity Federation
+  confidence: 0.75
+  evidence: '"implements the System for Cross-domain Identity Management (SCIM) 2.0 standard for automated
+    user provisioning"; "identity providers such as Okta, Azure AD, and OneLogin"'
+  reason: SCIM group provisioning from a customer's IdP into the SaaS account is tenant identity federation
+    and user/group lifecycle, not enterprise IAM operated by the vendor's buyer.
+- tag: Users
+  spec_file: amplitude-users-api-openapi.yml
+  capability_id: BC-4230.50
+  capability_id_l1: BC-4230
+  capability_name: Tenant Identity Federation
+  confidence: 0.75
+  evidence: '"POST /scim/1/Users createScimUser"; "automatically create, update, and deactivate user accounts
+    in Amplitude"'
+  reason: SCIM user lifecycle driven by the customer's identity provider is tenant identity federation
+    / tenant user account lifecycle for this SaaS product.
+- tag: Experiments
+  spec_file: amplitude-experiments-api-openapi.yml
+  capability_id: BC-4280.50
+  capability_id_l1: BC-4280
+  capability_name: A/B Test Execution
+  confidence: 0.7
+  evidence: '"POST /api/1/experiments createExperiment"; "managing deployments, variants, holdout groups,
+    and mutual exclusion groups"'
+  reason: Operations configure experiments, variants and targeting segments — A/B test execution; some
+    ambiguity with Experimentation Programme Management, hence moderate confidence.
