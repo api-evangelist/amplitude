@@ -883,6 +883,12 @@ apis:
   - type: Documentation
     url: https://amplitude.com/docs/apis/experiment/experiment-management-api
 common:
+- type: Plans
+  url: plans/amplitude-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/amplitude-rate-limits.yml
+- type: FinOps
+  url: finops/amplitude-finops.yml
 - type: CapabilityMap
   url: capabilities/amplitude-capability-edges.yml
   name: Amplitude Business Capability Map
