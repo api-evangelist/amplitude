@@ -1,0 +1,22 @@
+generated: '2026-10-13'
+method: searched
+checked:
+- https://aws.amazon.com/marketplace/
+marketplace_apps: []
+edges:
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=a4849517-4436-4f2d-93e4-8f2d16dc53a9
+  listing_count: 2
+  apps:
+  - Amplitude Digital Analytics Platform
+  - Amplitude Analytics (pay-as-you-go)
+  seller_name: Amplitude Analytics
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
