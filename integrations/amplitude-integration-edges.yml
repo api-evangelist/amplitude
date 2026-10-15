@@ -9,6 +9,7 @@ checked:
 - https://registry.modelcontextprotocol.io/v0/servers
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-amplitude
 - okta/integrations/okta-integration-edges.yml
+- stripe/integrations/stripe-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -218,6 +219,23 @@ edges:
   - IDENTITY_SECURITY_POSTURE_MANAGEMENT
   - SWA
   - UPDATE
+- partner_name: Stripe (own)
+  partner: stripe
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.stripe.com/apps/amplitude
+  mirror_of: stripe/integrations/stripe-integration-edges.yml
+  apps:
+  - Amplitude
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: data_and_analytics, developer_tools
 source:
 - https://docs.mparticle.com/integrations/amplitude/event/
 - https://fivetran.com/docs/activations/destinations/available-destinations/amplitude
