@@ -1,6 +1,7 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- contentful/integrations/contentful-integration-edges.yml
 - https://aws.amazon.com/marketplace/
 - https://docs.mparticle.com/integrations/amplitude/event/
 - https://fivetran.com/docs/activations/destinations/available-destinations/amplitude
@@ -10,6 +11,7 @@ checked:
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-amplitude
 - okta/integrations/okta-integration-edges.yml
 - stripe/integrations/stripe-integration-edges.yml
+- wordpress/integrations/wordpress-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -236,6 +238,39 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: data_and_analytics, developer_tools
+- partner_name: Contentful (own)
+  partner: contentful
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.contentful.com/marketplace/amplitude-experiment/
+  mirror_of: contentful/integrations/contentful-integration-edges.yml
+  apps:
+  - Amplitude Experiment
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+- partner_name: WordPress (own)
+  partner: wordpress
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://wordpress.org/plugins/amplitude/
+  mirror_of: wordpress/integrations/wordpress-integration-edges.yml
+  apps:
+  - Amplitude – Analytics, Session Replay, A/B testing and CDP for your website
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: WordPress plugin
 source:
 - https://docs.mparticle.com/integrations/amplitude/event/
 - https://fivetran.com/docs/activations/destinations/available-destinations/amplitude
