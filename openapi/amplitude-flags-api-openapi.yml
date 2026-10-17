@@ -295,28 +295,6 @@ components:
                 description: The variant key.
               payload:
                 description: Optional payload for the variant.
-    CreateFlagRequest:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-          description: The unique key for the flag.
-        name:
-          type: string
-          description: The display name of the flag.
-        description:
-          type: string
-          description: A description of the flag's purpose.
-        variants:
-          type: array
-          description: Array of variant configurations.
-          items:
-            $ref: '#/components/schemas/VariantConfig'
-        bucketingKey:
-          type: string
-          description: The property used for bucketing.
     Flag:
       type: object
       properties:
@@ -372,17 +350,6 @@ components:
           - draft
           - active
           - archived
-    FlagListResponse:
-      type: object
-      properties:
-        flags:
-          type: array
-          description: Array of feature flag objects.
-          items:
-            $ref: '#/components/schemas/Flag'
-        nextCursor:
-          type: string
-          description: A cursor for fetching the next page of results.
     Segment:
       type: object
       properties:
@@ -417,25 +384,6 @@ components:
           description: The percentage of matching users to include (0-100).
           minimum: 0
           maximum: 100
-    VariantConfig:
-      type: object
-      properties:
-        key:
-          type: string
-          description: The unique key for the variant.
-        name:
-          type: string
-          description: The display name of the variant.
-        payload:
-          description: An optional JSON payload associated with the variant.
-        description:
-          type: string
-          description: A description of what this variant does.
-        rolloutWeight:
-          type: integer
-          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
-          minimum: 0
-          maximum: 100
     UpdateFlagRequest:
       type: object
       properties:
@@ -458,6 +406,58 @@ components:
           description: Updated targeting segment configurations.
           items:
             $ref: '#/components/schemas/Segment'
+    CreateFlagRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: The unique key for the flag.
+        name:
+          type: string
+          description: The display name of the flag.
+        description:
+          type: string
+          description: A description of the flag's purpose.
+        variants:
+          type: array
+          description: Array of variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        bucketingKey:
+          type: string
+          description: The property used for bucketing.
+    FlagListResponse:
+      type: object
+      properties:
+        flags:
+          type: array
+          description: Array of feature flag objects.
+          items:
+            $ref: '#/components/schemas/Flag'
+        nextCursor:
+          type: string
+          description: A cursor for fetching the next page of results.
+    VariantConfig:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The unique key for the variant.
+        name:
+          type: string
+          description: The display name of the variant.
+        payload:
+          description: An optional JSON payload associated with the variant.
+        description:
+          type: string
+          description: A description of what this variant does.
+        rolloutWeight:
+          type: integer
+          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
+          minimum: 0
+          maximum: 100
   parameters:
     flagId:
       name: id

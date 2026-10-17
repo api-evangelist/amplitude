@@ -191,6 +191,14 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CohortListResponse:
+      type: object
+      properties:
+        cohorts:
+          type: array
+          description: Array of cohort metadata objects.
+          items:
+            $ref: '#/components/schemas/Cohort'
     CohortStatusResponse:
       type: object
       properties:
@@ -205,12 +213,15 @@ components:
           - computing
           - complete
           - failed
-    CohortUploadResponse:
+    CohortRequestResponse:
       type: object
       properties:
+        request_id:
+          type: string
+          description: The ID of the export request for polling status.
         cohort_id:
           type: string
-          description: The ID of the created or updated cohort.
+          description: The ID of the cohort being exported.
     Cohort:
       type: object
       properties:
@@ -239,6 +250,12 @@ components:
         appId:
           type: integer
           description: The Amplitude project ID the cohort belongs to.
+    CohortUploadResponse:
+      type: object
+      properties:
+        cohort_id:
+          type: string
+          description: The ID of the created or updated cohort.
     CohortUploadRequest:
       type: object
       required:
@@ -259,23 +276,6 @@ components:
         existing_cohort_id:
           type: string
           description: If provided, updates the existing cohort with this ID instead of creating a new one.
-    CohortListResponse:
-      type: object
-      properties:
-        cohorts:
-          type: array
-          description: Array of cohort metadata objects.
-          items:
-            $ref: '#/components/schemas/Cohort'
-    CohortRequestResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: The ID of the export request for polling status.
-        cohort_id:
-          type: string
-          description: The ID of the cohort being exported.
   securitySchemes:
     basicAuth:
       type: http

@@ -140,45 +140,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ScimGroupListResponse:
-      type: object
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-          description: The SCIM schema URIs for this response.
-        totalResults:
-          type: integer
-          description: The total number of matching groups.
-        Resources:
-          type: array
-          description: Array of SCIM group resources.
-          items:
-            $ref: '#/components/schemas/ScimGroup'
-    ScimGroupRequest:
-      type: object
-      required:
-      - schemas
-      - displayName
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-          description: The SCIM schema URIs.
-        displayName:
-          type: string
-          description: The display name of the group.
-        members:
-          type: array
-          description: Array of initial group members.
-          items:
-            type: object
-            properties:
-              value:
-                type: string
-                description: The member user ID.
     ScimPatchRequest:
       type: object
       required:
@@ -249,6 +210,45 @@ components:
               type: string
               format: date-time
               description: The date and time the resource was last modified.
+    ScimGroupRequest:
+      type: object
+      required:
+      - schemas
+      - displayName
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM schema URIs.
+        displayName:
+          type: string
+          description: The display name of the group.
+        members:
+          type: array
+          description: Array of initial group members.
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                description: The member user ID.
+    ScimGroupListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM schema URIs for this response.
+        totalResults:
+          type: integer
+          description: The total number of matching groups.
+        Resources:
+          type: array
+          description: Array of SCIM group resources.
+          items:
+            $ref: '#/components/schemas/ScimGroup'
   parameters:
     scimGroupId:
       name: group_id

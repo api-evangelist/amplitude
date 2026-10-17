@@ -90,6 +90,16 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DsarRequest:
+      type: object
+      required:
+      - user_ids
+      properties:
+        user_ids:
+          type: array
+          description: Array of user IDs to retrieve data for.
+          items:
+            type: string
     DsarStatusResponse:
       type: object
       properties:
@@ -117,16 +127,6 @@ components:
         status:
           type: string
           description: The status of the request.
-    DsarRequest:
-      type: object
-      required:
-      - user_ids
-      properties:
-        user_ids:
-          type: array
-          description: Array of user IDs to retrieve data for.
-          items:
-            type: string
   securitySchemes:
     basicAuth:
       type: http

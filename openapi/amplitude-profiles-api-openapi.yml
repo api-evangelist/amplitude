@@ -86,6 +86,11 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UserProfileResponse:
+      type: object
+      properties:
+        userData:
+          $ref: '#/components/schemas/UserData'
     UserData:
       type: object
       properties:
@@ -134,11 +139,6 @@ components:
         title:
           type: string
           description: The title of the recommendation.
-    UserProfileResponse:
-      type: object
-      properties:
-        userData:
-          $ref: '#/components/schemas/UserData'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

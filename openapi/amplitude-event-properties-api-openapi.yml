@@ -262,6 +262,14 @@ components:
         success:
           type: boolean
           description: Whether the operation was successful.
+    EventPropertyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of event properties.
+          items:
+            $ref: '#/components/schemas/EventProperty'
     EventProperty:
       type: object
       properties:
@@ -280,14 +288,6 @@ components:
         is_required:
           type: boolean
           description: Whether the property is required.
-    EventPropertyListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Array of event properties.
-          items:
-            $ref: '#/components/schemas/EventProperty'
   securitySchemes:
     basicAuth:
       type: http

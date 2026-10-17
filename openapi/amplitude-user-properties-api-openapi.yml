@@ -227,18 +227,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UserProperty:
-      type: object
-      properties:
-        user_property:
-          type: string
-          description: The name of the user property.
-        description:
-          type: string
-          description: A description of the user property.
-        type:
-          type: string
-          description: The data type of the property.
     SuccessResponse:
       type: object
       properties:
@@ -253,6 +241,18 @@ components:
           description: Array of user properties.
           items:
             $ref: '#/components/schemas/UserProperty'
+    UserProperty:
+      type: object
+      properties:
+        user_property:
+          type: string
+          description: The name of the user property.
+        description:
+          type: string
+          description: A description of the user property.
+        type:
+          type: string
+          description: The data type of the property.
   securitySchemes:
     basicAuth:
       type: http
