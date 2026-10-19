@@ -1,0 +1,12 @@
+{
+ "url": "https://amplitude.com/openapi.json",
+ "final": "https://amplitude.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 96788,
+ "sha256": "e475ad97669a922f03b24b9f62eacb142488f1960eaa8fc452f17f8f4165a884",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

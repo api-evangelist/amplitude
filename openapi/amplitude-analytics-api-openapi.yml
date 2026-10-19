@@ -1,0 +1,890 @@
+openapi: 3.2.0
+info:
+  title: Amplitude Public Analytics API
+  version: '2026-10-05'
+  summary: Event ingestion, analytics, taxonomy, export, async DSAR jobs, and agent-readable site content APIs for Amplitude.
+  description: 'Amplitude is a digital analytics platform covering product analytics, experimentation, session replay, web analytics, and CDP capabilities.
+
+
+    This document describes the public HTTP surface most useful to programmatic clients and AI agents:
+
+
+    - **Ingestion** (`api2.amplitude.com`) — send events. Authenticated with a project API key in the request body.
+
+    - **Analytics, Taxonomy, Export, Cohorts** (`amplitude.com/api`) — read and manage project data. Authenticated with HTTP Basic using a project API key and secret key.
+
+    - **DSAR** (`amplitude.com/api/2/dsar`) — export a user’s data. Authenticated with HTTP Basic using the organization API key and organization secret key, not project credentials.
+
+    - **Site content** (`amplitude.com`) — Markdown and index representations of amplitude.com pages, for retrieval-augmented and agent use.
+
+
+    For conversational access to Amplitude data, prefer the Amplitude MCP server (`https://mcp.amplitude.com/mcp`, OAuth 2.0) over these REST APIs. For public documentation, use the read-only Docs MCP server (`https://amplitude.com/docs/api/mcp`).
+
+
+    The full catalog of Amplitude’s agent-callable resources is published at https://amplitude.com/.well-known/ai-catalog.json.
+
+
+    Endpoint coverage here is deliberately limited to documented, stable endpoints. See https://amplitude.com/docs/apis for the complete reference, including the Experiment, Attribution, Lookup Table, and User Privacy APIs.'
+  termsOfService: https://amplitude.com/terms
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/support
+  license:
+    name: Amplitude Terms of Service
+    url: https://amplitude.com/terms
+servers:
+- url: https://amplitude.com
+  description: Analytics REST host (default / US data residency)
+- url: https://analytics.eu.amplitude.com
+  description: Analytics REST host (EU data residency)
+tags:
+- name: Analytics
+  description: 'Query behavioral data: segmentation, funnels, retention, sessions, revenue, and saved charts.'
+  externalDocs:
+    url: https://amplitude.com/docs/apis/analytics/dashboard-rest
+paths:
+  /api/2/events/list:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: listEvents
+      summary: List events
+      description: Return every active and inactive event type in the project, with display name and deleted state.
+      security:
+      - apiKeyAndSecretKey: []
+      responses:
+        '200':
+          description: Event list.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/events/segmentation:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getEventSegmentation
+      summary: Event segmentation
+      description: Return metrics for one or two events over a date range, optionally segmented and grouped. URL-encode special characters in event types and property names.
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: e
+        in: query
+        required: true
+        description: Event definition as a JSON object with `event_type` and optional `filters` and `group_by`. Use `_active` for any active event, `_all` for any event, and prefix custom events with `ce:`.
+        schema:
+          type: string
+        example: '{"event_type":"watch_tutorial"}'
+      - name: e2
+        in: query
+        required: false
+        description: Second event definition, same shape as `e`.
+        schema:
+          type: string
+      - name: start
+        in: query
+        required: true
+        description: First date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260801'
+      - name: end
+        in: query
+        required: true
+        description: Last date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260831'
+      - name: m
+        in: query
+        required: false
+        description: 'Metric to return. Non-property metrics: `uniques`, `totals`, `pct_dau`, `average`. Property metrics: `histogram`, `sums`, `value_avg`.'
+        schema:
+          type: string
+          enum:
+          - uniques
+          - totals
+          - pct_dau
+          - average
+          - histogram
+          - sums
+          - value_avg
+      - name: i
+        in: query
+        required: false
+        description: 'Interval: 1 for daily, 7 for weekly, 30 for monthly. Use -300000, -3600000 for realtime intervals.'
+        schema:
+          type: integer
+      - name: s
+        in: query
+        required: false
+        description: Segment definitions, as a JSON array of filter condition objects. Repeat the parameter for multiple segments.
+        schema:
+          type: string
+      - name: g
+        in: query
+        required: false
+        description: 'Property to group by, for example `platform`. Available only with a single segment. Limit: two.'
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Number of group-by values returned. Max 1000.
+        schema:
+          type: integer
+          maximum: 1000
+      responses:
+        '200':
+          description: Series data with labels and per-series values.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/funnels:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getFunnelAnalysis
+      summary: Funnel analysis
+      description: Return conversion data for a series of events. Repeat the `e` parameter once per funnel step, in order.
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: e
+        in: query
+        required: true
+        description: Funnel step event definition. Repeat once per step, in funnel order.
+        schema:
+          type: string
+      - name: start
+        in: query
+        required: true
+        description: First date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260801'
+      - name: end
+        in: query
+        required: true
+        description: Last date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260831'
+      - name: mode
+        in: query
+        required: false
+        description: Whether steps must occur in the given order. `ordered` (default), `unordered`, or `sequential`.
+        schema:
+          type: string
+          enum:
+          - ordered
+          - unordered
+          - sequential
+      - name: n
+        in: query
+        required: false
+        description: 'User set: `new` or `active` (default).'
+        schema:
+          type: string
+          enum:
+          - new
+          - active
+      - name: cs
+        in: query
+        required: false
+        description: Conversion window in seconds.
+        schema:
+          type: integer
+      - name: s
+        in: query
+        required: false
+        description: Segment definitions, as a JSON array of filter condition objects. Repeat the parameter for multiple segments.
+        schema:
+          type: string
+      - name: g
+        in: query
+        required: false
+        description: 'Property to group by, for example `platform`. Available only with a single segment. Limit: two.'
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        description: Number of group-by values returned. Max 1000.
+        schema:
+          type: integer
+          maximum: 1000
+      responses:
+        '200':
+          description: Funnel step counts and conversion rates.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/retention:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getRetentionAnalysis
+      summary: Retention analysis
+      description: Return retention for a starting event and a return event over a date range.
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: se
+        in: query
+        required: true
+        description: Starting event definition.
+        schema:
+          type: string
+        example: '{"event_type":"_active"}'
+      - name: re
+        in: query
+        required: true
+        description: Returning event definition.
+        schema:
+          type: string
+      - name: start
+        in: query
+        required: true
+        description: First date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260801'
+      - name: end
+        in: query
+        required: true
+        description: Last date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260831'
+      - name: rm
+        in: query
+        required: false
+        description: 'Retention type: `bracket`, `rolling` (unbounded), or `n` (N-day). Defaults to N-day.'
+        schema:
+          type: string
+          enum:
+          - bracket
+          - rolling
+          - n
+      - name: i
+        in: query
+        required: false
+        description: 'Interval: 1 daily, 7 weekly, 30 monthly.'
+        schema:
+          type: integer
+          enum:
+          - 1
+          - 7
+          - 30
+      - name: s
+        in: query
+        required: false
+        description: Segment definitions, as a JSON array of filter condition objects. Repeat the parameter for multiple segments.
+        schema:
+          type: string
+      - name: g
+        in: query
+        required: false
+        description: 'Property to group by, for example `platform`. Available only with a single segment. Limit: two.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retention series.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/users:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getUserCounts
+      summary: Active and new user counts
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: start
+        in: query
+        required: true
+        description: First date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260801'
+      - name: end
+        in: query
+        required: true
+        description: Last date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260831'
+      - name: m
+        in: query
+        required: false
+        description: Either `active` or `new`. Defaults to `active`.
+        schema:
+          type: string
+          enum:
+          - active
+          - new
+      - name: i
+        in: query
+        required: false
+        description: 'Interval: 1 daily, 7 weekly, 30 monthly.'
+        schema:
+          type: integer
+          enum:
+          - 1
+          - 7
+          - 30
+      - name: s
+        in: query
+        required: false
+        description: Segment definitions, as a JSON array of filter condition objects. Repeat the parameter for multiple segments.
+        schema:
+          type: string
+      - name: g
+        in: query
+        required: false
+        description: 'Property to group by, for example `platform`. Available only with a single segment. Limit: two.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User counts per interval.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/sessions/average:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getAverageSessionLength
+      summary: Average session length
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: start
+        in: query
+        required: true
+        description: First date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260801'
+      - name: end
+        in: query
+        required: true
+        description: Last date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260831'
+      responses:
+        '200':
+          description: Average session length per day, in seconds.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/sessions/length:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getSessionLengthDistribution
+      summary: Session length distribution
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: start
+        in: query
+        required: true
+        description: First date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260801'
+      - name: end
+        in: query
+        required: true
+        description: Last date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260831'
+      - name: timeHistogramConfigBinTimeUnit
+        in: query
+        required: false
+        description: 'Bin unit: `seconds`, `minutes`, `hours`, or `days`.'
+        schema:
+          type: string
+          enum:
+          - seconds
+          - minutes
+          - hours
+          - days
+      - name: timeHistogramConfigBinMin
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: timeHistogramConfigBinMax
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: timeHistogramConfigBinSize
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Session length buckets.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/composition:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getUserComposition
+      summary: User composition by property
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: start
+        in: query
+        required: true
+        description: First date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260801'
+      - name: end
+        in: query
+        required: true
+        description: Last date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260831'
+      - name: p
+        in: query
+        required: true
+        description: Property to break down by. Amplitude properties include `version`, `country`, `city`, `region`, `DMA`, `language`, `platform`, `os`, `device`, `device_type`, `start_version`, and `paying`. Prefix custom user properties with `gp:`.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Property value distribution.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/revenue/ltv:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getRevenueLtv
+      summary: Revenue lifetime value
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: start
+        in: query
+        required: true
+        description: First date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260801'
+      - name: end
+        in: query
+        required: true
+        description: Last date included in the data series, formatted YYYYMMDD.
+        schema:
+          type: string
+          pattern: ^\d{8}$
+          example: '20260831'
+      - name: m
+        in: query
+        required: false
+        description: 'Chart measure: 0 ARPU, 1 ARPPU, 2 total revenue, 3 paying users.'
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+      - name: i
+        in: query
+        required: false
+        description: 'Interval: 1 daily, 7 weekly, 30 monthly.'
+        schema:
+          type: integer
+          enum:
+          - 1
+          - 7
+          - 30
+      - name: s
+        in: query
+        required: false
+        description: Segment definitions, as a JSON array of filter condition objects. Repeat the parameter for multiple segments.
+        schema:
+          type: string
+      - name: g
+        in: query
+        required: false
+        description: 'Property to group by, for example `platform`. Available only with a single segment. Limit: two.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: LTV series.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/realtime:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getRealtimeActiveUsers
+      summary: Real-time active users
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: i
+        in: query
+        required: false
+        description: 'Number of 5-minute buckets to return: 1, 5, 15, or 30.'
+        schema:
+          type: integer
+          enum:
+          - 1
+          - 5
+          - 15
+          - 30
+      responses:
+        '200':
+          description: Active user counts for recent intervals.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/useractivity:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: getUserActivity
+      summary: User activity
+      description: Return a single user’s event stream and user properties. Rate limits for this endpoint are lower than other Dashboard REST endpoints.
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: user
+        in: query
+        required: true
+        description: Amplitude ID of the user.
+        schema:
+          type: string
+      - name: offset
+        in: query
+        required: false
+        description: Zero-indexed offset into the event stream.
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        required: false
+        description: Number of events to return. Defaults to 1000.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: User properties and recent events.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/2/usersearch:
+    x-api-version: '2'
+    get:
+      tags:
+      - Analytics
+      operationId: searchUsers
+      summary: User search
+      description: Look up users by Amplitude ID, device ID, user ID, or user ID prefix.
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: user
+        in: query
+        required: true
+        description: Amplitude ID, device ID, user ID, or user ID prefix.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Matching users and match type.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/3/chart/{chartId}/csv:
+    x-api-version: '3'
+    get:
+      tags:
+      - Analytics
+      operationId: getChartResults
+      summary: Get results from an existing chart
+      description: Return the current results of a saved chart. The response shape depends on the chart type.
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: chartId
+        in: path
+        required: true
+        description: Chart ID, taken from the chart URL in the Amplitude web app.
+        schema:
+          type: string
+        example: abc123
+      responses:
+        '200':
+          description: Chart results. Shape varies by chart type.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+components:
+  responses:
+    AnalyticsRateLimited:
+      description: Concurrent or hourly rate limit exceeded for the project. The response identifies which limit was hit. Up to 5 concurrent requests are allowed across Amplitude REST endpoints.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    AnalyticsUnauthorized:
+      description: Missing or invalid credentials. Send HTTP Basic auth with the project API key as the username and the secret key as the password.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    AnalyticsBadRequest:
+      description: Invalid request. Check that JSON query parameters are well formed and that special characters are URL encoded.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/ApiError'
+  schemas:
+    ApiError:
+      type:
+      - object
+      - string
+      description: Shared description of existing error bodies, not a new wire envelope. JSON APIs may return optional code/error fields or an errors array; other endpoints return text or Markdown. Fields are optional and clients must use the HTTP status and Content-Type. Endpoint-specific details may be present.
+      properties:
+        code:
+          type: integer
+          description: HTTP status code, repeated in the body.
+        error:
+          type: string
+          description: Human-readable error description.
+          examples:
+          - Invalid request path
+          - Missing request body
+          - Invalid JSON request body
+          - Request missing required field
+          - Invalid event JSON
+          - Invalid API key
+          - Invalid field values on some events
+        missing_field:
+          type: string
+          description: Request-level required field that is missing.
+        events_with_invalid_fields:
+          type: object
+          description: Maps field names to the indexes of the events that failed validation.
+        events_with_missing_fields:
+          type: object
+          description: Maps field names to the indexes of the events missing them.
+        eps_threshold:
+          type: integer
+          description: Current events-per-second threshold for the project.
+        throttled_devices:
+          type: object
+          description: Maps device IDs to their current events-per-second rate.
+        throttled_events:
+          type: array
+          items:
+            type: integer
+          description: Indexes of events that were throttled.
+        silenced_devices:
+          type: array
+          items:
+            type: string
+          description: Device IDs Amplitude has silenced.
+        silenced_events:
+          type: array
+          items:
+            type: integer
+          description: Indexes of events whose device was silenced.
+        exceeded_daily_quota_devices:
+          type: object
+          description: Maps device or user IDs to their daily event count, for those over quota.
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+            additionalProperties: true
+          description: Taxonomy API error details.
+      additionalProperties: true
+  securitySchemes:
+    orgApiKeyAndSecretKey:
+      type: http
+      scheme: basic
+      description: DSAR uses HTTP Basic with the org API key and org secret key, as documented in the DSAR request examples.
+    apiKeyAndSecretKey:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Username is the project API key, password is the project secret key. Both are found in Amplitude under Settings → Projects → General. Credentials must be base64 encoded.
+
+
+        This scheme is project-scoped and all-or-nothing: a key pair grants every operation on its project. There is no narrower grant. When an agent needs least-privilege access, prefer the MCP server and its `mcpOAuth` scopes over these keys.'
+    mcpOAuth:
+      type: oauth2
+      description: 'OAuth 2.1 authorization code flow with PKCE, used by the Amplitude MCP server at `https://mcp.amplitude.com/mcp`.
+
+
+        Endpoints and scopes here mirror the authorization server metadata at https://mcp.amplitude.com/.well-known/oauth-authorization-server, which is authoritative. Clients may be registered dynamically (RFC 7591) at `https://mcp.amplitude.com/register`; public clients are supported.
+
+
+        Scopes bound the token but do not widen it — every call is additionally enforced against the permissions of the Amplitude user who approved the grant. Request the narrowest scope that covers the task.
+
+
+        For EU data residency, substitute `https://mcp.eu.amplitude.com`.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://mcp.amplitude.com/authorize
+          tokenUrl: https://mcp.amplitude.com/token
+          refreshUrl: https://mcp.amplitude.com/token
+          scopes:
+            mcp:read: Read charts, dashboards, cohorts, experiments, feature flags, events, properties, and session replays.
+            mcp:write: Create and modify dashboards, notebooks, experiments, cohorts, and metrics.
+            offline_access: Issue a refresh token so the agent can act after the user closes the browser. Omit for one-shot interactive tasks.
+externalDocs:
+  description: Amplitude API reference
+  url: https://amplitude.com/docs/apis
+x-api-versioning:
+  scheme: per-api-path
+  documentVersionScheme: date
+  description: API families use independent path namespaces (for example /2/httpapi, /api/2/dsar and /api/5/cohorts). Batch and site-content paths are unversioned. The namespace number is not a shared release number or a semantic-version guarantee.
+  deprecationPolicy:
+    status: not-verified
+    description: No company-wide REST retirement notice period or sunset dates are asserted by this document. SDK maintenance policy does not establish REST API lifecycle policy.

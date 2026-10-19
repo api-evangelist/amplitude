@@ -1,286 +1,350 @@
 openapi: 3.2.0
 info:
-  title: Amplitude Behavioral Cohorts API
-  description: The Amplitude Behavioral Cohorts API allows developers to list, export, and upload cohorts in Amplitude. Cohorts are groups of users defined by shared behavioral patterns or properties. This API supports downloading cohort membership lists, creating new cohorts from external data, and retrieving cohort metadata. It is commonly used for syncing audience segments with marketing platforms, CRMs, and other downstream tools.
-  version: '3'
+  title: Amplitude Public Cohorts API
+  version: '2026-10-05'
+  summary: Event ingestion, analytics, taxonomy, export, async DSAR jobs, and agent-readable site content APIs for Amplitude.
+  description: 'Amplitude is a digital analytics platform covering product analytics, experimentation, session replay, web analytics, and CDP capabilities.
+
+
+    This document describes the public HTTP surface most useful to programmatic clients and AI agents:
+
+
+    - **Ingestion** (`api2.amplitude.com`) — send events. Authenticated with a project API key in the request body.
+
+    - **Analytics, Taxonomy, Export, Cohorts** (`amplitude.com/api`) — read and manage project data. Authenticated with HTTP Basic using a project API key and secret key.
+
+    - **DSAR** (`amplitude.com/api/2/dsar`) — export a user’s data. Authenticated with HTTP Basic using the organization API key and organization secret key, not project credentials.
+
+    - **Site content** (`amplitude.com`) — Markdown and index representations of amplitude.com pages, for retrieval-augmented and agent use.
+
+
+    For conversational access to Amplitude data, prefer the Amplitude MCP server (`https://mcp.amplitude.com/mcp`, OAuth 2.0) over these REST APIs. For public documentation, use the read-only Docs MCP server (`https://amplitude.com/docs/api/mcp`).
+
+
+    The full catalog of Amplitude’s agent-callable resources is published at https://amplitude.com/.well-known/ai-catalog.json.
+
+
+    Endpoint coverage here is deliberately limited to documented, stable endpoints. See https://amplitude.com/docs/apis for the complete reference, including the Experiment, Attribution, Lookup Table, and User Privacy APIs.'
+  termsOfService: https://amplitude.com/terms
   contact:
     name: Amplitude Support
-    url: https://amplitude.com/contact
-  termsOfService: https://amplitude.com/terms
+    url: https://amplitude.com/support
+  license:
+    name: Amplitude Terms of Service
+    url: https://amplitude.com/terms
 servers:
 - url: https://amplitude.com
-  description: Amplitude Production Server
-security:
-- basicAuth: []
+  description: Analytics REST host (default / US data residency)
+- url: https://analytics.eu.amplitude.com
+  description: Analytics REST host (EU data residency)
 tags:
 - name: Cohorts
-  description: Cohort management and export operations
+  description: List, download, and upload behavioral cohorts.
+  externalDocs:
+    url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
 paths:
   /api/3/cohorts:
+    x-api-version: '3'
     get:
-      operationId: listCohorts
-      summary: Amplitude List All Cohorts
-      description: Retrieve a list of all cohorts in the project including their metadata such as name, description, size, and last computed date.
       tags:
       - Cohorts
+      operationId: listCohorts
+      summary: List all cohorts
+      security:
+      - apiKeyAndSecretKey: []
       responses:
         '200':
-          description: Success
+          description: Cohort metadata for the project.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CohortListResponse'
-              examples:
-                listCohorts200Example:
-                  summary: Default listCohorts 200 response
-                  x-microcks-default: true
-                  value:
-                    cohorts:
-                    - example_value
+                type: object
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
         '401':
-          description: Unauthorized
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/5/cohorts/request/{cohort_id}:
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/5/cohorts/request/{cohortId}:
+    x-api-version: '5'
     get:
-      operationId: requestCohortExport
-      summary: Amplitude Request a Cohort Export
-      description: Request an asynchronous export of a specific cohort. This is the first step in a three-step process to download cohort membership data. After requesting, poll the status endpoint, then download the file when ready.
       tags:
       - Cohorts
+      operationId: requestCohortExport
+      summary: Request a cohort export
+      description: Start an asynchronous cohort export and return a request ID. Poll `/api/5/cohorts/request-status/{requestId}`, then download from `/api/5/cohorts/request/{requestId}/file`.
+      security:
+      - apiKeyAndSecretKey: []
       parameters:
-      - name: cohort_id
+      - name: cohortId
         in: path
         required: true
-        description: The ID of the cohort to export.
         schema:
           type: string
       - name: props
         in: query
+        required: false
         description: Set to 1 to include user properties in the export.
         schema:
           type: integer
           enum:
           - 0
           - 1
+      - name: propKeys
+        in: query
+        required: false
+        description: Specific user property to include. Repeat for multiple properties.
+        schema:
+          type: string
       responses:
-        '200':
-          description: Success - export request accepted
+        '202':
+          description: Export request accepted, with a request ID.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CohortRequestResponse'
-              examples:
-                requestCohortExport200Example:
-                  summary: Default requestCohortExport 200 response
-                  x-microcks-default: true
-                  value:
-                    request_id: '500123'
-                    cohort_id: '500123'
+                $ref: '#/components/schemas/CohortExportRequest'
+          links:
+            status:
+              operationId: getCohortExportStatus
+              parameters:
+                requestId: $response.body#/request_id
         '400':
-          description: Bad request
+          $ref: '#/components/responses/AnalyticsBadRequest'
         '401':
-          description: Unauthorized
-        '404':
-          description: Cohort not found
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/5/cohorts/request/{cohort_id}/status:
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/5/cohorts/request-status/{requestId}:
+    x-api-version: '5'
     get:
+      tags:
+      - Cohorts
       operationId: getCohortExportStatus
-      summary: Amplitude Get Cohort Export Status
-      description: Poll the status of a previously requested cohort export. Returns the current state of the export job. Continue polling until the status indicates the export is complete.
-      tags:
-      - Cohorts
+      summary: Get cohort export status
+      description: Poll while HTTP 202 reports JOB INPROGRESS. Download only after HTTP 200 reports JOB COMPLETED.
+      security:
+      - apiKeyAndSecretKey: []
       parameters:
-      - name: cohort_id
+      - name: requestId
         in: path
         required: true
-        description: The ID of the cohort whose export status to check.
         schema:
           type: string
       responses:
         '200':
-          description: Success
+          description: Export completed.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CohortStatusResponse'
-              examples:
-                getCohortExportStatus200Example:
-                  summary: Default getCohortExportStatus 200 response
-                  x-microcks-default: true
-                  value:
-                    request_id: '500123'
-                    status: queued
-        '401':
-          description: Unauthorized
-        '404':
-          description: Cohort not found
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/5/cohorts/request/{cohort_id}/file:
-    get:
-      operationId: downloadCohortExport
-      summary: Amplitude Download Cohort Export File
-      description: Download the exported cohort membership data file. This endpoint should only be called after the export status indicates completion.
-      tags:
-      - Cohorts
-      parameters:
-      - name: cohort_id
-        in: path
-        required: true
-        description: The ID of the cohort to download.
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Success - returns the cohort data file
+                $ref: '#/components/schemas/CohortExportStatus'
+              example:
+                request_id: qfaZya
+                cohort_id: cohort-id
+                async_status: JOB COMPLETED
+          links:
+            download:
+              operationId: downloadCohort
+              parameters:
+                requestId: $response.body#/request_id
+              description: Follow only when async_status is JOB COMPLETED.
+        '202':
+          description: Export is still running; continue polling.
           content:
             application/json:
               schema:
-                type: object
-                description: Cohort membership data including user IDs and optional properties.
-              examples:
-                downloadCohortExport200Example:
-                  summary: Default downloadCohortExport 200 response
-                  x-microcks-default: true
-                  value: {}
-        '401':
-          description: Unauthorized
-        '404':
-          description: Cohort not found or export not ready
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/3/cohorts/upload:
-    post:
-      operationId: uploadCohort
-      summary: Amplitude Upload a Cohort
-      description: Create or update a cohort by uploading a list of user IDs or Amplitude IDs. This allows importing audience segments from external systems into Amplitude for analysis and targeting.
-      tags:
-      - Cohorts
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CohortUploadRequest'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CohortUploadResponse'
-              examples:
-                uploadCohort200Example:
-                  summary: Default uploadCohort 200 response
-                  x-microcks-default: true
-                  value:
-                    cohort_id: '500123'
+                $ref: '#/components/schemas/CohortExportStatus'
+              example:
+                request_id: qfaZya
+                cohort_id: cohort-id
+                async_status: JOB INPROGRESS
         '400':
-          description: Bad request - invalid cohort data
+          $ref: '#/components/responses/AnalyticsBadRequest'
         '401':
-          description: Unauthorized
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
+  /api/5/cohorts/request/{requestId}/file:
+    x-api-version: '5'
+    get:
+      tags:
+      - Cohorts
+      operationId: downloadCohort
+      summary: Download a cohort export
+      description: Redirects to a short-lived download link. The request URL is valid for seven days; each generated link is valid for one minute.
+      security:
+      - apiKeyAndSecretKey: []
+      parameters:
+      - name: requestId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Cohort membership file.
+          content:
+            '*/*':
+              schema:
+                description: Cohort data; the published reference does not specify a serialization format.
+        '302':
+          description: Redirect to a pre-signed S3 download URL valid for one minute. Follow Location immediately; the original request URL remains valid for seven days.
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+        '400':
+          $ref: '#/components/responses/AnalyticsBadRequest'
+        '401':
+          $ref: '#/components/responses/AnalyticsUnauthorized'
+        '429':
+          $ref: '#/components/responses/AnalyticsRateLimited'
 components:
+  responses:
+    AnalyticsRateLimited:
+      description: Concurrent or hourly rate limit exceeded for the project. The response identifies which limit was hit. Up to 5 concurrent requests are allowed across Amplitude REST endpoints.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    AnalyticsUnauthorized:
+      description: Missing or invalid credentials. Send HTTP Basic auth with the project API key as the username and the secret key as the password.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    AnalyticsBadRequest:
+      description: Invalid request. Check that JSON query parameters are well formed and that special characters are URL encoded.
+      content:
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/ApiError'
   schemas:
-    CohortListResponse:
-      type: object
-      properties:
-        cohorts:
-          type: array
-          description: Array of cohort metadata objects.
-          items:
-            $ref: '#/components/schemas/Cohort'
-    CohortStatusResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: The ID of the export request.
-        status:
-          type: string
-          description: The status of the export job.
-          enum:
-          - queued
-          - computing
-          - complete
-          - failed
-    CohortRequestResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: The ID of the export request for polling status.
-        cohort_id:
-          type: string
-          description: The ID of the cohort being exported.
-    Cohort:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the cohort.
-        name:
-          type: string
-          description: The name of the cohort.
-        description:
-          type: string
-          description: A description of the cohort.
-        size:
-          type: integer
-          description: The number of users in the cohort.
-        lastComputed:
-          type: string
-          format: date-time
-          description: The date and time the cohort was last computed.
-        archived:
-          type: boolean
-          description: Whether the cohort is archived.
-        owner:
-          type: string
-          description: The email of the cohort owner.
-        appId:
-          type: integer
-          description: The Amplitude project ID the cohort belongs to.
-    CohortUploadResponse:
-      type: object
-      properties:
-        cohort_id:
-          type: string
-          description: The ID of the created or updated cohort.
-    CohortUploadRequest:
+    CohortExportRequest:
       type: object
       required:
-      - name
-      - ids
+      - request_id
+      - cohort_id
       properties:
-        name:
+        request_id:
           type: string
-          description: The name of the cohort to create or update.
-        ids:
+        cohort_id:
+          type: string
+    ApiError:
+      type:
+      - object
+      - string
+      description: Shared description of existing error bodies, not a new wire envelope. JSON APIs may return optional code/error fields or an errors array; other endpoints return text or Markdown. Fields are optional and clients must use the HTTP status and Content-Type. Endpoint-specific details may be present.
+      properties:
+        code:
+          type: integer
+          description: HTTP status code, repeated in the body.
+        error:
+          type: string
+          description: Human-readable error description.
+          examples:
+          - Invalid request path
+          - Missing request body
+          - Invalid JSON request body
+          - Request missing required field
+          - Invalid event JSON
+          - Invalid API key
+          - Invalid field values on some events
+        missing_field:
+          type: string
+          description: Request-level required field that is missing.
+        events_with_invalid_fields:
+          type: object
+          description: Maps field names to the indexes of the events that failed validation.
+        events_with_missing_fields:
+          type: object
+          description: Maps field names to the indexes of the events missing them.
+        eps_threshold:
+          type: integer
+          description: Current events-per-second threshold for the project.
+        throttled_devices:
+          type: object
+          description: Maps device IDs to their current events-per-second rate.
+        throttled_events:
           type: array
-          description: Array of user_id or amplitude_id values to include in the cohort.
+          items:
+            type: integer
+          description: Indexes of events that were throttled.
+        silenced_devices:
+          type: array
           items:
             type: string
-        owner:
+          description: Device IDs Amplitude has silenced.
+        silenced_events:
+          type: array
+          items:
+            type: integer
+          description: Indexes of events whose device was silenced.
+        exceeded_daily_quota_devices:
+          type: object
+          description: Maps device or user IDs to their daily event count, for those over quota.
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+            additionalProperties: true
+          description: Taxonomy API error details.
+      additionalProperties: true
+    CohortExportStatus:
+      allOf:
+      - $ref: '#/components/schemas/CohortExportRequest'
+      type: object
+      required:
+      - async_status
+      properties:
+        async_status:
           type: string
-          description: The email address of the cohort owner.
-        existing_cohort_id:
-          type: string
-          description: If provided, updates the existing cohort with this ID instead of creating a new one.
+          enum:
+          - JOB INPROGRESS
+          - JOB COMPLETED
   securitySchemes:
-    basicAuth:
+    orgApiKeyAndSecretKey:
       type: http
       scheme: basic
-      description: Use your Amplitude API key as the username and your secret key as the password. Encode them as base64 in the format api_key:secret_key.
+      description: DSAR uses HTTP Basic with the org API key and org secret key, as documented in the DSAR request examples.
+    apiKeyAndSecretKey:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication. Username is the project API key, password is the project secret key. Both are found in Amplitude under Settings → Projects → General. Credentials must be base64 encoded.
+
+
+        This scheme is project-scoped and all-or-nothing: a key pair grants every operation on its project. There is no narrower grant. When an agent needs least-privilege access, prefer the MCP server and its `mcpOAuth` scopes over these keys.'
+    mcpOAuth:
+      type: oauth2
+      description: 'OAuth 2.1 authorization code flow with PKCE, used by the Amplitude MCP server at `https://mcp.amplitude.com/mcp`.
+
+
+        Endpoints and scopes here mirror the authorization server metadata at https://mcp.amplitude.com/.well-known/oauth-authorization-server, which is authoritative. Clients may be registered dynamically (RFC 7591) at `https://mcp.amplitude.com/register`; public clients are supported.
+
+
+        Scopes bound the token but do not widen it — every call is additionally enforced against the permissions of the Amplitude user who approved the grant. Request the narrowest scope that covers the task.
+
+
+        For EU data residency, substitute `https://mcp.eu.amplitude.com`.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://mcp.amplitude.com/authorize
+          tokenUrl: https://mcp.amplitude.com/token
+          refreshUrl: https://mcp.amplitude.com/token
+          scopes:
+            mcp:read: Read charts, dashboards, cohorts, experiments, feature flags, events, properties, and session replays.
+            mcp:write: Create and modify dashboards, notebooks, experiments, cohorts, and metrics.
+            offline_access: Issue a refresh token so the agent can act after the user closes the browser. Omit for one-shot interactive tasks.
 externalDocs:
-  description: Amplitude Behavioral Cohorts API Documentation
-  url: https://amplitude.com/docs/apis/analytics/behavioral-cohorts
+  description: Amplitude API reference
+  url: https://amplitude.com/docs/apis
+x-api-versioning:
+  scheme: per-api-path
+  documentVersionScheme: date
+  description: API families use independent path namespaces (for example /2/httpapi, /api/2/dsar and /api/5/cohorts). Batch and site-content paths are unversioned. The namespace number is not a shared release number or a semantic-version guarantee.
+  deprecationPolicy:
+    status: not-verified
+    description: No company-wide REST retirement notice period or sunset dates are asserted by this document. SDK maintenance policy does not establish REST API lifecycle policy.

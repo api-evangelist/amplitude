@@ -295,61 +295,58 @@ components:
                 description: The variant key.
               payload:
                 description: Optional payload for the variant.
-    Flag:
+    FlagListResponse:
       type: object
       properties:
-        id:
+        flags:
+          type: array
+          description: Array of feature flag objects.
+          items:
+            $ref: '#/components/schemas/Flag'
+        nextCursor:
           type: string
-          description: The unique identifier for the flag.
-        projectId:
-          type: string
-          description: The project ID the flag belongs to.
+          description: A cursor for fetching the next page of results.
+    VariantConfig:
+      type: object
+      properties:
         key:
           type: string
-          description: The unique key used to reference the flag in code.
+          description: The unique key for the variant.
+        name:
+          type: string
+          description: The display name of the variant.
+        payload:
+          description: An optional JSON payload associated with the variant.
+        description:
+          type: string
+          description: A description of what this variant does.
+        rolloutWeight:
+          type: integer
+          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
+          minimum: 0
+          maximum: 100
+    CreateFlagRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: The unique key for the flag.
         name:
           type: string
           description: The display name of the flag.
         description:
           type: string
           description: A description of the flag's purpose.
-        enabled:
-          type: boolean
-          description: Whether the flag is enabled.
-        evaluationMode:
-          type: string
-          description: The evaluation mode, either local or remote.
-          enum:
-          - local
-          - remote
-        bucketingKey:
-          type: string
-          description: The property used for bucketing users into variants.
-        bucketingSalt:
-          type: string
-          description: The salt used for hashing during bucketing.
         variants:
           type: array
           description: Array of variant configurations.
           items:
             $ref: '#/components/schemas/VariantConfig'
-        deployments:
-          type: array
-          description: Array of deployment IDs the flag is deployed to.
-          items:
-            type: string
-        segments:
-          type: array
-          description: Array of targeting segment configurations.
-          items:
-            $ref: '#/components/schemas/Segment'
-        state:
+        bucketingKey:
           type: string
-          description: The current state of the flag.
-          enum:
-          - draft
-          - active
-          - archived
+          description: The property used for bucketing.
     Segment:
       type: object
       properties:
@@ -406,58 +403,61 @@ components:
           description: Updated targeting segment configurations.
           items:
             $ref: '#/components/schemas/Segment'
-    CreateFlagRequest:
+    Flag:
       type: object
-      required:
-      - key
       properties:
+        id:
+          type: string
+          description: The unique identifier for the flag.
+        projectId:
+          type: string
+          description: The project ID the flag belongs to.
         key:
           type: string
-          description: The unique key for the flag.
+          description: The unique key used to reference the flag in code.
         name:
           type: string
           description: The display name of the flag.
         description:
           type: string
           description: A description of the flag's purpose.
+        enabled:
+          type: boolean
+          description: Whether the flag is enabled.
+        evaluationMode:
+          type: string
+          description: The evaluation mode, either local or remote.
+          enum:
+          - local
+          - remote
+        bucketingKey:
+          type: string
+          description: The property used for bucketing users into variants.
+        bucketingSalt:
+          type: string
+          description: The salt used for hashing during bucketing.
         variants:
           type: array
           description: Array of variant configurations.
           items:
             $ref: '#/components/schemas/VariantConfig'
-        bucketingKey:
-          type: string
-          description: The property used for bucketing.
-    FlagListResponse:
-      type: object
-      properties:
-        flags:
+        deployments:
           type: array
-          description: Array of feature flag objects.
+          description: Array of deployment IDs the flag is deployed to.
           items:
-            $ref: '#/components/schemas/Flag'
-        nextCursor:
+            type: string
+        segments:
+          type: array
+          description: Array of targeting segment configurations.
+          items:
+            $ref: '#/components/schemas/Segment'
+        state:
           type: string
-          description: A cursor for fetching the next page of results.
-    VariantConfig:
-      type: object
-      properties:
-        key:
-          type: string
-          description: The unique key for the variant.
-        name:
-          type: string
-          description: The display name of the variant.
-        payload:
-          description: An optional JSON payload associated with the variant.
-        description:
-          type: string
-          description: A description of what this variant does.
-        rolloutWeight:
-          type: integer
-          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
-          minimum: 0
-          maximum: 100
+          description: The current state of the flag.
+          enum:
+          - draft
+          - active
+          - archived
   parameters:
     flagId:
       name: id
