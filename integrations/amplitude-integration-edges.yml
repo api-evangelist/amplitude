@@ -1,5 +1,13 @@
-generated: '2026-10-13'
+generated: '2026-10-20'
 method: searched
+source:
+- https://docs.mparticle.com/integrations/amplitude/event/
+- https://fivetran.com/docs/activations/destinations/available-destinations/amplitude
+- https://github.com/rudderlabs/rudder-integrations-config/tree/main/src/configurations/destinations/am
+- https://hightouch.com/docs/destinations/amplitude
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-amplitude
+- https://zapier.com/apps/amplitude/integrations
+- https://composio.dev/toolkits/amplitude
 checked:
 - contentful/integrations/contentful-integration-edges.yml
 - https://aws.amazon.com/marketplace/
@@ -23,7 +31,81 @@ checked:
 - slack/integrations/slack-integration-edges.yml
 - stripe/integrations/stripe-integration-edges.yml
 - wordpress/integrations/wordpress-integration-edges.yml
-marketplace_apps: []
+- https://composio.dev/toolkits/amplitude
+- https://monid.ai/tools/amplitude
+- https://n8n.io/integrations/amplitude/
+- https://zapier.com/apps/amplitude/integrations
+summary: null
+marketplace_apps:
+- marketplace: zapier
+  channel: ipaas-listing
+  app: amplitude
+  url: https://zapier.com/apps/amplitude/integrations
+  external_url: https://amplitude.com/
+  partner_tier: null
+  triggers: []
+  actions: []
+  searches: []
+- marketplace: composio
+  channel: agent-gateway
+  app: amplitude
+  url: https://composio.dev/toolkits/amplitude
+  identity: action-prefix
+  actions:
+  - key: AMPLITUDE_ASSIGN_ANNOTATIONS_TO_CATEGORY
+  - key: AMPLITUDE_CANCEL_DELETION
+  - key: AMPLITUDE_CHECK_COHORT_STATUS
+  - key: AMPLITUDE_CREATE_ANNOTATION
+  - key: AMPLITUDE_CREATE_ANNOTATION_CATEGORY
+  - key: AMPLITUDE_CREATE_EVENT_CATEGORY
+  - key: AMPLITUDE_CREATE_EVENT_TYPE
+  - key: AMPLITUDE_CREATE_RELEASE
+  - key: AMPLITUDE_DELETE_ANNOTATION
+  - key: AMPLITUDE_DELETE_ANNOTATION_CATEGORY
+  - key: AMPLITUDE_DELETE_EVENT_CATEGORY
+  - key: AMPLITUDE_DELETE_EVENT_TYPE
+  - key: AMPLITUDE_DELETE_USERS
+  - key: AMPLITUDE_DOWNLOAD_COHORT_FILE
+  - key: AMPLITUDE_FIND_USER
+  - key: AMPLITUDE_GET_ACTIVE_USERS
+  - key: AMPLITUDE_GET_ANNOTATION
+  - key: AMPLITUDE_GET_ANNOTATION_CATEGORY
+  - key: AMPLITUDE_GET_COHORT
+  - key: AMPLITUDE_GET_DELETION_REQUESTS
+  - key: AMPLITUDE_GET_EVENT_CATEGORIES
+  - key: AMPLITUDE_GET_EVENT_PROPERTY
+  - key: AMPLITUDE_GET_EVENT_SEGMENTATION
+  - key: AMPLITUDE_GET_EVENT_TYPE
+  - key: AMPLITUDE_GET_EVENT_TYPES
+  - key: AMPLITUDE_GET_FUNNEL_DATA
+  - key: AMPLITUDE_GET_REALTIME_ACTIVE_USERS
+  - key: AMPLITUDE_GET_RETENTION
+  - key: AMPLITUDE_GET_REVENUE_LTV
+  - key: AMPLITUDE_GET_SESSIONS_PER_USER
+  - key: AMPLITUDE_GET_SESSION_AVERAGE
+  - key: AMPLITUDE_GET_SESSION_LENGTH
+  - key: AMPLITUDE_GET_USER_ACTIVITY
+  - key: AMPLITUDE_GET_USER_COMPOSITION
+  - key: AMPLITUDE_GET_USER_MAPPINGS
+  - key: AMPLITUDE_GET_USER_PROPERTY
+  - key: AMPLITUDE_IDENTIFY
+  - key: AMPLITUDE_LIST_ANNOTATIONS
+  - key: AMPLITUDE_LIST_ANNOTATION_CATEGORIES
+  - key: AMPLITUDE_LIST_COHORTS
+  - key: AMPLITUDE_LIST_EVENTS
+  - key: AMPLITUDE_LIST_EVENT_PROPERTIES
+  - key: AMPLITUDE_LIST_USER_PROPERTIES
+  - key: AMPLITUDE_MAP_USER
+  - key: AMPLITUDE_RESTORE_EVENT_TYPE
+  - key: AMPLITUDE_SEND_EVENTS
+  - key: AMPLITUDE_SET_GROUP_PROPERTIES
+  - key: AMPLITUDE_UPDATE_ANNOTATION
+  - key: AMPLITUDE_UPDATE_ANNOTATION_CATEGORY
+  - key: AMPLITUDE_UPDATE_COHORT_MEMBERSHIP
+  - key: AMPLITUDE_UPDATE_EVENT_CATEGORY
+  - key: AMPLITUDE_UPDATE_EVENT_TYPE
+  - key: AMPLITUDE_UPLOAD_BATCH_EVENTS
+  - key: AMPLITUDE_UPLOAD_COHORT
 edges:
 - partner_name: AWS Marketplace
   partner: amazon-web-services
@@ -460,9 +542,4 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
-source:
-- https://docs.mparticle.com/integrations/amplitude/event/
-- https://fivetran.com/docs/activations/destinations/available-destinations/amplitude
-- https://github.com/rudderlabs/rudder-integrations-config/tree/main/src/configurations/destinations/am
-- https://hightouch.com/docs/destinations/amplitude
-- https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-amplitude
+templates: []
