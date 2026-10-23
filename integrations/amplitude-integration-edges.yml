@@ -61,6 +61,7 @@ checked:
 - https://packagist.org/packages
 - https://pub.dev/api
 - intercom/integrations/intercom-integration-edges.yml
+- discord/integrations/discord-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: zapier
@@ -904,4 +905,23 @@ edges:
   detected: '2026-10-23'
   detected_by: mirror-platform-listings.py
   category: Analytics
+- partner_name: Discord (discord-app-directory)
+  partner: discord
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: discord-app-directory
+  evidence: https://discord.com/discovery/applications/1520218286057324726
+  mirror_of: discord/integrations/discord-integration-edges.yml
+  apps:
+  - Amplitude
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Utilities, Moderation and Tools
+  publisher_verified:
+  - discord-verified-app
 templates: []
