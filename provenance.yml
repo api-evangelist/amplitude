@@ -13,50 +13,53 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   arazzo/amplitude-annotation-lifecycle-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-cohort-export-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-cohort-upload-verify-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-dsar-request-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-event-property-lifecycle-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-experiment-lifecycle-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-flag-rollout-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-identity-merge-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-ingest-and-segment-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-scim-user-provisioning-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-taxonomy-event-governance-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-user-360-lookup-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   arazzo/amplitude-variant-evaluation-workflow.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: Arazzo whose sourceDescriptions are our split specs (../openapi/)
   asyncapi/amplitude-webhooks-cohort-sync-asyncapi.yml:
     method: unknown
     evidence: no authorship recorded
   authentication/amplitude-authentication.yml:
     method: derived
     evidence: declared in the artifact
+  capabilities/amplitude-capability-edges.yml:
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-annotations-api.opencollection.json:
     method: derived
     evidence: openapi/amplitude-annotations-api
@@ -94,17 +97,17 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/amplitude-data-access-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-data-access-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-data-access-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-data-access-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-data-deletion-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-data-deletion-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-data-deletion-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-data-deletion-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-deployments-api.opencollection.json:
     method: derived
     evidence: openapi/amplitude-deployments-api
@@ -112,11 +115,11 @@ artifacts:
     method: derived
     evidence: openapi/amplitude-deployments-api
   collections/amplitude-dsar-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amplitude-dsar-api
   collections/amplitude-dsar-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amplitude-dsar-api
   collections/amplitude-evaluation-api.opencollection.json:
     method: derived
     evidence: openapi/amplitude-evaluation-api
@@ -124,41 +127,41 @@ artifacts:
     method: derived
     evidence: openapi/amplitude-evaluation-api
   collections/amplitude-event-categories-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-event-categories-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-categories-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-event-categories-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-list-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-event-list-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-list-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-event-list-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-properties-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-event-properties-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-properties-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-event-properties-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-segmentation-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-event-segmentation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-segmentation-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-event-segmentation-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-types-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-event-types-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-event-types-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-event-types-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-events-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-events-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-events-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-events-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-experiment-evaluation-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -178,11 +181,11 @@ artifacts:
     method: derived
     evidence: openapi/amplitude-experiments-api
   collections/amplitude-export-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amplitude-export-api
   collections/amplitude-export-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amplitude-export-api
   collections/amplitude-flags-api.opencollection.json:
     method: derived
     evidence: openapi/amplitude-flags-api
@@ -190,11 +193,11 @@ artifacts:
     method: derived
     evidence: openapi/amplitude-flags-api
   collections/amplitude-funnel-analysis-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-funnel-analysis-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-funnel-analysis-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-funnel-analysis-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-groups-api.opencollection.json:
     method: derived
     evidence: openapi/amplitude-groups-api
@@ -220,17 +223,17 @@ artifacts:
     method: derived
     evidence: openapi/amplitude-profiles-api
   collections/amplitude-retention-analysis-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-retention-analysis-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-retention-analysis-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-retention-analysis-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-revenue-analysis-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-revenue-analysis-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-revenue-analysis-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-revenue-analysis-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-scim-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -238,17 +241,17 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/amplitude-taxonomy-api.opencollection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amplitude-taxonomy-api
   collections/amplitude-taxonomy-api.postman_collection.json:
+    method: derived
+    evidence: openapi/amplitude-taxonomy-api
+  collections/amplitude-user-activity-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
-  collections/amplitude-user-activity-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-user-activity-api
   collections/amplitude-user-activity-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-user-activity-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-user-mapping-api.opencollection.json:
     method: unknown
     evidence: no authorship recorded
@@ -262,11 +265,11 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   collections/amplitude-user-properties-api.opencollection.json:
-    method: derived
-    evidence: openapi/amplitude-user-properties-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-user-properties-api.postman_collection.json:
-    method: derived
-    evidence: openapi/amplitude-user-properties-api
+    method: unknown
+    evidence: no authorship recorded
   collections/amplitude-users-api.opencollection.json:
     method: derived
     evidence: openapi/amplitude-users-api
@@ -693,6 +696,12 @@ artifacts:
   front-door-ai/2026-09-17.yml:
     method: unknown
     evidence: no authorship recorded
+  integrations/_index.yml:
+    method: generated
+    evidence: carries an API Evangelist house phrase
+  integrations/amplitude-integration-edges.yml:
+    method: searched
+    evidence: declared in the artifact
   json-ld/amplitude-amplitude-cohort-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -1425,127 +1434,7 @@ artifacts:
   json-structure/user-profile-api-user-profile-response-structure.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-24T161608.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T125852.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T133943.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T143147.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-25T154045.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-26T215308.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T094438.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T103455.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T123021.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T132314.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-27T140727.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-28T221322.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T213958.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-29T230545.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T203505.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-30T220315.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-31T223420.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T063623.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T210448.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-01T222808.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-02T224043.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T161828.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-03T174231.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T062714.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T212454.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-04T224856.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T055819.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T144739.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T195450.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-05T211839.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T011047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T211804.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-06T224210.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T200636.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-07T213054.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T214843.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-08T232836.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T204815.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-09-10T222408.yml:
+  kin/checks-2026-10-11T110117.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-09-12T062655.yml:
@@ -1629,22 +1518,25 @@ artifacts:
   kin/score-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T210408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-25T232841.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T000835.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-03T024842.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-10-11T110117.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   mcp/amplitude-mcp.yml:
     method: unknown
     evidence: no authorship recorded
-  openapi/_original/amplitude-behavioral-cohorts-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
   openapi/_original/amplitude-chart-annotations-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/amplitude-dashboard-rest-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/amplitude-dsar-api-openapi.yml:
     method: harvested
     evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
       to the provider's source is unverified
@@ -1656,15 +1548,10 @@ artifacts:
     method: harvested
     evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
       to the provider's source is unverified
-  openapi/_original/amplitude-http-v2-api-openapi.yml:
+  openapi/_original/amplitude-openapi.json:
     method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
+    evidence: byte-identical to https://amplitude.com/openapi.json (sha256 e475ad97669a, fetched 2026-10-19)
   openapi/_original/amplitude-scim-api-openapi.yml:
-    method: harvested
-    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
-      to the provider's source is unverified
-  openapi/_original/amplitude-taxonomy-api-openapi.yml:
     method: harvested
     evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
       to the provider's source is unverified
@@ -1672,67 +1559,49 @@ artifacts:
     method: harvested
     evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
       to the provider's source is unverified
+  openapi/amplitude-analytics-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/amplitude-annotations-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/amplitude-cohorts-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-data-access-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-data-deletion-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/amplitude-deployments-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amplitude-dsar-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/amplitude-evaluation-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-event-categories-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-event-list-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-event-properties-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-event-segmentation-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-event-types-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-events-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/amplitude-experiments-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amplitude-export-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/amplitude-flags-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-funnel-analysis-api-openapi.yml:
+  openapi/amplitude-groups-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-groups-api-openapi.yml:
+  openapi/amplitude-ingestion-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/amplitude-mcp-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/amplitude-profiles-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-retention-analysis-api-openapi.yml:
+  openapi/amplitude-site-content-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-revenue-analysis-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-user-activity-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/amplitude-user-properties-api-openapi.yml:
+  openapi/amplitude-taxonomy-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/amplitude-users-api-openapi.yml:
@@ -1757,8 +1626,8 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   postman/amplitude-dsar-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amplitude-dsar-api
   postman/amplitude-experiment-evaluation-api.postman_collection.json:
     method: unknown
     evidence: no authorship recorded
@@ -1766,8 +1635,8 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   postman/amplitude-export-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amplitude-export-api
   postman/amplitude-http-v2-api.postman_collection.json:
     method: unknown
     evidence: no authorship recorded
@@ -1778,8 +1647,8 @@ artifacts:
     method: unknown
     evidence: no authorship recorded
   postman/amplitude-taxonomy-api.postman_collection.json:
-    method: unknown
-    evidence: no authorship recorded
+    method: derived
+    evidence: openapi/amplitude-taxonomy-api
   postman/amplitude-user-mapping-api.postman_collection.json:
     method: unknown
     evidence: no authorship recorded

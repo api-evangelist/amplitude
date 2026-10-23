@@ -449,3 +449,9 @@ x-api-versioning:
   deprecationPolicy:
     status: not-verified
     description: No company-wide REST retirement notice period or sunset dates are asserted by this document. SDK maintenance policy does not establish REST API lifecycle policy.
+x-provenance:
+  method: harvested
+  publisher: Amplitude
+  source: https://amplitude.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
