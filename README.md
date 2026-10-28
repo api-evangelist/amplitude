@@ -1,4 +1,4 @@
-# Amplitude (amplitude)
+# Amplitude
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,632 +66,382 @@
 
 Amplitude is a digital analytics platform that helps product teams understand user behavior, run experiments, and drive growth. It provides a suite of APIs for event ingestion, user management, cohort syncing, taxonomy governance, A/B testing, and data export. Amplitude is widely used by product, data, and engineering teams to build better digital experiences through data-driven insights.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/amplitude/refs/heads/main/apis.yml)
-
-## Tags
-
-- A/B Testing
-- Analytics
-- Experimentation
-- Feature Flags
-- Product Analytics
-- User Behavior
-
-## Timestamps
-
-- **Modified:** 2026-05-30
-
-## APIs
-
-### Amplitude HTTP V2 API
-
-The Amplitude HTTP V2 API enables developers to send event data directly from servers or clients to Amplitude's analytics platform. It supports uploading individual or batched events along with user properties, event properties, and group properties. This API is the primary method for server-side event ingestion and is designed for high-throughput data collection with built-in validation and error reporting.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/http-v2](https://amplitude.com/docs/apis/analytics/http-v2)
-- **Base URL:** `https://api2.amplitude.com`
-
-#### Tags
-
-- Analytics
-- Events
-- Ingestion
-- Tracking
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/http-v2)
-- [OpenAPI](openapi/amplitude-http-v2-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-http-v2-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-http-v2-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Batch Event Upload API
-
-The Amplitude Batch Event Upload API is optimized for high-volume server-side event ingestion. It accepts batches of events up to 20MB per request and is designed for use cases where data volume may exceed the limits of the standard HTTP V2 API. The API uses the same event structure as the HTTP V2 API and is recommended for data pipelines processing millions of events.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/batch-event-upload](https://amplitude.com/docs/apis/analytics/batch-event-upload)
-- **Base URL:** `https://api2.amplitude.com`
-
-#### Tags
-
-- Analytics
-- Batch
-- Events
-- Ingestion
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/batch-event-upload)
-- [Postman Collection](collections/amplitude-attribution-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-attribution-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-behavioral-cohorts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-behavioral-cohorts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-chart-annotations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-chart-annotations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dashboard-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dashboard-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dsar-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dsar-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-evaluation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-evaluation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-http-v2-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-http-v2-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-identify-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-identify-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-scim-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-scim-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-taxonomy-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-taxonomy-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-mapping-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-mapping-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-profile-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-profile-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Identify API
-
-The Amplitude Identify API allows developers to update user properties for a specific user without needing to send an accompanying event. This is useful for setting or modifying user attributes such as demographics, subscription status, or preferences outside of the normal event tracking flow. The API supports operations like set, unset, append, and prepend on user properties.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/identify](https://amplitude.com/docs/apis/analytics/identify)
-- **Base URL:** `https://api2.amplitude.com`
-
-#### Tags
-
-- Analytics
-- Identity
-- Properties
-- Users
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/identify)
-- [OpenAPI](openapi/amplitude-identify-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-identify-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-identify-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Group Identify API
-
-The Amplitude Group Identify API allows developers to set or update properties on groups within Amplitude. Groups are entities such as companies, teams, or accounts that users belong to. This API enables B2B analytics use cases by attaching account-level properties to groups for segmentation and reporting purposes.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/group-identify](https://amplitude.com/docs/apis/analytics/group-identify)
-- **Base URL:** `https://api2.amplitude.com`
-
-#### Tags
-
-- Analytics
-- Groups
-- Identity
-- Properties
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/group-identify)
-- [Postman Collection](collections/amplitude-attribution-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-attribution-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-behavioral-cohorts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-behavioral-cohorts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-chart-annotations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-chart-annotations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dashboard-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dashboard-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dsar-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dsar-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-evaluation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-evaluation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-http-v2-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-http-v2-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-identify-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-identify-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-scim-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-scim-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-taxonomy-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-taxonomy-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-mapping-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-mapping-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-profile-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-profile-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Dashboard REST API
-
-The Amplitude Dashboard REST API provides programmatic access to the same data displayed in Amplitude's dashboard charts and graphs. It returns results in JSON format and supports queries filtered by event types, user segments, cohorts, and date ranges. Developers can use this API to build custom reporting tools, export chart data, or integrate Amplitude analytics into external dashboards and business intelligence systems.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/dashboard-rest](https://amplitude.com/docs/apis/analytics/dashboard-rest)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- Analytics
-- Dashboards
-- Metrics
-- Reporting
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/dashboard-rest)
-- [OpenAPI](openapi/amplitude-dashboard-rest-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-dashboard-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dashboard-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Export API
-
-The Amplitude Export API enables bulk export of raw event data for a given project within a specified date range. Results are returned as zipped archives of JSON files containing complete event records with timestamps, user properties, device information, and attribution data. This API is commonly used for data warehousing, offline analysis, and feeding event data into external processing pipelines.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/export](https://amplitude.com/docs/apis/analytics/export)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- Analytics
-- Data
-- Events
-- Export
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/export)
-- [OpenAPI](openapi/amplitude-export-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Behavioral Cohorts API
-
-The Amplitude Behavioral Cohorts API allows developers to list, export, and upload cohorts in Amplitude. Cohorts are groups of users defined by shared behavioral patterns or properties. This API supports downloading cohort membership lists, creating new cohorts from external data, and retrieving cohort metadata. It is commonly used for syncing audience segments with marketing platforms, CRMs, and other downstream tools.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/behavioral-cohorts](https://amplitude.com/docs/apis/analytics/behavioral-cohorts)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- Analytics
-- Cohorts
-- Segmentation
-- Users
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/behavioral-cohorts)
-- [OpenAPI](openapi/amplitude-behavioral-cohorts-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-behavioral-cohorts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-behavioral-cohorts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Taxonomy API
-
-The Amplitude Taxonomy API provides programmatic management of your analytics tracking plan. It supports creating, reading, updating, and deleting event categories, event types, event properties, and user properties. This API is essential for data governance workflows, enabling teams to maintain a consistent and well-organized event taxonomy across their instrumentation without needing to use the Amplitude UI directly.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/taxonomy](https://amplitude.com/docs/apis/analytics/taxonomy)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- Analytics
-- Data Governance
-- Events
-- Taxonomy
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/taxonomy)
-- [OpenAPI](openapi/amplitude-taxonomy-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-taxonomy-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-taxonomy-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Attribution API
-
-The Amplitude Attribution API allows developers to send attribution campaign events to Amplitude from ad networks, attribution providers, or custom marketing tools. It associates users with the campaigns, channels, and creatives that drove their acquisition or re-engagement. This API is used to enrich Amplitude user profiles with marketing attribution data for campaign performance analysis and ROI measurement.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/attribution](https://amplitude.com/docs/apis/analytics/attribution)
-- **Base URL:** `https://api2.amplitude.com`
-
-#### Tags
-
-- Analytics
-- Attribution
-- Campaigns
-- Marketing
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/attribution)
-- [OpenAPI](openapi/amplitude-attribution-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-attribution-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-attribution-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Chart Annotations API
-
-The Amplitude Chart Annotations API enables developers to programmatically create, retrieve, update, and delete annotations on Amplitude charts. Annotations mark significant events such as product releases, marketing campaigns, or incidents on timeline-based charts. This API allows teams to automate annotation management as part of their deployment or release pipelines, ensuring that important context is always visible alongside analytics data.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/chart-annotations](https://amplitude.com/docs/apis/analytics/chart-annotations)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- Analytics
-- Annotations
-- Charts
-- Reporting
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/chart-annotations)
-- [OpenAPI](openapi/amplitude-chart-annotations-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-chart-annotations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-chart-annotations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Releases API
-
-The Amplitude Releases API allows developers to programmatically track software releases and deployments in Amplitude. By recording release events, teams can correlate product changes with analytics metrics to understand the impact of each deployment on user behavior, retention, and engagement.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/releases](https://amplitude.com/docs/apis/analytics/releases)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- Analytics
-- Deployments
-- Releases
-- Tracking
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/releases)
-- [Postman Collection](collections/amplitude-attribution-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-attribution-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-behavioral-cohorts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-behavioral-cohorts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-chart-annotations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-chart-annotations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dashboard-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dashboard-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dsar-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dsar-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-evaluation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-evaluation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-http-v2-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-http-v2-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-identify-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-identify-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-scim-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-scim-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-taxonomy-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-taxonomy-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-mapping-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-mapping-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-profile-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-profile-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Session Replay API
-
-The Amplitude Session Replay API enables developers to upload and manage session replay data for playback within Amplitude. Session replays provide qualitative insights by recording user interactions and pairing them with quantitative analytics data. This API is used for server-side ingestion of session replay events and metadata.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/session-replay](https://amplitude.com/docs/apis/analytics/session-replay)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- Analytics
-- Replay
-- Sessions
-- User Experience
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/session-replay)
-- [Postman Collection](collections/amplitude-attribution-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-attribution-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-behavioral-cohorts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-behavioral-cohorts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-chart-annotations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-chart-annotations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dashboard-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dashboard-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dsar-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dsar-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-evaluation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-evaluation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-http-v2-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-http-v2-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-identify-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-identify-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-scim-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-scim-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-taxonomy-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-taxonomy-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-mapping-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-mapping-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-profile-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-profile-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude User Profile API
-
-The Amplitude User Profile API serves user profiles that include user properties, computed user properties, a list of cohort IDs the user belongs to, and personalized recommendations. It enables real-time access to enriched user data for powering personalization engines, in-app experiences, and targeted content delivery. This API is particularly useful for retrieving recommendation results generated by Amplitude's machine learning models.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/user-profile](https://amplitude.com/docs/apis/analytics/user-profile)
-- **Base URL:** `https://profile-api.amplitude.com`
-
-#### Tags
-
-- Analytics
-- Profiles
-- Recommendations
-- Users
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/user-profile)
-- [OpenAPI](openapi/amplitude-user-profile-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-user-profile-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-profile-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude User Mapping API
-
-The Amplitude User Mapping (Aliasing) API allows developers to merge users with different user IDs together in Amplitude. This is useful when a user initially interacts with a product anonymously and later creates an account, or when users have multiple identifiers across different systems. The API maps these distinct identities into a single unified user profile to ensure accurate analytics and attribution.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/user-mapping](https://amplitude.com/docs/apis/analytics/user-mapping)
-- **Base URL:** `https://api2.amplitude.com`
-
-#### Tags
-
-- Aliasing
-- Analytics
-- Identity
-- Users
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/user-mapping)
-- [OpenAPI](openapi/amplitude-user-mapping-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-user-mapping-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-mapping-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude User Privacy API
-
-The Amplitude User Privacy API provides endpoints for managing user data in compliance with privacy regulations such as GDPR and CCPA. It supports requesting the deletion or suppression of user data by user ID or device ID, enabling organizations to fulfill data subject rights requests and maintain regulatory compliance.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/user-privacy](https://amplitude.com/docs/apis/analytics/user-privacy)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- Compliance
-- GDPR
-- Privacy
-- Users
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/user-privacy)
-- [Postman Collection](collections/amplitude-attribution-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-attribution-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-behavioral-cohorts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-behavioral-cohorts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-chart-annotations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-chart-annotations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dashboard-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dashboard-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dsar-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dsar-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-evaluation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-evaluation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-http-v2-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-http-v2-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-identify-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-identify-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-scim-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-scim-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-taxonomy-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-taxonomy-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-mapping-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-mapping-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-profile-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-profile-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude SCIM API
-
-The Amplitude SCIM API implements the System for Cross-domain Identity Management (SCIM) 2.0 standard for automated user provisioning and deprovisioning. It allows identity providers such as Okta, Azure AD, and OneLogin to automatically create, update, and deactivate user accounts in Amplitude. This API is essential for enterprise organizations that need centralized user lifecycle management and compliance with security policies.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/scim](https://amplitude.com/docs/apis/analytics/scim)
-- **Base URL:** `https://analytics.amplitude.com`
-
-#### Tags
-
-- Access Management
-- Identity
-- Provisioning
-- Users
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/scim)
-- [OpenAPI](openapi/amplitude-scim-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-scim-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-scim-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Data Subject Access Request API
-
-The Amplitude Data Subject Access Request (DSAR) API enables organizations to programmatically handle privacy requests in compliance with GDPR, CCPA, and other data protection regulations. It supports submitting deletion requests for user data based on user IDs or device IDs. This API allows companies to automate their privacy compliance workflows and ensure timely processing of data subject requests at scale.
-
-- **Human URL:** [https://amplitude.com/docs/apis/analytics/ccpa-dsar](https://amplitude.com/docs/apis/analytics/ccpa-dsar)
-- **Base URL:** `https://amplitude.com`
-
-#### Tags
-
-- CCPA
-- Compliance
-- GDPR
-- Privacy
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/analytics/ccpa-dsar)
-- [OpenAPI](openapi/amplitude-dsar-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-dsar-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dsar-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Experiment Evaluation API
-
-The Amplitude Experiment Evaluation API retrieves variant assignment data for users through remote evaluation. When called, it evaluates targeting rules and returns the assigned variant for each active experiment or feature flag. The API also tracks assignment events automatically in Amplitude Analytics. It is used by server-side applications that need to determine which experiment variant or feature flag value to serve to a given user in real time.
-
-- **Human URL:** [https://amplitude.com/docs/apis/experiment/experiment-evaluation-api](https://amplitude.com/docs/apis/experiment/experiment-evaluation-api)
-- **Base URL:** `https://api.lab.amplitude.com`
-
-#### Tags
-
-- A/B Testing
-- Experimentation
-- Feature Flags
-- Variants
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/experiment/experiment-evaluation-api)
-- [OpenAPI](openapi/amplitude-experiment-evaluation-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-experiment-evaluation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-evaluation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Experiment Management API
-
-The Amplitude Experiment Management API provides programmatic control over feature flags and experiments. It supports creating, updating, activating, and archiving experiments and flags, as well as managing deployments, variants, holdout groups, and mutual exclusion groups. This API enables teams to integrate experiment lifecycle management into their CI/CD pipelines, automate flag rollouts, and manage experimentation workflows without using the Amplitude UI.
-
-- **Human URL:** [https://amplitude.com/docs/apis/experiment/experiment-management-api](https://amplitude.com/docs/apis/experiment/experiment-management-api)
-- **Base URL:** `https://experiment.amplitude.com`
-
-#### Tags
-
-- A/B Testing
-- Experimentation
-- Feature Flags
-- Management
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/apis/experiment/experiment-management-api)
-- [OpenAPI](openapi/amplitude-experiment-management-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amplitude-experiment-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Amplitude Webhooks and Cohort Sync
-
-The Webhooks Streaming destination forwards Amplitude event and user payloads to a customer-configured HTTPS endpoint, and the Cohort Sync family of destinations pushes cohort membership changes to downstream tools such as Iterable, Braze, MoEngage, Customer.io, Intercom, HubSpot, Google Ads, Bing Ads, Google Pub/Sub, Amazon Kinesis, and Amazon S3. Sync types include on-demand, automated (hourly or daily), and real-time (per-minute) modes. This AsyncAPI document models the subscriber-side HTTP contract for Webhooks Streaming and the generic cohort membership change shape; vendor-specific cohort sync destinations conform to each downstream tool's own API contract.
-
-- **Human URL:** [https://amplitude.com/docs/data/destination-catalog/webhooks](https://amplitude.com/docs/data/destination-catalog/webhooks)
-
-#### Tags
-
-- Cohort Sync
-- Destinations
-- Events
-- Streaming
-- Webhooks
-
-#### Properties
-
-- [Documentation](https://amplitude.com/docs/data/destination-catalog/webhooks)
-- [Documentation](https://amplitude.com/docs/data/destinations/syncs)
-- [Documentation](https://amplitude.com/docs/data/destinations)
-- [AsyncAPI](asyncapi/amplitude-webhooks-cohort-sync-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/amplitude-attribution-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-attribution-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-behavioral-cohorts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-behavioral-cohorts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-chart-annotations-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-chart-annotations-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dashboard-rest-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dashboard-rest-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-dsar-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-dsar-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-evaluation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-evaluation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-experiment-management-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-experiment-management-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-export-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-export-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-http-v2-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-http-v2-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-identify-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-identify-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-scim-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-scim-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-taxonomy-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-taxonomy-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-mapping-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-mapping-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/amplitude-user-profile-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amplitude-user-profile-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [LinkedIn](https://www.linkedin.com/company/amplitude-analytics)
-- [Portal](https://amplitude.com)
+**Areas:** A/B Testing · Analytics · Experimentation · Feature Flags · Product Analytics · User Behavior
+
+## Amplitude on APIs.io
+
+Everything profiled for Amplitude is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amplitude/](https://apis.io/providers/amplitude/)** — or go straight to one of the APIs or properties below.
+
+### APIs (29)
+
+- [Amplitude Batch Event Upload API](https://apis.io/apis/amplitude/batch-event-upload-api/) — The Amplitude Batch Event Upload API is optimized for high-volume server-side event ingestion. It accepts batches of events up to 20MB per request and is…
+- [Amplitude Group Identify API](https://apis.io/apis/amplitude/group-identify-api/) — The Amplitude Group Identify API allows developers to set or update properties on groups within Amplitude. Groups are entities such as companies, teams, or…
+- [Amplitude Releases API](https://apis.io/apis/amplitude/releases-api/) — The Amplitude Releases API allows developers to programmatically track software releases and deployments in Amplitude. By recording release events, teams…
+- [Amplitude Session Replay API](https://apis.io/apis/amplitude/session-replay-api/) — The Amplitude Session Replay API enables developers to upload and manage session replay data for playback within Amplitude. Session replays provide…
+- [Amplitude User Privacy API](https://apis.io/apis/amplitude/user-privacy-api/) — The Amplitude User Privacy API provides endpoints for managing user data in compliance with privacy regulations such as GDPR and CCPA. It supports…
+- [Amplitude Webhooks and Cohort Sync](https://apis.io/apis/amplitude/webhooks-cohort-sync/) — The Webhooks Streaming destination forwards Amplitude event and user payloads to a customer-configured HTTPS endpoint, and the Cohort Sync family of…
+- [Amplitude Annotations API](https://apis.io/apis/amplitude/amplitude-annotations-api/) — Chart annotation management operations
+- [Amplitude Cohorts API](https://apis.io/apis/amplitude/amplitude-cohorts-api/) — Cohort management and export operations
+- [Amplitude Data Access API](https://apis.io/apis/amplitude/amplitude-data-access-api/) — Data subject access request operations
+- [Amplitude Data Deletion API](https://apis.io/apis/amplitude/amplitude-data-deletion-api/) — User data deletion request operations
+- [Amplitude Deployments API](https://apis.io/apis/amplitude/amplitude-deployments-api/) — Deployment management operations
+- [Amplitude Evaluation API](https://apis.io/apis/amplitude/amplitude-evaluation-api/) — Remote flag and experiment evaluation operations
+- [Amplitude Event Categories API](https://apis.io/apis/amplitude/amplitude-event-categories-api/) — Operations for managing event categories
+- [Amplitude Event List API](https://apis.io/apis/amplitude/amplitude-event-list-api/) — Event listing operations
+- [Amplitude Event Properties API](https://apis.io/apis/amplitude/amplitude-event-properties-api/) — Operations for managing event properties
+- [Amplitude Event Segmentation API](https://apis.io/apis/amplitude/amplitude-event-segmentation-api/) — Event segmentation analysis operations
+- [Amplitude Event Types API](https://apis.io/apis/amplitude/amplitude-event-types-api/) — Operations for managing event types
+- [Amplitude Events API](https://apis.io/apis/amplitude/amplitude-events-api/) — Event ingestion operations
+- [Amplitude Experiments API](https://apis.io/apis/amplitude/amplitude-experiments-api/) — Experiment management operations
+- [Amplitude Flags API](https://apis.io/apis/amplitude/amplitude-flags-api/) — Flag configuration retrieval for local evaluation
+- [Amplitude Funnel Analysis API](https://apis.io/apis/amplitude/amplitude-funnel-analysis-api/) — Funnel analysis operations
+- [Amplitude Groups API](https://apis.io/apis/amplitude/amplitude-groups-api/) — SCIM group management operations
+- [Amplitude Profiles API](https://apis.io/apis/amplitude/amplitude-profiles-api/) — User profile retrieval operations
+- [Amplitude Retention Analysis API](https://apis.io/apis/amplitude/amplitude-retention-analysis-api/) — Retention analysis operations
+- [Amplitude Revenue Analysis API](https://apis.io/apis/amplitude/amplitude-revenue-analysis-api/) — Revenue analysis operations
+- [Amplitude User Activity API](https://apis.io/apis/amplitude/amplitude-user-activity-api/) — User activity lookup operations
+- [Amplitude User Properties API](https://apis.io/apis/amplitude/amplitude-user-properties-api/) — Operations for managing user properties
+- [Amplitude Users API](https://apis.io/apis/amplitude/amplitude-users-api/) — SCIM user provisioning operations
+- [Amplitude Versions API](https://apis.io/apis/amplitude/amplitude-versions-api/) — Flag and experiment version history operations
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (13)
+
+Multi-step workflows that chain operations into a business task.
+
+- [Amplitude Chart Annotation Lifecycle](https://apis.io/arazzos/amplitude/amplitude-annotation-lifecycle-workflow/)
+- [Amplitude Behavioral Cohort Export](https://apis.io/arazzos/amplitude/amplitude-cohort-export-workflow/)
+- [Amplitude Cohort Upload and Verify](https://apis.io/arazzos/amplitude/amplitude-cohort-upload-verify-workflow/)
+- [Amplitude DSAR Request and Poll](https://apis.io/arazzos/amplitude/amplitude-dsar-request-workflow/)
+- [Amplitude Event Property Lifecycle](https://apis.io/arazzos/amplitude/amplitude-event-property-lifecycle-workflow/)
+- [Amplitude Experiment Lifecycle](https://apis.io/arazzos/amplitude/amplitude-experiment-lifecycle-workflow/)
+- [Amplitude Feature Flag Rollout](https://apis.io/arazzos/amplitude/amplitude-flag-rollout-workflow/)
+- [Amplitude Identity Merge and Verify](https://apis.io/arazzos/amplitude/amplitude-identity-merge-workflow/)
+- [Amplitude Ingest Events and Segment](https://apis.io/arazzos/amplitude/amplitude-ingest-and-segment-workflow/)
+- [Amplitude SCIM User Provisioning](https://apis.io/arazzos/amplitude/amplitude-scim-user-provisioning-workflow/)
+- [Amplitude Taxonomy Event Governance](https://apis.io/arazzos/amplitude/amplitude-taxonomy-event-governance-workflow/)
+- [Amplitude User 360 Lookup](https://apis.io/arazzos/amplitude/amplitude-user-360-lookup-workflow/)
+- [Amplitude Variant Evaluation](https://apis.io/arazzos/amplitude/amplitude-variant-evaluation-workflow/)
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Amplitude Webhooks and Cohort Sync](https://apis.io/asyncapis/amplitude/amplitude-webhooks-cohort-sync-asyncapi/)
+
+#### Event channels (2)
+
+Individual events and webhooks the provider emits.
+
+- [/cohort-sync/google-pubsub](https://apis.io/channels/amplitude/cohort-sync-google-pubsub/)
+- [/webhooks/streaming](https://apis.io/channels/amplitude/webhooks-streaming/)
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/amplitude/](https://apis.io/graphqls/amplitude/amplitude-graphql/)
+
+#### MCP servers (2)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [amplitude](https://apis.io/servers/amplitude/amplitude/)
+- [MCP Server](https://apis.io/servers/amplitude/mcp-server/)
+
+#### Agent skills (57)
+
+Agent skills built on the API.
+
+- [7-powers-analysis](https://apis.io/agent-skills/amplitude/7-powers-analysis/)
+- [amazon-working-backwards](https://apis.io/agent-skills/amplitude/amazon-working-backwards/)
+- [analyze-account-health](https://apis.io/agent-skills/amplitude/analyze-account-health/)
+- [analyze-chart](https://apis.io/agent-skills/amplitude/analyze-chart/)
+- [analyze-dashboard](https://apis.io/agent-skills/amplitude/analyze-dashboard/)
+- [analyze-experiments](https://apis.io/agent-skills/amplitude/analyze-experiments/)
+- [analyze-feedback](https://apis.io/agent-skills/amplitude/analyze-feedback/)
+- [build-metric-tree](https://apis.io/agent-skills/amplitude/build-metric-tree/)
+- [build-plg-strategy](https://apis.io/agent-skills/amplitude/build-plg-strategy/)
+- [churn-lost-deal-analysis](https://apis.io/agent-skills/amplitude/churn-lost-deal-analysis/)
+- [citation-recovery-optimizer](https://apis.io/agent-skills/amplitude/citation-recovery-optimizer/)
+- [competitor-monitoring](https://apis.io/agent-skills/amplitude/competitor-monitoring/)
+- [competitor-prompt-hijacker](https://apis.io/agent-skills/amplitude/competitor-prompt-hijacker/)
+- [craft-discovery-synthesis](https://apis.io/agent-skills/amplitude/craft-discovery-synthesis/)
+- [craft-experiment-design](https://apis.io/agent-skills/amplitude/craft-experiment-design/)
+- [craft-experiment-readout](https://apis.io/agent-skills/amplitude/craft-experiment-readout/)
+- [craft-spec](https://apis.io/agent-skills/amplitude/craft-spec/)
+- [create-chart](https://apis.io/agent-skills/amplitude/create-chart/)
+- [create-dashboard](https://apis.io/agent-skills/amplitude/create-dashboard/)
+- [create-user-stories](https://apis.io/agent-skills/amplitude/create-user-stories/)
+- [diagnose-acquisition](https://apis.io/agent-skills/amplitude/diagnose-acquisition/)
+- [diagnose-activation](https://apis.io/agent-skills/amplitude/diagnose-activation/)
+- [diagnose-monetization](https://apis.io/agent-skills/amplitude/diagnose-monetization/)
+- [diagnose-retention](https://apis.io/agent-skills/amplitude/diagnose-retention/)
+- [discover-opportunities](https://apis.io/agent-skills/amplitude/discover-opportunities/)
+- …and 32 more published on APIs.io
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Amplitude Agentic Access](https://apis.io/agentic-access/amplitude/amplitude-agentic-access/)
+
+#### JSON Schema (149)
+
+The data models the API reads and writes.
+
+- [Annotation](https://apis.io/schemas/amplitude/amplitude-annotation/)
+- [AnnotationListResponse](https://apis.io/schemas/amplitude/amplitude-annotationlistresponse/)
+- [AttributionEvent](https://apis.io/schemas/amplitude/amplitude-attributionevent/)
+- [AttributionRequest](https://apis.io/schemas/amplitude/amplitude-attributionrequest/)
+- [AttributionResponse](https://apis.io/schemas/amplitude/amplitude-attributionresponse/)
+- [Category](https://apis.io/schemas/amplitude/amplitude-category/)
+- [CategoryListResponse](https://apis.io/schemas/amplitude/amplitude-categorylistresponse/)
+- [Amplitude Cohort](https://apis.io/schemas/amplitude/amplitude-cohort/)
+- [CohortListResponse](https://apis.io/schemas/amplitude/amplitude-cohortlistresponse/)
+- [CohortRequestResponse](https://apis.io/schemas/amplitude/amplitude-cohortrequestresponse/)
+- [CohortStatusResponse](https://apis.io/schemas/amplitude/amplitude-cohortstatusresponse/)
+- [CohortUploadRequest](https://apis.io/schemas/amplitude/amplitude-cohortuploadrequest/)
+- [CohortUploadResponse](https://apis.io/schemas/amplitude/amplitude-cohortuploadresponse/)
+- [CreateAnnotationRequest](https://apis.io/schemas/amplitude/amplitude-createannotationrequest/)
+- [CreateExperimentRequest](https://apis.io/schemas/amplitude/amplitude-createexperimentrequest/)
+- [CreateFlagRequest](https://apis.io/schemas/amplitude/amplitude-createflagrequest/)
+- [DeletionListResponse](https://apis.io/schemas/amplitude/amplitude-deletionlistresponse/)
+- [DeletionRequest](https://apis.io/schemas/amplitude/amplitude-deletionrequest/)
+- [DeletionResponse](https://apis.io/schemas/amplitude/amplitude-deletionresponse/)
+- [Deployment](https://apis.io/schemas/amplitude/amplitude-deployment/)
+- [DeploymentListResponse](https://apis.io/schemas/amplitude/amplitude-deploymentlistresponse/)
+- [DsarRequest](https://apis.io/schemas/amplitude/amplitude-dsarrequest/)
+- [DsarResponse](https://apis.io/schemas/amplitude/amplitude-dsarresponse/)
+- [DsarStatusResponse](https://apis.io/schemas/amplitude/amplitude-dsarstatusresponse/)
+- [ErrorResponse](https://apis.io/schemas/amplitude/amplitude-errorresponse/)
+- …and 124 more published on APIs.io
+
+#### JSON Structure (78)
+
+Data models expressed in JSON Structure.
+
+- [Amplitude Cohort Structure](https://apis.io/json-structure/amplitude/amplitude-cohort-structure/)
+- [Amplitude Event Structure](https://apis.io/json-structure/amplitude/amplitude-event-structure/)
+- [Amplitude Experiment Structure](https://apis.io/json-structure/amplitude/amplitude-experiment-structure/)
+- [Amplitude Structure](https://apis.io/json-structure/amplitude/amplitude-structure/)
+- [Attribution Api Attribution Event Structure](https://apis.io/json-structure/amplitude/attribution-api-attribution-event-structure/)
+- [Attribution Api Attribution Request Structure](https://apis.io/json-structure/amplitude/attribution-api-attribution-request-structure/)
+- [Attribution Api Attribution Response Structure](https://apis.io/json-structure/amplitude/attribution-api-attribution-response-structure/)
+- [Behavioral Cohorts Api Cohort List Response Structure](https://apis.io/json-structure/amplitude/behavioral-cohorts-api-cohort-list-response-structure/)
+- [Behavioral Cohorts Api Cohort Request Response Structure](https://apis.io/json-structure/amplitude/behavioral-cohorts-api-cohort-request-response-structure/)
+- [Behavioral Cohorts Api Cohort Status Response Structure](https://apis.io/json-structure/amplitude/behavioral-cohorts-api-cohort-status-response-structure/)
+- [Behavioral Cohorts Api Cohort Structure](https://apis.io/json-structure/amplitude/behavioral-cohorts-api-cohort-structure/)
+- [Behavioral Cohorts Api Cohort Upload Request Structure](https://apis.io/json-structure/amplitude/behavioral-cohorts-api-cohort-upload-request-structure/)
+- [Behavioral Cohorts Api Cohort Upload Response Structure](https://apis.io/json-structure/amplitude/behavioral-cohorts-api-cohort-upload-response-structure/)
+- [Chart Annotations Api Annotation List Response Structure](https://apis.io/json-structure/amplitude/chart-annotations-api-annotation-list-response-structure/)
+- [Chart Annotations Api Annotation Structure](https://apis.io/json-structure/amplitude/chart-annotations-api-annotation-structure/)
+- [Chart Annotations Api Create Annotation Request Structure](https://apis.io/json-structure/amplitude/chart-annotations-api-create-annotation-request-structure/)
+- [Chart Annotations Api Update Annotation Request Structure](https://apis.io/json-structure/amplitude/chart-annotations-api-update-annotation-request-structure/)
+- [Dashboard Rest Api Event List Result Structure](https://apis.io/json-structure/amplitude/dashboard-rest-api-event-list-result-structure/)
+- [Dashboard Rest Api Funnel Result Structure](https://apis.io/json-structure/amplitude/dashboard-rest-api-funnel-result-structure/)
+- [Dashboard Rest Api Retention Result Structure](https://apis.io/json-structure/amplitude/dashboard-rest-api-retention-result-structure/)
+- [Dashboard Rest Api Segmentation Result Structure](https://apis.io/json-structure/amplitude/dashboard-rest-api-segmentation-result-structure/)
+- [Dashboard Rest Api User Activity Result Structure](https://apis.io/json-structure/amplitude/dashboard-rest-api-user-activity-result-structure/)
+- [Dashboard Rest Api User Search Result Structure](https://apis.io/json-structure/amplitude/dashboard-rest-api-user-search-result-structure/)
+- [Dsar Api Deletion List Response Structure](https://apis.io/json-structure/amplitude/dsar-api-deletion-list-response-structure/)
+- [Dsar Api Deletion Request Structure](https://apis.io/json-structure/amplitude/dsar-api-deletion-request-structure/)
+- …and 53 more published on APIs.io
+
+#### JSON-LD (17)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Amplitude Amplitude Cohort Context](https://apis.io/jsonld/amplitude/amplitude-amplitude-cohort-context/)
+- [Amplitude Amplitude Event Context](https://apis.io/jsonld/amplitude/amplitude-amplitude-event-context/)
+- [Amplitude Amplitude Experiment Context](https://apis.io/jsonld/amplitude/amplitude-amplitude-experiment-context/)
+- [Amplitude Attribution Api Context](https://apis.io/jsonld/amplitude/amplitude-attribution-api-context/)
+- [Amplitude Behavioral Cohorts Api Context](https://apis.io/jsonld/amplitude/amplitude-behavioral-cohorts-api-context/)
+- [Amplitude Chart Annotations Api Context](https://apis.io/jsonld/amplitude/amplitude-chart-annotations-api-context/)
+- [Amplitude Context](https://apis.io/jsonld/amplitude/amplitude-context/)
+- [Amplitude Dashboard Rest Api Context](https://apis.io/jsonld/amplitude/amplitude-dashboard-rest-api-context/)
+- [Amplitude Dsar Api Context](https://apis.io/jsonld/amplitude/amplitude-dsar-api-context/)
+- [Amplitude Experiment Evaluation Api Context](https://apis.io/jsonld/amplitude/amplitude-experiment-evaluation-api-context/)
+- [Amplitude Experiment Management Api Context](https://apis.io/jsonld/amplitude/amplitude-experiment-management-api-context/)
+- [Amplitude Http V2 Api Context](https://apis.io/jsonld/amplitude/amplitude-http-v2-api-context/)
+- [Amplitude Identify Api Context](https://apis.io/jsonld/amplitude/amplitude-identify-api-context/)
+- [Amplitude Scim Api Context](https://apis.io/jsonld/amplitude/amplitude-scim-api-context/)
+- [Amplitude Taxonomy Api Context](https://apis.io/jsonld/amplitude/amplitude-taxonomy-api-context/)
+- [Amplitude User Mapping Api Context](https://apis.io/jsonld/amplitude/amplitude-user-mapping-api-context/)
+- [Amplitude User Profile Api Context](https://apis.io/jsonld/amplitude/amplitude-user-profile-api-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Amplitude Vocabulary](https://apis.io/vocabularies/amplitude/amplitude-vocabulary/)
+
+#### Examples (136)
+
+Example requests and responses.
+
+- [Amplitude Cohort Example](https://apis.io/examples/amplitude/amplitude-cohort-example/)
+- [Amplitude Createannotation Example](https://apis.io/examples/amplitude/amplitude-createannotation-example/)
+- [Amplitude Createdeletionrequest Example](https://apis.io/examples/amplitude/amplitude-createdeletionrequest-example/)
+- [Amplitude Createdsarrequest Example](https://apis.io/examples/amplitude/amplitude-createdsarrequest-example/)
+- [Amplitude Createeventcategory Example](https://apis.io/examples/amplitude/amplitude-createeventcategory-example/)
+- [Amplitude Createeventproperty Example](https://apis.io/examples/amplitude/amplitude-createeventproperty-example/)
+- [Amplitude Createeventtype Example](https://apis.io/examples/amplitude/amplitude-createeventtype-example/)
+- [Amplitude Createexperiment Example](https://apis.io/examples/amplitude/amplitude-createexperiment-example/)
+- [Amplitude Createflag Example](https://apis.io/examples/amplitude/amplitude-createflag-example/)
+- [Amplitude Createuserproperty Example](https://apis.io/examples/amplitude/amplitude-createuserproperty-example/)
+- [Amplitude Deleteeventcategory Example](https://apis.io/examples/amplitude/amplitude-deleteeventcategory-example/)
+- [Amplitude Deleteeventproperty Example](https://apis.io/examples/amplitude/amplitude-deleteeventproperty-example/)
+- [Amplitude Deleteeventtype Example](https://apis.io/examples/amplitude/amplitude-deleteeventtype-example/)
+- [Amplitude Deleteuserproperty Example](https://apis.io/examples/amplitude/amplitude-deleteuserproperty-example/)
+- [Amplitude Downloadcohortexport Example](https://apis.io/examples/amplitude/amplitude-downloadcohortexport-example/)
+- [Amplitude Evaluatevariants Example](https://apis.io/examples/amplitude/amplitude-evaluatevariants-example/)
+- [Amplitude Evaluatevariantsget Example](https://apis.io/examples/amplitude/amplitude-evaluatevariantsget-example/)
+- [Amplitude Event Example](https://apis.io/examples/amplitude/amplitude-event-example/)
+- [Amplitude Experiment Example](https://apis.io/examples/amplitude/amplitude-experiment-example/)
+- [Amplitude Getannotation Example](https://apis.io/examples/amplitude/amplitude-getannotation-example/)
+- [Amplitude Getcohortexportstatus Example](https://apis.io/examples/amplitude/amplitude-getcohortexportstatus-example/)
+- [Amplitude Getdeployment Example](https://apis.io/examples/amplitude/amplitude-getdeployment-example/)
+- [Amplitude Getdsarrequeststatus Example](https://apis.io/examples/amplitude/amplitude-getdsarrequeststatus-example/)
+- [Amplitude Geteventcategory Example](https://apis.io/examples/amplitude/amplitude-geteventcategory-example/)
+- [Amplitude Geteventproperty Example](https://apis.io/examples/amplitude/amplitude-geteventproperty-example/)
+- …and 111 more published on APIs.io
+
+#### Collections (51)
+
+Postman and Open Collection request collections.
+
+- [Amplitude Attribution Annotations API](https://apis.io/collections/amplitude/open-amplitude-annotations-api/)
+- [Amplitude Annotations Attribution API](https://apis.io/collections/amplitude/open-amplitude-attribution-api/)
+- [Amplitude Behavioral Cohorts API](https://apis.io/collections/amplitude/open-amplitude-behavioral-cohorts-api/)
+- [Amplitude Chart Annotations API](https://apis.io/collections/amplitude/open-amplitude-chart-annotations-api/)
+- [Amplitude Attribution Annotations Cohorts API](https://apis.io/collections/amplitude/open-amplitude-cohorts-api/)
+- [Amplitude Dashboard REST API](https://apis.io/collections/amplitude/open-amplitude-dashboard-rest-api/)
+- [Amplitude Attribution Annotations Data Access API](https://apis.io/collections/amplitude/open-amplitude-data-access-api/)
+- [Amplitude Attribution Annotations Data Deletion API](https://apis.io/collections/amplitude/open-amplitude-data-deletion-api/)
+- [Amplitude Attribution Annotations Deployments API](https://apis.io/collections/amplitude/open-amplitude-deployments-api/)
+- [Amplitude Data Subject Access Request API](https://apis.io/collections/amplitude/open-amplitude-dsar-api/)
+- [Amplitude Attribution Annotations Evaluation API](https://apis.io/collections/amplitude/open-amplitude-evaluation-api/)
+- [Amplitude Attribution Annotations Event Categories API](https://apis.io/collections/amplitude/open-amplitude-event-categories-api/)
+- [Amplitude Attribution Annotations Event List API](https://apis.io/collections/amplitude/open-amplitude-event-list-api/)
+- [Amplitude Attribution Annotations Event Properties API](https://apis.io/collections/amplitude/open-amplitude-event-properties-api/)
+- [Amplitude Attribution Annotations Event Segmentation API](https://apis.io/collections/amplitude/open-amplitude-event-segmentation-api/)
+- [Amplitude Attribution Annotations Event Types API](https://apis.io/collections/amplitude/open-amplitude-event-types-api/)
+- [Amplitude Attribution Annotations Events API](https://apis.io/collections/amplitude/open-amplitude-events-api/)
+- [Amplitude Experiment Evaluation API](https://apis.io/collections/amplitude/open-amplitude-experiment-evaluation-api/)
+- [Amplitude Experiment Management API](https://apis.io/collections/amplitude/open-amplitude-experiment-management-api/)
+- [Amplitude Attribution Annotations Experiments API](https://apis.io/collections/amplitude/open-amplitude-experiments-api/)
+- [Amplitude Attribution Annotations Export API](https://apis.io/collections/amplitude/open-amplitude-export-api/)
+- [Amplitude Attribution Annotations Flags API](https://apis.io/collections/amplitude/open-amplitude-flags-api/)
+- [Amplitude Attribution Annotations Funnel Analysis API](https://apis.io/collections/amplitude/open-amplitude-funnel-analysis-api/)
+- [Amplitude Attribution Annotations Groups API](https://apis.io/collections/amplitude/open-amplitude-groups-api/)
+- [Amplitude HTTP V2 API](https://apis.io/collections/amplitude/open-amplitude-http-v2-api/)
+- …and 26 more published on APIs.io
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [Amplitude — asyncapi rules](https://apis.io/rules/amplitude/amplitude-asyncapi-spectral-rules/)
+- [Amplitude — jsonschema rules](https://apis.io/rules/amplitude/amplitude-jsonschema-spectral-rules/)
+- [Amplitude API Rules](https://apis.io/rules/amplitude/amplitude-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amplitude Authentication](https://apis.io/security/amplitude/amplitude-authentication/)
+- [Amplitude Domain Security](https://apis.io/security/amplitude/amplitude-domain-security/)
+- [Amplitude Trust Center](https://apis.io/security/amplitude/amplitude-trust-center/)
+- [Amplitude Vulnerability Disclosure](https://apis.io/security/amplitude/amplitude-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amplitude Plans Pricing](https://apis.io/plans/amplitude/amplitude-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amplitude Rate Limits](https://apis.io/rate-limits/amplitude/amplitude-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Amplitude Finops](https://apis.io/finops/amplitude/amplitude-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.amplitude.com/)
 - [Documentation](https://amplitude.com/docs)
-- [Getting Started](https://amplitude.com/docs/get-started)
-- [Authentication](https://amplitude.com/docs/apis/authentication)
-- [SDK](https://amplitude.com/docs/sdks)
-- [GitHub Organization](https://github.com/amplitude)
-- [Blog](https://amplitude.com/blog)
-- [Academy](https://academy.amplitude.com)
-- [Support](https://help.amplitude.com)
+- [Getting started](https://amplitude.com/docs/get-started)
 - [Pricing](https://amplitude.com/pricing)
-- [Status Page](https://status.amplitude.com)
-- [Terms of Service](https://amplitude.com/terms)
-- [Privacy Policy](https://amplitude.com/privacy)
-- [JSON-LD](json-ld/amplitude-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON Schema](json-schema/amplitude-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/amplitude-cohort-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/amplitude-experiment-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Spectral Rules](rules/amplitude-spectral-rules.yml)
-- [Vocabulary](vocabulary/amplitude-vocabulary.yaml)
-- [JSON Structure](json-structure/behavioral-cohorts-api-cohort-request-response-structure.json)
-- [JSON Structure](json-structure/dashboard-rest-api-user-search-result-structure.json)
-- [JSON Structure](json-structure/scim-api-scim-group-request-structure.json)
-- [JSON Structure](json-structure/http-v2-api-event-structure.json)
-- [JSON Structure](json-structure/experiment-evaluation-api-flag-configuration-structure.json)
-- [Integrations](https://amplitude.com/integrations)
-- [M C P Server](https://github.com/amplitude/mcp-marketplace)
-- [Agent Skill](https://github.com/amplitude/builder-skills)
+- [Support](https://help.amplitude.com)
+- [Blog](https://amplitude.com/blog)
+- [Terms of service](https://amplitude.com/terms)
+- [Privacy policy](https://amplitude.com/privacy)
+- [GitHub](https://github.com/amplitude)
+- [Status](https://status.amplitude.com)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 57.6** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 65.0 |
+| Contract quality | 73.3 |
+| Contract governance | 27.3 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 64.8 |
+| Access clarity | 47.4 |
+
+**Agent readiness 51.3** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | unknown |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amplitude/](https://apis.io/providers/amplitude/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amplitude: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amplitude/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
