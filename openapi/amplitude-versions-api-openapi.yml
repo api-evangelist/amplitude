@@ -1,0 +1,110 @@
+openapi: 3.2.0
+info:
+  title: Amplitude Experiment Management Versions API
+  description: The Amplitude Experiment Management API provides programmatic control over feature flags and experiments. It supports creating, updating, activating, and archiving experiments and flags, as well as managing deployments, variants, holdout groups, and mutual exclusion groups. This API enables teams to integrate experiment lifecycle management into their CI/CD pipelines, automate flag rollouts, and manage experimentation workflows without using the Amplitude UI.
+  version: '1'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://experiment.amplitude.com
+  description: Amplitude Experiment Management Server
+security:
+- bearerAuth: []
+tags:
+- name: Versions
+  description: Flag and experiment version history operations
+paths:
+  /api/1/versions:
+    get:
+      operationId: listVersions
+      summary: Amplitude List Flag and Experiment Versions
+      description: Retrieve the version history for flags and experiments. Returns a paginated list of version records with change details.
+      tags:
+      - Versions
+      parameters:
+      - name: limit
+        in: query
+        description: The maximum number of versions to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: A cursor for pagination.
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: The start date for filtering versions.
+        schema:
+          type: string
+          format: date
+      - name: end
+        in: query
+        description: The end date for filtering versions.
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionListResponse'
+              examples:
+                listVersions200Example:
+                  summary: Default listVersions 200 response
+                  x-microcks-default: true
+                  value:
+                    versions:
+                    - id: {}
+                      flagId: {}
+                      version: {}
+                      createdAt: {}
+                      createdBy: {}
+                    nextCursor: example_value
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    VersionListResponse:
+      type: object
+      properties:
+        versions:
+          type: array
+          description: Array of version records.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The version record ID.
+              flagId:
+                type: string
+                description: The flag or experiment ID.
+              version:
+                type: integer
+                description: The version number.
+              createdAt:
+                type: string
+                format: date-time
+                description: The date and time the version was created.
+              createdBy:
+                type: string
+                description: The user who created this version.
+        nextCursor:
+          type: string
+          description: A cursor for fetching the next page.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Use a Management API key generated in the Experiment sidebar of the Amplitude UI. Pass it in the Authorization header as Bearer YOUR_MANAGEMENT_API_KEY.
+externalDocs:
+  description: Amplitude Experiment Management API Documentation
+  url: https://amplitude.com/docs/apis/experiment/experiment-management-api

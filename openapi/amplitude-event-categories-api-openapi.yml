@@ -1,0 +1,223 @@
+openapi: 3.2.0
+info:
+  title: Amplitude Taxonomy Event Categories API
+  description: The Amplitude Taxonomy API provides programmatic management of your analytics tracking plan. It supports creating, reading, updating, and deleting event categories, event types, event properties, and user properties. This API is essential for data governance workflows, enabling teams to maintain a consistent and well-organized event taxonomy across their instrumentation without needing to use the Amplitude UI directly.
+  version: '2'
+  contact:
+    name: Amplitude Support
+    url: https://amplitude.com/contact
+  termsOfService: https://amplitude.com/terms
+servers:
+- url: https://amplitude.com
+  description: Amplitude Production Server
+security:
+- basicAuth: []
+tags:
+- name: Event Categories
+  description: Operations for managing event categories
+paths:
+  /api/2/taxonomy/category:
+    get:
+      operationId: listEventCategories
+      summary: Amplitude List All Event Categories
+      description: Retrieve all event categories in the project. Categories help organize event types into logical groups for easier data governance.
+      tags:
+      - Event Categories
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryListResponse'
+              examples:
+                listEventCategories200Example:
+                  summary: Default listEventCategories 200 response
+                  x-microcks-default: true
+                  value:
+                    data:
+                    - example_value
+        '401':
+          description: Unauthorized
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createEventCategory
+      summary: Amplitude Create an Event Category
+      description: Create a new event category to organize event types into logical groups.
+      tags:
+      - Event Categories
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - category_name
+              properties:
+                category_name:
+                  type: string
+                  description: The name of the event category.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                createEventCategory200Example:
+                  summary: Default createEventCategory 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '409':
+          description: Category already exists
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/2/taxonomy/category/{category_id}:
+    get:
+      operationId: getEventCategory
+      summary: Amplitude Get an Event Category
+      description: Retrieve a single event category by its ID.
+      tags:
+      - Event Categories
+      parameters:
+      - $ref: '#/components/parameters/categoryId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+              examples:
+                getEventCategory200Example:
+                  summary: Default getEventCategory 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 100
+                    name: Example Name
+        '401':
+          description: Unauthorized
+        '404':
+          description: Category not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateEventCategory
+      summary: Amplitude Update an Event Category
+      description: Update the name of an existing event category.
+      tags:
+      - Event Categories
+      parameters:
+      - $ref: '#/components/parameters/categoryId'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - category_name
+              properties:
+                category_name:
+                  type: string
+                  description: The new name for the event category.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                updateEventCategory200Example:
+                  summary: Default updateEventCategory 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+        '401':
+          description: Unauthorized
+        '404':
+          description: Category not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteEventCategory
+      summary: Amplitude Delete an Event Category
+      description: Delete an event category. Event types previously assigned to this category will become uncategorized.
+      tags:
+      - Event Categories
+      parameters:
+      - $ref: '#/components/parameters/categoryId'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+              examples:
+                deleteEventCategory200Example:
+                  summary: Default deleteEventCategory 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+        '401':
+          description: Unauthorized
+        '404':
+          description: Category not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    categoryId:
+      name: category_id
+      in: path
+      required: true
+      description: The ID of the event category.
+      schema:
+        type: integer
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the category.
+        name:
+          type: string
+          description: The name of the category.
+    CategoryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of event categories.
+          items:
+            $ref: '#/components/schemas/Category'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your Amplitude API key as the username and your secret key as the password. Encode them as base64 in the format api_key:secret_key.
+externalDocs:
+  description: Amplitude Taxonomy API Documentation
+  url: https://amplitude.com/docs/apis/analytics/taxonomy

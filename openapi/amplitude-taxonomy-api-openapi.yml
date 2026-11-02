@@ -330,14 +330,14 @@ components:
         '*/*':
           schema:
             $ref: '#/components/schemas/ApiError'
-    AnalyticsBadRequest:
-      description: Invalid request. Check that JSON query parameters are well formed and that special characters are URL encoded.
+    AnalyticsUnauthorized:
+      description: Missing or invalid credentials. Send HTTP Basic auth with the project API key as the username and the secret key as the password.
       content:
         '*/*':
           schema:
             $ref: '#/components/schemas/ApiError'
-    AnalyticsUnauthorized:
-      description: Missing or invalid credentials. Send HTTP Basic auth with the project API key as the username and the secret key as the password.
+    AnalyticsBadRequest:
+      description: Invalid request. Check that JSON query parameters are well formed and that special characters are URL encoded.
       content:
         '*/*':
           schema:

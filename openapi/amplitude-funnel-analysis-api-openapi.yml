@@ -63,15 +63,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  schemas:
+    FunnelResult:
+      type: object
+      properties:
+        data:
+          type: object
+          description: Funnel conversion data including step-by-step drop-off rates.
   parameters:
-    startDate:
-      name: start
-      in: query
-      required: true
-      description: The start date in YYYYMMDD format.
-      schema:
-        type: string
-        pattern: ^\d{8}$
     eventParam:
       name: e
       in: query
@@ -87,13 +86,14 @@ components:
       schema:
         type: string
         pattern: ^\d{8}$
-  schemas:
-    FunnelResult:
-      type: object
-      properties:
-        data:
-          type: object
-          description: Funnel conversion data including step-by-step drop-off rates.
+    startDate:
+      name: start
+      in: query
+      required: true
+      description: The start date in YYYYMMDD format.
+      schema:
+        type: string
+        pattern: ^\d{8}$
   securitySchemes:
     basicAuth:
       type: http

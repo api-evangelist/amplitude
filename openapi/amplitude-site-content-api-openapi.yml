@@ -148,6 +148,20 @@ paths:
                 type: object
 components:
   responses:
+    SiteContentBadRequest:
+      description: No page path was supplied.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SiteContentError'
+          example:
+            type: https://amplitude.com/errors/missing_parameter
+            title: Missing required parameter
+            status: 400
+            code: missing_parameter
+            detail: No page path was supplied. Append .md to a page path, for example /pricing.md.
+            hint: Request a page path, for example https://amplitude.com/pricing.md.
+            documentation_url: https://amplitude.com/openapi.json
     SiteContentServerError:
       description: The Markdown rendering could not be generated. Retryable.
       content:
@@ -163,20 +177,6 @@ components:
             hint: Retry the request. If it keeps failing, fetch the page as HTML without the .md suffix.
             documentation_url: https://amplitude.com/openapi.json
             instance: /pricing
-    SiteContentBadRequest:
-      description: No page path was supplied.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SiteContentError'
-          example:
-            type: https://amplitude.com/errors/missing_parameter
-            title: Missing required parameter
-            status: 400
-            code: missing_parameter
-            detail: No page path was supplied. Append .md to a page path, for example /pricing.md.
-            hint: Request a page path, for example https://amplitude.com/pricing.md.
-            documentation_url: https://amplitude.com/openapi.json
   schemas:
     SiteContentError:
       type: object

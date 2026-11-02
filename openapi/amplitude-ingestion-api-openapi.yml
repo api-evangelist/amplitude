@@ -139,54 +139,85 @@ paths:
         '500':
           $ref: '#/components/responses/IngestionServerError'
 components:
-  responses:
-    IngestionPayloadTooLarge:
-      description: Payload exceeds 1 MB. Split the events array across multiple requests.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          example:
-            code: 413
-            error: Payload too large
-    IngestionBadRequest:
-      description: 'Invalid upload request: malformed JSON, missing required fields, invalid field values, or silenced devices.'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          example:
-            code: 400
-            error: Request missing required field
-            missing_field: api_key
-            events_with_missing_fields:
-              event_type:
-              - 3
-    IngestionServerError:
-      description: Server error. Retry the request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-    IngestionRateLimited:
-      description: Too many requests for a user or device. Pause sending for that user or device for 30 seconds, then retry until the 429 clears.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          example:
-            code: 429
-            error: Too many requests for some devices and users
-    IngestionForbidden:
-      description: Blocked by Amplitude’s web application firewall, or sent from a sanctioned region.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ApiError'
-          example:
-            code: 403
-            error: Forbidden
   schemas:
+    UploadSuccess:
+      type: object
+      properties:
+        code:
+          type: integer
+          const: 200
+        events_ingested:
+          type: integer
+          description: Number of events ingested from the request.
+        payload_size_bytes:
+          type: integer
+          description: Size of the upload payload in bytes.
+        server_upload_time:
+          type: integer
+          description: Milliseconds since epoch when Amplitude accepted the request.
+    ApiError:
+      type:
+      - object
+      - string
+      description: Shared description of existing error bodies, not a new wire envelope. JSON APIs may return optional code/error fields or an errors array; other endpoints return text or Markdown. Fields are optional and clients must use the HTTP status and Content-Type. Endpoint-specific details may be present.
+      properties:
+        code:
+          type: integer
+          description: HTTP status code, repeated in the body.
+        error:
+          type: string
+          description: Human-readable error description.
+          examples:
+          - Invalid request path
+          - Missing request body
+          - Invalid JSON request body
+          - Request missing required field
+          - Invalid event JSON
+          - Invalid API key
+          - Invalid field values on some events
+        missing_field:
+          type: string
+          description: Request-level required field that is missing.
+        events_with_invalid_fields:
+          type: object
+          description: Maps field names to the indexes of the events that failed validation.
+        events_with_missing_fields:
+          type: object
+          description: Maps field names to the indexes of the events missing them.
+        eps_threshold:
+          type: integer
+          description: Current events-per-second threshold for the project.
+        throttled_devices:
+          type: object
+          description: Maps device IDs to their current events-per-second rate.
+        throttled_events:
+          type: array
+          items:
+            type: integer
+          description: Indexes of events that were throttled.
+        silenced_devices:
+          type: array
+          items:
+            type: string
+          description: Device IDs Amplitude has silenced.
+        silenced_events:
+          type: array
+          items:
+            type: integer
+          description: Indexes of events whose device was silenced.
+        exceeded_daily_quota_devices:
+          type: object
+          description: Maps device or user IDs to their daily event count, for those over quota.
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+            additionalProperties: true
+          description: Taxonomy API error details.
+      additionalProperties: true
     UploadRequestBody:
       type: object
       required:
@@ -207,21 +238,6 @@ components:
             min_id_length:
               type: integer
               description: Overrides the default minimum length of 5 for `user_id` and `device_id`.
-    UploadSuccess:
-      type: object
-      properties:
-        code:
-          type: integer
-          const: 200
-        events_ingested:
-          type: integer
-          description: Number of events ingested from the request.
-        payload_size_bytes:
-          type: integer
-          description: Size of the upload payload in bytes.
-        server_upload_time:
-          type: integer
-          description: Milliseconds since epoch when Amplitude accepted the request.
     Event:
       type: object
       description: One of `user_id` or `device_id` is required, in addition to `event_type`.
@@ -332,69 +348,53 @@ components:
               type: string
             version:
               type: string
-    ApiError:
-      type:
-      - object
-      - string
-      description: Shared description of existing error bodies, not a new wire envelope. JSON APIs may return optional code/error fields or an errors array; other endpoints return text or Markdown. Fields are optional and clients must use the HTTP status and Content-Type. Endpoint-specific details may be present.
-      properties:
-        code:
-          type: integer
-          description: HTTP status code, repeated in the body.
-        error:
-          type: string
-          description: Human-readable error description.
-          examples:
-          - Invalid request path
-          - Missing request body
-          - Invalid JSON request body
-          - Request missing required field
-          - Invalid event JSON
-          - Invalid API key
-          - Invalid field values on some events
-        missing_field:
-          type: string
-          description: Request-level required field that is missing.
-        events_with_invalid_fields:
-          type: object
-          description: Maps field names to the indexes of the events that failed validation.
-        events_with_missing_fields:
-          type: object
-          description: Maps field names to the indexes of the events missing them.
-        eps_threshold:
-          type: integer
-          description: Current events-per-second threshold for the project.
-        throttled_devices:
-          type: object
-          description: Maps device IDs to their current events-per-second rate.
-        throttled_events:
-          type: array
-          items:
-            type: integer
-          description: Indexes of events that were throttled.
-        silenced_devices:
-          type: array
-          items:
-            type: string
-          description: Device IDs Amplitude has silenced.
-        silenced_events:
-          type: array
-          items:
-            type: integer
-          description: Indexes of events whose device was silenced.
-        exceeded_daily_quota_devices:
-          type: object
-          description: Maps device or user IDs to their daily event count, for those over quota.
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-            additionalProperties: true
-          description: Taxonomy API error details.
-      additionalProperties: true
+  responses:
+    IngestionPayloadTooLarge:
+      description: Payload exceeds 1 MB. Split the events array across multiple requests.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 413
+            error: Payload too large
+    IngestionForbidden:
+      description: Blocked by Amplitude’s web application firewall, or sent from a sanctioned region.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 403
+            error: Forbidden
+    IngestionBadRequest:
+      description: 'Invalid upload request: malformed JSON, missing required fields, invalid field values, or silenced devices.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 400
+            error: Request missing required field
+            missing_field: api_key
+            events_with_missing_fields:
+              event_type:
+              - 3
+    IngestionRateLimited:
+      description: Too many requests for a user or device. Pause sending for that user or device for 30 seconds, then retry until the 429 clears.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 429
+            error: Too many requests for some devices and users
+    IngestionServerError:
+      description: Server error. Retry the request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
   securitySchemes:
     orgApiKeyAndSecretKey:
       type: http
