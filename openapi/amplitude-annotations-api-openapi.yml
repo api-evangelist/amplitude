@@ -183,30 +183,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    UpdateAnnotationRequest:
-      type: object
-      properties:
-        label:
-          type: string
-          description: The updated display label for the annotation.
-          maxLength: 255
-        date:
-          type: string
-          format: date
-          description: The updated date in YYYY-MM-DD format.
-        end_date:
-          type: string
-          format: date
-          description: The updated end date in YYYY-MM-DD format.
-        details:
-          type: string
-          description: Updated additional details or notes.
-        category:
-          type: string
-          description: The updated category.
-        chart_id:
-          type: integer
-          description: The updated chart ID.
     Annotation:
       type: object
       properties:
@@ -241,6 +217,38 @@ components:
           type: string
           format: date-time
           description: The timestamp when the annotation was last updated.
+    AnnotationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Array of annotation objects.
+          items:
+            $ref: '#/components/schemas/Annotation'
+    UpdateAnnotationRequest:
+      type: object
+      properties:
+        label:
+          type: string
+          description: The updated display label for the annotation.
+          maxLength: 255
+        date:
+          type: string
+          format: date
+          description: The updated date in YYYY-MM-DD format.
+        end_date:
+          type: string
+          format: date
+          description: The updated end date in YYYY-MM-DD format.
+        details:
+          type: string
+          description: Updated additional details or notes.
+        category:
+          type: string
+          description: The updated category.
+        chart_id:
+          type: integer
+          description: The updated chart ID.
     CreateAnnotationRequest:
       type: object
       required:
@@ -268,14 +276,6 @@ components:
         chart_id:
           type: integer
           description: The ID of the chart to associate the annotation with. Omit for project-wide annotations.
-    AnnotationListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: Array of annotation objects.
-          items:
-            $ref: '#/components/schemas/Annotation'
   parameters:
     annotationId:
       name: annotation_id

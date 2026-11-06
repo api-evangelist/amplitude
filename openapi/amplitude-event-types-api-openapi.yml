@@ -202,6 +202,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation was successful.
     EventTypeListResponse:
       type: object
       properties:
@@ -210,12 +216,6 @@ components:
           description: Array of event types.
           items:
             $ref: '#/components/schemas/EventType'
-    SuccessResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
     Category:
       type: object
       properties:

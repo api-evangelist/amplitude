@@ -90,6 +90,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DsarResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: The unique identifier for the DSAR request.
+        status:
+          type: string
+          description: The status of the request.
     DsarStatusResponse:
       type: object
       properties:
@@ -108,15 +117,6 @@ components:
           type: string
           format: uri
           description: The URL to download the requested data. Only present when status is complete.
-    DsarResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: The unique identifier for the DSAR request.
-        status:
-          type: string
-          description: The status of the request.
     DsarRequest:
       type: object
       required:

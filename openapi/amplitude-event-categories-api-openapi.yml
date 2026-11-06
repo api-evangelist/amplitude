@@ -190,12 +190,14 @@ components:
       schema:
         type: integer
   schemas:
-    SuccessResponse:
+    CategoryListResponse:
       type: object
       properties:
-        success:
-          type: boolean
-          description: Whether the operation was successful.
+        data:
+          type: array
+          description: Array of event categories.
+          items:
+            $ref: '#/components/schemas/Category'
     Category:
       type: object
       properties:
@@ -205,14 +207,12 @@ components:
         name:
           type: string
           description: The name of the category.
-    CategoryListResponse:
+    SuccessResponse:
       type: object
       properties:
-        data:
-          type: array
-          description: Array of event categories.
-          items:
-            $ref: '#/components/schemas/Category'
+        success:
+          type: boolean
+          description: Whether the operation was successful.
   securitySchemes:
     basicAuth:
       type: http

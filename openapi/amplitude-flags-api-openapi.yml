@@ -295,28 +295,6 @@ components:
                 description: The variant key.
               payload:
                 description: Optional payload for the variant.
-    UpdateFlagRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The updated display name.
-        description:
-          type: string
-          description: The updated description.
-        enabled:
-          type: boolean
-          description: Whether the flag should be enabled.
-        variants:
-          type: array
-          description: Updated variant configurations.
-          items:
-            $ref: '#/components/schemas/VariantConfig'
-        segments:
-          type: array
-          description: Updated targeting segment configurations.
-          items:
-            $ref: '#/components/schemas/Segment'
     Segment:
       type: object
       properties:
@@ -349,47 +327,6 @@ components:
         percentage:
           type: integer
           description: The percentage of matching users to include (0-100).
-          minimum: 0
-          maximum: 100
-    CreateFlagRequest:
-      type: object
-      required:
-      - key
-      properties:
-        key:
-          type: string
-          description: The unique key for the flag.
-        name:
-          type: string
-          description: The display name of the flag.
-        description:
-          type: string
-          description: A description of the flag's purpose.
-        variants:
-          type: array
-          description: Array of variant configurations.
-          items:
-            $ref: '#/components/schemas/VariantConfig'
-        bucketingKey:
-          type: string
-          description: The property used for bucketing.
-    VariantConfig:
-      type: object
-      properties:
-        key:
-          type: string
-          description: The unique key for the variant.
-        name:
-          type: string
-          description: The display name of the variant.
-        payload:
-          description: An optional JSON payload associated with the variant.
-        description:
-          type: string
-          description: A description of what this variant does.
-        rolloutWeight:
-          type: integer
-          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
           minimum: 0
           maximum: 100
     Flag:
@@ -447,6 +384,47 @@ components:
           - draft
           - active
           - archived
+    VariantConfig:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The unique key for the variant.
+        name:
+          type: string
+          description: The display name of the variant.
+        payload:
+          description: An optional JSON payload associated with the variant.
+        description:
+          type: string
+          description: A description of what this variant does.
+        rolloutWeight:
+          type: integer
+          description: The rollout weight as a percentage (0-100) controlling traffic allocation to this variant.
+          minimum: 0
+          maximum: 100
+    CreateFlagRequest:
+      type: object
+      required:
+      - key
+      properties:
+        key:
+          type: string
+          description: The unique key for the flag.
+        name:
+          type: string
+          description: The display name of the flag.
+        description:
+          type: string
+          description: A description of the flag's purpose.
+        variants:
+          type: array
+          description: Array of variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        bucketingKey:
+          type: string
+          description: The property used for bucketing.
     FlagListResponse:
       type: object
       properties:
@@ -458,6 +436,28 @@ components:
         nextCursor:
           type: string
           description: A cursor for fetching the next page of results.
+    UpdateFlagRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The updated display name.
+        description:
+          type: string
+          description: The updated description.
+        enabled:
+          type: boolean
+          description: Whether the flag should be enabled.
+        variants:
+          type: array
+          description: Updated variant configurations.
+          items:
+            $ref: '#/components/schemas/VariantConfig'
+        segments:
+          type: array
+          description: Updated targeting segment configurations.
+          items:
+            $ref: '#/components/schemas/Segment'
   parameters:
     flagId:
       name: id

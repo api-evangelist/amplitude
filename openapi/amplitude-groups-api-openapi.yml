@@ -139,6 +139,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    scimGroupId:
+      name: group_id
+      in: path
+      required: true
+      description: The SCIM group ID.
+      schema:
+        type: string
   schemas:
     ScimGroup:
       type: object
@@ -181,6 +189,22 @@ components:
               type: string
               format: date-time
               description: The date and time the resource was last modified.
+    ScimGroupListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          description: The SCIM schema URIs for this response.
+        totalResults:
+          type: integer
+          description: The total number of matching groups.
+        Resources:
+          type: array
+          description: Array of SCIM group resources.
+          items:
+            $ref: '#/components/schemas/ScimGroup'
     ScimGroupRequest:
       type: object
       required:
@@ -204,22 +228,6 @@ components:
               value:
                 type: string
                 description: The member user ID.
-    ScimGroupListResponse:
-      type: object
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-          description: The SCIM schema URIs for this response.
-        totalResults:
-          type: integer
-          description: The total number of matching groups.
-        Resources:
-          type: array
-          description: Array of SCIM group resources.
-          items:
-            $ref: '#/components/schemas/ScimGroup'
     ScimPatchRequest:
       type: object
       required:
@@ -249,14 +257,6 @@ components:
                 description: The attribute path to apply the operation to.
               value:
                 description: The value to use for the operation.
-  parameters:
-    scimGroupId:
-      name: group_id
-      in: path
-      required: true
-      description: The SCIM group ID.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

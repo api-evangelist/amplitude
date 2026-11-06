@@ -137,6 +137,45 @@ paths:
           $ref: '#/components/responses/DsarRateLimited'
 components:
   schemas:
+    DsarAccepted:
+      type: object
+      required:
+      - requestId
+      properties:
+        requestId:
+          type: integer
+    DsarStatus:
+      type: object
+      properties:
+        requestId:
+          type: integer
+        userId:
+          type: string
+        amplitudeId:
+          type: integer
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - staging
+          - submitted
+          - done
+          - failed
+        failReason:
+          type: string
+        urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        expires:
+          type: string
+          description: Expiry date as supplied by the API.
     DsarRequest:
       type: object
       required:
@@ -221,45 +260,6 @@ components:
             additionalProperties: true
           description: Taxonomy API error details.
       additionalProperties: true
-    DsarStatus:
-      type: object
-      properties:
-        requestId:
-          type: integer
-        userId:
-          type: string
-        amplitudeId:
-          type: integer
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        status:
-          type: string
-          enum:
-          - staging
-          - submitted
-          - done
-          - failed
-        failReason:
-          type: string
-        urls:
-          type: array
-          items:
-            type: string
-            format: uri
-        expires:
-          type: string
-          description: Expiry date as supplied by the API.
-    DsarAccepted:
-      type: object
-      required:
-      - requestId
-      properties:
-        requestId:
-          type: integer
   responses:
     DsarRateLimited:
       description: DSAR cost budget exceeded. POST costs 8, GET costs 1; all endpoints share 14,400 cost/hour. Reduce polling frequency before retrying.

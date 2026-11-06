@@ -28,7 +28,7 @@ accessModel:
   - plans
   - authentication
   - security
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   method: derived
 modified: '2026-05-30'
 name: Amplitude

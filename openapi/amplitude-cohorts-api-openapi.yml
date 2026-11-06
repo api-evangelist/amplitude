@@ -367,49 +367,6 @@ paths:
       description: Analytics REST host (EU data residency)
 components:
   schemas:
-    CohortUploadResponse:
-      type: object
-      properties:
-        cohort_id:
-          type: string
-          description: The ID of the created or updated cohort.
-    CohortUploadRequest:
-      type: object
-      required:
-      - name
-      - ids
-      properties:
-        name:
-          type: string
-          description: The name of the cohort to create or update.
-        ids:
-          type: array
-          description: Array of user_id or amplitude_id values to include in the cohort.
-          items:
-            type: string
-        owner:
-          type: string
-          description: The email address of the cohort owner.
-        existing_cohort_id:
-          type: string
-          description: If provided, updates the existing cohort with this ID instead of creating a new one.
-    CohortRequestResponse:
-      type: object
-      properties:
-        request_id:
-          type: string
-          description: The ID of the export request for polling status.
-        cohort_id:
-          type: string
-          description: The ID of the cohort being exported.
-    CohortListResponse:
-      type: object
-      properties:
-        cohorts:
-          type: array
-          description: Array of cohort metadata objects.
-          items:
-            $ref: '#/components/schemas/Cohort'
     CohortStatusResponse:
       type: object
       properties:
@@ -452,6 +409,71 @@ components:
         appId:
           type: integer
           description: The Amplitude project ID the cohort belongs to.
+    CohortListResponse:
+      type: object
+      properties:
+        cohorts:
+          type: array
+          description: Array of cohort metadata objects.
+          items:
+            $ref: '#/components/schemas/Cohort'
+    CohortUploadRequest:
+      type: object
+      required:
+      - name
+      - ids
+      properties:
+        name:
+          type: string
+          description: The name of the cohort to create or update.
+        ids:
+          type: array
+          description: Array of user_id or amplitude_id values to include in the cohort.
+          items:
+            type: string
+        owner:
+          type: string
+          description: The email address of the cohort owner.
+        existing_cohort_id:
+          type: string
+          description: If provided, updates the existing cohort with this ID instead of creating a new one.
+    CohortUploadResponse:
+      type: object
+      properties:
+        cohort_id:
+          type: string
+          description: The ID of the created or updated cohort.
+    CohortRequestResponse:
+      type: object
+      properties:
+        request_id:
+          type: string
+          description: The ID of the export request for polling status.
+        cohort_id:
+          type: string
+          description: The ID of the cohort being exported.
+    CohortExportStatus:
+      allOf:
+      - $ref: '#/components/schemas/CohortExportRequest'
+      type: object
+      required:
+      - async_status
+      properties:
+        async_status:
+          type: string
+          enum:
+          - JOB INPROGRESS
+          - JOB COMPLETED
+    CohortExportRequest:
+      type: object
+      required:
+      - request_id
+      - cohort_id
+      properties:
+        request_id:
+          type: string
+        cohort_id:
+          type: string
     ApiError:
       type:
       - object
@@ -515,37 +537,15 @@ components:
             additionalProperties: true
           description: Taxonomy API error details.
       additionalProperties: true
-    CohortExportStatus:
-      allOf:
-      - $ref: '#/components/schemas/CohortExportRequest'
-      type: object
-      required:
-      - async_status
-      properties:
-        async_status:
-          type: string
-          enum:
-          - JOB INPROGRESS
-          - JOB COMPLETED
-    CohortExportRequest:
-      type: object
-      required:
-      - request_id
-      - cohort_id
-      properties:
-        request_id:
-          type: string
-        cohort_id:
-          type: string
   responses:
-    AnalyticsRateLimited:
-      description: Concurrent or hourly rate limit exceeded for the project. The response identifies which limit was hit. Up to 5 concurrent requests are allowed across Amplitude REST endpoints.
+    AnalyticsUnauthorized:
+      description: Missing or invalid credentials. Send HTTP Basic auth with the project API key as the username and the secret key as the password.
       content:
         '*/*':
           schema:
             $ref: '#/components/schemas/ApiError'
-    AnalyticsUnauthorized:
-      description: Missing or invalid credentials. Send HTTP Basic auth with the project API key as the username and the secret key as the password.
+    AnalyticsRateLimited:
+      description: Concurrent or hourly rate limit exceeded for the project. The response identifies which limit was hit. Up to 5 concurrent requests are allowed across Amplitude REST endpoints.
       content:
         '*/*':
           schema:
